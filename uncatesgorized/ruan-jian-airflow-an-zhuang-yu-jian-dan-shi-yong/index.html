@@ -429,8 +429,6 @@ source airflowenv&#x2F;bin&#x2F;activate<span aria-hidden="true" class="line-num
 <li><p>2、安装airflow<br>需要等一段时间</p>
 <pre class="line-numbers language-none"><code class="language-none">pip install airflow&#x3D;&#x3D;1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>3、查看安装结果</p>
-</li>
-</ul>
 <pre class="line-numbers language-none"><code class="language-none">airflow version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>出现如下则说明安装成功</p>
@@ -439,11 +437,11 @@ ____    |__( )_________  __&#x2F;__  &#x2F;________      __
 ____  &#x2F;| |_  &#x2F;__  ___&#x2F;_  &#x2F;_ __  &#x2F;_  __ \_ | &#x2F;| &#x2F; &#x2F;
 ___  ___ |  &#x2F; _  &#x2F;   _  __&#x2F; _  &#x2F; &#x2F; &#x2F;_&#x2F; &#x2F;_ |&#x2F; |&#x2F; &#x2F;
 _&#x2F;_&#x2F;  |_&#x2F;_&#x2F;  &#x2F;_&#x2F;    &#x2F;_&#x2F;    &#x2F;_&#x2F;  \____&#x2F;____&#x2F;|__&#x2F;
-  v1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</blockquote>
-<ul>
-<li>4、cd 进入airflow文件夹</li>
+  v1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
+</li>
 </ul>
+<ul>
+<li><p>4、cd 进入airflow文件夹</p>
 <pre class="line-numbers language-none"><code class="language-none">ls -al<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <pre class="line-numbers language-none"><code class="language-none">有以下两个文件
@@ -451,26 +449,21 @@ _&#x2F;_&#x2F;  |_&#x2F;_&#x2F;  &#x2F;_&#x2F;    &#x2F;_&#x2F;    &#x2F;_&#x2F;
 -rw-r--r--   1 ***  staff   1549  8 27 12:31 unittests.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>airflow.cfg有许多<strong>配置项</strong>，后面会作简单解释</p>
 </blockquote>
-<ul>
-<li>5、初始化airflow数据库</li>
-</ul>
+</li>
+<li><p>5、初始化airflow数据库</p>
 <pre class="line-numbers language-none"><code class="language-none">airflow initdb
-默认配置使用SQLLite，执行后在airflow文件夹生成一个airflow.db数据库文件（可以通过配置airflow.cfg的方式更改数据库类型如：mysql）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ul>
-<li>6、启动服务</li>
-</ul>
+默认配置使用SQLLite，执行后在airflow文件夹生成一个airflow.db数据库文件（可以通过配置airflow.cfg的方式更改数据库类型如：mysql）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>6、启动服务</p>
 <pre class="line-numbers language-none"><code class="language-none">airflow webserver -p 8080
 执行之后在浏览器输入：localhost:8080&#x2F;admin
 结果如下所示：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://img-blog.csdn.net/20180828194455231?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="airflow"></p>
+</li>
+</ul>
 <h4 id="安装工作结束"><a href="#安装工作结束" class="headerlink" title="安装工作结束"></a>安装工作结束</h4><h2 id="二、更改数据库为Mysql"><a href="#二、更改数据库为Mysql" class="headerlink" title="二、更改数据库为Mysql"></a>二、更改数据库为Mysql</h2><ul>
-<li>1、安装MySQL，方法不限</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">pip install mysql-python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li>2、成功进入MySQL之后</li>
-</ul>
+<li><p>1、安装MySQL，方法不限</p>
+<pre class="line-numbers language-none"><code class="language-none">pip install mysql-python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>2、成功进入MySQL之后</p>
 <pre class="line-numbers language-none"><code class="language-none">新建用户
 CREATE USER airflow;
 新建数据库
@@ -479,16 +472,14 @@ CREATE DATABASE celery_result_airflow;
 给权限
 GRANT all privileges on airflow.* TO &#39;airflow&#39;@&#39;%&#39; IDENTIFIED BY &#39;airflow&#39;;
 GRANT all privileges on celery_result_airflow.* TO &#39;airflow&#39;@&#39;%&#39; IDENTIFIED BY &#39;airflow&#39;;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>3、打开上文提到的airflow.cfg<br>将 sql_alchemy_conn，改为如下：<pre class="line-numbers language-none"><code class="language-none">sql_alchemy_conn &#x3D; mysql:&#x2F;&#x2F;airflow:airflow@localhost:3306&#x2F;airflow<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>3、打开上文提到的airflow.cfg<br>将 sql_alchemy_conn，改为如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">sql_alchemy_conn &#x3D; mysql:&#x2F;&#x2F;airflow:airflow@localhost:3306&#x2F;airflow<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <pre class="line-numbers language-none"><code class="language-none">初始化元数据库
 airflow initdb
 重置元数据库
-airflow resetdb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+airflow resetdb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 <h2 id="三、启动airflow"><a href="#三、启动airflow" class="headerlink" title="三、启动airflow"></a>三、启动airflow</h2><ul>
 <li><p>运行命令（需要在不同窗口）</p>
 <pre class="line-numbers language-none"><code class="language-none">airflow webserver -p 8080

@@ -436,7 +436,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="dingtalk"><a href="#dingtalk" class="headerlink" title="dingtalk"></a>dingtalk</h1><p>钉钉机器人消息封装——Golang</p>
-<p>目前自定义机器人支持s</p>
+<p>目前自定义机器人支持</p>
 <ul>
 <li>文本（text）</li>
 <li>链接（link）</li>
@@ -454,15 +454,15 @@
 </ul>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="创建钉钉群机器人"><a href="#创建钉钉群机器人" class="headerlink" title="创建钉钉群机器人"></a>创建钉钉群机器人</h3><ol>
 <li>选择添加<code>自定义</code>机器人。</li>
-<li>安全设置<br> 共有关键词、加签、IP白名单三种设置，需要根据情况进行选择。<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Cd03uXui-1609383182732)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/4XqHG2dOwo8StEu.jpg)]">https://i.loli.net/2020/07/05/4XqHG2dOwo8StEu.jpg)]</a></li>
-<li>选择<code>自定义关键词</code>，这里设置的关键词在初始化机器人的时候会用到。<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3> <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> get github<span class="token punctuation">.</span>com<span class="token operator">/</span>blinkbean<span class="token operator">/</span>dingtalk<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3> <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// key 创建钉钉机器人需要设置的关键词，默认为`.`</span>
+<li>安全设置<br> 共有关键词、加签、IP白名单三种设置，需要根据情况进行选择。<br> <img src="https://i.loli.net/2020/07/05/4XqHG2dOwo8StEu.jpg" alt="Xnip2020-07-05_15-55-24.jpg"></li>
+<li>选择<code>自定义关键词</code>，这里设置的关键词在初始化机器人的时候会用到。<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> get github<span class="token punctuation">.</span>com<span class="token operator">/</span>blinkbean<span class="token operator">/</span>dingtalk<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// key 创建钉钉机器人需要设置的关键词，默认为`.`</span>
 <span class="token keyword">func</span> <span class="token function">InitDingTalk</span><span class="token punctuation">(</span>tokens <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> key <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">*</span>dingTalk
 
 <span class="token comment">// 加签方式创建钉钉机器人</span>
 <span class="token comment">// 加签机器人 access_token和secret一一对应，在创建机器人是获取</span>
 <span class="token keyword">func</span> <span class="token function">InitDingTalkWithSecret</span><span class="token punctuation">(</span>tokens <span class="token builtin">string</span><span class="token punctuation">,</span> secret <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">*</span>DingTalk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
- <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"github.com/blinkbean/dingtalk"</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"github.com/blinkbean/dingtalk"</span>
 
 <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 单个机器人有单位时间内消息条数的限制，如果有需要可以初始化多个token，发消息时随机发给其中一个机器人。</span>
@@ -487,14 +487,14 @@ cli<span class="token punctuation">.</span><span class="token function">SendText
 
 <span class="token comment">// at指定群成员</span>
 mobiles <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"131********"</span><span class="token punctuation">&#125;</span>
-cli<span class="token punctuation">.</span><span class="token function">SendTextMessage</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">,</span> <span class="token function">WithAtMobiles</span><span class="token punctuation">(</span>mobiles<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-BCu3HFo8-1609383182748)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/LXErbH1KiRGstQ7.jpg)]">https://i.loli.net/2020/07/05/LXErbH1KiRGstQ7.jpg)]</a></li>
+cli<span class="token punctuation">.</span><span class="token function">SendTextMessage</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">,</span> <span class="token function">WithAtMobiles</span><span class="token punctuation">(</span>mobiles<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <img src="https://i.loli.net/2020/07/05/LXErbH1KiRGstQ7.jpg" alt="Xnip2020-07-05_10-46-59.jpg"></li>
 </ul>
 <h3 id="link类型"><a href="#link类型" class="headerlink" title="link类型"></a>link类型</h3><ul>
 <li>方法  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 方法定义</span>
 <span class="token function">SendLinkMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> picUrl<span class="token punctuation">,</span> msgUrl <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">error</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">cli<span class="token punctuation">.</span><span class="token function">SendLinkMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> picUrl<span class="token punctuation">,</span> msgUrl<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-A6jXhdAE-1609383182751)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/wDG1sMPlU7XZQfr.jpg)]">https://i.loli.net/2020/07/05/wDG1sMPlU7XZQfr.jpg)]</a></li>
+<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">cli<span class="token punctuation">.</span><span class="token function">SendLinkMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> picUrl<span class="token punctuation">,</span> msgUrl<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  <img src="https://i.loli.net/2020/07/05/wDG1sMPlU7XZQfr.jpg" alt="Xnip2020-07-05_10-25-33.jpg"></li>
 </ul>
 <h3 id="markdown类型"><a href="#markdown类型" class="headerlink" title="markdown类型"></a>markdown类型</h3><ul>
 <li><p>方法及可选参数</p>
@@ -529,23 +529,21 @@ dm<span class="token punctuation">.</span><span class="token function">Set</span
 dm<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"成功"</span><span class="token punctuation">,</span> GREEN<span class="token punctuation">)</span>
 dm<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"警告"</span><span class="token punctuation">,</span> BLUE<span class="token punctuation">)</span>
 dm<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"普通文字"</span><span class="token punctuation">,</span> N<span class="token punctuation">)</span>
-cli<span class="token punctuation">.</span><span class="token function">SendMarkDownMessageBySlice</span><span class="token punctuation">(</span><span class="token string">"color test"</span><span class="token punctuation">,</span> dm<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-2y4k2M37-1609383182754)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/7LScefCZIGnDjBV.jpg)]">https://i.loli.net/2020/07/05/7LScefCZIGnDjBV.jpg)]</a></p>
+cli<span class="token punctuation">.</span><span class="token function">SendMarkDownMessageBySlice</span><span class="token punctuation">(</span><span class="token string">"color test"</span><span class="token punctuation">,</span> dm<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  <img src="https://i.loli.net/2020/07/05/7LScefCZIGnDjBV.jpg" alt="Xnip2020-07-05_10-27-33.jpg"><br>  <img src="https://i.loli.net/2020/07/26/PADJ5uqmfQht2cr.jpg" alt="Xnip2020-07-26_17-14-40.jpg"></p>
 </li>
-<li><p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-B5PYTjIm-1609383182757)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/26/PADJ5uqmfQht2cr.jpg)]">https://i.loli.net/2020/07/26/PADJ5uqmfQht2cr.jpg)]</a></p>
-</li>
-<li><p>点击链接发送消息</p>
+<li><p>点击DTMD链接发送消息</p>
 <p>  点击’dtmdLink1’，自动发送’dtmdValue1’并@机器人，简化输入</p>
   <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 创建有序map</span>
 dtmdOrderMap <span class="token operator">:=</span> <span class="token function">DingMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
     <span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"dtmdOrderMap1"</span><span class="token punctuation">,</span> <span class="token string">"dtmdValue1"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
     <span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"dtmdOrderMap2"</span><span class="token punctuation">,</span> <span class="token string">"dtmdValue2"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
     <span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"dtmdOrderMap3"</span><span class="token punctuation">,</span> <span class="token string">"dtmdValue3"</span><span class="token punctuation">)</span>
-err <span class="token operator">:=</span> dingTalkCli<span class="token punctuation">.</span><span class="token function">SendDTMDMessage</span><span class="token punctuation">(</span><span class="token string">"DTMD title"</span><span class="token punctuation">,</span> dtmdOrderMap<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-h15FF5fw-1609383182760)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/11/02/1OqEr4HKZWapRgd.jpg)]">https://i.loli.net/2020/11/02/1OqEr4HKZWapRgd.jpg)]</a></p>
+err <span class="token operator">:=</span> dingTalkCli<span class="token punctuation">.</span><span class="token function">SendDTMDMessage</span><span class="token punctuation">(</span><span class="token string">"DTMD title"</span><span class="token punctuation">,</span> dtmdOrderMap<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  <img src="https://i.loli.net/2020/11/02/1OqEr4HKZWapRgd.jpg" alt="Xnip2020-11-02_17-17-26.jpg"></p>
 </li>
 </ul>
-<h3 id="整体跳转ActionCard类型"><a href="#整体跳转ActionCard类型" class="headerlink" title="整体跳转ActionCard类型"></a>整体跳转ActionCard类型</h3><ul>
+<h3 id="ActionCard类型-独立跳转"><a href="#ActionCard类型-独立跳转" class="headerlink" title="ActionCard类型(独立跳转)"></a>ActionCard类型(独立跳转)</h3><ul>
 <li>方法及可选参数  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 方法定义</span>
 <span class="token function">SendActionCardMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">,</span> opts <span class="token operator">...</span>actionCardOption<span class="token punctuation">)</span> <span class="token builtin">error</span>
 
@@ -555,10 +553,10 @@ err <span class="token operator">:=</span> dingTalkCli<span class="token punctua
 
 <span class="token comment">// 跳转地址</span>
 <span class="token function">WithCardSingleURL</span><span class="token punctuation">(</span>url <span class="token builtin">string</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">cli<span class="token punctuation">.</span><span class="token function">SendActionSingleMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> <span class="token function">WithCardSingleTitle</span><span class="token punctuation">(</span>sTitle<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">WithCardSingleURL</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-HVGqLNFi-1609383182762)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/kKELHAlomndiO9I.jpg)]">https://i.loli.net/2020/07/05/kKELHAlomndiO9I.jpg)]</a></li>
+<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">cli<span class="token punctuation">.</span><span class="token function">SendActionSingleMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> <span class="token function">WithCardSingleTitle</span><span class="token punctuation">(</span>sTitle<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">WithCardSingleURL</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  <img src="https://i.loli.net/2020/07/05/kKELHAlomndiO9I.jpg" alt="Xnip2020-07-05_10-28-57.jpg"></li>
 </ul>
-<h3 id="独立跳转ActionCard类型"><a href="#独立跳转ActionCard类型" class="headerlink" title="独立跳转ActionCard类型"></a>独立跳转ActionCard类型</h3><ul>
+<h3 id="ActionCard类型-独立跳转-1"><a href="#ActionCard类型-独立跳转-1" class="headerlink" title="ActionCard类型(独立跳转)"></a>ActionCard类型(独立跳转)</h3><ul>
 <li>方法及可选参数  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 方法定义</span>
 <span class="token function">SendActionCardMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text <span class="token builtin">string</span><span class="token punctuation">,</span> opts <span class="token operator">...</span>actionCardOption<span class="token punctuation">)</span> <span class="token builtin">error</span>
 
@@ -571,8 +569,8 @@ err <span class="token operator">:=</span> dingTalkCli<span class="token punctua
 
 <span class="token comment">// ActionCardMultiBtnModel</span>
 <span class="token keyword">type</span> ActionCardMultiBtnModel <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	Title     <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
-	ActionURL <span class="token builtin">string</span> <span class="token string">`json:"actionURL,omitempty"`</span>
+    Title     <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
+    ActionURL <span class="token builtin">string</span> <span class="token string">`json:"actionURL,omitempty"`</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">btns <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>ActionCardMultiBtnModel<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>
     Title<span class="token punctuation">:</span>     <span class="token string">"test1"</span><span class="token punctuation">,</span>
@@ -582,9 +580,8 @@ err <span class="token operator">:=</span> dingTalkCli<span class="token punctua
     ActionURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span>
-cli<span class="token punctuation">.</span><span class="token function">SendActionSingleMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> <span class="token function">WithCardBtns</span><span class="token punctuation">(</span>btns<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-1uALzgDH-1609383182763)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/t9GywHFSQUWCVDT.jpg)]">https://i.loli.net/2020/07/05/t9GywHFSQUWCVDT.jpg)]</a></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-OH6OzXyF-1609383182764)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/26/pEg7hotXZnsaJPV.jpg)]">https://i.loli.net/2020/07/26/pEg7hotXZnsaJPV.jpg)]</a></li>
+cli<span class="token punctuation">.</span><span class="token function">SendActionSingleMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> <span class="token function">WithCardBtns</span><span class="token punctuation">(</span>btns<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <img src="https://i.loli.net/2020/07/05/t9GywHFSQUWCVDT.jpg" alt="Xnip2020-07-05_10-29-21.jpg"><br>  <img src="https://i.loli.net/2020/07/26/pEg7hotXZnsaJPV.jpg" alt="Xnip2020-07-26_17-14-56.jpg"></li>
 </ul>
 <h3 id="FeedCard类型"><a href="#FeedCard类型" class="headerlink" title="FeedCard类型"></a>FeedCard类型</h3><ul>
 <li>方法  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 方法定义</span>
@@ -592,9 +589,9 @@ cli<span class="token punctuation">.</span><span class="token function">SendActi
 
 <span class="token comment">// FeedCardLinkModel</span>
 <span class="token keyword">type</span> FeedCardLinkModel <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	Title      <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
-	MessageURL <span class="token builtin">string</span> <span class="token string">`json:"messageURL,omitempty"`</span>
-	PicURL     <span class="token builtin">string</span> <span class="token string">`json:"picURL,omitempty"`</span>
+    Title      <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
+    MessageURL <span class="token builtin">string</span> <span class="token string">`json:"messageURL,omitempty"`</span>
+    PicURL     <span class="token builtin">string</span> <span class="token string">`json:"picURL,omitempty"`</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">links <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>FeedCardLinkModel<span class="token punctuation">&#123;</span>
     <span class="token punctuation">&#123;</span>
@@ -613,8 +610,8 @@ cli<span class="token punctuation">.</span><span class="token function">SendActi
         PicURL<span class="token punctuation">:</span>     testImg<span class="token punctuation">,</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span>
-cli<span class="token punctuation">.</span><span class="token function">SendFeedCardMessage</span><span class="token punctuation">(</span>links<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-yPI4l7Bp-1609383182765)(<a target="_blank" rel="noopener" href="https://i.loli.net/2020/07/05/F5WDLqyJ4Yzfj6A.jpg)]">https://i.loli.net/2020/07/05/F5WDLqyJ4Yzfj6A.jpg)]</a></li>
+cli<span class="token punctuation">.</span><span class="token function">SendFeedCardMessage</span><span class="token punctuation">(</span>links<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <img src="https://i.loli.net/2020/07/05/F5WDLqyJ4Yzfj6A.jpg" alt="Xnip2020-07-05_10-30-02.jpg"></li>
 </ul>
 <h3 id="OutGoing"><a href="#OutGoing" class="headerlink" title="OutGoing"></a>OutGoing</h3><ul>
 <li>消息格式  <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
@@ -718,13 +715,13 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/suan-fa/suan-fa-dao-lun-liang-ge-dui-lie-shi-xian-zhan/">
+                <a href="/xiao-lu-gong-ju/chang-yong-zai-xian-wang-zhan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="算法导论-两个队列实现栈">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="常用在线网站">
                         
-                        <span class="card-title">算法导论-两个队列实现栈</span>
+                        <span class="card-title">常用在线网站</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,8 +738,8 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    效率工具
                                 </a>
                             
                             
@@ -752,12 +749,8 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Golang/">
-                        <span class="chip bg-color">Golang</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/">
-                        <span class="chip bg-color">算法导论</span>
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
                     </a>
                     
                 </div>
@@ -771,13 +764,13 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/ni-de-aes-jia-mi-jie-guo-xiang-tong-ma/">
+                <a href="/hou-duan-kai-fa/golang-zi-fu-chuan-gao-xiao-pin-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="你的AES加密结果相同吗">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Golang-字符串高效拼接">
                         
-                        <span class="card-title">你的AES加密结果相同吗</span>
+                        <span class="card-title">Golang-字符串高效拼接</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -788,7 +781,7 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
                             </span>
                         <span class="publish-author">
                             
@@ -807,10 +800,6 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
                     
                     <a href="/tags/Golang/">
                         <span class="chip bg-color">Golang</span>
-                    </a>
-                    
-                    <a href="/tags/AES/">
-                        <span class="chip bg-color">AES</span>
                     </a>
                     
                 </div>

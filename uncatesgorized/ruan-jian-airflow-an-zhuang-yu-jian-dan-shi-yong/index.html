@@ -493,27 +493,24 @@ airflow worker<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 </li>
 </ul>
 <h2 id="四、实际项目中可能遇到的问题"><a href="#四、实际项目中可能遇到的问题" class="headerlink" title="四、实际项目中可能遇到的问题"></a>四、实际项目中可能遇到的问题</h2><ul>
-<li>如何打开已有项目<pre class="line-numbers language-none"><code class="language-none">在 airflow.cfg文件中将 dags_folder 指向已有项目
+<li><p>如何打开已有项目</p>
+<pre class="line-numbers language-none"><code class="language-none">在 airflow.cfg文件中将 dags_folder 指向已有项目
 原本为：dags_folder &#x3D; &#x2F;Users&#x2F;liyuxing&#x2F;airflow&#x2F;dags
 改为：dags_folder &#x3D; &#x2F;Users&#x2F;liyuxing&#x2F;work&#x2F;mive&#x2F;dags<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>如果需要添加自己的dags，在airflow目录下新建dags文件夹，并将文件放入文件夹即可，airflow会自己找。</li>
-<li>报错 No module named pyutil.program.conf</li>
-</ul>
+<li><p>如果需要添加自己的dags，在airflow目录下新建dags文件夹，并将文件放入文件夹即可，airflow会自己找。</p>
+</li>
+<li><p>报错 No module named pyutil.program.conf</p>
 <pre class="line-numbers language-none"><code class="language-none">‘*’号为Python版本
 cd airflowenv&#x2F;lib&#x2F;python*.*&#x2F;site-packages
 vim data.pth
 
 在文件中一行，添加pyutil的路径（其他类似问题也可这样解决），如
-&#x2F;Users&#x2F;liyuxing&#x2F;work&#x2F;util<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>执行 airflow webserver之后提示缺少Redis或者其他包</li>
-</ul>
+&#x2F;Users&#x2F;liyuxing&#x2F;work&#x2F;util<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>执行 airflow webserver之后提示缺少Redis或者其他包</p>
 <pre class="line-numbers language-none"><code class="language-none">通通
-pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ul>
-<li>schedule_interval 参数意义<br><a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/scheduler.html?highlight=schedule_interval#dag-runs">官方文档</a></li>
+pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>schedule_interval 参数意义<br><a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/scheduler.html?highlight=schedule_interval#dag-runs">官方文档</a></p>
+</li>
 </ul>
 
                 
@@ -573,9 +570,53 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/uncatesgorized/ruan-jian-airflow-jin-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="软件-Airflow进阶">
+                        
+                        <span class="card-title">软件-Airflow进阶</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            blinkbean
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Airflow/">
+                        <span class="chip bg-color">Airflow</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
                 <a href="/uncatesgorized/ruan-jian-airflow-an-zhuang-yu-jian-dan-shi-yong/">
@@ -595,7 +636,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-07
                             </span>
                         <span class="publish-author">
                             
@@ -606,51 +647,6 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                     </div>
                 </div>
 
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Airflow/">
-                        <span class="chip bg-color">Airflow</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/uncatesgorized/ruan-jian-airflow-jin-jie/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="软件-Airflow进阶">
-                        
-                        <span class="card-title">软件-Airflow进阶</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
-                            
-                        </span>
-                    </div>
-                </div>
                 
                 <div class="card-action article-tags">
                     

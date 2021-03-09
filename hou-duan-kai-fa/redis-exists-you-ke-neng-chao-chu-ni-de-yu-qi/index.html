@@ -443,15 +443,15 @@
 </blockquote>
 </li>
 <li>主动删除：由于惰性删除策略无法保证冷数据被及时删掉，所以Redis会定期主动淘汰一批已过期的key</li>
-<li>当前已用内存超过maxmemory限定时，触发主动清理策略<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> <span class="token keyword">not</span> self<span class="token punctuation">.</span>chatroom_redis<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        value <span class="token operator">=</span> self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token comment"># 间隔时间</span>
-        _interval <span class="token operator">=</span> <span class="token number">30</span>
-        <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li>当前已用内存超过maxmemory限定时，触发主动清理策略<pre class="line-numbers language-py" data-language="py"><code class="language-py">def get_chatroom_user_tips(self, uid):
+    if not self.chatroom_redis.exists(&quot;flag_key&quot;):
+        value &#x3D; self.redis.get(&quot;key&quot;, 0 , 0)
+        # 间隔时间
+        _interval &#x3D; 30
+        if group_ids:
+            self.redis.setex(&quot;flag_key&quot;, value&#x3D;1, time&#x3D;_interval)
+            self.redis.delete(&quot;key&quot;)
+        return group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h6 id="上面代码存在的问题及应对方式"><a href="#上面代码存在的问题及应对方式" class="headerlink" title="上面代码存在的问题及应对方式"></a>上面代码存在的问题及应对方式</h6>问题</li>
 </ol>
 <ul>
@@ -462,15 +462,15 @@
 <ul>
 <li>用ttl代替exists</li>
 </ul>
-<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> self<span class="token punctuation">.</span>chatroom_redis<span class="token punctuation">.</span>ttl<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        value <span class="token operator">=</span> self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token comment"># 间隔时间</span>
-        _interval <span class="token operator">=</span> <span class="token number">30</span>
-        <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-py" data-language="py"><code class="language-py">def get_chatroom_user_tips(self, uid):
+    if self.chatroom_redis.ttl(&quot;flag_key&quot;) &lt;&#x3D; 0:
+        value &#x3D; self.redis.get(&quot;key&quot;, 0 , 0)
+        # 间隔时间
+        _interval &#x3D; 30
+        if group_ids:
+            self.redis.setex(&quot;flag_key&quot;, value&#x3D;1, time&#x3D;_interval)
+            self.redis.delete(&quot;key&quot;)
+        return group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -532,13 +532,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/golang-zi-fu-chuan-gao-xiao-pin-jie/">
+                <a href="/suan-fa/suan-fa-dao-lun-yi-ge-shu-zu-zhong-shi-xian-liang-ge-zhan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Golang-字符串高效拼接">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="算法导论—一个数组中实现两个栈">
                         
-                        <span class="card-title">Golang-字符串高效拼接</span>
+                        <span class="card-title">算法导论—一个数组中实现两个栈</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -549,14 +549,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-05
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -570,6 +570,10 @@
                         <span class="chip bg-color">Golang</span>
                     </a>
                     
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/">
+                        <span class="chip bg-color">算法导论</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -581,13 +585,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/python-pil-mode-imagefilter-dui-bi-shi-jian/">
+                <a href="/shu-ju-ku/mysql-zi-zeng-lie-auto-increment/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Python-PIL—Mode,ImageFilter对比实践">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Mysql-自增列AUTO_INCREMENT">
                         
-                        <span class="card-title">Python-PIL—Mode,ImageFilter对比实践</span>
+                        <span class="card-title">Mysql-自增列AUTO_INCREMENT</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -598,14 +602,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
                                 </a>
                             
                             
@@ -615,12 +619,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                    <a href="/tags/PIL/">
-                        <span class="chip bg-color">PIL</span>
+                    <a href="/tags/Mysql/">
+                        <span class="chip bg-color">Mysql</span>
                     </a>
                     
                 </div>

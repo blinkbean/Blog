@@ -443,15 +443,15 @@
 </blockquote>
 </li>
 <li>主动删除：由于惰性删除策略无法保证冷数据被及时删掉，所以Redis会定期主动淘汰一批已过期的key</li>
-<li>当前已用内存超过maxmemory限定时，触发主动清理策略<pre class="line-numbers language-py" data-language="py"><code class="language-py">def get_chatroom_user_tips(self, uid):
-    if not self.chatroom_redis.exists(&quot;flag_key&quot;):
-        value &#x3D; self.redis.get(&quot;key&quot;, 0 , 0)
-        # 间隔时间
-        _interval &#x3D; 30
-        if group_ids:
-            self.redis.setex(&quot;flag_key&quot;, value&#x3D;1, time&#x3D;_interval)
-            self.redis.delete(&quot;key&quot;)
-        return group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li>当前已用内存超过maxmemory限定时，触发主动清理策略<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> self<span class="token punctuation">.</span>chatroom_redis<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        value <span class="token operator">=</span> self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token comment"># 间隔时间</span>
+        _interval <span class="token operator">=</span> <span class="token number">30</span>
+        <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h6 id="上面代码存在的问题及应对方式"><a href="#上面代码存在的问题及应对方式" class="headerlink" title="上面代码存在的问题及应对方式"></a>上面代码存在的问题及应对方式</h6>问题</li>
 </ol>
 <ul>
@@ -462,15 +462,15 @@
 <ul>
 <li>用ttl代替exists</li>
 </ul>
-<pre class="line-numbers language-py" data-language="py"><code class="language-py">def get_chatroom_user_tips(self, uid):
-    if self.chatroom_redis.ttl(&quot;flag_key&quot;) &lt;&#x3D; 0:
-        value &#x3D; self.redis.get(&quot;key&quot;, 0 , 0)
-        # 间隔时间
-        _interval &#x3D; 30
-        if group_ids:
-            self.redis.setex(&quot;flag_key&quot;, value&#x3D;1, time&#x3D;_interval)
-            self.redis.delete(&quot;key&quot;)
-        return group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>chatroom_redis<span class="token punctuation">.</span>ttl<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        value <span class="token operator">=</span> self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token comment"># 间隔时间</span>
+        _interval <span class="token operator">=</span> <span class="token number">30</span>
+        <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

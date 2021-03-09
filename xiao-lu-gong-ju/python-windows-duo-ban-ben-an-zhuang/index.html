@@ -450,13 +450,10 @@ python安装路径找到Scripts文件夹，进入里面找到pip*-script.py，�
 <li>Windows环境下使用virtualenv对Python进行多版本隔离，但是前提是能安装上多个版本。[笑哭.jpg]</li>
 <li>Win8.1安装Python==3.5==以上提示缺失==api-ms-win-crt-runtime-l1-1-0.dll==问题<h4 id="怎么安装anaconda？"><a href="#怎么安装anaconda？" class="headerlink" title="怎么安装anaconda？"></a>怎么安装anaconda？</h4></li>
 <li>国内镜像地址 : <blockquote>
-<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华大学开源软件镜像站</a></p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华大学开源软件镜像站</a><br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/3f16e0031e87522591c10320.html">如何安装Anaconda和Python</a></p>
 </blockquote>
 </li>
 </ul>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/3f16e0031e87522591c10320.html">如何安装Anaconda和Python</a></p>
-</blockquote>
 <h4 id="安装anaconda过程"><a href="#安装anaconda过程" class="headerlink" title="安装anaconda过程"></a>安装anaconda过程</h4><ul>
 <li>安装好anaconda之后会自带：base(root)<br>的python</li>
 <li>安装其他版本的python<blockquote>
@@ -531,6 +528,59 @@ conda env list &#x2F;&#x2F;查看现有的环境<span aria-hidden="true" class="
     
 
     
+
+    
+        
+    <div id="SOHUCS"></div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var loadChangYan = function () {
+                var appid = 'cyvlt8R0W';
+                var conf = 'prod_e2dee049e699932e72131199e0ee8824';
+                var width = window.innerWidth || document.documentElement.clientWidth;
+                if (width < 960) {
+                    var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.charset = 'utf-8';
+                    script.id = 'changyan_mobile_js';
+                    script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid +
+                        '&conf=' + conf;
+                    head.appendChild(script);
+                } else {
+                    var loadJs = function (d, a) {
+                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                        var b = document.createElement("script");
+                        b.setAttribute("type", "text/javascript");
+                        b.setAttribute("charset", "UTF-8");
+                        b.setAttribute("src", d);
+                        if (typeof a === "function") {
+                            if (window.attachEvent) {
+                                b.onreadystatechange = function () {
+                                    var e = b.readyState;
+                                    if (e === "loaded" || e === "complete") {
+                                        b.onreadystatechange = null;
+                                        a()
+                                    }
+                                }
+                            } else {
+                                b.onload = a
+                            }
+                        }
+                        c.appendChild(b)
+                    };
+                    loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js", function () {
+                        window.changyan.api.config({
+                            appid: appid,
+                            conf: conf
+                        })
+                    });
+                }
+            }
+
+            loadChangYan();
+        }
+    </script>
 
     
 

@@ -438,24 +438,20 @@ z &#x3D; 0b1100  # 消去了y最后一位的1
 <li>O(1) 时间检测X是否是2的n次方<blockquote>
 <p>一个数如果是2的n次方，则这个数的二进制中只有一个1<br>如果消去最后一位的1，则这个数为0</p>
 </blockquote>
-</li>
-</ul>
 <pre class="line-numbers language-none"><code class="language-none">x &#x3D; 16
 	16 &#x3D; 0b10000
 	15 &#x3D; 0b01111
-x &amp; (x - 1) &#x3D; 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
+x &amp; (x - 1) &#x3D; 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>一个整数的二进制中有多少个1<blockquote>
 <p>x &amp; (x - 1) 可以消除最后一位的1<br>while循环消除最后一位的1，直到结果为0</p>
 </blockquote>
-</li>
-</ul>
 <pre class="line-numbers language-none"><code class="language-none">a &#x3D; 15
 b &#x3D; 0
 while a &gt; 0:
 	a &#x3D; a &amp; (a - 1)
 	b +&#x3D; 1
-print b # 1的个数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+print b # 1的个数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 
                 
             </div>

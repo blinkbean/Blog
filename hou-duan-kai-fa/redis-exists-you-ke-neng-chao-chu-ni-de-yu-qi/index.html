@@ -460,9 +460,7 @@
 </ul>
 <p>解决</p>
 <ul>
-<li>用ttl代替exists</li>
-</ul>
-<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<li>用ttl代替exists<pre class="line-numbers language-py" data-language="py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">get_chatroom_user_tips</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> uid<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> self<span class="token punctuation">.</span>chatroom_redis<span class="token punctuation">.</span>ttl<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
         value <span class="token operator">=</span> self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
         <span class="token comment"># 间隔时间</span>
@@ -470,7 +468,9 @@
         <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
             self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+
                 
             </div>
             <hr/>

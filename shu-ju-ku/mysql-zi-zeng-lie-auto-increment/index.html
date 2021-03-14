@@ -440,9 +440,7 @@
 </ul>
 <p>2、插入语句执行前就<strong>确定</strong>要插入多少条记录。</p>
 <ul>
-<li>采用一个轻量级的锁，在为插入语句生成auto-increment修饰的列的值时获取一下这个轻量级锁，生成需要用到的auto-increment列的值后，==立马释放==，不需要等语句执行。</li>
-</ul>
-<blockquote>
+<li>采用一个轻量级的锁，在为插入语句生成auto-increment修饰的列的值时获取一下这个轻量级锁，生成需要用到的auto-increment列的值后，==立马释放==，不需要等语句执行。<blockquote>
 <p>InnoDB中提供系统变量 innodb_autoinc_lock_mode 控制用以上哪种方式进行自增的赋值。</p>
 <ol>
 <li>innodb_autoinc_lock_mode=0 一律采用auto-inc锁。</li>
@@ -451,6 +449,8 @@
 </ol>
 <p>当一律采用轻量级锁时，可能会造成不同事物中插入语句生成的值时交叉的，在有主从复制的场景中是不安全的。</p>
 </blockquote>
+</li>
+</ul>
 
                 
             </div>

@@ -439,9 +439,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/puhaiyang/article/details/72284702">静下心来静下心来</a></li>
 </ol>
 <ul>
-<li><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4></li>
-</ul>
-<blockquote>
+<li><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><blockquote>
 <ul>
 <li>没有线程对该结果集中的任何行数据使用排他锁或共享锁，否则申请会阻塞。</li>
 <li>for update仅适用于InnoDB，且必须在事务块(BEGIN/COMMIT)中才能生效</li>
@@ -449,7 +447,7 @@
 <li>排他锁包含行锁、表锁。</li>
 </ul>
 </blockquote>
-<ul>
+</li>
 <li><h4 id="数据一致性"><a href="#数据一致性" class="headerlink" title="数据一致性"></a>数据一致性</h4></li>
 <li><p>悲观锁</p>
 <blockquote>
@@ -485,16 +483,13 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 </ul>
 </blockquote>
 </blockquote>
-</li>
-</ul>
 <pre class="line-numbers language-none"><code class="language-none">#不加锁获取 id&#x3D;1 的商品对象
 select * from goods where id &#x3D; 1
 
 begin;
     #更新 stock 值，这里需要注意 where 条件 “stock &#x3D; cur_stock”，只有程序中获取到的库存量与数据库中的库存量相等才执行更新
     update goods set stock &#x3D; stock - 1 where id &#x3D; 1 and stock &#x3D; cur_stock;
-commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
+commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><h4 id="行锁和表锁"><a href="#行锁和表锁" class="headerlink" title="行锁和表锁"></a>行锁和表锁</h4><blockquote>
 <ol>
 <li>只根据主键进行查询，并且查询到数据，主键字段产生行锁。</li>

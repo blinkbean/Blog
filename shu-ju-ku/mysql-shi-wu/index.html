@@ -489,12 +489,10 @@ Last checkpoint at  77292702 # 刷新到磁盘的LSN
 <p>InnoDB会对每个select操作自动添加<code>lock in share mode</code>，即共享锁。因为InnoDB在rr的隔离级别就可以避免幻读，所以serializable隔离级别主要用于分布式事务。</p>
 </li>
 </ul>
-<h4 id="查看事务隔离级别"><a href="#查看事务隔离级别" class="headerlink" title="查看事务隔离级别"></a>查看事务隔离级别</h4><ul>
-<li><pre><code class="mysql">select @@tx_isolation\G;
-select @@global.tx_isolation\G;
-</code></pre>
-</li>
-</ul>
+<h4 id="查看事务隔离级别"><a href="#查看事务隔离级别" class="headerlink" title="查看事务隔离级别"></a>查看事务隔离级别</h4><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select @@tx_isolation\G;
+select @@global.tx_isolation\G;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
 <h4 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h4><p>分布式事务由一个或多个资源管理器、一个事务管理器和一个应用程序组成。</p>
 <p>分布式事务使用两段式提交<code>two-phase commit</code>的方式。在第一个阶段，所有参与全局事务的节点都开始准备，告诉事务管理器他们准备好了。第二阶段，事务管理器告诉所有资源管理器执行rollback还是commit。如果任何节点显示不能提交，则所有节点都被告知需要回滚。</p>
 <ul>

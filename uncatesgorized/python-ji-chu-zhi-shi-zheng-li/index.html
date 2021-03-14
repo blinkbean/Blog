@@ -426,13 +426,10 @@
 <p>字节类型 a=bytes(‘123’)/a = b’123’<br>字节数组 bytearray(‘123’)</p>
 <p>可变序列：list,set,dict<br>不可变序列：str,tuple</p>
 <h4 id="数据类型方法"><a href="#数据类型方法" class="headerlink" title="数据类型方法"></a>数据类型方法</h4><h5 id="字符串方法"><a href="#字符串方法" class="headerlink" title="字符串方法"></a>字符串方法</h5><ol>
-<li>增</li>
-</ol>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">strs <span class="token operator">=</span> str1 <span class="token operator">+</span> str2 <span class="token operator">+</span> str3
+<li>增<pre class="line-numbers language-python" data-language="python"><code class="language-python">strs <span class="token operator">=</span> str1 <span class="token operator">+</span> str2 <span class="token operator">+</span> str3
 strs <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">,</span> str3<span class="token punctuation">]</span><span class="token punctuation">)</span>
 strs <span class="token operator">=</span> <span class="token string">"%s%s%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">,</span> str3<span class="token punctuation">)</span>
-strs <span class="token operator">=</span> <span class="token string">"&#123;&#125;&#123;&#125;&#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">,</span> str3<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
+strs <span class="token operator">=</span> <span class="token string">"&#123;&#125;&#123;&#125;&#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">,</span> str3<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>删<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># m准备替换的内容，n替换的内容，x替换的个数</span>
 strs <span class="token operator">=</span> x<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>m<span class="token punctuation">,</span> n<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li>改<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># x转化为大写</span>
@@ -454,12 +451,9 @@ x<span class="token punctuation">.</span>startswith<span class="token punctuatio
 x<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token comment"># 是否以m结尾</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 <h5 id="列表方法"><a href="#列表方法" class="headerlink" title="列表方法"></a>列表方法</h5><ol>
-<li>增</li>
-</ol>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">li<span class="token punctuation">.</span>append<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+<li>增<pre class="line-numbers language-python" data-language="python"><code class="language-python">li<span class="token punctuation">.</span>append<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
 li<span class="token punctuation">.</span>insert<span class="token punctuation">(</span>x<span class="token punctuation">,</span> m<span class="token punctuation">)</span> <span class="token comment"># 在x下标处插入m</span>
-li<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
+li<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li>删<pre class="line-numbers language-python" data-language="python"><code class="language-python">li<span class="token punctuation">.</span>pop<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment"># 删除并返回该元素的值，若无参数则从最后开始删</span>
 li<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token comment"># 删掉第一个m</span>
 li<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 清空 py2无此方法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
@@ -475,11 +469,9 @@ li<span class="token punctuation">.</span>reverse<span class="token punctuation"
 li2 <span class="token operator">=</span> <span class="token builtin">reversed</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span> <span class="token comment"># li2是listreverseiterator 对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ol>
 <h5 id="元组方法"><a href="#元组方法" class="headerlink" title="元组方法"></a>元组方法</h5><ol>
-<li>查</li>
+<li>查<pre class="line-numbers language-python" data-language="python"><code class="language-python">t<span class="token punctuation">.</span>index<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+t<span class="token punctuation">.</span>count<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ol>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">t<span class="token punctuation">.</span>index<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-t<span class="token punctuation">.</span>count<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <h5 id="集合方法"><a href="#集合方法" class="headerlink" title="集合方法"></a>集合方法</h5><p><strong>交集&amp;</strong><br><strong>并集|</strong><br><strong>差集-</strong></p>
 <ol>
 <li>增<pre class="line-numbers language-python" data-language="python"><code class="language-python">a<span class="token punctuation">.</span>add<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>

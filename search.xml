@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>LeetCode-20-有效括号</title>
+      <link href="suan-fa/leetcode-20-you-xiao-gua-hao/"/>
+      <url>suan-fa/leetcode-20-you-xiao-gua-hao/</url>
+      
+        <content type="html"><![CDATA[<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。</p><p>有效字符串需满足：</p><p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p><p><a href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a></p><pre class="line-numbers language-none"><code class="language-none">type stack struct &#123;arr []int32&#125;func (s *stack) push(c int32) &#123;s.arr &#x3D; append(s.arr, c)&#125;func (s *stack) pop() int32 &#123;var t int32if !s.isEmpty() &#123;t &#x3D; s.arr[len(s.arr)-1]s.arr &#x3D; s.arr[:len(s.arr)-1]&#125;return t&#125;func (s *stack) isEmpty() bool &#123;if len(s.arr) &#x3D;&#x3D; 0 &#123;return true&#125;return false&#125;func isValid(s string) bool &#123;m :&#x3D; map[int32]int32&#123;&#39;)&#39;: &#39;(&#39;,&#39;]&#39;: &#39;[&#39;,&#39;&#125;&#39;: &#39;&#123;&#39;,&#125;sta :&#x3D; stack&#123;arr: make([]int32, 0, 0)&#125;for _, v :&#x3D; range s &#123;if mv, ok :&#x3D; m[v]; ok &#123;if sta.pop() !&#x3D; mv &#123;return false&#125;&#125; else &#123;sta.push(v)&#125;&#125;if sta.isEmpty() &#123;return true&#125;return false&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Elasticsearch data</title>
       <link href="uncatesgorized/elasticsearch-data/"/>
       <url>uncatesgorized/elasticsearch-data/</url>

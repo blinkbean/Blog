@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>LeetCode-215-数组中的第K个最大元素</title>
+      <link href="suan-fa/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/"/>
+      <url>suan-fa/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/</url>
+      
+        <content type="html"><![CDATA[<p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p><p>示例 1:</p><p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5<br>示例 2:</p><p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br>说明:</p><p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</p><p><a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array">https://leetcode-cn.com/problems/kth-largest-element-in-an-array</a></p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul><li>最小堆</li></ul><pre class="line-numbers language-none"><code class="language-none">type MinHeap struct &#123;arr  []intsize int&#125;func (m *MinHeap) Len() int &#123;return len(m.arr)&#125;func (m *MinHeap) Less(i, j int) bool &#123;return m.arr[i] &lt; m.arr[j]&#125;func (m *MinHeap) Swap(i, j int) &#123;m.arr[i], m.arr[j] &#x3D; m.arr[j], m.arr[i]&#125;func (m *MinHeap) Push(v interface&#123;&#125;) &#123;m.arr &#x3D; append(m.arr, v.(int))&#125;func (m *MinHeap) Pop() interface&#123;&#125; &#123;t :&#x3D; m.arr[m.Len()-1] &#x2F;&#x2F; 最后一个m.arr &#x3D; m.arr[0 : m.Len()-1]return t&#125;func (m *MinHeap) Top() int &#123;return m.arr[0] &#x2F;&#x2F; 第一个&#125;func (m *MinHeap) RealPush(v int) &#123;if m.size &#x3D;&#x3D; m.Len() &#123;if m.Top() &lt; v &#123;heap.Pop(m)heap.Push(m, v)&#125;&#125; else &#123;heap.Push(m, v)&#125;&#125;func InitHeap(size int) MinHeap &#123;m :&#x3D; MinHeap&#123;arr:  make([]int, 0),size: size,&#125;heap.Init(&amp;m)return m&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LeetCode-20-有效括号</title>
       <link href="suan-fa/leetcode-20-you-xiao-gua-hao/"/>
       <url>suan-fa/leetcode-20-you-xiao-gua-hao/</url>
       
-        <content type="html"><![CDATA[<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。</p><p>有效字符串需满足：</p><p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p><p><a href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a></p><pre class="line-numbers language-none"><code class="language-none">type stack struct &#123;arr []int32&#125;func (s *stack) push(c int32) &#123;s.arr &#x3D; append(s.arr, c)&#125;func (s *stack) pop() int32 &#123;var t int32if !s.isEmpty() &#123;t &#x3D; s.arr[len(s.arr)-1]s.arr &#x3D; s.arr[:len(s.arr)-1]&#125;return t&#125;func (s *stack) isEmpty() bool &#123;if len(s.arr) &#x3D;&#x3D; 0 &#123;return true&#125;return false&#125;func isValid(s string) bool &#123;m :&#x3D; map[int32]int32&#123;&#39;)&#39;: &#39;(&#39;,&#39;]&#39;: &#39;[&#39;,&#39;&#125;&#39;: &#39;&#123;&#39;,&#125;sta :&#x3D; stack&#123;arr: make([]int32, 0, 0)&#125;for _, v :&#x3D; range s &#123;if mv, ok :&#x3D; m[v]; ok &#123;if sta.pop() !&#x3D; mv &#123;return false&#125;&#125; else &#123;sta.push(v)&#125;&#125;if sta.isEmpty() &#123;return true&#125;return false&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。</p><p>有效字符串需满足：</p><p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p><p><a href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a></p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul><li>滑动窗口</li></ul><pre class="line-numbers language-none"><code class="language-none">type stack struct &#123;arr []int32&#125;func (s *stack) push(c int32) &#123;s.arr &#x3D; append(s.arr, c)&#125;func (s *stack) pop() int32 &#123;var t int32if !s.isEmpty() &#123;t &#x3D; s.arr[len(s.arr)-1]s.arr &#x3D; s.arr[:len(s.arr)-1]&#125;return t&#125;func (s *stack) isEmpty() bool &#123;if len(s.arr) &#x3D;&#x3D; 0 &#123;return true&#125;return false&#125;func isValid(s string) bool &#123;m :&#x3D; map[int32]int32&#123;&#39;)&#39;: &#39;(&#39;,&#39;]&#39;: &#39;[&#39;,&#39;&#125;&#39;: &#39;&#123;&#39;,&#125;sta :&#x3D; stack&#123;arr: make([]int32, 0, 0)&#125;for _, v :&#x3D; range s &#123;if mv, ok :&#x3D; m[v]; ok &#123;if sta.pop() !&#x3D; mv &#123;return false&#125;&#125; else &#123;sta.push(v)&#125;&#125;if sta.isEmpty() &#123;return true&#125;return false&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>

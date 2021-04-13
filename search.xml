@@ -5,12 +5,24 @@
     
     <entry>
       <title>LeetCode-236-二叉树的最近公共祖先</title>
-      <link href="uncatesgorized/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/"/>
-      <url>uncatesgorized/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</url>
+      <link href="suan-fa/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/"/>
+      <url>suan-fa/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p><p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p><p><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree">https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree</a></p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul><li>情况1：p,q 在 root 两侧</li><li>情况2：p或q 等于 root, 且另一个节点在root的子树中</li></ul><pre class="line-numbers language-none"><code class="language-none">func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode &#123;if root &#x3D;&#x3D; nil || root &#x3D;&#x3D; q || root &#x3D;&#x3D; p &#123;return root&#125;left :&#x3D; lowestCommonAncestor(root.Left, p, q)right :&#x3D; lowestCommonAncestor(root.Right, p, q)if left &#x3D;&#x3D; nil &#123;return right&#125;if right &#x3D;&#x3D; nil &#123;return left&#125;return root&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
       
     </entry>
     

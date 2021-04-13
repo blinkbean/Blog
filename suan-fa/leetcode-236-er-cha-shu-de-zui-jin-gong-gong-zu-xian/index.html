@@ -385,12 +385,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/LeetCode/">
+                                <span class="chip bg-color">LeetCode</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                算法
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -418,7 +431,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree">https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree</a></p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
+<li>情况1：p,q 在 root 两侧</li>
+<li>情况2：p或q 等于 root, 且另一个节点在root的子树中</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode &#123;
+	if root &#x3D;&#x3D; nil || root &#x3D;&#x3D; q || root &#x3D;&#x3D; p &#123;
+		return root
+	&#125;
+	left :&#x3D; lowestCommonAncestor(root.Left, p, q)
+	right :&#x3D; lowestCommonAncestor(root.Right, p, q)
+	if left &#x3D;&#x3D; nil &#123;
+		return right
+	&#125;
+	if right &#x3D;&#x3D; nil &#123;
+		return left
+	&#125;
+	return root
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -431,7 +464,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/LeetCode/">
+                                    <span class="chip bg-color">LeetCode</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -530,7 +567,7 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/uncatesgorized/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">
+                <a href="/suan-fa/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">
                     <div class="card-image">
                         
                         
@@ -551,13 +588,25 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/LeetCode/">
+                        <span class="chip bg-color">LeetCode</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

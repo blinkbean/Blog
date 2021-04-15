@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>LeetCode-206-反转链表</title>
+      <link href="suan-fa/leetcode-206-fan-zhuan-lian-biao/"/>
+      <url>suan-fa/leetcode-206-fan-zhuan-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<p>反转一个单链表。 </p><p>示例: </p><p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL </p><p>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？ </p><p><a href="https://leetcode-cn.com/problems/reverse-linked-list/">https://leetcode-cn.com/problems/reverse-linked-list/</a></p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul><li>每个节点都只关心自己和下一个节点的指向关系</li><li>node.Next.Next = node</li><li>node.Next = nil</li></ul><pre class="line-numbers language-none"><code class="language-none">func reverseList(head *ListNode) *ListNode &#123;if head&#x3D;&#x3D;nil&#123;return nil&#125;return revert(head)&#125;func revert(head *ListNode) *ListNode &#123;if head.Next&#x3D;&#x3D;nil&#123;return head&#125;h :&#x3D; revert(head.Next)head.Next.Next &#x3D; headhead.Next&#x3D;nilreturn h&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>LeetCode-160-相交链表</title>
+      <link href="uncatesgorized/leetcode-160-xiang-jiao-lian-biao/"/>
+      <url>uncatesgorized/leetcode-160-xiang-jiao-lian-biao/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LeetCode-236-二叉树的最近公共祖先</title>
       <link href="suan-fa/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/"/>
       <url>suan-fa/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</url>

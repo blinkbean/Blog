@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis-为什么使用跳表?, Blinkbean">
+    <meta name="keywords" content="Golang-Interface能怎么用?, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis-为什么使用跳表? | Blinkbean</title>
+    <title>Golang-Interface能怎么用? | Blinkbean</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis-为什么使用跳表?</h1>
+                    <h1 class="description center-align post-title">Golang-Interface能怎么用?</h1>
                 </div>
             </div>
         </div>
@@ -387,8 +387,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Redis/">
-                                <span class="chip bg-color">Redis</span>
+                            <a href="/tags/Golang/">
+                                <span class="chip bg-color">Golang</span>
                             </a>
                         
                     </div>
@@ -399,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
-                                中间件
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                后端开发
                             </a>
                         
                     </div>
@@ -431,51 +431,173 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="为什么有可比性"><a href="#为什么有可比性" class="headerlink" title="为什么有可比性"></a>为什么有可比性</h4><p>它们都是用于解决数据集合的查找问题，即根据指定的key，快速查到它所在的位置或者对应的value。</p>
-<h4 id="Redis用跳表不用B-树的原因"><a href="#Redis用跳表不用B-树的原因" class="headerlink" title="Redis用跳表不用B+树的原因"></a>Redis用跳表不用B+树的原因</h4><p>redis是内存数据库，儿B+树是为了mysql这种io数据库准备的。B+树每个节点的数量都是一个mysql分区页的大小。</p>
-<h4 id="数据结构对比"><a href="#数据结构对比" class="headerlink" title="数据结构对比"></a>数据结构对比</h4><table>
-<thead>
-<tr>
-<th>数据结构</th>
-<th>实现原理</th>
-<th>查询方式</th>
-<th>查找</th>
-<th>存储</th>
-<th>插入删除</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Hash</td>
-<td>哈希表</td>
-<td>单key</td>
-<td>O(1)</td>
-<td>除数据外没有额外存储</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>B+树</td>
-<td>平衡二叉树扩展而来</td>
-<td>单key，范围，分页</td>
-<td>O(logn)</td>
-<td>数据，左右指针，页节点指针</td>
-<td>O(logn)</td>
-</tr>
-<tr>
-<td>跳表</td>
-<td>有序链表扩展而来</td>
-<td>单key，分页</td>
-<td>O(logn)</td>
-<td>数据，指针，每个节点指针&lt;2，所以占用空间比B+树小</td>
-<td>O(logn)</td>
-</tr>
-</tbody></table>
-<h4 id="redis-SortedSet底层数据结构"><a href="#redis-SortedSet底层数据结构" class="headerlink" title="redis SortedSet底层数据结构"></a>redis SortedSet底层数据结构</h4><p> zset底层的存储结构包括ziplist或skiplist，在同时满足以下两个条件的时候使用ziplist，其他时候使用skiplist，两个条件如下：</p>
-<ul>
-<li>有序集合保存的元素数量小于128个</li>
-<li>有序集合保存的所有元素的长度小于64字节</li>
+                <h1 id="Golang-Interface-应用"><a href="#Golang-Interface-应用" class="headerlink" title="Golang Interface 应用"></a>Golang Interface 应用</h1><h3 id="Interface是什么？"><a href="#Interface是什么？" class="headerlink" title="Interface是什么？"></a>Interface是什么？</h3><p>在Golang中，interface是一组method的集合，duck-type programing的一种体现。不关心属性（数据），只关心行为（方法）。可以认为interface是一种协议，一种为了双方交流而做出的约定。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// The error built-in interface type is the conventional interface for</span>
+<span class="token comment">// representing an error condition, with the nil value representing no error.</span>
+<span class="token keyword">type</span> <span class="token builtin">error</span> <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ----------------</span>
+<span class="token comment">// 定义自己的err类型</span>
+<span class="token keyword">type</span> MyErr <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 实现error接口</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>MyErr<span class="token punctuation">)</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token string">"my error"</span>	
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="Interface能干什么？"><a href="#Interface能干什么？" class="headerlink" title="Interface能干什么？"></a>Interface能干什么？</h3><ul>
+<li>writing generic algorithm （泛型编程）</li>
+<li>hiding implementation detail （隐藏具体实现）</li>
+<li>providing interception points （提供拦截点）</li>
 </ul>
-<p> 当ziplist作为zset的底层存储结构时候，每个集合元素使用两个紧挨在一起的压缩列表节点来保存，第一个节点保存元素的成员，第二个元素保存元素的分值。</p>
-<p> 当skiplist作为zset的底层存储结构的时候，使用skiplist按序保存元素及分值，使用dict来保存元素和分值的映射关系。</p>
+<h4 id="writing-generic-algorithm"><a href="#writing-generic-algorithm" class="headerlink" title="writing generic algorithm"></a>writing generic algorithm</h4><p>golang的泛型最早1.17才提供版本支持。用interface实现一下行不行呀？</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> sort
+
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Len is the number of elements in the collection.</span>
+    <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>
+    <span class="token comment">// Less reports whether the element with</span>
+    <span class="token comment">// index i should sort before the element with index j.</span>
+    <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span>
+    <span class="token comment">// Swap swaps the elements with indexes i and j.</span>
+    <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ------------------</span>
+
+<span class="token keyword">type</span> BestLanguage <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name  <span class="token builtin">string</span>
+	Score <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b BestLanguage<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%s:%d"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> b<span class="token punctuation">.</span>Score<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> Languages <span class="token punctuation">[</span><span class="token punctuation">]</span>BestLanguage
+
+<span class="token comment">// 实现了sort的Interface，不知道是怎么排序的，但拥有了排序的能力</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>Languages<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Score <span class="token operator">></span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Score
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> l<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	languages <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>BestLanguage<span class="token punctuation">&#123;</span>
+		<span class="token punctuation">&#123;</span><span class="token string">"Chinese"</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span><span class="token string">"English"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span><span class="token string">"Japanese"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span>
+	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token function">Languages</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Return concrete types, receive interfaces as parameter.</span>
+<span class="token keyword">func</span> <span class="token function">ConvertInterfaceToString</span><span class="token punctuation">(</span>v <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> vstr <span class="token builtin">string</span>
+	<span class="token keyword">switch</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">case</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+		vstr <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">case</span> <span class="token builtin">int32</span><span class="token punctuation">:</span>
+		vstr <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span><span class="token function">int</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">int32</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">case</span> <span class="token builtin">int64</span><span class="token punctuation">:</span>
+		vstr <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatInt</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">int64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+	<span class="token keyword">case</span> <span class="token builtin">float64</span><span class="token punctuation">:</span>
+		vstr <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span><span class="token function">int</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">float64</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">case</span> <span class="token builtin">string</span><span class="token punctuation">:</span>
+		vstr <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+	<span class="token keyword">default</span><span class="token punctuation">:</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> vstr
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="hiding-implement-detail"><a href="#hiding-implement-detail" class="headerlink" title="hiding implement detail"></a>hiding implement detail</h4><p>三个函数返回的具体 struct （都实现了 Context interface），但是对于使用者来说是完全无感知的。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Context <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Deadline</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">,</span> ok <span class="token builtin">bool</span><span class="token punctuation">)</span>
+	<span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
+	<span class="token function">Value</span><span class="token punctuation">(</span>key <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ------------------</span>
+
+<span class="token keyword">type</span> cancelCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Context
+	mu       sync<span class="token punctuation">.</span>Mutex
+	done     <span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	children <span class="token keyword">map</span><span class="token punctuation">[</span>canceler<span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	err      <span class="token builtin">error</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">WithCancel</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">)</span> <span class="token punctuation">(</span>ctx Context<span class="token punctuation">,</span> cancel CancelFunc<span class="token punctuation">)</span>    <span class="token comment">//返回 cancelCtx</span>
+
+<span class="token keyword">type</span> timerCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	cancelCtx
+	timer <span class="token operator">*</span>time<span class="token punctuation">.</span>Timer
+	deadline time<span class="token punctuation">.</span>Time
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">WithDeadline</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">)</span> <span class="token punctuation">(</span>Context<span class="token punctuation">,</span> CancelFunc<span class="token punctuation">)</span> <span class="token comment">//返回 timerCtx</span>
+
+<span class="token keyword">type</span> valueCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Context
+	key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">WithValue</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> Context    <span class="token comment">//返回 valueCtx</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="providing-interception-points"><a href="#providing-interception-points" class="headerlink" title="providing interception points"></a>providing interception points</h4><p>实现RoundTripper接口，可以在http请求前后写入自己的逻辑，如apm，jaeger的打点。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> http
+
+<span class="token keyword">type</span> RoundTripper <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">RoundTrip</span><span class="token punctuation">(</span><span class="token operator">*</span>Request<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>Response<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">WrapClient</span><span class="token punctuation">(</span>c <span class="token operator">*</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">)</span> <span class="token operator">*</span>http<span class="token punctuation">.</span>Client <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> c <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		c <span class="token operator">=</span> http<span class="token punctuation">.</span>DefaultClient
+	<span class="token punctuation">&#125;</span>
+	copied <span class="token operator">:=</span> <span class="token operator">*</span>c
+	copied<span class="token punctuation">.</span>Transport <span class="token operator">=</span> <span class="token function">wrapRoundTripper</span><span class="token punctuation">(</span>copied<span class="token punctuation">.</span>Transport<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token operator">&amp;</span>copied
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">wrapRoundTripper</span><span class="token punctuation">(</span>r http<span class="token punctuation">.</span>RoundTripper<span class="token punctuation">)</span> http<span class="token punctuation">.</span>RoundTripper <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> r <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		r <span class="token operator">=</span> http<span class="token punctuation">.</span>DefaultTransport
+	<span class="token punctuation">&#125;</span>
+	rt <span class="token operator">:=</span> <span class="token operator">&amp;</span>roundTripper<span class="token punctuation">&#123;</span>r<span class="token punctuation">:</span> r<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> rt
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> roundTripper <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	r http<span class="token punctuation">.</span>RoundTripper
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>roundTripper<span class="token punctuation">)</span> <span class="token function">RoundTrip</span><span class="token punctuation">(</span>req <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>http<span class="token punctuation">.</span>Response<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// do something</span>
+  resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> r<span class="token punctuation">.</span>r<span class="token punctuation">.</span><span class="token function">RoundTrip</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span> <span class="token comment">// real request</span>
+  <span class="token comment">// do something</span>
+  <span class="token keyword">return</span> resp<span class="token punctuation">,</span> err
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/06/12/understanding-golang-interface/">http://legendtkl.com/2017/06/12/understanding-golang-interface/</a></p>
 
                 
             </div>
@@ -490,8 +612,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Redis/">
-                                    <span class="chip bg-color">Redis</span>
+                                <a href="/tags/Golang/">
+                                    <span class="chip bg-color">Golang</span>
                                 </a>
                             
                         </div>
@@ -587,9 +709,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/hou-duan-kai-fa/golang-interface-neng-zen-me-yong/">
                     <div class="card-image">
@@ -607,9 +730,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -622,6 +745,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -640,13 +764,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/uncatesgorized/golang-pprof/">
+                <a href="/zhong-jian-jian/redis-wei-shi-me-shi-yong-tiao-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Golang-pprof">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Redis-为什么使用跳表?">
                         
-                        <span class="card-title">Golang-pprof</span>
+                        <span class="card-title">Redis-为什么使用跳表?</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -657,15 +781,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-21
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
+                                    中间件
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
                 </div>
                 
             </div>

@@ -595,7 +595,75 @@
 
 
 
+<h3 id="值接收-or-指针接收"><a href="#值接收-or-指针接收" class="headerlink" title="值接收 or 指针接收"></a>值接收 or 指针接收</h3><p>实现接口的时候应该用值还是指针？</p>
+<ol>
+<li>赋值时必须用指针。</li>
+<li>初始化为指针类型，编译指定没问题。</li>
+<li>❎表示编译不通过，因为对象没有声明接口的全部方法。</li>
+<li>指针类型没有声明全部，但是能编译通过，因为Go自己做了一些转换。</li>
+</ol>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Animal <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span>
+	<span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
 
+<span class="token comment">// 全部值</span>
+<span class="token keyword">type</span> Dog <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	food <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"dog like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 全部指针</span>
+<span class="token keyword">type</span> Cat <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	food <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"cat like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 有值、有指针</span>
+<span class="token keyword">type</span> Fish <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	food <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Fish<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Fish<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"fish like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> Dog<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> <span class="token operator">&amp;</span>Dog<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span>
+	dog<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"bone"</span><span class="token punctuation">)</span>
+	dog<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// dog like    # 没吃上，赋值失败</span>
+
+	❎ <span class="token keyword">var</span> cat Animal <span class="token operator">=</span> Cat<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token comment">//var cat Animal = &amp;Cat&#123;&#125;</span>
+	<span class="token keyword">var</span> cat Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Cat<span class="token punctuation">)</span>
+	cat<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"fish"</span><span class="token punctuation">)</span>
+	cat<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// cat like  fish</span>
+
+	❎ <span class="token keyword">var</span> fish Animal <span class="token operator">=</span> Fish<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token keyword">var</span> fish Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Fish<span class="token punctuation">)</span>
+	fish<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"small fish"</span><span class="token punctuation">)</span>
+	fish<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// fish like  small fish</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/06/12/understanding-golang-interface/">http://legendtkl.com/2017/06/12/understanding-golang-interface/</a></p>
 
@@ -709,18 +777,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/golang-interface-neng-zen-me-yong/">
+                <a href="/hou-duan-kai-fa/golang-interface-di-ceng-shi-zen-me-shi-xian-de/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Golang-Interface能怎么用?">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Golang-Interface底层是怎么实现的?">
                         
-                        <span class="card-title">Golang-Interface能怎么用?</span>
+                        <span class="card-title">Golang-Interface底层是怎么实现的?</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -730,9 +797,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-16
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -745,7 +812,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

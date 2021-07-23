@@ -650,142 +650,147 @@
 </li>
 <li><p>场景三：ringbuffer 没空间，这个时候就要是否需要 block 了，一般来讲，<code>c &lt;- x</code> 编译出的代码都是 <code>block = true</code> ，那么什么时候 chansend 的 block 参数会是 false 呢？答案是：select 的时候；</p>
 </li>
-<li><p>```go<br>select {<br>case c &lt;- v:</p>
-<pre><code>// ... foo
-</code></pre>
-<p>default:</p>
-<pre><code>// ... bar
-</code></pre>
-<p>}</p>
-<p>// 编译后<br>if selectnbsend(c, v) {</p>
-<pre><code>//  ... foo
-</code></pre>
-<p>} else {<br>//  … bar<br>}</p>
-<p>func selectnbsend(c *hchan, elem unsafe.Pointer) (selected bool) {<br> // 调用 chansend 函数，block 参数为 false；<br> return chansend(c, elem, false, getcallerpc())<br>}</p>
-<pre class="line-numbers language-none"><code class="language-none">
-
-
-### chanrecv
-
-chanrecv 函数是在编译器解析到 &#96; &lt;- c&#96; 这样的代码的时候插入的，本质上就是从sender或 hchan 的 ringbuffer 中取一个元素。chanrecv 调用的时候，一般用户会遇到三种情况：
-
-1. 接收成功，非常顺利，正常返回元素，true
-2. 接收受阻，该函数阻塞，goroutine 切走
-3. 接收失败返回nil，false
-
-&#96;&#96;&#96;go
-&#x2F;&#x2F; &lt;- c 对应
-func chanrecv1(c *hchan, elem unsafe.Pointer) &#123;
-	chanrecv(c, elem, true)
-&#125;
-
-&#x2F;&#x2F; v, ok :&#x3D; &lt;- c 对应
-func chanrecv2(c *hchan, elem unsafe.Pointer) (received bool) &#123;
-	_, received &#x3D; chanrecv(c, elem, true)
-	return
-&#125;
-
-&#x2F;&#x2F; 除了select的时候，block都是true
-func chanrecv(c *hchan, ep unsafe.Pointer, block bool) (selected, received bool) &#123;
-	&#x2F;&#x2F; 先各种判断
-	if c &#x3D;&#x3D; nil &#123;
-		if !block &#123;
-			return
-		&#125;
-		gopark(nil, nil, waitReasonChanReceiveNilChan, traceEvGoStop, 2)
-		throw(&quot;unreachable&quot;)
-	&#125;
-  
-	&#x2F;&#x2F; incorrect behavior when racing with a close.
-	if !block &amp;&amp; (c.dataqsiz &#x3D;&#x3D; 0 &amp;&amp; c.sendq.first &#x3D;&#x3D; nil ||
-		c.dataqsiz &gt; 0 &amp;&amp; atomic.Loaduint(&amp;c.qcount) &#x3D;&#x3D; 0) &amp;&amp;
-		atomic.Load(&amp;c.closed) &#x3D;&#x3D; 0 &#123;
-		return
-	&#125;
-
-	var t0 int64
-	if blockprofilerate &gt; 0 &#123;
-		t0 &#x3D; cputicks()
-	&#125;
-
-  &#x2F;&#x2F; 上锁，干活
-	lock(&amp;c.lock)
-
-  &#x2F;&#x2F; 关了且队列里没数据了
-	if c.closed !&#x3D; 0 &amp;&amp; c.qcount &#x3D;&#x3D; 0 &#123;
-		unlock(&amp;c.lock)
-		if ep !&#x3D; nil &#123;
-			typedmemclr(c.elemtype, ep)
-		&#125;
-		return true, false
-	&#125;
-	
-  &#x2F;&#x2F; 场景1：你想要的时候刚好有人可以给，直接交到手里就好了
-	if sg :&#x3D; c.sendq.dequeue(); sg !&#x3D; nil &#123;
-    &#x2F;&#x2F; 如果 buffer 内没有剩余的元素，直接从sender拿数据，否则，从buffer的头部拿，并将sender的值放到buffer的尾部，拿一个立马在原位置放一个，能一定程度上保证有序性。
-		recv(c, sg, ep, func() &#123; unlock(&amp;c.lock) &#125;, 3)
-		return true, true
-	&#125;
-	&#x2F;&#x2F; ringbuffer内还有没拿的元素
-	if c.qcount &gt; 0 &#123;
-		&#x2F;&#x2F; 从队列拿
-		qp :&#x3D; chanbuf(c, c.recvx)
-		if ep !&#x3D; nil &#123;
-			typedmemmove(c.elemtype, ep, qp)
-		&#125;
-		typedmemclr(c.elemtype, qp)
-    &#x2F;&#x2F; 加索引值
-		c.recvx++
-		if c.recvx &#x3D;&#x3D; c.dataqsiz &#123;
-			c.recvx &#x3D; 0
-		&#125;
-		c.qcount--
-		unlock(&amp;c.lock)
-		return true, true
-	&#125;
-
-	if !block &#123;
-		unlock(&amp;c.lock)
-		return false, false
-	&#125;
-
-	&#x2F;&#x2F; 没有人等着给，又没有存货，block住了
-	gp :&#x3D; getg()
-	mysg :&#x3D; acquireSudog()
-	mysg.releasetime &#x3D; 0
-	if t0 !&#x3D; 0 &#123;
-		mysg.releasetime &#x3D; -1
-	&#125;
-
-	mysg.elem &#x3D; ep
-	mysg.waitlink &#x3D; nil
-	gp.waiting &#x3D; mysg
-	mysg.g &#x3D; gp
-	mysg.isSelect &#x3D; false
-	mysg.c &#x3D; c
-	gp.param &#x3D; nil
-  &#x2F;&#x2F; 入队等待唤醒
-	c.recvq.enqueue(mysg)
-	atomic.Store8(&amp;gp.parkingOnChan, 1)
-  &#x2F;&#x2F; goroutine切走，让出cpu
-	gopark(chanparkcommit, unsafe.Pointer(&amp;c.lock), waitReasonChanReceive, traceEvGoBlockRecv, 2)
-
-	&#x2F;&#x2F; someone woke us up
-	if mysg !&#x3D; gp.waiting &#123;
-		throw(&quot;G waiting list is corrupted&quot;)
-	&#125;
-	gp.waiting &#x3D; nil
-	gp.activeStackChans &#x3D; false
-	if mysg.releasetime &gt; 0 &#123;
-		blockevent(mysg.releasetime-t0, 2)
-	&#125;
-	closed :&#x3D; gp.param &#x3D;&#x3D; nil
-	gp.param &#x3D; nil
-	mysg.c &#x3D; nil
-	releaseSudog(mysg)
-	return true, !closed
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">case</span> c <span class="token operator">&lt;-</span> v<span class="token punctuation">:</span>
+  <span class="token comment">// ... foo</span>
+  <span class="token keyword">default</span><span class="token punctuation">:</span>
+  <span class="token comment">// ... bar</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 编译后</span>
+<span class="token keyword">if</span> <span class="token function">selectnbsend</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">//  ... foo</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">//  ... bar</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">selectnbsend</span><span class="token punctuation">(</span>c <span class="token operator">*</span>hchan<span class="token punctuation">,</span> elem unsafe<span class="token punctuation">.</span>Pointer<span class="token punctuation">)</span> <span class="token punctuation">(</span>selected <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 调用 chansend 函数，block 参数为 false；</span>
+  <span class="token keyword">return</span> <span class="token function">chansend</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> elem<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token function">getcallerpc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+<h3 id="chanrecv"><a href="#chanrecv" class="headerlink" title="chanrecv"></a>chanrecv</h3><p>chanrecv 函数是在编译器解析到 <code> &lt;- c</code> 这样的代码的时候插入的，本质上就是从sender或 hchan 的 ringbuffer 中取一个元素。chanrecv 调用的时候，一般用户会遇到三种情况：</p>
+<ol>
+<li>接收成功，非常顺利，正常返回元素，true</li>
+<li>接收受阻，该函数阻塞，goroutine 切走</li>
+<li>接收失败返回nil，false</li>
+</ol>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// &lt;- c 对应</span>
+<span class="token keyword">func</span> <span class="token function">chanrecv1</span><span class="token punctuation">(</span>c <span class="token operator">*</span>hchan<span class="token punctuation">,</span> elem unsafe<span class="token punctuation">.</span>Pointer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">chanrecv</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> elem<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// v, ok := &lt;- c 对应</span>
+<span class="token keyword">func</span> <span class="token function">chanrecv2</span><span class="token punctuation">(</span>c <span class="token operator">*</span>hchan<span class="token punctuation">,</span> elem unsafe<span class="token punctuation">.</span>Pointer<span class="token punctuation">)</span> <span class="token punctuation">(</span>received <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token boolean">_</span><span class="token punctuation">,</span> received <span class="token operator">=</span> <span class="token function">chanrecv</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> elem<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 除了select的时候，block都是true</span>
+<span class="token keyword">func</span> <span class="token function">chanrecv</span><span class="token punctuation">(</span>c <span class="token operator">*</span>hchan<span class="token punctuation">,</span> ep unsafe<span class="token punctuation">.</span>Pointer<span class="token punctuation">,</span> block <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>selected<span class="token punctuation">,</span> received <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 先各种判断</span>
+	<span class="token keyword">if</span> c <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token operator">!</span>block <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">gopark</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> waitReasonChanReceiveNilChan<span class="token punctuation">,</span> traceEvGoStop<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+		<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"unreachable"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// incorrect behavior when racing with a close.</span>
+	<span class="token keyword">if</span> <span class="token operator">!</span>block <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>c<span class="token punctuation">.</span>dataqsiz <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> c<span class="token punctuation">.</span>sendq<span class="token punctuation">.</span>first <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">||</span>
+		c<span class="token punctuation">.</span>dataqsiz <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> atomic<span class="token punctuation">.</span><span class="token function">Loaduint</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>qcount<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+		atomic<span class="token punctuation">.</span><span class="token function">Load</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>closed<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">var</span> t0 <span class="token builtin">int64</span>
+	<span class="token keyword">if</span> blockprofilerate <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		t0 <span class="token operator">=</span> <span class="token function">cputicks</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 上锁，干活</span>
+	<span class="token function">lock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span>
+
+  <span class="token comment">// 关了且队列里没数据了</span>
+	<span class="token keyword">if</span> c<span class="token punctuation">.</span>closed <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> c<span class="token punctuation">.</span>qcount <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span>
+		<span class="token keyword">if</span> ep <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+			<span class="token function">typedmemclr</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>elemtype<span class="token punctuation">,</span> ep<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span>
+	<span class="token punctuation">&#125;</span>
+	
+  <span class="token comment">// 场景1：你想要的时候刚好有人可以给，直接交到手里就好了</span>
+	<span class="token keyword">if</span> sg <span class="token operator">:=</span> c<span class="token punctuation">.</span>sendq<span class="token punctuation">.</span><span class="token function">dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> sg <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 如果 buffer 内没有剩余的元素，直接从sender拿数据，否则，从buffer的头部拿，并将sender的值放到buffer的尾部，拿一个立马在原位置放一个，能一定程度上保证有序性。</span>
+		<span class="token function">recv</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> sg<span class="token punctuation">,</span> ep<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token function">unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">true</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// ringbuffer内还有没拿的元素</span>
+	<span class="token keyword">if</span> c<span class="token punctuation">.</span>qcount <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// 从队列拿</span>
+		qp <span class="token operator">:=</span> <span class="token function">chanbuf</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> c<span class="token punctuation">.</span>recvx<span class="token punctuation">)</span>
+		<span class="token keyword">if</span> ep <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+			<span class="token function">typedmemmove</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>elemtype<span class="token punctuation">,</span> ep<span class="token punctuation">,</span> qp<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">typedmemclr</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>elemtype<span class="token punctuation">,</span> qp<span class="token punctuation">)</span>
+    <span class="token comment">// 加索引值</span>
+		c<span class="token punctuation">.</span>recvx<span class="token operator">++</span>
+		<span class="token keyword">if</span> c<span class="token punctuation">.</span>recvx <span class="token operator">==</span> c<span class="token punctuation">.</span>dataqsiz <span class="token punctuation">&#123;</span>
+			c<span class="token punctuation">.</span>recvx <span class="token operator">=</span> <span class="token number">0</span>
+		<span class="token punctuation">&#125;</span>
+		c<span class="token punctuation">.</span>qcount<span class="token operator">--</span>
+		<span class="token function">unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">true</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> <span class="token operator">!</span>block <span class="token punctuation">&#123;</span>
+		<span class="token function">unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token comment">// 没有人等着给，又没有存货，block住了</span>
+	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	mysg <span class="token operator">:=</span> <span class="token function">acquireSudog</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	mysg<span class="token punctuation">.</span>releasetime <span class="token operator">=</span> <span class="token number">0</span>
+	<span class="token keyword">if</span> t0 <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		mysg<span class="token punctuation">.</span>releasetime <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+	<span class="token punctuation">&#125;</span>
+	
+	mysg<span class="token punctuation">.</span>elem <span class="token operator">=</span> ep
+	mysg<span class="token punctuation">.</span>waitlink <span class="token operator">=</span> <span class="token boolean">nil</span>
+	gp<span class="token punctuation">.</span>waiting <span class="token operator">=</span> mysg
+	mysg<span class="token punctuation">.</span>g <span class="token operator">=</span> gp
+	mysg<span class="token punctuation">.</span>isSelect <span class="token operator">=</span> <span class="token boolean">false</span>
+	mysg<span class="token punctuation">.</span>c <span class="token operator">=</span> c
+	gp<span class="token punctuation">.</span>param <span class="token operator">=</span> <span class="token boolean">nil</span>
+  <span class="token comment">// 入队等待唤醒</span>
+	c<span class="token punctuation">.</span>recvq<span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>mysg<span class="token punctuation">)</span>
+	atomic<span class="token punctuation">.</span><span class="token function">Store8</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>gp<span class="token punctuation">.</span>parkingOnChan<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token comment">// goroutine切走，让出cpu</span>
+	<span class="token function">gopark</span><span class="token punctuation">(</span>chanparkcommit<span class="token punctuation">,</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">,</span> waitReasonChanReceive<span class="token punctuation">,</span> traceEvGoBlockRecv<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// someone woke us up</span>
+	<span class="token keyword">if</span> mysg <span class="token operator">!=</span> gp<span class="token punctuation">.</span>waiting <span class="token punctuation">&#123;</span>
+		<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"G waiting list is corrupted"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	gp<span class="token punctuation">.</span>waiting <span class="token operator">=</span> <span class="token boolean">nil</span>
+	gp<span class="token punctuation">.</span>activeStackChans <span class="token operator">=</span> <span class="token boolean">false</span>
+	<span class="token keyword">if</span> mysg<span class="token punctuation">.</span>releasetime <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">blockevent</span><span class="token punctuation">(</span>mysg<span class="token punctuation">.</span>releasetime<span class="token operator">-</span>t0<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	closed <span class="token operator">:=</span> gp<span class="token punctuation">.</span>param <span class="token operator">==</span> <span class="token boolean">nil</span>
+	gp<span class="token punctuation">.</span>param <span class="token operator">=</span> <span class="token boolean">nil</span>
+	mysg<span class="token punctuation">.</span>c <span class="token operator">=</span> <span class="token boolean">nil</span>
+	<span class="token function">releaseSudog</span><span class="token punctuation">(</span>mysg<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token operator">!</span>closed
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>可以看到send和recv代码和处理情况基本一样：</p>
 <ol>
 <li>如果是非阻塞模式（ block=false ），并且没有任何可用元素，返回 （selected=false，received=false），这样就不会进到 select 的 case 分支；</li>
@@ -814,7 +819,7 @@ func chanrecv(c *hchan, ep unsafe.Pointer, block bool) (selected, received bool)
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/08/06/golang-channel-implement/">http://legendtkl.com/2017/08/06/golang-channel-implement/</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/297053654">https://zhuanlan.zhihu.com/p/297053654</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cyhone.com/articles/analysis-of-golang-channel/">https://www.cyhone.com/articles/analysis-of-golang-channel/</a></p>
-
+ <pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>

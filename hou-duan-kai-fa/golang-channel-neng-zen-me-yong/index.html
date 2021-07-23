@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Mysql-索引与算法, Blinkbean">
+    <meta name="keywords" content="Golang-Channel能怎么用?, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Mysql-索引与算法 | Blinkbean</title>
+    <title>Golang-Channel能怎么用? | Blinkbean</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Mysql-索引与算法</h1>
+                    <h1 class="description center-align post-title">Golang-Channel能怎么用?</h1>
                 </div>
             </div>
         </div>
@@ -387,8 +387,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Mysql/">
-                                <span class="chip bg-color">Mysql</span>
+                            <a href="/tags/Golang/">
+                                <span class="chip bg-color">Golang</span>
                             </a>
                         
                     </div>
@@ -399,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                后端开发
                             </a>
                         
                     </div>
@@ -431,42 +431,110 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="B-树索引的管理"><a href="#B-树索引的管理" class="headerlink" title="B+树索引的管理"></a>B+树索引的管理</h3><ul>
-<li><p>创建索引</p>
-<p>对于索引的添加或删除，MySQL先创建一张临时表，把数据导入临时表，删除原表，然后把临时表重命名为原来的表。因此大表创建和删除索引的时间非常长。</p>
-<p>快速索引创建法：对于非聚集索引的创建，InnoDB会对表加S锁，创建过程中只能读，不能写。</p>
-</li>
-</ul>
-<h3 id="B-树索引的使用"><a href="#B-树索引的使用" class="headerlink" title="B+树索引的使用"></a>B+树索引的使用</h3><ul>
-<li><p>顺序读</p>
-<p>顺序的读取磁盘上的块</p>
-</li>
-<li><p>随机读</p>
-<p>访问的块不连续，需要磁头不断移动</p>
-</li>
-<li><p>预读取</p>
-<p>通过一次I/O请求多个页预读到缓冲池中，并且估计预读的多个页马上会被访问。传统I/O请求每次只读取一个页，在传统机械硬盘较低的IOPS下，预读计数可以大大提高读取的性能。</p>
-<blockquote>
-<ol>
-<li><p>随机预读</p>
-<p>当一个区中==13==个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。</p>
-<p>InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
-</li>
-<li><p>线性预读</p>
-<p>基于缓冲池中页的访问模式，而不是数量。如果一个区中的N个页都被顺序的访问了，则InnoDB会读取下一个区的所有页。</p>
-<p>N的值由<code>innodb_read_ahead_threshold</code>控制，默认值56。</p>
-</li>
-</ol>
+                <h3 id="Golang-CSP"><a href="#Golang-CSP" class="headerlink" title="Golang CSP"></a>Golang CSP</h3><blockquote>
+<p>不要通过共享内存来通信，而应该通过通信来共享内存。</p>
 </blockquote>
+<p>CSP模型用于描述两个独立的并发实体通过共享的通信管道（channel）进行通信的并发模型。Golang借用process和channel两个概念作为并发的理论支持。process在golang表现就是goroutine是实际并发执行的实体，每个实体之间通过channel通信实现数据共享。</p>
+<h3 id="channel初始化"><a href="#channel初始化" class="headerlink" title="channel初始化"></a>channel初始化</h3><p>使用channel必须make初始化。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">unBufferChan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> Type<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// Type: int、string...</span>
+bufferChan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> Type<span class="token punctuation">,</span> N<span class="token punctuation">)</span> <span class="token comment">// 有缓存的通道</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果使用未初始化的channel会有dead lock错误：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> x <span class="token keyword">chan</span> <span class="token builtin">int</span>
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        x <span class="token operator">&lt;-</span> <span class="token number">1</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">&lt;-</span>x
+<span class="token punctuation">&#125;</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+fatal <span class="token builtin">error</span><span class="token punctuation">:</span> all goroutines are asleep <span class="token operator">-</span> deadlock<span class="token operator">!</span>
+
+goroutine <span class="token number">1</span> <span class="token punctuation">[</span><span class="token keyword">chan</span> receive <span class="token punctuation">(</span><span class="token boolean">nil</span> <span class="token keyword">chan</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+main<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="单向channel"><a href="#单向channel" class="headerlink" title="单向channel"></a>单向channel</h3><p>单向channel主要用在函数声明中。是约定，但是强制必须这样。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 输入一个只能写的channel，返回一个只能读的channel</span>
+<span class="token keyword">func</span> <span class="token function">foo</span><span class="token punctuation">(</span>ch <span class="token keyword">chan</span><span class="token operator">&lt;-</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// context包的Done()方法。</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Context<span class="token punctuation">)</span> <span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token boolean">nil</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="channel读写"><a href="#channel读写" class="headerlink" title="channel读写"></a>channel读写</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go">ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 读操作</span>
+x <span class="token operator">&lt;-</span> ch
+
+<span class="token comment">// 写操作</span>
+ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>读<ol>
+<li>从空的缓冲channel里读消息，会block。</li>
+<li>从无缓冲channel读消息，如果没有另一个goroutine正在写，会block。</li>
+<li>从已关闭的channel读消息，==v,ok := &lt;-c==，v为通道类型的默认值，ok为false。</li>
+</ol>
+</li>
+<li>写<ol>
+<li>向无缓冲channel写消息，如果没有另一个goroutine正在读，会block。</li>
+<li>向已关闭的channel写消息，会panic。==panic: send on closed channel==。</li>
+</ol>
 </li>
 </ul>
-<h3 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h3><ul>
-<li><p>InnoDB中的哈希算法</p>
-<p>InnoDB使用哈希算法对字典进行查找，采用链表方式解决冲突、哈希函数采用除法散列方式（ ==h(k)=k mod m== ）。</p>
-<p>缓冲池中的Page页都有一个chain指针，指向相同哈希函数值的页。</p>
-<p>除法散列，m的取值为略大于2倍的缓冲池页数量的质素。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select内channel有点特殊，不会block，与golang编译有关。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> e<span class="token punctuation">,</span> ok <span class="token operator">:=</span> <span class="token operator">&lt;-</span>ch1<span class="token punctuation">:</span>
+        <span class="token operator">...</span>
+    <span class="token keyword">case</span> e<span class="token punctuation">,</span> ok <span class="token operator">:=</span> <span class="token operator">&lt;-</span>ch2<span class="token punctuation">:</span>
+        <span class="token operator">...</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>  
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 超时控制</span>
+<span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">case</span> <span class="token operator">&lt;-</span> ch<span class="token punctuation">:</span>
+    <span class="token comment">// get data from ch</span>
+  <span class="token keyword">case</span> <span class="token operator">&lt;-</span> time<span class="token punctuation">.</span><span class="token function">After</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+    <span class="token comment">// read data from ch timeout</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>一旦 channel 关闭，channel 内部数据读完之后循环自动结束。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">for</span> x <span class="token operator">:=</span> <span class="token keyword">range</span> ch <span class="token punctuation">&#123;</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="channel关闭"><a href="#channel关闭" class="headerlink" title="channel关闭"></a>channel关闭</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go">ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 关闭</span>
+<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>关<ol>
+<li>重复关闭channel，会panic。==panic: close of closed channel==。</li>
+</ol>
 </li>
 </ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/36e246c6153d">https://www.jianshu.com/p/36e246c6153d</a></p>
+<p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/07/30/understanding-golang-channel/">http://legendtkl.com/2017/07/30/understanding-golang-channel/</a></p>
 
                 
             </div>
@@ -481,8 +549,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Mysql/">
-                                    <span class="chip bg-color">Mysql</span>
+                                <a href="/tags/Golang/">
+                                    <span class="chip bg-color">Golang</span>
                                 </a>
                             
                         </div>
@@ -578,17 +646,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/uncatesgorized/emoticons/">
+                <a href="/hou-duan-kai-fa/golang-channel-neng-zen-me-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Emotions">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Golang-Channel能怎么用?">
                         
-                        <span class="card-title">Emotions</span>
+                        <span class="card-title">Golang-Channel能怎么用?</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -598,16 +667,29 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Golang/">
+                        <span class="chip bg-color">Golang</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -619,13 +701,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/shu-ju-ku/mysql-sui-pian-zheng-li-yu-dao-de-na-xie-shi/">
+                <a href="/hou-duan-kai-fa/golang-channel-di-ceng-shi-zen-me-shi-xian-de/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Mysql-碎片整理遇到的那些事">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Golang-Channel底层是怎么实现的?">
                         
-                        <span class="card-title">Mysql-碎片整理遇到的那些事</span>
+                        <span class="card-title">Golang-Channel底层是怎么实现的?</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -636,14 +718,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
                                 </a>
                             
                             
@@ -653,8 +735,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Mysql/">
-                        <span class="chip bg-color">Mysql</span>
+                    <a href="/tags/Golang/">
+                        <span class="chip bg-color">Golang</span>
                     </a>
                     
                 </div>

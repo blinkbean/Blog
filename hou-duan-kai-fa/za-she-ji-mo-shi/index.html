@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Golang-Channel能怎么用?, Blinkbean">
+    <meta name="keywords" content="设计模式, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Golang-Channel能怎么用? | Blinkbean</title>
+    <title>设计模式 | Blinkbean</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Golang-Channel能怎么用?</h1>
+                    <h1 class="description center-align post-title">设计模式</h1>
                 </div>
             </div>
         </div>
@@ -387,8 +387,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Golang/">
-                                <span class="chip bg-color">Golang</span>
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">设计模式</span>
                             </a>
                         
                     </div>
@@ -431,110 +431,89 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Golang-CSP"><a href="#Golang-CSP" class="headerlink" title="Golang CSP"></a>Golang CSP</h3><blockquote>
-<p>不要通过共享内存来通信，而应该通过通信来共享内存。</p>
-</blockquote>
-<p>CSP模型用于描述两个独立的并发实体通过共享的通信管道（channel）进行通信的并发模型。Golang借用process和channel两个概念作为并发的理论支持。process在golang表现就是goroutine是实际并发执行的实体，每个实体之间通过channel通信实现数据共享。</p>
-<h3 id="channel初始化"><a href="#channel初始化" class="headerlink" title="channel初始化"></a>channel初始化</h3><p>使用channel必须make初始化。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go">unBufferChan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> Type<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// Type: int、string...</span>
-bufferChan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> Type<span class="token punctuation">,</span> N<span class="token punctuation">)</span> <span class="token comment">// 有缓存的通道</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>如果使用未初始化的channel会有dead lock错误：</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> x <span class="token keyword">chan</span> <span class="token builtin">int</span>
-    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        x <span class="token operator">&lt;-</span> <span class="token number">1</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&lt;-</span>x
-<span class="token punctuation">&#125;</span>
-
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
-
-fatal <span class="token builtin">error</span><span class="token punctuation">:</span> all goroutines are asleep <span class="token operator">-</span> deadlock<span class="token operator">!</span>
-
-goroutine <span class="token number">1</span> <span class="token punctuation">[</span><span class="token keyword">chan</span> receive <span class="token punctuation">(</span><span class="token boolean">nil</span> <span class="token keyword">chan</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-main<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="单向channel"><a href="#单向channel" class="headerlink" title="单向channel"></a>单向channel</h3><p>单向channel主要用在函数声明中。是约定，但是强制必须这样。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 输入一个只能写的channel，返回一个只能读的channel</span>
-<span class="token keyword">func</span> <span class="token function">foo</span><span class="token punctuation">(</span>ch <span class="token keyword">chan</span><span class="token operator">&lt;-</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
-
-<span class="token comment">// context包的Done()方法。</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Context<span class="token punctuation">)</span> <span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> <span class="token boolean">nil</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="channel读写"><a href="#channel读写" class="headerlink" title="channel读写"></a>channel读写</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go">ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-
-<span class="token comment">// 读操作</span>
-x <span class="token operator">&lt;-</span> ch
-
-<span class="token comment">// 写操作</span>
-ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>读<ol>
-<li>从空的缓冲channel里读消息，会block。</li>
-<li>从无缓冲channel读消息，如果没有另一个goroutine正在写，会block。</li>
-<li>从已关闭的channel读消息，==v,ok := &lt;-c==，v为通道类型的默认值，ok为false。</li>
-</ol>
-</li>
-<li>写<ol>
-<li>向无缓冲channel写消息，如果没有另一个goroutine正在读，会block。</li>
-<li>向已关闭的channel写消息，会panic。==panic: send on closed channel==。</li>
-</ol>
-</li>
+                <h3 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h3><p>设计模式是为了重用代码、让人更容易理解代码、保证代码可靠性而总结出来的通用的解决方案。你从来没有学过设计模式，但是遇到类似的问题一定有自己的解决方案，那这个解决方案也算自己的设计模式吧。或者在看到某种设计模式的时候会突然发现，原来自己早就用了传说中的种种设计模式了。一直在使用，只是不知道它还有个名字。</p>
+<h3 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h3><h4 id="根据目的"><a href="#根据目的" class="headerlink" title="根据目的"></a>根据目的</h4><ul>
+<li>创建型：主要用于创建对象</li>
+<li>结构型：主要用于处理类或对象的组合</li>
+<li>行为型：主要用于描述对象或对象怎样交互和分配职责</li>
 </ul>
-<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select内channel有点特殊，不会block，与golang编译有关。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">case</span> e<span class="token punctuation">,</span> ok <span class="token operator">:=</span> <span class="token operator">&lt;-</span>ch1<span class="token punctuation">:</span>
-        <span class="token operator">...</span>
-    <span class="token keyword">case</span> e<span class="token punctuation">,</span> ok <span class="token operator">:=</span> <span class="token operator">&lt;-</span>ch2<span class="token punctuation">:</span>
-        <span class="token operator">...</span>
-    <span class="token keyword">default</span><span class="token punctuation">:</span>  
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">for</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
-        <span class="token operator">...</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 超时控制</span>
-<span class="token keyword">select</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">case</span> <span class="token operator">&lt;-</span> ch<span class="token punctuation">:</span>
-    <span class="token comment">// get data from ch</span>
-  <span class="token keyword">case</span> <span class="token operator">&lt;-</span> time<span class="token punctuation">.</span><span class="token function">After</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-    <span class="token comment">// read data from ch timeout</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>一旦 channel 关闭，channel 内部数据读完之后循环自动结束。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">for</span> x <span class="token operator">:=</span> <span class="token keyword">range</span> ch <span class="token punctuation">&#123;</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-    <span class="token operator">...</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="channel关闭"><a href="#channel关闭" class="headerlink" title="channel关闭"></a>channel关闭</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go">ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
-
-<span class="token comment">// 关闭</span>
-<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>关<ol>
-<li>重复关闭channel，会panic。==panic: close of closed channel==。</li>
-</ol>
-</li>
+<h4 id="根据范围"><a href="#根据范围" class="headerlink" title="根据范围"></a>根据范围</h4><ul>
+<li>类模型：处理类和子类之间都得关系，这些关系是过继承简历，在编译时刻就被确定下来，属于静态的。</li>
+<li>对象模型：处理对象间的关系，这些关系在运行时刻变化，更具动态性。</li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/36e246c6153d">https://www.jianshu.com/p/36e246c6153d</a></p>
-<p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/07/30/understanding-golang-channel/">http://legendtkl.com/2017/07/30/understanding-golang-channel/</a></p>
+<p><img src="https://i.loli.net/2021/07/23/3ETtLMsqu4oeWJm.png" alt="640.png"></p>
+<h4 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h4><ol>
+<li><p>简单(静态)工厂：工厂类通过传入的参数决定创建哪种产品类型</p>
+<p>定义一个工厂类来负责创建其他类的实例，被创建的实例通常都具有共同的父类，在工厂类中，可以根据参数的不同返回不同类的实例。升级版本简单工厂模式，通过反射根据类的全路径名生成对象。</p>
+<ul>
+<li>代码可读性更好</li>
+<li>与使用者代码解耦</li>
+</ul>
+</li>
+<li><p>抽象工厂：创建相关或依赖对象的家族，而无需明确指定具体类</p>
+</li>
+<li><p>建造者模式：封装一个复杂对象的构建过程，并可以按步骤构造</p>
+<ul>
+<li>封装复杂对象的创建过程，使对象使用者不感知复杂的创建逻辑</li>
+<li>可以一步步按照顺序对成员进行赋值，或者创建嵌套对象，并最终完成目标对象的创建</li>
+<li>对多个对象复用同样的对象创建逻辑</li>
+</ul>
+</li>
+<li><p>单例模式：某个类只能有一个实例，提供一个全局的访问点</p>
+<p>有一些对象通常我们只需要一个共享的实例，比如线程池、全局缓存、对象池等，这种场景下就适合使用单例模式。</p>
+<ul>
+<li>限制调用者直接实例化该对象</li>
+<li>为该对象的单例提供一个全局唯一的访问方法</li>
+</ul>
+</li>
+<li><p>原型模式：通过复制现有的实例来创建新的实例</p>
+<p>原型模式主要解决对象复制的问题，它的核心就是<code>clone()</code>方法，返回<code>Prototype</code>对象的复制品。</p>
+</li>
+</ol>
+<h4 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h4><ol>
+<li><p>外观模式：对外提供一个统一的方法，来访问子系统中的一群接口</p>
+<p>外观模式经常运用于<strong>分层架构</strong>上，通常我们都会为分层架构中的每一个层级提供一个或多个统一对外的访问接口，这样就能让各个层级之间的耦合性更低，使得系统的架构更加合理。</p>
+</li>
+<li><p>桥接模式：将抽象部分和它的实现部分分离，使它们都可以独立的变化</p>
+<p>桥接模式本质上就是面向接口编程，可以给系统带来很好的灵活性和可扩展性。</p>
+</li>
+<li><p>组合模式：将对象组合成树形结构以表示“”部分-整体“”的层次结构</p>
+<p>将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性，组合优于继承。</p>
+</li>
+<li><p>装饰模式：动态的给对象添加新的功能</p>
+<p>使用组合而非继承的方式，能够动态地为本体对象叠加新的行为.从结构上看，装饰模式和代理模式具有很高的相似性，但是两种所强调的点不一样。前者强调的是为本体对象添加新的功能，后者强调的是对本体对象的访问控制。</p>
+</li>
+<li><p>代理模式：为其他对象提供一个代理以便控制这个对象的访问</p>
+<p>使用代理模式的关键在于当Client不方便直接访问一个对象时，提供一个代理对象控制该对象的访问。Client实际上访问的是代理对象，代理对象会将Client的请求转给本体对象去处理。</p>
+<ul>
+<li>远程代理</li>
+<li>虚拟代理</li>
+<li>保护代理</li>
+<li>缓存代理</li>
+<li>智能引用</li>
+</ul>
+</li>
+<li><p>适配器模式：将一个类的方法接口转换成客户希望的另外一个接口</p>
+<p>让原本因为接口不匹配而无法一起工作的两个对象能够一起工作。将一个接口<code>Adaptee</code>，通过适配器<code>Adapter</code>转换成<code>Client</code>所期望的另一个接口<code>Target</code>来使用，实现原理也很简单，就是<code>Adapter</code>通过实现<code>Target</code>接口，并在对应的方法中调用<code>Adaptee</code>的接口实现。</p>
+</li>
+<li><p>亨元（蝇量）模式：通过共享技术来有效的支持大量细粒度的对象</p>
+<p>享元模式摒弃了在每个对象中保存所有数据的方式， 通过共享多个对象所共有的相同状态， 让你能在有限的内存容量中载入更多对象。</p>
+</li>
+</ol>
+<h4 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h4><ol>
+<li>模板模式：定义一个算法结构，而将一些步骤延迟到子类实现</li>
+<li>解释器模式：给定一个语言，定义它的文法的一种表示，并定义一个解释器</li>
+<li>策略模式：定义一系列算法，把他们封装起来，并且使它们可以相互替换</li>
+<li>状态模式：允许一个对象在其对象内部状态改变时改变它的行为</li>
+<li>观察者模式：对象间的一对多的依赖关系</li>
+<li>备忘录模式：在不破坏封装的前提下，保持对象的内部状态</li>
+<li>中介者模式：用一个中介对象来封装一系列的对象交互</li>
+<li>命令模式：将命令请求封装为一个对象，使得可以用不同的请求来进行参数化</li>
+<li>访问者模式：在不改变数据结构的前提下，增加作用于一组对象元素的新功能</li>
+<li>责任链模式：将请求的发送者和接收者解耦，使的多个对象都有处理这个请求的机会</li>
+<li>迭代器模式：一种遍历访问聚合对象中各个元素的方法，不暴露该对象的内部结构</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p><a target="_blank" rel="noopener" href="https://github.com/blinkbean/goSteps">https://github.com/blinkbean/goSteps</a></p>
 
                 
             </div>
@@ -549,8 +528,8 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Golang/">
-                                    <span class="chip bg-color">Golang</span>
+                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">设计模式</span>
                                 </a>
                             
                         </div>
@@ -646,9 +625,10 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/hou-duan-kai-fa/za-she-ji-mo-shi/">
                     <div class="card-image">
@@ -666,9 +646,9 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -681,6 +661,7 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -699,13 +680,13 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/golang-channel-di-ceng-shi-zen-me-shi-xian-de/">
+                <a href="/hou-duan-kai-fa/golang-channel-neng-zen-me-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Golang-Channel底层是怎么实现的?">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Golang-Channel能怎么用?">
                         
-                        <span class="card-title">Golang-Channel底层是怎么实现的?</span>
+                        <span class="card-title">Golang-Channel能怎么用?</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -716,7 +697,7 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
                             </span>
                         <span class="publish-author">
                             

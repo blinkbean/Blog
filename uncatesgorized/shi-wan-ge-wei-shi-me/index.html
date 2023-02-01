@@ -418,14 +418,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><ul>
+                <h3 id="不懂就问"><a href="#不懂就问" class="headerlink" title="不懂就问"></a>不懂就问</h3><p>记录遇到了但是并不能立马找到答案的问题，大佬们既然这样做了，一定有它的道理。</p>
+<h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><ul>
 <li>redis pipeline底层实现是队列，队列先进先出的特性，保证了数据的顺序性。pipeline默认同步个数为53个，也就是说args累加到53条数据时会把数据提交。为什么是53？</li>
 </ul>
 <h4 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h4><ul>
 <li>Mysql  默认最大连接数上限为151，如果超过会报错：==MySQL: ERROR 1040: Too many connections==，5.5+默认最大连接数都是151，上限为100000。为什么是151？</li>
 </ul>
 <h4 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h4><ul>
-<li>sort在排序时</li>
+<li>sort在排序时会根据数据量不同选择不同的方法，元素个数小于等于12时，会选择希尔排序。为什么是12？</li>
 </ul>
 
                 
@@ -762,7 +763,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2021</span>
+                <span id="year">2020-2023</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

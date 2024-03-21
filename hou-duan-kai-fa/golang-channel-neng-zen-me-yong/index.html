@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -480,12 +480,12 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
 <li>读<ol>
 <li>从空的缓冲channel里读消息，会block。</li>
 <li>从无缓冲channel读消息，如果没有另一个goroutine正在写，会block。</li>
-<li>从已关闭的channel读消息，==v,ok := &lt;-c==，v为通道类型的默认值，ok为false。</li>
+<li>从已关闭的channel读消息，&#x3D;&#x3D;v,ok :&#x3D; &lt;-c&#x3D;&#x3D;，v为通道类型的默认值，ok为false。</li>
 </ol>
 </li>
 <li>写<ol>
 <li>向无缓冲channel写消息，如果没有另一个goroutine正在读，会block。</li>
-<li>向已关闭的channel写消息，会panic。==panic: send on closed channel==。</li>
+<li>向已关闭的channel写消息，会panic。&#x3D;&#x3D;panic: send on closed channel&#x3D;&#x3D;。</li>
 </ol>
 </li>
 </ul>
@@ -529,7 +529,7 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
 
 <ul>
 <li>关<ol>
-<li>重复关闭channel，会panic。==panic: close of closed channel==。</li>
+<li>重复关闭channel，会panic。&#x3D;&#x3D;panic: close of closed channel&#x3D;&#x3D;。</li>
 </ol>
 </li>
 </ul>
@@ -874,7 +874,7 @@ ch <span class="token operator">&lt;-</span> x<span aria-hidden="true" class="li
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

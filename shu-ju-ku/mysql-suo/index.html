@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -439,27 +439,29 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/puhaiyang/article/details/72284702">静下心来静下心来</a></li>
 </ol>
 <ul>
-<li><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><blockquote>
+<li><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4></li>
+</ul>
+<blockquote>
 <ul>
 <li>没有线程对该结果集中的任何行数据使用排他锁或共享锁，否则申请会阻塞。</li>
-<li>for update仅适用于InnoDB，且必须在事务块(BEGIN/COMMIT)中才能生效</li>
+<li>for update仅适用于InnoDB，且必须在事务块(BEGIN&#x2F;COMMIT)中才能生效</li>
 <li>MySQL会对查询结果集中每行数据都添加排他锁，其他线程对该记录的更新与删除操作都会阻塞。</li>
 <li>排他锁包含行锁、表锁。</li>
 </ul>
 </blockquote>
-</li>
+<ul>
 <li><h4 id="数据一致性"><a href="#数据一致性" class="headerlink" title="数据一致性"></a>数据一致性</h4></li>
 <li><p>悲观锁</p>
 <blockquote>
 <ul>
 <li>共享锁<blockquote>
-<p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。<br>关键字：==lock in share mode==</p>
+<p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。<br>关键字：&#x3D;&#x3D;lock in share mode&#x3D;&#x3D;</p>
 <pre class="line-numbers language-none"><code class="language-none">begin;
  SELECT * from city where id &#x3D; &quot;1&quot;  lock in share mode;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></blockquote>
 </li>
 <li>排他锁<blockquote>
-<p>多个不同的事务，对同一个资源只能有一把锁。<br>关键字：==for update==</p>
+<p>多个不同的事务，对同一个资源只能有一把锁。<br>关键字：&#x3D;&#x3D;for update&#x3D;&#x3D;</p>
 <ul>
 <li>每次获取商品时，对该商品加排他锁。</li>
 <li>期间其他用户阻塞等待访问该记录。</li>
@@ -490,7 +492,9 @@ begin;
     #更新 stock 值，这里需要注意 where 条件 “stock &#x3D; cur_stock”，只有程序中获取到的库存量与数据库中的库存量相等才执行更新
     update goods set stock &#x3D; stock - 1 where id &#x3D; 1 and stock &#x3D; cur_stock;
 commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><h4 id="行锁和表锁"><a href="#行锁和表锁" class="headerlink" title="行锁和表锁"></a>行锁和表锁</h4><blockquote>
+<li><h4 id="行锁和表锁"><a href="#行锁和表锁" class="headerlink" title="行锁和表锁"></a>行锁和表锁</h4></li>
+</ul>
+<blockquote>
 <ol>
 <li>只根据主键进行查询，并且查询到数据，主键字段产生行锁。</li>
 <li>除了使用非主键不含索引字段查询，其余所有的查询，没有查询到数据，就不产生锁。</li>
@@ -504,17 +508,17 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <li>只根据主键进行查询，查询条件为 like，查到或查不到数据，主键字段产生表锁。</li>
 </ol>
 </blockquote>
-</li>
-<li><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
+<ul>
+<li><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4></li>
+</ul>
+<blockquote>
 <ol>
-<li>InnoDB行锁是通过给索引上的索引项加锁来实现的，只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁。==行锁一定有索引==</li>
+<li>InnoDB行锁是通过给索引上的索引项加锁来实现的，只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁。&#x3D;&#x3D;行锁一定有索引&#x3D;&#x3D;</li>
 <li>当表有多个索引的时候，不同的事务可以使用不同的索引锁定不同的行，另外，不论是使用主键索引、唯一索引或普通索引，InnoDB都会使用行锁来对数据加锁。 </li>
 <li>如果MySQL认为全表扫描效率更高，比如对一些很小的表，它就不会使用索引，这种情况下InnoDB将使用表锁，而不是行锁。</li>
-<li>检索值的==数据类型==与索引字段不同，虽然MySQL能够进行数据类型转换，但却不会使用索引，从而导致InnoDB使用表锁。</li>
+<li>检索值的&#x3D;&#x3D;数据类型&#x3D;&#x3D;与索引字段不同，虽然MySQL能够进行数据类型转换，但却不会使用索引，从而导致InnoDB使用表锁。</li>
 </ol>
 </blockquote>
-</li>
-</ul>
 
                 
             </div>
@@ -850,7 +854,7 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

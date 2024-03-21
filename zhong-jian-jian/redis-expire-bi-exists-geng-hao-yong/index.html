@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -433,10 +433,16 @@
             <div id="articleContent">
                 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9352d20fb2e0">参考文章——简书</a></p>
 <h4 id="什么情况下expire比exists更好？"><a href="#什么情况下expire比exists更好？" class="headerlink" title="什么情况下expire比exists更好？"></a>什么情况下expire比exists更好？</h4><h6 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h6><ul>
-<li>redis key过期时间必须设置（特殊需求除外），但是如果DB的值有变动会主动更新到redis，所以不会有数据不同步的情况。<h6 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h6></li>
-<li>每次都需要判断某个key是否存在，然后才能执行相应的操作。<h6 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h6></li>
+<li>redis key过期时间必须设置（特殊需求除外），但是如果DB的值有变动会主动更新到redis，所以不会有数据不同步的情况。</li>
+</ul>
+<h6 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h6><ul>
+<li>每次都需要判断某个key是否存在，然后才能执行相应的操作。</li>
+</ul>
+<h6 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h6><ul>
 <li>最坏情况下，代码在执行exists时key是有效的，后面对key进行操作时，发现在那两行代码执行的中间，key被清掉了。</li>
-<li>条件虽然比较极端，但是在代码里——一切皆有可能。<h6 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h6></li>
+<li>条件虽然比较极端，但是在代码里——一切皆有可能。</li>
+</ul>
+<h6 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h6><ul>
 <li>expire代替exists，重置key的过期时间。相当于利用expire给key续命，可以合理的“长生不死”。</li>
 </ul>
 <h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">EXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>TTL<span class="token operator">></span> <span class="token punctuation">:</span> 将键的生存时间设为 ttl 秒
@@ -789,7 +795,7 @@ PEXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -441,7 +441,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 <p>那什么时候进行合并呢？</p>
 <ul>
 <li>非聚集索引页被读取到缓冲池中。select先检查insert buffer是否有非聚集索引页的存在，如果有则合并。</li>
-<li>非聚集索引页没有可用空间。空间小于1/32页的大小，则进行合并。</li>
+<li>非聚集索引页没有可用空间。空间小于1&#x2F;32页的大小，则进行合并。</li>
 <li>master thread每秒和每10秒的合并操作。</li>
 </ul>
 </blockquote>
@@ -467,13 +467,13 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 </li>
 <li><p>自适应哈希索引</p>
 <p>InnoDB会监控对表上索引的查找，如果建立哈希索引可以带来速度的提升，则建立哈希索引。自适应哈希索引通过缓冲池的B+树构造，因此建立速度很快。</p>
-<p>哈希索引会根据访问的频率和模式为==某些页建==立哈希索引，而不是整个表。</p>
+<p>哈希索引会根据访问的频率和模式为&#x3D;&#x3D;某些页建&#x3D;&#x3D;立哈希索引，而不是整个表。</p>
 <p>自适应哈希索引占用InnoDB buffer poll的空间。</p>
 </li>
 <li><p>预读</p>
 <ul>
 <li><p>随机预读（已废弃）</p>
-<p>当一个区中==13==个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
+<p>当一个区中&#x3D;&#x3D;13&#x3D;&#x3D;个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
 </li>
 <li><p>线性预读</p>
 <p>基于缓冲池中页的访问模式，而不是数量。如果一个区中的N个页都被顺序的访问了，则InnoDB会读取下一个区的所有页。N的值由<code>innodb_read_ahead_threshold</code>控制，默认值56。</p>
@@ -490,7 +490,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 </li>
 <li><p>1个错误监控线程</p>
 </li>
-<li><p>4个I/O thread（不同版本read write线程数可能不同）</p>
+<li><p>4个I&#x2F;O thread（不同版本read write线程数可能不同）</p>
 <blockquote>
 <p>Insert  buffer thread</p>
 <p>Log thread</p>
@@ -873,7 +873,7 @@ Modified db pages  0 # 脏页数量<span aria-hidden="true" class="line-numbers-
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -524,27 +524,27 @@
 <li>插入1000条耗时在2-4s之间。</li>
 <li>插入和查询耗时基本相同。</li>
 </ul>
-<h4 id="Redis数据查询"><a href="#Redis数据查询" class="headerlink" title="Redis数据查询"></a>Redis数据查询</h4><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">➜  ~ redis<span class="token operator">-</span><span class="token function">cli</span> <span class="token operator">--</span>bigkeys <span class="token operator">-</span>i 0<span class="token punctuation">.</span>1 <span class="token operator">-</span>h 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1
+<h4 id="Redis数据查询"><a href="#Redis数据查询" class="headerlink" title="Redis数据查询"></a>Redis数据查询</h4><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">➜  ~ redis-<span class="token function">cli</span> <span class="token operator">--</span>bigkeys <span class="token operator">-</span>i 0<span class="token punctuation">.</span>1 <span class="token operator">-</span>h 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1
 
 <span class="token comment"># Scanning the entire keyspace to find biggest keys as well as</span>
 <span class="token comment"># average sizes per key type.  You can use -i 0.1 to sleep 0.1 sec</span>
 <span class="token comment"># per 100 SCAN commands (not usually needed).</span>
 
-<span class="token punctuation">[</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span><span class="token punctuation">]</span> Biggest string found so far <span class="token string">'bloomfilter0'</span> with 419346305 bytes
+<span class="token punctuation">[</span>00<span class="token punctuation">.</span>00%<span class="token punctuation">]</span> Biggest string found so far <span class="token string">'bloomfilter0'</span> with 419346305 bytes
 
-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span> summary <span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">-</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span> summary <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
 
-Sampled 1 keys in the keyspace<span class="token operator">!</span>
+Sampled 1 keys in the keyspace!
 Total key length in bytes is 12 <span class="token punctuation">(</span>avg len 12<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
 
 Biggest string found <span class="token string">'bloomfilter0'</span> has 419346305 bytes
 
-1 strings with 419346305 bytes <span class="token punctuation">(</span>100<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 419346305<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 lists with 0 items <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 hashs with 0 fields <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 streams with 0 entries <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 sets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 zsets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00<span class="token operator">%</span> of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+1 strings with 419346305 bytes <span class="token punctuation">(</span>100<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 419346305<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
+0 lists with 0 items <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
+0 hashs with 0 fields <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
+0 streams with 0 entries <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
+0 sets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
+0 zsets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到 bloomfilter0 所占内存为400M左右</p>
 
                 
@@ -885,7 +885,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

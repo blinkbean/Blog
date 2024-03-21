@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -447,7 +447,7 @@
 <p>索引也是数据。数据和索引存在一个XX.IDB文件中。</p>
 </li>
 <li><p>Mermory：基于内存</p>
-<p>Memory表至少比MyISAM表要快一个数量级，因为所有的数据都保存在内存中，不需要进行磁盘I/O。Memory表的结构在重启以后还会保留，但数据会丢失。</p>
+<p>Memory表至少比MyISAM表要快一个数量级，因为所有的数据都保存在内存中，不需要进行磁盘I&#x2F;O。Memory表的结构在重启以后还会保留，但数据会丢失。</p>
 </li>
 <li><p>Archive：数据存档，数据插入后不能修改</p>
 <p>针对高写入压缩做了优化的简单引擎。</p>
@@ -534,27 +534,27 @@
 </ol>
 <p>缺点：</p>
 <ol>
-<li>Hash索引只能满足”=”，”IN”，”!=”，不能使用范围查询。</li>
+<li>Hash索引只能满足”&#x3D;”，”IN”，”!&#x3D;”，不能使用范围查询。</li>
 <li>Hash值的大小关系不一定个原键值一样，不能做排序操作。</li>
 <li>联合索引中不能利用部分索引键查询。</li>
 <li>遇到大量Hash值相等的情况后，性能不一定比B树高。</li>
 <li>存储引擎会为Hash索引中的每一列都计算hash码，Hash索引中存储的即hash码，所以每次读取都会进行两次查询。</li>
 </ol>
-<p>InnoDB引擎有一个特殊功能叫“自适应哈希索引”。当InnoDB发现某些索引值被使用的非常频繁是，会在内存中基于B-Tree索引之上再建一个哈希索引，这样可以让B-Tree索引具有哈希索引的优点。这是一个==完全自动的、内部的行为==，用户无法控制或配置（如果有必要，可以关闭该功能）。</p>
+<p>InnoDB引擎有一个特殊功能叫“自适应哈希索引”。当InnoDB发现某些索引值被使用的非常频繁是，会在内存中基于B-Tree索引之上再建一个哈希索引，这样可以让B-Tree索引具有哈希索引的优点。这是一个&#x3D;&#x3D;完全自动的、内部的行为&#x3D;&#x3D;，用户无法控制或配置（如果有必要，可以关闭该功能）。</p>
 </li>
 <li><h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><p>优点：</p>
 <ol>
 <li><p>所有索引数据都在叶子结点上，并且增加了顺序访问指针,每个叶子节点都有指向相邻叶子节点的指针。</p>
 </li>
-<li><p>利用了磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入。</p>
+<li><p>利用了磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I&#x2F;O就可以完全载入。</p>
 </li>
-<li><p><strong>B-Tree中一次检索最多需要h-1次I/O（根节点常驻内存），渐进复杂度为O(h)=O(logdN)。</strong></p>
+<li><p><strong>B-Tree中一次检索最多需要h-1次I&#x2F;O（根节点常驻内存），渐进复杂度为O(h)&#x3D;O(logdN)。</strong></p>
 <p>假设叶子节点页可以存放100条记录，内部节点可以存放1000条目录，则</p>
-<p>h=1，最多能放100条记录。</p>
-<p>h=2，最多能放1000*100=100000条记录。</p>
-<p>h=3，最多能放1000*1000*100=100000000（一亿）条记录。</p>
-<p>h=4，最多能放1000*1000*1000*100=100000000000（一千亿）条记录，应该不会有这种数据量的表吧！</p>
-<p>那为什么是O(logdN)呢？因为在页内查找一条记录时，使用的是==二分查找==。</p>
+<p>h&#x3D;1，最多能放100条记录。</p>
+<p>h&#x3D;2，最多能放1000*100&#x3D;100000条记录。</p>
+<p>h&#x3D;3，最多能放1000*1000*100&#x3D;100000000（一亿）条记录。</p>
+<p>h&#x3D;4，最多能放1000*1000*1000*100&#x3D;100000000000（一千亿）条记录，应该不会有这种数据量的表吧！</p>
+<p>那为什么是O(logdN)呢？因为在页内查找一条记录时，使用的是&#x3D;&#x3D;二分查找&#x3D;&#x3D;。</p>
 </li>
 </ol>
 </li>
@@ -600,12 +600,14 @@
 <ol>
 <li>每张表都会有主键，也会用主键生成主键索引。</li>
 <li>主键索引就是聚簇索引，因此建表时最好用自增类型主键。</li>
-<li>如果没有设置主键会发生什么？建表时如果没有设置主键，MySQL会启用内部的隐藏主键==row_id==（6个字节），也就是说无论如何一张表都必须有主键。MySQL会依次查找<strong>主键-&gt;唯一键-&gt;隐藏主键</strong>建立索引。</li>
+<li>如果没有设置主键会发生什么？建表时如果没有设置主键，MySQL会启用内部的隐藏主键&#x3D;&#x3D;row_id&#x3D;&#x3D;（6个字节），也就是说无论如何一张表都必须有主键。MySQL会依次查找<strong>主键-&gt;唯一键-&gt;隐藏主键</strong>建立索引。</li>
 </ol>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">alter table table_name add primary key (column name);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">alter table table_name add primary key (column name);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>普通索引，联合索引</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create index 索引名 on table_name(column1,column2);
-alter table table_name add index 索引名(column1,column2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+alter table table_name add index 索引名(column1,column2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 <li><p>唯一索引</p>
 <ol>
 <li>唯一索引可以有多个null（不提倡有null值）,但不能有重复的内容。</li>
@@ -615,7 +617,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 </ul>
 <h3 id="为什么要使用索引？"><a href="#为什么要使用索引？" class="headerlink" title="为什么要使用索引？"></a>为什么要使用索引？</h3><ol>
 <li>减少存储引擎需要扫描的数据量，加快查询速度。</li>
-<li>索引可以把随机I/O变为顺序I/O。</li>
+<li>索引可以把随机I&#x2F;O变为顺序I&#x2F;O。</li>
 <li>对索引结果进行排序以避免使用磁盘临时表。</li>
 </ol>
 <h3 id="建索引、使用索引要注意什么？"><a href="#建索引、使用索引要注意什么？" class="headerlink" title="建索引、使用索引要注意什么？"></a>建索引、使用索引要注意什么？</h3><ol>
@@ -624,11 +626,11 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <li>尽量避免NULL。</li>
 <li>复合索引将最常用作限制条件的列放在最左边，依次递减。</li>
 <li>复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。</li>
-<li>短索引。对串列进行索引，如果可能应该指定一个前缀长度，不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。</li>
+<li>短索引。对串列进行索引，如果可能应该指定一个前缀长度，不仅可以提高查询速度而且可以节省磁盘空间和I&#x2F;O操作。</li>
 <li>mysql查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。</li>
 <li>建立索引的时候，可以加上nologging选项。以减少在建立索引过程中产生的大量redo，从而提高执行的速度。</li>
 <li>建立索引的时候要对表进行加锁，因此应当注意操作在业务空闲的时候进行。</li>
-<li>使用NOT IN和!=操作，mysql将无法使用索引。</li>
+<li>使用NOT IN和!&#x3D;操作，mysql将无法使用索引。</li>
 <li>不要在列上进行运算，where字句的查询条件里使用了函数将不会使用索引。</li>
 </ol>
 <h3 id="B-树有什么特点？为什么B-树更适合做索引？"><a href="#B-树有什么特点？为什么B-树更适合做索引？" class="headerlink" title="B+树有什么特点？为什么B+树更适合做索引？"></a>B+树有什么特点？为什么B+树更适合做索引？</h3><p>回答这个问题，心里一定要有点B树🐶。</p>
@@ -670,7 +672,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <ul>
 <li>为了磁盘或其它存储设备而设计的一种平衡多路查找树。</li>
 <li>与二叉树相比，每个节点有多个分支。在相同节点的情况下，高度远远低于红黑树。</li>
-<li>B/B+树操作时间由磁盘存取和CPU两部分构成，CPU速度非常快，多以B树的效率取决于磁盘访问次数。关键字总数相同的情况下B树的高度越小，磁盘I/O所花时间越少。</li>
+<li>B&#x2F;B+树操作时间由磁盘存取和CPU两部分构成，CPU速度非常快，多以B树的效率取决于磁盘访问次数。关键字总数相同的情况下B树的高度越小，磁盘I&#x2F;O所花时间越少。</li>
 <li>所有叶子节点位于同一层。</li>
 </ul>
 </li>
@@ -682,7 +684,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 </ul>
 </li>
 <li><h5 id="那么为什么是B-树？"><a href="#那么为什么是B-树？" class="headerlink" title="那么为什么是B+树？"></a>那么为什么是B+树？</h5><ul>
-<li><p>磁盘读写代价更低：内部节点只有指向下层节点的页指针（6个字节），因此内部节点相对B树更小，一页空间能容纳的关键字数量更多，I/O次数也就更少。</p>
+<li><p>磁盘读写代价更低：内部节点只有指向下层节点的页指针（6个字节），因此内部节点相对B树更小，一页空间能容纳的关键字数量更多，I&#x2F;O次数也就更少。</p>
 </li>
 <li><p>查询效率更稳定：任何关键字的查找必须走一条从根结点到叶子结点的路，所以每一个数据的查询效率相当。</p>
 </li>
@@ -703,7 +705,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 </li>
 <li><p>想要找”二班的小Q“，因为不知道年级，所以需要遍历所有数据。</p>
 </li>
-<li><p>年级&gt;=三 and 年级&lt;=四 and 名字=小Q，因为不知道是几班的，所以要把三、四年级都遍历一遍，但是也用到了年级这个索引列，不用找其他年级。</p>
+<li><p>年级&gt;&#x3D;三 and 年级&lt;&#x3D;四 and 名字&#x3D;小Q，因为不知道是几班的，所以要把三、四年级都遍历一遍，但是也用到了年级这个索引列，不用找其他年级。</p>
 </li>
 <li><p>如果期望order by的子句使用索引，后面的顺序也必须按照索引列的顺序给出。如：按照年级、班级、名字顺次取10位同学。</p>
 <p><img src="https://img-blog.csdnimg.cn/20200419175555700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -714,7 +716,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <li>建表随便一点，能达到事半功倍的效果。</li>
 <li>建表不建索引，或者建了索引但是没有用上。</li>
 <li>隐式类型转换。</li>
-<li>select * where xxx=xxx 不管是啥，先查出来再说。</li>
+<li>select * where xxx&#x3D;xxx 不管是啥，先查出来再说。</li>
 <li>select xxx limit 100000 符合条件的数据有多少，全部拿出来，用不用再说。</li>
 <li>join 各种表，连接一万遍。</li>
 <li>为了展现强大的SQL水平，一条SQL要写一页，谁都别想看懂。</li>
@@ -744,7 +746,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <li>避免在SQL语句进行数学运算或者函数运算，否则不走索引。</li>
 <li>避免使用JOIN。</li>
 <li>统计表中记录数时使用COUNT(*)，而不是COUNT(primary_key)和COUNT(1)。但是COUNT(*)也可以用Redis等其他方式代替。</li>
-<li>WHERE条件中的非等值条件（IN、BETWEEN、&lt;、&lt;=、&gt;、&gt;=）会导致后面的条件使用不了索引。</li>
+<li>WHERE条件中的非等值条件（IN、BETWEEN、&lt;、&lt;&#x3D;、&gt;、&gt;&#x3D;）会导致后面的条件使用不了索引。</li>
 <li>复杂SQL拆分。</li>
 <li>使用合理的分页方式以提高分页的效率。</li>
 </ol>
@@ -753,7 +755,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <li><p>建表</p>
 <blockquote>
 <ol>
-<li><p>每一列都是not null：如果某一列可能存储null值，那么mysql需要额外维护一个==null值列表==，存储上，查询上都增加了成本。</p>
+<li><p>每一列都是not null：如果某一列可能存储null值，那么mysql需要额外维护一个&#x3D;&#x3D;null值列表&#x3D;&#x3D;，存储上，查询上都增加了成本。</p>
 </li>
 <li><p>能用固定长度数据类型解决的，不用变长类型。</p>
 </li>
@@ -819,8 +821,6 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 </tr>
 </tbody></table>
 </li>
-</ul>
-<ul>
 <li><h5 id="不可重复读和幻读"><a href="#不可重复读和幻读" class="headerlink" title="不可重复读和幻读"></a>不可重复读和幻读</h5><p>不可重复读重点在于update</p>
 <p>幻读的重点在于insert</p>
 </li>
@@ -834,7 +834,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <ol>
 <li>行锁是InnoDB引擎才有的。MyISAM、Memory、Merge等引擎都只支持表锁，并且不支持事务。</li>
 <li>表锁实现简单，占用资源少，但是粒度大，性能较差。</li>
-<li>对某个表执行一些诸如<code>ALTER TABLE</code>、<code>DROP TABLE</code>这类的<code>DDL</code>语句时，其他事务对这个表并发执行诸如<code>SELECT</code>、<code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>的语句会发生阻塞，反之也会发生阻塞。这个过程通过在server层使用==元数据锁==（MDL）实现。</li>
+<li>对某个表执行一些诸如<code>ALTER TABLE</code>、<code>DROP TABLE</code>这类的<code>DDL</code>语句时，其他事务对这个表并发执行诸如<code>SELECT</code>、<code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>的语句会发生阻塞，反之也会发生阻塞。这个过程通过在server层使用&#x3D;&#x3D;元数据锁&#x3D;&#x3D;（MDL）实现。</li>
 </ol>
 </li>
 <li><p>一致性读</p>
@@ -844,7 +844,8 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <ol>
 <li><p>共享锁</p>
 <p>Share Locks，简称S锁。事务在读取一条记录时，需要先获取S锁。</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select ... lock in share mode;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select ... lock in share mode;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>独占锁</p>
 <p>也叫排它锁，Exclusive Locks，简称X锁。事务要改动一条记录时，需要先获取该记录的X锁。</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select ... for update;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
@@ -927,10 +928,10 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 </li>
 </ol>
 </li>
-<li><h5 id="表级别AUTO-INC锁"><a href="#表级别AUTO-INC锁" class="headerlink" title="表级别AUTO-INC锁"></a>表级别AUTO-INC锁</h5><p>主键通常添加==AUTO_INCREMENT==属性，系统实现自增的原理有两个：</p>
+<li><h5 id="表级别AUTO-INC锁"><a href="#表级别AUTO-INC锁" class="headerlink" title="表级别AUTO-INC锁"></a>表级别AUTO-INC锁</h5><p>主键通常添加&#x3D;&#x3D;AUTO_INCREMENT&#x3D;&#x3D;属性，系统实现自增的原理有两个：</p>
 <blockquote>
 <ol>
-<li><p>执行插入操作时，在表级别加一个==AUTO-INC==锁，然后为每条记录分配递增值，该语句结束后再释放AUTO-INC锁，这样可以保证递增值是连续的。</p>
+<li><p>执行插入操作时，在表级别加一个&#x3D;&#x3D;AUTO-INC&#x3D;&#x3D;锁，然后为每条记录分配递增值，该语句结束后再释放AUTO-INC锁，这样可以保证递增值是连续的。</p>
 <p>AUTO_INC锁的作用范围只是insert语句，insert语句执行完就被释放了，不用等到事务结束。</p>
 </li>
 <li><p>采用轻量级的锁，在为insert语句生成递增值的时候获取一下轻量级锁，获取到后即可释放，不用等insert语句执行完毕再释放。</p>
@@ -945,7 +946,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
 <li><p>普通行锁</p>
 </li>
 <li><p>间隙锁</p>
-<p>官方名为LOCK_GAP，简称gap锁，仅仅是为了==防止插入幻影记录==而提出的。获取间隙锁后，其他事务不能在当前记录和相邻前一条记录的间隙中插入新记录。</p>
+<p>官方名为LOCK_GAP，简称gap锁，仅仅是为了&#x3D;&#x3D;防止插入幻影记录&#x3D;&#x3D;而提出的。获取间隙锁后，其他事务不能在当前记录和相邻前一条记录的间隙中插入新记录。</p>
 <p>MySQL在可重复读隔离级别下是可以解决幻读问题的：</p>
 <ol>
 <li>MVCC</li>
@@ -1366,7 +1367,7 @@ alter table table_name add index 索引名(column1,column2);<span aria-hidden="t
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

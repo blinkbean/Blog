@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -437,17 +437,14 @@
 </ol>
 <h4 id="同分不同名"><a href="#同分不同名" class="headerlink" title="同分不同名"></a>同分不同名</h4><p>SortedSet score支持浮点数，只要给每个score加上对应的小数，就能实现按先后达到目标值的排序进行展示。</p>
 <blockquote>
-<p>如 1/timestamp 或 1/(时间戳最大值-timestamp)，这里可能有精度问题注意一下。</p>
+<p>如 1&#x2F;timestamp 或 1&#x2F;(时间戳最大值-timestamp)，这里可能有精度问题注意一下。</p>
 </blockquote>
 <h4 id="同分同名次"><a href="#同分同名次" class="headerlink" title="同分同名次"></a>同分同名次</h4><p>这时一个SortedSet 就不能满足需求了，因为不知道前面有多少个同分的成员。</p>
 <ul>
 <li><p>两个SortedSet，一个Hash<br>A SortedSet 放所有排名信息 member score<br>B SortedSet 放不重复的分数排名 member和score都用A中的score<br>C Hash记录 score 及 该分数成员的数量</p>
 </li>
-<li><p>数据更新<br>分数增加或减少</p>
+<li><p>数据更新<br>分数增加或减少<br>1.检查C key中原分数下成员的数量，并减1，如果数量为0，删除在 B key中对应分数；检查新的分数是否已经在B key中，如果没有，加进去。<br>2.C key新的分数下团的数量加1。<br>3.A key正常增加分数。</p>
 </li>
-</ul>
-<p>1.检查C key中原分数下成员的数量，并减1，如果数量为0，删除在 B key中对应分数；检查新的分数是否已经在B key中，如果没有，加进去。<br>2.C key新的分数下团的数量加1。<br>3.A key正常增加分数。</p>
-<ul>
 <li><p>存在的问题：<br>两次分页请求可能存在排名变化，导致获取的数据重复的丢失的情况。</p>
 </li>
 <li><p>解决方案：<br>如果不能接受两次请求间排名变化导致的数据误差，可以给榜单做快照，请求时将快照编号带给服务端来解决。</p>
@@ -796,7 +793,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

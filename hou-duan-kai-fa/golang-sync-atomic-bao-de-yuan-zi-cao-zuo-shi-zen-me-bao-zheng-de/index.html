@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -448,17 +448,21 @@
 <h3 id="操作类型"><a href="#操作类型" class="headerlink" title="操作类型"></a>操作类型</h3><ul>
 <li><p>增或减 AddXXX</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token operator">*</span>addr <span class="token operator">+=</span> delta
-<span class="token keyword">return</span> <span class="token operator">*</span>addr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<span class="token keyword">return</span> <span class="token operator">*</span>addr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 <li><p>比较并交换 CompareAndSwapXXX</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">if</span> <span class="token operator">*</span>addr <span class="token operator">==</span> old <span class="token punctuation">&#123;</span>
 	<span class="token operator">*</span>addr <span class="token operator">=</span> <span class="token builtin">new</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">return</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token keyword">return</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p>载入 LoadXXX</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">return</span> <span class="token operator">*</span>addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">return</span> <span class="token operator">*</span>addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>存储 StoreXXX</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token operator">*</span>addr <span class="token operator">=</span> val<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token operator">*</span>addr <span class="token operator">=</span> val<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>交换 SwapXXX</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">old <span class="token operator">=</span> <span class="token operator">*</span>addr
 <span class="token operator">*</span>addr <span class="token operator">=</span> <span class="token builtin">new</span>
@@ -973,7 +977,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

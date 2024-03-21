@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -433,22 +433,24 @@
 	airflow list_tasks tutorial
 	
 3、以树形图的形式列出 tutorial 的任务id
-	airflow list_tasks tutorial --tree<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+	airflow list_tasks tutorial --tree<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p>测试</p>
 <pre class="line-numbers language-none"><code class="language-none">1、模拟2015-06-01 执行tutorial的print_date任务
-	airflow test tutorial print_date 2015-06-01<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+	airflow test tutorial print_date 2015-06-01<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 <li><p>回填数据</p>
 <blockquote>
 <p>如果希望新写的DAG执行过去一段时间的任务怎么办？<br>backfill 可以执行一个时间段内应该执行的所有任务</p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">airflow backfill tutorial -s 2018-06-01 -e 2015-08-01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-none"><code class="language-none">airflow backfill tutorial -s 2018-06-01 -e 2015-08-01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>重建元数据库</p>
 <pre class="line-numbers language-none"><code class="language-none">airflow resetdb [-h] [-y]
 
--y --yes，不经过提示确认就重置，默认为False<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h5 id="更多命令-官方Command-Line-Interface"><a href="#更多命令-官方Command-Line-Interface" class="headerlink" title="更多命令  官方Command Line Interface"></a>更多命令  <a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/cli.html">官方Command Line Interface</a></h5></li>
+-y --yes，不经过提示确认就重置，默认为False<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<hr>
+<h5 id="更多命令-官方Command-Line-Interface"><a href="#更多命令-官方Command-Line-Interface" class="headerlink" title="更多命令  官方Command Line Interface"></a>更多命令  <a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/cli.html">官方Command Line Interface</a></h5><hr>
 <h2 id="BaseOperator"><a href="#BaseOperator" class="headerlink" title="BaseOperator"></a>BaseOperator</h2><p>官网例子，里面的各个属性有代表什么意思？</p>
 <pre class="line-numbers language-none"><code class="language-none">&quot;&quot;&quot;
 Code that goes along with the Airflow tutorial located at:
@@ -516,7 +518,7 @@ t3.set_upstream(t1)
 <li><strong>depends_on_past</strong> （bool）设置为true时，任务实例将依次运行，同时依赖上一个任务的计划成功。允许start_date的任务实例运行。</li>
 <li><strong>wait_for_downstream</strong> （bool）TODO</li>
 <li><strong>dag</strong> (DAG) 任务所附的dag的引用（如果有的话）</li>
-<li>parallelism：这个参数指定了整个Airflow系统，在任何一刻能同时运行的Task Instance的数量，这个数量跟DAG无关，只跟Executor和Task有关。举个例子：如果parallelism=15, 这时你有两个DAG，A和B，如果A需要同时开跑10个Task，B也要同时开跑10个Task，两个DAG同时触发，那么这时候同时在跑的Task数量只能是15，其余的5个会等之前的Task运行完了触发，这时的状态不会显示在web上。而且在这种情况下，触发的顺序是不确定的。</li>
+<li>parallelism：这个参数指定了整个Airflow系统，在任何一刻能同时运行的Task Instance的数量，这个数量跟DAG无关，只跟Executor和Task有关。举个例子：如果parallelism&#x3D;15, 这时你有两个DAG，A和B，如果A需要同时开跑10个Task，B也要同时开跑10个Task，两个DAG同时触发，那么这时候同时在跑的Task数量只能是15，其余的5个会等之前的Task运行完了触发，这时的状态不会显示在web上。而且在这种情况下，触发的顺序是不确定的。</li>
 </ol>
 </blockquote>
 <blockquote>
@@ -532,7 +534,7 @@ t3.set_upstream(t1)
 <blockquote>
 <ol start="13">
 <li>non_pooled_task_slot_count：这个参数指定了默认的Pool能同时运行的Task Instance的数量，如果你的Task没有指定Pool选项，那么这个Task就是属于这个默认的Pool的</li>
-<li> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/skyrim/p/7456166.html">更多配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skyrim/p/7456166.html">更多配置</a></li>
 </ol>
 </blockquote>
 <h2 id="airflow执行组件"><a href="#airflow执行组件" class="headerlink" title="airflow执行组件"></a>airflow执行组件</h2><ul>
@@ -548,7 +550,9 @@ t3.set_upstream(t1)
 </ul>
 </blockquote>
 <ul>
-<li>Pool：这个Pool虽然不是Airflow的核心，但也跟整个Airflow的执行流程相关。任何一个Task其实都是指定了Pool这个参数的，即使没有自己指定，其实也是归结到了Default Pool这么个池子中。Pool本身是个抽象的概念，由Slot组成，可以建立任何一个Pool，指定Slot的数量。任何一个使用了这个Pool的Task Instance就需要占用一个Slot，Slot用完了，Task就处于等待状态。<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2></li>
+<li>Pool：这个Pool虽然不是Airflow的核心，但也跟整个Airflow的执行流程相关。任何一个Task其实都是指定了Pool这个参数的，即使没有自己指定，其实也是归结到了Default Pool这么个池子中。Pool本身是个抽象的概念，由Slot组成，可以建立任何一个Pool，指定Slot的数量。任何一个使用了这个Pool的Task Instance就需要占用一个Slot，Slot用完了，Task就处于等待状态。</li>
+</ul>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ul>
 <li>配置元素优先级<blockquote>
 <p>环境变量<br>  airflow.cfg中的配置<br>  airflow.cfg中的命令<br>  默认</p>
 </blockquote>
@@ -893,7 +897,7 @@ t3.set_upstream(t1)
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

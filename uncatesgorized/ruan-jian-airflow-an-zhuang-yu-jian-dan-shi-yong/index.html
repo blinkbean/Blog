@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -426,8 +426,10 @@
 <li><p>1、新建一个虚拟环境</p>
 <pre class="line-numbers language-none"><code class="language-none">virtualenv airflowenv
 source airflowenv&#x2F;bin&#x2F;activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>2、安装airflow<br>需要等一段时间</p>
-<pre class="line-numbers language-none"><code class="language-none">pip install airflow&#x3D;&#x3D;1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>2、安装airflow<br> 需要等一段时间</p>
+<pre class="line-numbers language-none"><code class="language-none">pip install airflow&#x3D;&#x3D;1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+</li>
 <li><p>3、查看安装结果</p>
 <pre class="line-numbers language-none"><code class="language-none">airflow version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
@@ -437,10 +439,9 @@ ____    |__( )_________  __&#x2F;__  &#x2F;________      __
 ____  &#x2F;| |_  &#x2F;__  ___&#x2F;_  &#x2F;_ __  &#x2F;_  __ \_ | &#x2F;| &#x2F; &#x2F;
 ___  ___ |  &#x2F; _  &#x2F;   _  __&#x2F; _  &#x2F; &#x2F; &#x2F;_&#x2F; &#x2F;_ |&#x2F; |&#x2F; &#x2F;
 _&#x2F;_&#x2F;  |_&#x2F;_&#x2F;  &#x2F;_&#x2F;    &#x2F;_&#x2F;    &#x2F;_&#x2F;  \____&#x2F;____&#x2F;|__&#x2F;
-  v1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
+  v1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
 </li>
-</ul>
-<ul>
 <li><p>4、cd 进入airflow文件夹</p>
 <pre class="line-numbers language-none"><code class="language-none">ls -al<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
@@ -462,7 +463,8 @@ _&#x2F;_&#x2F;  |_&#x2F;_&#x2F;  &#x2F;_&#x2F;    &#x2F;_&#x2F;    &#x2F;_&#x2F;
 </ul>
 <h4 id="安装工作结束"><a href="#安装工作结束" class="headerlink" title="安装工作结束"></a>安装工作结束</h4><h2 id="二、更改数据库为Mysql"><a href="#二、更改数据库为Mysql" class="headerlink" title="二、更改数据库为Mysql"></a>二、更改数据库为Mysql</h2><ul>
 <li><p>1、安装MySQL，方法不限</p>
-<pre class="line-numbers language-none"><code class="language-none">pip install mysql-python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-none"><code class="language-none">pip install mysql-python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 <li><p>2、成功进入MySQL之后</p>
 <pre class="line-numbers language-none"><code class="language-none">新建用户
 CREATE USER airflow;
@@ -486,8 +488,9 @@ airflow resetdb<span aria-hidden="true" class="line-numbers-rows"><span></span><
 airflow scheduler
 
 以非root用户运行
-airflow worker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>浏览器输入 localhost:8080/admin</p>
+airflow worker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>浏览器输入 localhost:8080&#x2F;admin</p>
 </li>
 <li><p>(o゜▽゜)o☆[BINGO!]</p>
 </li>
@@ -505,10 +508,12 @@ cd airflowenv&#x2F;lib&#x2F;python*.*&#x2F;site-packages
 vim data.pth
 
 在文件中一行，添加pyutil的路径（其他类似问题也可这样解决），如
-&#x2F;Users&#x2F;liyuxing&#x2F;work&#x2F;util<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#x2F;Users&#x2F;liyuxing&#x2F;work&#x2F;util<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p>执行 airflow webserver之后提示缺少Redis或者其他包</p>
 <pre class="line-numbers language-none"><code class="language-none">通通
-pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 <li><p>schedule_interval 参数意义<br><a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/scheduler.html?highlight=schedule_interval#dag-runs">官方文档</a></p>
 </li>
 </ul>
@@ -844,7 +849,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -431,9 +431,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h3><p>​        你想看一本书，需要的时候开始印刷，看完了就卖废品，1000个人想看就得印刷1000本书，卖1000本废品。这明显太不绿色了，你想了想如果建一个图书馆，里面放几本书，大家想看的时候去借，看完了再还回去，这明显高效了不少。</p>
-<p>​        程序员发现了你用图书馆的方式合理的利用了资源，于是照猫画虎发明了连接池、线程池、协程池、内存池，各种各样的池都是想解决同类的问题：创建连接、线程等都相对比较消耗资源，通过池存一写已经新建的连接，线程…需要的时候拿去用，不用了就再还回来。借与还的模式，节省了不少资源，大家都说好。</p>
-<p>​        Golang的sync.Pool，对象池。采用对象池来创建对象，增加对象的重复利用率，使用的时候就不必在堆上重新创建对象可以节省开销。</p>
+                <h3 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h3><p>​		你想看一本书，需要的时候开始印刷，看完了就卖废品，1000个人想看就得印刷1000本书，卖1000本废品。这明显太不绿色了，你想了想如果建一个图书馆，里面放几本书，大家想看的时候去借，看完了再还回去，这明显高效了不少。</p>
+<p>​		程序员发现了你用图书馆的方式合理的利用了资源，于是照猫画虎发明了连接池、线程池、协程池、内存池，各种各样的池都是想解决同类的问题：创建连接、线程等都相对比较消耗资源，通过池存一写已经新建的连接，线程…需要的时候拿去用，不用了就再还回来。借与还的模式，节省了不少资源，大家都说好。</p>
+<p>​		Golang的sync.Pool，对象池。采用对象池来创建对象，增加对象的重复利用率，使用的时候就不必在堆上重新创建对象可以节省开销。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>sync.Pool对外提供三个方法：New，Get，Put。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> pool <span class="token operator">*</span>sync<span class="token punctuation">.</span>Pool
 
@@ -652,7 +652,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/uncatesgorized/wang-luo-ya-ce-gong-ju-wrk/">
+                <a href="/wang-luo/wang-luo-ya-ce-gong-ju-wrk/">
                     <div class="card-image">
                         
                         
@@ -673,11 +673,27 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">网络工具</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8E%8B%E6%B5%8B/">
+                        <span class="chip bg-color">压测</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -864,7 +880,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -433,7 +433,9 @@
             <div id="articleContent">
                 <h4 id="为什么需要-pipeline-？"><a href="#为什么需要-pipeline-？" class="headerlink" title="为什么需要 pipeline ？"></a>为什么需要 pipeline ？</h4><ul>
 <li>正常情况下，客户端发送一个命令，等待 Redis 应答；Redis 接收到命令，处理后应答。请求发出到响应的时间叫做往返时间，即 RTT（Round Time Trip）。在这种情况下，如果需要执行大量的命令，就需要等待上一条命令应答后再执行。这中间不仅仅多了许多次 RTT，而且还频繁的调用系统 IO，发送网络请求。</li>
-<li>pipeline 允许客户端可以一次发送多条命令，而不等待上一条命令执行的结果。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2ltZy9iVlY5MTY?x-oss-process=image/format,png" alt="在这里插入图片描述"><h4 id="两次redis操作，用pipeline会不会好一点"><a href="#两次redis操作，用pipeline会不会好一点" class="headerlink" title="两次redis操作，用pipeline会不会好一点"></a>两次redis操作，用pipeline会不会好一点</h4></li>
+<li>pipeline 允许客户端可以一次发送多条命令，而不等待上一条命令执行的结果。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2ltZy9iVlY5MTY?x-oss-process=image/format,png" alt="在这里插入图片描述"></li>
+</ul>
+<h4 id="两次redis操作，用pipeline会不会好一点"><a href="#两次redis操作，用pipeline会不会好一点" class="headerlink" title="两次redis操作，用pipeline会不会好一点"></a>两次redis操作，用pipeline会不会好一点</h4><ul>
 <li>执行10万次set<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> redis
 <span class="token keyword">import</span> time
 
@@ -487,7 +489,8 @@ pipe <span class="token operator">=</span> my_redis<span class="token punctuatio
     pipe<span class="token punctuation">.</span>expire<span class="token punctuation">(</span>key1<span class="token punctuation">,</span> <span class="token number">3600</span><span class="token punctuation">)</span>
 pipe<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token punctuation">)</span>
 end_time <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span> end_time <span class="token operator">-</span> start_time<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token keyword">print</span> end_time <span class="token operator">-</span> start_time<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p>执行结果</p>
 <blockquote>
 <p>83849<br>26313</p>
@@ -826,7 +829,7 @@ end_time <span class="token operator">=</span> <span class="token builtin">int</
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -503,13 +503,13 @@ Level 0                0 | A |
 &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.F&#39;&gt;,
 &lt;type &#39;object&#39;&gt;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h4 id="什么时候对MRO来说是非法的？"><a href="#什么时候对MRO来说是非法的？" class="headerlink" title="什么时候对MRO来说是非法的？"></a>什么时候对MRO来说是非法的？</h4><ul>
-<li><h5 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h5><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; O &#x3D; object
+<h4 id="什么时候对MRO来说是非法的？"><a href="#什么时候对MRO来说是非法的？" class="headerlink" title="什么时候对MRO来说是非法的？"></a>什么时候对MRO来说是非法的？</h4><p>- </p>
+<h5 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h5>  <pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; O &#x3D; object
 &gt;&gt;&gt; class X(O): pass
 &gt;&gt;&gt; class Y(O): pass
 &gt;&gt;&gt; class A(X,Y): pass
 &gt;&gt;&gt; class B(Y,X): pass<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none"> -----------
+  <pre class="line-numbers language-none"><code class="language-none"> -----------
 |           |
 |    O      |
 |  &#x2F;   \    |
@@ -519,17 +519,17 @@ Level 0                0 | A |
    A    B
    \   &#x2F;
      ?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">L[O] &#x3D; 0
+  <pre class="line-numbers language-none"><code class="language-none">L[O] &#x3D; 0
 L[X] &#x3D; X O
 L[Y] &#x3D; Y O
 L[A] &#x3D; A X Y O
 L[B] &#x3D; B Y X O<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-none"><code class="language-none">L[C] &#x3D; C + merge(AXYO, BYXO, AB)
+  <pre class="line-numbers language-none"><code class="language-none">L[C] &#x3D; C + merge(AXYO, BYXO, AB)
      &#x3D; C + A + merge(XYO, BYXO, B)
-     &#x3D; C + A + B + merge(XYO, YXO)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li><p>这时，我们不能合并列表XYO和列表YXO，：因此，没有了符合规则的head，C3算法停止。在这种情形下，Python 2.3会抛出一个异常(TypeError: MRO conflict among bases Y, X)，因为X在YXO的tail中,而Y在XYO的tail中,阻止创建模棱两可的继承层次。Python 2.2不会抛出异常，而是选择了一种特定的方法解析顺序(CABXYO).</p>
-</li>
+     &#x3D; C + A + B + merge(XYO, YXO)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>这时，我们不能合并列表XYO和列表YXO，：因此，没有了符合规则的head，C3算法停止。在这种情形下，Python 2.3会抛出一个异常(TypeError: MRO conflict among bases Y, X)，因为X在YXO的tail中,而Y在XYO的tail中,阻止创建模棱两可的继承层次。Python 2.2不会抛出异常，而是选择了一种特定的方法解析顺序(CABXYO).</li>
 </ul>
 
                 
@@ -866,7 +866,7 @@ L[B] &#x3D; B Y X O<span aria-hidden="true" class="line-numbers-rows"><span></sp
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -438,7 +438,7 @@
 <li>Redis key过期的方式有三种：</li>
 </ul>
 <ol>
-<li>被动删除：当读/写一个已经过期的key时，会触发惰性删除策略，直接删除掉这个过期key<blockquote>
+<li>被动删除：当读&#x2F;写一个已经过期的key时，会触发惰性删除策略，直接删除掉这个过期key<blockquote>
 <p>对这个key执行exists不会触发惰性删除</p>
 </blockquote>
 </li>
@@ -451,9 +451,9 @@
         <span class="token keyword">if</span> group_ids<span class="token punctuation">:</span>
             self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>setex<span class="token punctuation">(</span><span class="token string">"flag_key"</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> time<span class="token operator">=</span>_interval<span class="token punctuation">)</span>
             self<span class="token punctuation">.</span>redis<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h6 id="上面代码存在的问题及应对方式"><a href="#上面代码存在的问题及应对方式" class="headerlink" title="上面代码存在的问题及应对方式"></a>上面代码存在的问题及应对方式</h6>问题</li>
+        <span class="token keyword">return</span> group_ids<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
+<h6 id="上面代码存在的问题及应对方式"><a href="#上面代码存在的问题及应对方式" class="headerlink" title="上面代码存在的问题及应对方式"></a>上面代码存在的问题及应对方式</h6><p>问题</p>
 <ul>
 <li>redis Key在30s之后过期，但是执行exists命令的返回值可能还为True。</li>
 <li>但是如果执行ttl命令是发现返回值为0。</li>
@@ -813,7 +813,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

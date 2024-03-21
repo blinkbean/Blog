@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -434,8 +434,8 @@
                 <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>channel 是 golang 的最重要的一个结构，是区别于其他高级语言的最重要的特色之一，也是 goroutine 通信必须要的要素之一。下文将基于golang1.14从channel的数据结构&amp;收、发操作的代码实现，进一步了解channel。</p>
 <h3 id="hchan-struct"><a href="#hchan-struct" class="headerlink" title="hchan struct"></a>hchan struct</h3><p>hchan 中的所有属性大致可以分为三类：</p>
 <ol>
-<li>buffer 相关的属性。例如 buf、dataqsiz、qcount 等。 当 channel 的缓冲区大小不为 0 时，buffer 中存放了待接收的数据。使用 ==环形队列==(ring buffer) 实现，FIFO。</li>
-<li>waitq 相关的属性，可以理解为是一个 FIFO 的标准队列。其中 recvq 中是正在等待接收数据的 goroutine，sendq 中是等待发送数据的 goroutine。waitq 使用==双向链表==实现。</li>
+<li>buffer 相关的属性。例如 buf、dataqsiz、qcount 等。 当 channel 的缓冲区大小不为 0 时，buffer 中存放了待接收的数据。使用 &#x3D;&#x3D;环形队列&#x3D;&#x3D;(ring buffer) 实现，FIFO。</li>
+<li>waitq 相关的属性，可以理解为是一个 FIFO 的标准队列。其中 recvq 中是正在等待接收数据的 goroutine，sendq 中是等待发送数据的 goroutine。waitq 使用&#x3D;&#x3D;双向链表&#x3D;&#x3D;实现。</li>
 <li>其他属性，例如 lock、elemtype、closed 等。</li>
 </ol>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> hchan <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
@@ -481,7 +481,7 @@
 <p>我们可以看到 </p>
 <ol>
 <li>channel 其实就是一个队列加一个锁，只不过这个锁是一个轻量级锁。</li>
-<li> recvq 是读操作阻塞在 channel 的 goroutine 列表，sendq 是写操作阻塞在 channel 的 goroutine 列表。</li>
+<li>recvq 是读操作阻塞在 channel 的 goroutine 列表，sendq 是写操作阻塞在 channel 的 goroutine 列表。</li>
 <li>链表的实现是 sudog，其实就是一个对 g 的结构的封装。</li>
 </ol>
 <h3 id="makechan"><a href="#makechan" class="headerlink" title="makechan"></a>makechan</h3><ol>
@@ -642,7 +642,7 @@
 	<span class="token keyword">return</span> <span class="token boolean">true</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>golang内执行 ==&lt;- x== 会调用chansend函数，会有三种场景：</p>
+<p>golang内执行 &#x3D;&#x3D;&lt;- x&#x3D;&#x3D; 会调用chansend函数，会有三种场景：</p>
 <ol>
 <li><p>场景一：如果有人（ goroutine ）等着取 channel 的元素，这种场景最快乐，直接把元素给他就完了，然后把它唤醒，hchan 本身递增下 ringbuffer 索引；<strong>举一反三：kafka也有这种高效操作。</strong></p>
 </li>
@@ -793,9 +793,9 @@
 
 <p>可以看到send和recv代码和处理情况基本一样：</p>
 <ol>
-<li>如果是非阻塞模式（ block=false ），并且没有任何可用元素，返回 （selected=false，received=false），这样就不会进到 select 的 case 分支；</li>
-<li>如果是阻塞模式（ block=true ），如果 chan 已经 closed 了，那么返回的是 （selected=true，received=false），说明需要进到 select 的分支，但是是没有取到元素的；</li>
-<li>如果是阻塞模式，chan 还是正常状态，那么返回（selected=true，recived=true），说明正常取到了元素；</li>
+<li>如果是非阻塞模式（ block&#x3D;false ），并且没有任何可用元素，返回 （selected&#x3D;false，received&#x3D;false），这样就不会进到 select 的 case 分支；</li>
+<li>如果是阻塞模式（ block&#x3D;true ），如果 chan 已经 closed 了，那么返回的是 （selected&#x3D;true，received&#x3D;false），说明需要进到 select 的分支，但是是没有取到元素的；</li>
+<li>如果是阻塞模式，chan 还是正常状态，那么返回（selected&#x3D;true，recived&#x3D;true），说明正常取到了元素；</li>
 </ol>
 <p>select部分和send基本一致，在编译时block参数设为false，不再重复。不过recv还可以通过range的方式进行。</p>
 <ul>
@@ -1158,7 +1158,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2023</span>
+                <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

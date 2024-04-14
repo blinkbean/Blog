@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-15
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    448
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -445,11 +462,11 @@
 <p>访问的块不连续，需要磁头不断移动</p>
 </li>
 <li><p>预读取</p>
-<p>通过一次I&#x2F;O请求多个页预读到缓冲池中，并且估计预读的多个页马上会被访问。传统I&#x2F;O请求每次只读取一个页，在传统机械硬盘较低的IOPS下，预读计数可以大大提高读取的性能。</p>
+<p>通过一次I/O请求多个页预读到缓冲池中，并且估计预读的多个页马上会被访问。传统I/O请求每次只读取一个页，在传统机械硬盘较低的IOPS下，预读计数可以大大提高读取的性能。</p>
 <blockquote>
 <ol>
 <li><p>随机预读</p>
-<p>当一个区中&#x3D;&#x3D;13&#x3D;&#x3D;个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。</p>
+<p>当一个区中==13==个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。</p>
 <p>InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
 </li>
 <li><p>线性预读</p>
@@ -462,7 +479,7 @@
 </ul>
 <h3 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h3><ul>
 <li><p>InnoDB中的哈希算法</p>
-<p>InnoDB使用哈希算法对字典进行查找，采用链表方式解决冲突、哈希函数采用除法散列方式（ &#x3D;&#x3D;h(k)&#x3D;k mod m&#x3D;&#x3D; ）。</p>
+<p>InnoDB使用哈希算法对字典进行查找，采用链表方式解决冲突、哈希函数采用除法散列方式（ ==h(k)=k mod m== ）。</p>
 <p>缓冲池中的Page页都有一个chain指针，指向相同哈希函数值的页。</p>
 <p>除法散列，m的取值为略大于2倍的缓冲池页数量的质素。</p>
 </li>

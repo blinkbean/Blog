@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -414,11 +416,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-01-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    7 分
+                </div>
                 
 
                 
@@ -451,10 +468,10 @@
 <span class="token keyword">return</span> <span class="token operator">*</span>addr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>比较并交换 CompareAndSwapXXX</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">if</span> <span class="token operator">*</span>addr <span class="token operator">==</span> old <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">if</span> <span class="token operator">*</span>addr <span class="token operator">==</span> old <span class="token punctuation">{</span>
 	<span class="token operator">*</span>addr <span class="token operator">=</span> <span class="token builtin">new</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">return</span> <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>载入 LoadXXX</p>
@@ -478,30 +495,30 @@
 <span class="token comment">//利用for循环以进行多次尝试</span>
 <span class="token keyword">var</span> value <span class="token builtin">int32</span>
 
-<span class="token keyword">func</span> <span class="token function">addValue1</span><span class="token punctuation">(</span>delta <span class="token builtin">int32</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">for</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">addValue1</span><span class="token punctuation">(</span>delta <span class="token builtin">int32</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">for</span><span class="token punctuation">{</span>
 		<span class="token comment">//在进行读取value的操作的过程中,其他对此值的读写操作是可以被同时进行的</span>
 		<span class="token comment">//那么这个读操作很可能会读取到一个只被修改了一半的数据</span>
 		v <span class="token operator">:=</span> value
-		<span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">CompareAndSwapInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>value<span class="token punctuation">,</span> v<span class="token punctuation">,</span> v <span class="token operator">+</span> delta<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">CompareAndSwapInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>value<span class="token punctuation">,</span> v<span class="token punctuation">,</span> v <span class="token operator">+</span> delta<span class="token punctuation">)</span><span class="token punctuation">{</span>
 			<span class="token keyword">break</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>用Load函数防止只读取一半有效数据的发生</li>
 </ul>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">addValue2</span><span class="token punctuation">(</span>delta <span class="token builtin">int32</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span><span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">addValue2</span><span class="token punctuation">(</span>delta <span class="token builtin">int32</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">{</span>
     	<span class="token comment">//使用载入</span>
 		v <span class="token operator">:=</span> atomic<span class="token punctuation">.</span><span class="token function">LoadInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>value<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">CompareAndSwapInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>value<span class="token punctuation">,</span> v<span class="token punctuation">,</span> v <span class="token operator">+</span> delta<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">CompareAndSwapInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>value<span class="token punctuation">,</span> v<span class="token punctuation">,</span> v <span class="token operator">+</span> delta<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token comment">//在函数的结果值为true时,退出循环</span>
             <span class="token keyword">break</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="struct类型操作"><a href="#struct类型操作" class="headerlink" title="struct类型操作"></a>struct类型操作</h4><ul>
 <li>如果对一个结构体直接进行赋值，那出现问题的概率更高。线程刚写完一部分字段，读线程就读取了变量，那么只能读到一部分修改的值，破坏了变量的完整性，读到的值也是完全错误的。</li>
@@ -509,39 +526,39 @@
 </ul>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 使用示例</span>
 
-<span class="token keyword">type</span> Config <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Config <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	Addr <span class="token builtin">string</span>
 	Port <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c Config<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Config<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
 	<span class="token keyword">return</span> c<span class="token punctuation">.</span>Addr <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> c<span class="token punctuation">.</span>Port
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">loadConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Config <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">loadConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Config <span class="token punctuation">{</span>
 	<span class="token comment">// do something</span>
-	<span class="token keyword">return</span> Config<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token function">automicValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> Config<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">automicValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	<span class="token keyword">var</span> config atomic<span class="token punctuation">.</span>Value
-	wg <span class="token operator">:=</span> sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">for</span> <span class="token punctuation">&#123;</span>
+	wg <span class="token operator">:=</span> sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">for</span> <span class="token punctuation">{</span>
 			time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
 			config<span class="token punctuation">.</span><span class="token function">Store</span><span class="token punctuation">(</span><span class="token function">loadConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
 		wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-		<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 			c <span class="token operator">:=</span> config<span class="token punctuation">.</span><span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span>Config<span class="token punctuation">)</span>
 			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
 			wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
 	wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="atomic-Value-设计与实现"><a href="#atomic-Value-设计与实现" class="headerlink" title="atomic.Value 设计与实现"></a>atomic.Value 设计与实现</h4><p><code>atomic</code>包中除了<code>atomic.Value</code>外，其余都是早期由汇编写成的，<code>atomic.Value</code>类型的底层实现也是建立在已有的<code>atomic</code>包的基础上。</p>
 <blockquote>
@@ -551,66 +568,66 @@
 </blockquote>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">//atomic.Value源码</span>
 
-<span class="token keyword">type</span> Value <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	v <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 所以可以存储任何类型的数据</span>
-<span class="token punctuation">&#125;</span>
+<span class="token keyword">type</span> Value <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	v <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// 所以可以存储任何类型的数据</span>
+<span class="token punctuation">}</span>
 
-<span class="token comment">// 空 interface&#123;&#125; 的内部表示格式，作用是将interface&#123;&#125;类型分解，得到其中两个字段</span>
-<span class="token keyword">type</span> ifaceWords <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// 空 interface{} 的内部表示格式，作用是将interface{}类型分解，得到其中两个字段</span>
+<span class="token keyword">type</span> ifaceWords <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	typ  unsafe<span class="token punctuation">.</span>Pointer
 	data unsafe<span class="token punctuation">.</span>Pointer
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 取数据就是正常走流程</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>v <span class="token operator">*</span>Value<span class="token punctuation">)</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>v <span class="token operator">*</span>Value<span class="token punctuation">)</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	vp <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>ifaceWords<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span>
 	typ <span class="token operator">:=</span> <span class="token function">LoadPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>typ<span class="token punctuation">)</span>
-	<span class="token keyword">if</span> typ <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">||</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>typ<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> typ <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">||</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>typ<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 		<span class="token comment">// 第一次还没写入</span>
 		<span class="token keyword">return</span> <span class="token boolean">nil</span>
-	<span class="token punctuation">&#125;</span>
-  <span class="token comment">// 构造新的interface&#123;&#125;返回出去</span>
+	<span class="token punctuation">}</span>
+  <span class="token comment">// 构造新的interface{}返回出去</span>
 	data <span class="token operator">:=</span> <span class="token function">LoadPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 	xp <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>ifaceWords<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
 	xp<span class="token punctuation">.</span>typ <span class="token operator">=</span> typ
 	xp<span class="token punctuation">.</span>data <span class="token operator">=</span> data
 	<span class="token keyword">return</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 写数据（如何保证数据完整性）</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>v <span class="token operator">*</span>Value<span class="token punctuation">)</span> <span class="token function">Store</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>v <span class="token operator">*</span>Value<span class="token punctuation">)</span> <span class="token function">Store</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sync/atomic: store of nil value into Value"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
   <span class="token comment">// 绕过 Go 语言类型系统的检查，与任意的指针类型互相转换</span>
 	vp <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>ifaceWords<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 旧值</span>
 	xp <span class="token operator">:=</span> <span class="token punctuation">(</span><span class="token operator">*</span>ifaceWords<span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 新值</span>
-	<span class="token keyword">for</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 配合CompareAndSwap达到乐观锁的功效</span>
+	<span class="token keyword">for</span> <span class="token punctuation">{</span> <span class="token comment">// 配合CompareAndSwap达到乐观锁的功效</span>
 		typ <span class="token operator">:=</span> <span class="token function">LoadPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>typ<span class="token punctuation">)</span>
-		<span class="token keyword">if</span> typ <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 第一次写入</span>
+		<span class="token keyword">if</span> typ <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span> <span class="token comment">// 第一次写入</span>
 			<span class="token function">runtime_procPin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 禁止抢占</span>
-			<span class="token keyword">if</span> <span class="token operator">!</span><span class="token function">CompareAndSwapPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>typ<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">if</span> <span class="token operator">!</span><span class="token function">CompareAndSwapPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>typ<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 				<span class="token function">runtime_procUnpin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 没有抢到锁，说明已经有别的线程抢先完成赋值，重新进入循环</span>
 				<span class="token keyword">continue</span>
-			<span class="token punctuation">&#125;</span>
+			<span class="token punctuation">}</span>
 			<span class="token comment">// 首次赋值</span>
 			<span class="token function">StorePointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>data<span class="token punctuation">,</span> xp<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 			<span class="token function">StorePointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>typ<span class="token punctuation">,</span> xp<span class="token punctuation">.</span>typ<span class="token punctuation">)</span>
 			<span class="token function">runtime_procUnpin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 写入成功，解除占用状态</span>
 			<span class="token keyword">return</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">if</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>typ<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">if</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>typ<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">^</span><span class="token function">uintptr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 			<span class="token comment">// 第一次写入还未完成，继续等待</span>
 			<span class="token keyword">continue</span>
-		<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">}</span>
 		<span class="token comment">// 两次需要写入相同类型</span>
-		<span class="token keyword">if</span> typ <span class="token operator">!=</span> xp<span class="token punctuation">.</span>typ <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> typ <span class="token operator">!=</span> xp<span class="token punctuation">.</span>typ <span class="token punctuation">{</span>
 			<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sync/atomic: store of inconsistently typed value into Value"</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">}</span>
 		<span class="token function">StorePointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vp<span class="token punctuation">.</span>data<span class="token punctuation">,</span> xp<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
 		<span class="token keyword">return</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 禁止抢占，标记当前G在M上不会被抢占，并返回当前所在P的ID。</span>
 <span class="token keyword">func</span> <span class="token function">runtime_procPin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>

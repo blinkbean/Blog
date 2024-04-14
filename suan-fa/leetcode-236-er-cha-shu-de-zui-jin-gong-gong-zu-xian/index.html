@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-13
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    182
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -438,20 +455,20 @@
 <li>情况1：p,q 在 root 两侧</li>
 <li>情况2：p或q 等于 root, 且另一个节点在root的子树中</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode &#123;
-	if root &#x3D;&#x3D; nil || root &#x3D;&#x3D; q || root &#x3D;&#x3D; p &#123;
+<pre class="line-numbers language-none"><code class="language-none">func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	if root == nil || root == q || root == p {
 		return root
-	&#125;
-	left :&#x3D; lowestCommonAncestor(root.Left, p, q)
-	right :&#x3D; lowestCommonAncestor(root.Right, p, q)
-	if left &#x3D;&#x3D; nil &#123;
+	}
+	left := lowestCommonAncestor(root.Left, p, q)
+	right := lowestCommonAncestor(root.Right, p, q)
+	if left == nil {
 		return right
-	&#125;
-	if right &#x3D;&#x3D; nil &#123;
+	}
+	if right == nil {
 		return left
-	&#125;
+	}
 	return root
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

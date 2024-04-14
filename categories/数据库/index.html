@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -361,11 +363,11 @@
                 </a>
                 
                 
-                <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" title="程序人生: 7">
+                <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" title="程序人生: 9">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             style="background-color: #82E0AA;">程序人生
-                        <span class="tag-length">7</span>
+                        <span class="tag-length">9</span>
                     </span>
                 </a>
                 
@@ -397,7 +399,7 @@
                             
                                 AUTO_INCREMENT两种情况1、在载入语句执行前，已经不确定要插入多少条记录。
 
-在执行插入语句时在&#x3D;&#x3D;表级别&#x3D;&#x3D;加一个&#x3D;&#x3D;auto-inc锁&#x3D;&#x3D;，然后
+在执行插入语句时在==表级别==加一个==auto-inc锁==，然后为每条待插入记录的auto-increment修饰的列分配递增的值，语句执行结束
                             
                         </div>
                         <div class="publish-info">
@@ -546,10 +548,11 @@ MySQL中使用varchar、text、blob等可变长度的文本数据类型之后需
 日志文件
 错误日志
 # 查看文件位置
-show variables like &#39;log_error&#39;;
+show variables like 'log_error';
 
 二进制日志
-事务提
+事务提交前进行记录。
+
                             
                         </div>
                         <div class="publish-info">
@@ -895,8 +898,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息
                     <a href="/shu-ju-ku/mysql-mian-shi-100-wen/">
                         <div class="card-image tag-image">
                             
-                            
-                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Mysql-面试100问">
+                            <img src="/Image/image-20240322005522124.png" class="responsive-img" alt="Mysql-面试100问">
                             
                             <span class="card-title">Mysql-面试100问</span>
                         </div>
@@ -1029,7 +1031,7 @@ zhiboer
 
 
 没有线程对该结果集中的任何行数据使用排他锁或共享锁，否则申请会阻塞。
-for update仅适用于InnoDB，且必须在事务块(BEGIN&#x2F;C
+for update仅适用于InnoDB，且必须在事务块(BEGIN/COMMIT
                             
                         </div>
                         <div class="publish-info">

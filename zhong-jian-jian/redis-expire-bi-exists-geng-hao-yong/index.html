@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    330
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -445,10 +462,10 @@
 <h6 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h6><ul>
 <li>expire代替exists，重置key的过期时间。相当于利用expire给key续命，可以合理的“长生不死”。</li>
 </ul>
-<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">EXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>TTL<span class="token operator">></span> <span class="token punctuation">:</span> 将键的生存时间设为 ttl 秒
-PEXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>TTL<span class="token operator">></span> <span class="token punctuation">:</span>将键的生存时间设为 ttl 毫秒
-EXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>timestamp<span class="token operator">></span> <span class="token punctuation">:</span>将键的过期时间设为 timestamp 所指定的秒数时间戳
-PEXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>timestamp<span class="token operator">></span><span class="token punctuation">:</span> 将键的过期时间设为 timestamp 所指定的毫秒数时间戳<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">EXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>TTL<span class="token operator">&gt;</span> <span class="token punctuation">:</span> 将键的生存时间设为 ttl 秒
+PEXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>TTL<span class="token operator">&gt;</span> <span class="token punctuation">:</span>将键的生存时间设为 ttl 毫秒
+EXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>timestamp<span class="token operator">&gt;</span> <span class="token punctuation">:</span>将键的过期时间设为 timestamp 所指定的秒数时间戳
+PEXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>timestamp<span class="token operator">&gt;</span><span class="token punctuation">:</span> 将键的过期时间设为 timestamp 所指定的毫秒数时间戳<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">persist key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 

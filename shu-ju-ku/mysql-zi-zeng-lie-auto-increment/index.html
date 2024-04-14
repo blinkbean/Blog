@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-20
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    384
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -433,19 +450,19 @@
             <div id="articleContent">
                 <h3 id="AUTO-INCREMENT"><a href="#AUTO-INCREMENT" class="headerlink" title="AUTO_INCREMENT"></a>AUTO_INCREMENT</h3><h6 id="两种情况"><a href="#两种情况" class="headerlink" title="两种情况"></a>两种情况</h6><p>1、在载入语句执行前，已经<strong>不确定</strong>要插入多少条记录。</p>
 <ul>
-<li>在执行插入语句时在&#x3D;&#x3D;表级别&#x3D;&#x3D;加一个&#x3D;&#x3D;auto-inc锁&#x3D;&#x3D;，然后为每条待插入记录的auto-increment修饰的列分配递增的值，语句执行结束后，再把auto-inc锁释放掉。一个事务再持有auto-inc锁的过程中，其他事务的插入语句都要被阻塞，可以保证一个语句中分配的递增值是连续的。<blockquote>
+<li>在执行插入语句时在==表级别==加一个==auto-inc锁==，然后为每条待插入记录的auto-increment修饰的列分配递增的值，语句执行结束后，再把auto-inc锁释放掉。一个事务再持有auto-inc锁的过程中，其他事务的插入语句都要被阻塞，可以保证一个语句中分配的递增值是连续的。<blockquote>
 <p>AUTO-INC锁的作用范围只是单个插入语句，插入语句执行完成后，这个锁就被释放了，跟我们之前介绍的锁在事务结束时释放是不一样的。</p>
 </blockquote>
 </li>
 </ul>
 <p>2、插入语句执行前就<strong>确定</strong>要插入多少条记录。</p>
 <ul>
-<li>采用一个轻量级的锁，在为插入语句生成auto-increment修饰的列的值时获取一下这个轻量级锁，生成需要用到的auto-increment列的值后，&#x3D;&#x3D;立马释放&#x3D;&#x3D;，不需要等语句执行。<blockquote>
+<li>采用一个轻量级的锁，在为插入语句生成auto-increment修饰的列的值时获取一下这个轻量级锁，生成需要用到的auto-increment列的值后，==立马释放==，不需要等语句执行。<blockquote>
 <p>InnoDB中提供系统变量 innodb_autoinc_lock_mode 控制用以上哪种方式进行自增的赋值。</p>
 <ol>
-<li>innodb_autoinc_lock_mode&#x3D;0 一律采用auto-inc锁。</li>
-<li>innodb_autoinc_lock_mode&#x3D;2 一律采用轻量级锁。</li>
-<li>innodb_autoinc_lock_mode&#x3D;1 混着来，插入记录数量确定时采用轻量级锁，不确定时使用AUTO-INC锁。</li>
+<li>innodb_autoinc_lock_mode=0 一律采用auto-inc锁。</li>
+<li>innodb_autoinc_lock_mode=2 一律采用轻量级锁。</li>
+<li>innodb_autoinc_lock_mode=1 混着来，插入记录数量确定时采用轻量级锁，不确定时使用AUTO-INC锁。</li>
 </ol>
 <p>当一律采用轻量级锁时，可能会造成不同事物中插入语句生成的值时交叉的，在有主从复制的场景中是不安全的。</p>
 </blockquote>

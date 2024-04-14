@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-28
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    643
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
 
                 
@@ -437,31 +454,31 @@
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>sync.Pool对外提供三个方法：New，Get，Put。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> pool <span class="token operator">*</span>sync<span class="token punctuation">.</span>Pool
 
-<span class="token keyword">type</span> Book <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Book <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	Name <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	pool <span class="token operator">=</span> <span class="token operator">&amp;</span>sync<span class="token punctuation">.</span>Pool<span class="token punctuation">&#123;</span>
-		New<span class="token punctuation">:</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	pool <span class="token operator">=</span> <span class="token operator">&amp;</span>sync<span class="token punctuation">.</span>Pool<span class="token punctuation">{</span>
+		New<span class="token punctuation">:</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>
 			<span class="token keyword">return</span> <span class="token function">new</span><span class="token punctuation">(</span>Book<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	book <span class="token operator">:=</span> pool<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Book<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>book<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;&#125;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>book<span class="token punctuation">)</span> <span class="token comment">// &amp;{}</span>
 	book<span class="token punctuation">.</span>Name <span class="token operator">=</span> <span class="token string">"Go Programming"</span>
 	pool<span class="token punctuation">.</span><span class="token function">Put</span><span class="token punctuation">(</span>book<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pool<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Book<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;Go Programming&#125;</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pool<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Book<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pool<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Book<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// &amp;{Go Programming}</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pool<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>Book<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// &amp;{}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><ul>
 <li>结构体</li>
 </ul>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Pool <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Pool <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	noCopy noCopy <span class="token comment">// 禁止拷贝</span>
 
 	local     unsafe<span class="token punctuation">.</span>Pointer <span class="token comment">// [P]poolLocal poolLocal数组指针</span>
@@ -471,19 +488,19 @@
 	victimSize <span class="token builtin">uintptr</span>
 
 	<span class="token comment">// 当pool没有缓存对象的时候，会调用New方法生成一个新的对象</span>
-	New <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+	New <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> poolLocal <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> poolLocal <span class="token keyword">struct</span> <span class="token punctuation">{</span>
     poolLocalInternal
-    pad <span class="token punctuation">[</span><span class="token number">128</span> <span class="token operator">-</span> unsafe<span class="token punctuation">.</span><span class="token function">Sizeof</span><span class="token punctuation">(</span>poolLocalInternal<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">type</span> poolLocalInternal <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-    private <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>   <span class="token comment">// Can be used only by the respective P.</span>
+    pad <span class="token punctuation">[</span><span class="token number">128</span> <span class="token operator">-</span> unsafe<span class="token punctuation">.</span><span class="token function">Sizeof</span><span class="token punctuation">(</span>poolLocalInternal<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> poolLocalInternal <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    private <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>   <span class="token comment">// Can be used only by the respective P.</span>
     shared  poolChain   <span class="token comment">// Local P can pushHead/popHead; any P can popTail.</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> poolChain <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> poolChain <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	<span class="token comment">// head is the poolDequeue to push to. This is only accessed</span>
 	<span class="token comment">// by the producer, so doesn't need to be synchronized.</span>
 	head <span class="token operator">*</span>poolChainElt
@@ -491,51 +508,51 @@
 	<span class="token comment">// tail is the poolDequeue to popTail from. This is accessed</span>
 	<span class="token comment">// by consumers, so reads and writes must be atomic.</span>
 	tail <span class="token operator">*</span>poolChainElt
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>Get</li>
 </ul>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Pool<span class="token punctuation">)</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">&#123;</span> <span class="token comment">// 不允许竞态检测</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Pool<span class="token punctuation">)</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span> <span class="token comment">// 不允许竞态检测</span>
 		race<span class="token punctuation">.</span><span class="token function">Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
 	l<span class="token punctuation">,</span> pid <span class="token operator">:=</span> p<span class="token punctuation">.</span><span class="token function">pin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 获取一个poolLocal</span>
 	x <span class="token operator">:=</span> l<span class="token punctuation">.</span>private
 	l<span class="token punctuation">.</span>private <span class="token operator">=</span> <span class="token boolean">nil</span>
-	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 		<span class="token comment">// Try to pop the head of the local shard. We prefer</span>
 		<span class="token comment">// the head over the tail for temporal locality of</span>
 		<span class="token comment">// reuse.</span>
 		x<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> l<span class="token punctuation">.</span>shared<span class="token punctuation">.</span><span class="token function">popHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 			x <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token function">getSlow</span><span class="token punctuation">(</span>pid<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
 	<span class="token function">runtime_procUnpin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
 		race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> x <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 			race<span class="token punctuation">.</span><span class="token function">Acquire</span><span class="token punctuation">(</span><span class="token function">poolRaceAddr</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> p<span class="token punctuation">.</span>New <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 没拿到 new一个</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> p<span class="token punctuation">.</span>New <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span> <span class="token comment">// 没拿到 new一个</span>
 		x <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
 	<span class="token keyword">return</span> x
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Pool<span class="token punctuation">)</span> <span class="token function">pin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span>poolLocal <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p <span class="token operator">*</span>Pool<span class="token punctuation">)</span> <span class="token function">pin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span>poolLocal <span class="token punctuation">{</span>
     pid <span class="token operator">:=</span> <span class="token function">runtime_procPin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     s <span class="token operator">:=</span> atomic<span class="token punctuation">.</span><span class="token function">LoadUintptr</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token punctuation">.</span>localSize<span class="token punctuation">)</span> <span class="token comment">// load-acquire</span>
     l <span class="token operator">:=</span> p<span class="token punctuation">.</span>local                          <span class="token comment">// load-consume</span>
-    <span class="token keyword">if</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>pid<span class="token punctuation">)</span> <span class="token operator">&lt;</span> s <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>pid<span class="token punctuation">)</span> <span class="token operator">&lt;</span> s <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token function">indexLocal</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> pid<span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> p<span class="token punctuation">.</span><span class="token function">pinSlow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 

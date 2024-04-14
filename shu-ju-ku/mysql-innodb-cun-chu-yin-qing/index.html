@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
                 
 
                 
@@ -441,7 +458,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 <p>那什么时候进行合并呢？</p>
 <ul>
 <li>非聚集索引页被读取到缓冲池中。select先检查insert buffer是否有非聚集索引页的存在，如果有则合并。</li>
-<li>非聚集索引页没有可用空间。空间小于1&#x2F;32页的大小，则进行合并。</li>
+<li>非聚集索引页没有可用空间。空间小于1/32页的大小，则进行合并。</li>
 <li>master thread每秒和每10秒的合并操作。</li>
 </ul>
 </blockquote>
@@ -467,13 +484,13 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 </li>
 <li><p>自适应哈希索引</p>
 <p>InnoDB会监控对表上索引的查找，如果建立哈希索引可以带来速度的提升，则建立哈希索引。自适应哈希索引通过缓冲池的B+树构造，因此建立速度很快。</p>
-<p>哈希索引会根据访问的频率和模式为&#x3D;&#x3D;某些页建&#x3D;&#x3D;立哈希索引，而不是整个表。</p>
+<p>哈希索引会根据访问的频率和模式为==某些页建==立哈希索引，而不是整个表。</p>
 <p>自适应哈希索引占用InnoDB buffer poll的空间。</p>
 </li>
 <li><p>预读</p>
 <ul>
 <li><p>随机预读（已废弃）</p>
-<p>当一个区中&#x3D;&#x3D;13&#x3D;&#x3D;个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
+<p>当一个区中==13==个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
 </li>
 <li><p>线性预读</p>
 <p>基于缓冲池中页的访问模式，而不是数量。如果一个区中的N个页都被顺序的访问了，则InnoDB会读取下一个区的所有页。N的值由<code>innodb_read_ahead_threshold</code>控制，默认值56。</p>
@@ -490,7 +507,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 </li>
 <li><p>1个错误监控线程</p>
 </li>
-<li><p>4个I&#x2F;O thread（不同版本read write线程数可能不同）</p>
+<li><p>4个I/O thread（不同版本read write线程数可能不同）</p>
 <blockquote>
 <p>Insert  buffer thread</p>
 <p>Log thread</p>
@@ -500,7 +517,7 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="tru
 
 Per second averages calculated from the last 46 seconds # 过去46s内的状态
 
-FILE I&#x2F;O
+FILE I/O
 xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
 </li>
 </ol>

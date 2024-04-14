@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -266,7 +268,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20240322005830514.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -414,11 +416,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    884
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
                 
 
                 
@@ -466,12 +483,12 @@
 <span class="token keyword">func</span> <span class="token function">InitDingTalkWithSecret</span><span class="token punctuation">(</span>tokens <span class="token builtin">string</span><span class="token punctuation">,</span> secret <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">*</span>DingTalk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
    <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"github.com/blinkbean/dingtalk"</span>
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 单个机器人有单位时间内消息条数的限制，如果有需要可以初始化多个token，发消息时随机发给其中一个机器人。</span>
-    <span class="token keyword">var</span> dingToken <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"7bd675b66646ba890046c2198257576470099e1bda0770bad7dd6684fb1e0415"</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> dingToken <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"7bd675b66646ba890046c2198257576470099e1bda0770bad7dd6684fb1e0415"</span><span class="token punctuation">}</span>
     cli <span class="token operator">:=</span> dingtalk<span class="token punctuation">.</span><span class="token function">InitDingTalk</span><span class="token punctuation">(</span>dingToken<span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span>
     cli<span class="token punctuation">.</span><span class="token function">SendTextMessage</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="text类型"><a href="#text类型" class="headerlink" title="text类型"></a>text类型</h3><ul>
 <li>方法及可选参数  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 方法定义</span>
 <span class="token function">SendTextMessage</span><span class="token punctuation">(</span>content <span class="token builtin">string</span><span class="token punctuation">,</span> opt <span class="token operator">...</span>atOption<span class="token punctuation">)</span> <span class="token builtin">error</span>
@@ -486,7 +503,7 @@
 cli<span class="token punctuation">.</span><span class="token function">SendTextMessage</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">,</span> <span class="token function">WithAtAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token comment">// at指定群成员</span>
-mobiles <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"131********"</span><span class="token punctuation">&#125;</span>
+mobiles <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"131********"</span><span class="token punctuation">}</span>
 cli<span class="token punctuation">.</span><span class="token function">SendTextMessage</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">,</span> <span class="token function">WithAtMobiles</span><span class="token punctuation">(</span>mobiles<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
   <img src="https://i.loli.net/2020/07/05/LXErbH1KiRGstQ7.jpg" alt="Xnip2020-07-05_10-46-59.jpg"></li>
 </ul>
@@ -512,14 +529,14 @@ cli<span class="token punctuation">.</span><span class="token function">SendText
   <pre class="line-numbers language-go" data-language="go"><code class="language-go">cli<span class="token punctuation">.</span><span class="token function">SendMarkDownMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>Markdown进阶</p>
   <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 按行写入数组，增强markdown的可读性</span>
-msg <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span>
+msg <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span>
     <span class="token string">"### Link test"</span><span class="token punctuation">,</span>
     <span class="token string">"---"</span><span class="token punctuation">,</span>
-    <span class="token string">"- &lt;font color=#00ff00 size=6>红色文字&lt;/font>"</span><span class="token punctuation">,</span>
+    <span class="token string">"- &lt;font color=#00ff00 size=6&gt;红色文字&lt;/font&gt;"</span><span class="token punctuation">,</span>
     <span class="token string">"- content2"</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 cli<span class="token punctuation">.</span><span class="token function">SendMarkDownMessageBySlice</span><span class="token punctuation">(</span><span class="token string">"Markdown title"</span><span class="token punctuation">,</span> msg<span class="token punctuation">,</span> <span class="token function">WithAtAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-  
+
 <span class="token comment">// 字体及颜色</span>
 dm <span class="token operator">:=</span> <span class="token function">DingMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 dm<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"颜色测试"</span><span class="token punctuation">,</span> H2<span class="token punctuation">)</span>
@@ -563,23 +580,23 @@ err <span class="token operator">:=</span> dingTalkCli<span class="token punctua
 <span class="token comment">// 可选参数</span>
 <span class="token comment">// 按钮排列方向，默认水平</span>
 <span class="token function">WithCardBtnVertical</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  
+
 <span class="token comment">// 跳转按钮</span>
 <span class="token function">WithCardBtns</span><span class="token punctuation">(</span>btns <span class="token punctuation">[</span><span class="token punctuation">]</span>ActionCardMultiBtnModel<span class="token punctuation">)</span>
 
 <span class="token comment">// ActionCardMultiBtnModel</span>
-<span class="token keyword">type</span> ActionCardMultiBtnModel <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> ActionCardMultiBtnModel <span class="token keyword">struct</span> <span class="token punctuation">{</span>
     Title     <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
     ActionURL <span class="token builtin">string</span> <span class="token string">`json:"actionURL,omitempty"`</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">btns <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>ActionCardMultiBtnModel<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">btns <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>ActionCardMultiBtnModel<span class="token punctuation">{</span><span class="token punctuation">{</span>
     Title<span class="token punctuation">:</span>     <span class="token string">"test1"</span><span class="token punctuation">,</span>
     ActionURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
     Title<span class="token punctuation">:</span>     <span class="token string">"test2"</span><span class="token punctuation">,</span>
     ActionURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 cli<span class="token punctuation">.</span><span class="token function">SendActionSingleMessage</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> text<span class="token punctuation">,</span> <span class="token function">WithCardBtns</span><span class="token punctuation">(</span>btns<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
   <img src="https://i.loli.net/2020/07/05/t9GywHFSQUWCVDT.jpg" alt="Xnip2020-07-05_10-29-21.jpg"><br>  <img src="https://i.loli.net/2020/07/26/pEg7hotXZnsaJPV.jpg" alt="Xnip2020-07-26_17-14-56.jpg"></li>
 </ul>
@@ -588,38 +605,38 @@ cli<span class="token punctuation">.</span><span class="token function">SendActi
 <span class="token function">SendFeedCardMessage</span><span class="token punctuation">(</span>feedCard <span class="token punctuation">[</span><span class="token punctuation">]</span>FeedCardLinkModel<span class="token punctuation">)</span> <span class="token builtin">error</span>
 
 <span class="token comment">// FeedCardLinkModel</span>
-<span class="token keyword">type</span> FeedCardLinkModel <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> FeedCardLinkModel <span class="token keyword">struct</span> <span class="token punctuation">{</span>
     Title      <span class="token builtin">string</span> <span class="token string">`json:"title,omitempty"`</span>
     MessageURL <span class="token builtin">string</span> <span class="token string">`json:"messageURL,omitempty"`</span>
     PicURL     <span class="token builtin">string</span> <span class="token string">`json:"picURL,omitempty"`</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">links <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>FeedCardLinkModel<span class="token punctuation">&#123;</span>
-    <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>使用  <pre class="line-numbers language-go" data-language="go"><code class="language-go">links <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>FeedCardLinkModel<span class="token punctuation">{</span>
+    <span class="token punctuation">{</span>
         Title<span class="token punctuation">:</span>      <span class="token string">"FeedCard1."</span><span class="token punctuation">,</span>
         MessageURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
         PicURL<span class="token punctuation">:</span>     testImg<span class="token punctuation">,</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
         Title<span class="token punctuation">:</span>      <span class="token string">"FeedCard2"</span><span class="token punctuation">,</span>
         MessageURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
         PicURL<span class="token punctuation">:</span>     testImg<span class="token punctuation">,</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
         Title<span class="token punctuation">:</span>      <span class="token string">"FeedCard3"</span><span class="token punctuation">,</span>
         MessageURL<span class="token punctuation">:</span> testUrl<span class="token punctuation">,</span>
         PicURL<span class="token punctuation">:</span>     testImg<span class="token punctuation">,</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 cli<span class="token punctuation">.</span><span class="token function">SendFeedCardMessage</span><span class="token punctuation">(</span>links<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
   <img src="https://i.loli.net/2020/07/05/F5WDLqyJ4Yzfj6A.jpg" alt="Xnip2020-07-05_10-30-02.jpg"></li>
 </ul>
 <h3 id="OutGoing"><a href="#OutGoing" class="headerlink" title="OutGoing"></a>OutGoing</h3><ul>
 <li><p>消息格式</p>
-  <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"atUsers"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-        <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"dingtalkId"</span><span class="token operator">:</span><span class="token string">"$:LWCP_v1:$1h0bmSzcLCHncx0lCt3Bb/UVz7xv/8vh*"</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token property">"chatbotUserId"</span><span class="token operator">:</span><span class="token string">"$:LWCP_v1:$1h0bmSzcLCHncx0lCt3Bb/UVz7x/8vh*"</span><span class="token punctuation">,</span>
     <span class="token property">"conversationId"</span><span class="token operator">:</span><span class="token string">"cidkkCwvtlh1L0RmFuhmashi*=="</span><span class="token punctuation">,</span>
     <span class="token property">"conversationTitle"</span><span class="token operator">:</span><span class="token string">"项目群"</span><span class="token punctuation">,</span>
@@ -634,23 +651,23 @@ cli<span class="token punctuation">.</span><span class="token function">SendFeed
     <span class="token property">"senderNick"</span><span class="token operator">:</span><span class="token string">"blinkbean"</span><span class="token punctuation">,</span>
     <span class="token property">"sessionWebhook"</span><span class="token operator">:</span><span class="token string">"https://oapi.dingtalk.com/robot/sendBySession?session=6d69b333f243db32d42c11sda9de620*"</span><span class="token punctuation">,</span>
     <span class="token property">"sessionWebhookExpiredTime"</span><span class="token operator">:</span><span class="token number">1595237839030</span><span class="token punctuation">,</span>
-    <span class="token property">"text"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+    <span class="token property">"text"</span><span class="token operator">:</span><span class="token punctuation">{</span>
         <span class="token property">"content"</span><span class="token operator">:</span><span class="token string">" outgoing"</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>Usage</p>
-  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">OutGoing</span><span class="token punctuation">(</span>ctx <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    cli <span class="token operator">:=</span> dingtalk<span class="token punctuation">.</span><span class="token function">InitDingTalk</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">&#123;</span><span class="token string">"***"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span>
+  <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">OutGoing</span><span class="token punctuation">(</span>ctx <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cli <span class="token operator">:=</span> dingtalk<span class="token punctuation">.</span><span class="token function">InitDingTalk</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"***"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span>
     msg<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> cli<span class="token punctuation">.</span><span class="token function">OutGoing</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span>Request<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
     <span class="token comment">// 处理content</span>
     res <span class="token operator">:=</span> <span class="token function">doSomeThing</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>Content<span class="token punctuation">)</span>
-  
+
     textMsg <span class="token operator">:=</span> dingtalk<span class="token punctuation">.</span><span class="token function">NewTextMsg</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
     ctx<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"respData"</span><span class="token punctuation">,</span> textMsg<span class="token punctuation">)</span>
     ctx<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span>Writer<span class="token punctuation">.</span><span class="token function">Status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
     <span class="token keyword">return</span> 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 
                 

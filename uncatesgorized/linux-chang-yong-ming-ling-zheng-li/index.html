@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -401,11 +403,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    340
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -422,20 +439,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="开进程并发下载"><a href="#开进程并发下载" class="headerlink" title="开进程并发下载"></a>开进程并发下载</h4><pre class="line-numbers language-none"><code class="language-none">for ((s&#x3D;1987;s&lt;2019;s&#x3D;s+1))
+                <h4 id="开进程并发下载"><a href="#开进程并发下载" class="headerlink" title="开进程并发下载"></a>开进程并发下载</h4><pre class="line-numbers language-none"><code class="language-none">for ((s=1987;s&lt;2019;s=s+1))
 do
-for ((m&#x3D;1;m&lt;13;m&#x3D;m+1))
+for ((m=1;m&lt;13;m=m+1))
 do
-aa&#x3D;($s&#39;_&#39;$m)
+aa=($s'_'$m)
 echo $aa
-wget https:&#x2F;&#x2F;transtats.bts.gov&#x2F;PREZIP&#x2F;On_Time_Reporting_Carrier_On_Time_Performance_1987_present_$aa.zip &amp;
+wget https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_$aa.zip &amp;
 done
 done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="远程复制"><a href="#远程复制" class="headerlink" title="远程复制"></a>远程复制</h4><pre class="line-numbers language-none"><code class="language-none">从前面的文件夹复制到后面的文件夹
 scp -r remote_username@remote_ip:remote_folder local_folder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h4 id="查看外网ip"><a href="#查看外网ip" class="headerlink" title="查看外网ip"></a>查看外网ip</h4><pre class="line-numbers language-none"><code class="language-none">curl -L tool.lu&#x2F;ip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h4><pre class="line-numbers language-none"><code class="language-none">du -h --max-depth&#x3D;0 .&#x2F;2017_credits.txt
+<h4 id="查看外网ip"><a href="#查看外网ip" class="headerlink" title="查看外网ip"></a>查看外网ip</h4><pre class="line-numbers language-none"><code class="language-none">curl -L tool.lu/ip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h4><pre class="line-numbers language-none"><code class="language-none">du -h --max-depth=0 ./2017_credits.txt
 
 由小到大
 du -sh * | sort -n
@@ -443,31 +460,31 @@ du -sh * | sort -n
 du -sh * | sort -nr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="查看ip"><a href="#查看ip" class="headerlink" title="查看ip"></a>查看ip</h4><pre class="line-numbers language-none"><code class="language-none">ip addr show<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="看日志"><a href="#看日志" class="headerlink" title="看日志"></a>看日志</h4><pre class="line-numbers language-none"><code class="language-none">看线上日志要用less&#x2F;more，千万别用vi，vi会一次把文件全读入，内存耗光<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="看日志"><a href="#看日志" class="headerlink" title="看日志"></a>看日志</h4><pre class="line-numbers language-none"><code class="language-none">看线上日志要用less/more，千万别用vi，vi会一次把文件全读入，内存耗光<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="远程文件弄到本地文件夹"><a href="#远程文件弄到本地文件夹" class="headerlink" title="远程文件弄到本地文件夹"></a>远程文件弄到本地文件夹</h4><pre class="line-numbers language-none"><code class="language-none">shutil.copy(remote_file, local_file_dir)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="echo导出select数据"><a href="#echo导出select数据" class="headerlink" title="echo导出select数据"></a>echo导出select数据</h4><pre class="line-numbers language-none"><code class="language-none">echo &quot;select * from miveshow_money.user_credits_history limit 1&quot; | mysql -umiveshow -h10.0.110.115 -pmiveshow123 -Dmiveshow &gt; o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="echo导出select数据"><a href="#echo导出select数据" class="headerlink" title="echo导出select数据"></a>echo导出select数据</h4><pre class="line-numbers language-none"><code class="language-none">echo "select * from miveshow_money.user_credits_history limit 1" | mysql -umiveshow -h10.0.110.115 -pmiveshow123 -Dmiveshow &gt; o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="统计文件和文件夹的总量"><a href="#统计文件和文件夹的总量" class="headerlink" title="统计文件和文件夹的总量"></a>统计文件和文件夹的总量</h4><pre class="line-numbers language-none"><code class="language-none">ls | wc -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="统计文件个数"><a href="#统计文件个数" class="headerlink" title="统计文件个数"></a>统计文件个数</h4><pre class="line-numbers language-none"><code class="language-none">ls -l |grep &quot;^-&quot;|wc -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="统计文件个数"><a href="#统计文件个数" class="headerlink" title="统计文件个数"></a>统计文件个数</h4><pre class="line-numbers language-none"><code class="language-none">ls -l |grep "^-"|wc -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="统计当前目录下的所有目录"><a href="#统计当前目录下的所有目录" class="headerlink" title="统计当前目录下的所有目录"></a>统计当前目录下的所有目录</h4><pre class="line-numbers language-none"><code class="language-none">文件以-开头
 目录以d开头
 
-1、ls -l | grep &quot;^d&quot;
+1、ls -l | grep "^d"
 
-目录以&#x2F;结尾
+目录以/结尾
 
-2、ls -F | grep &quot;&#x2F;$&quot;
+2、ls -F | grep "/$"
 
 配合查看文件数量的命令查看目录数量
 
-ls -l | grep &quot;^d&quot; | wc -l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ls -l | grep "^d" | wc -l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="排序、去重"><a href="#排序、去重" class="headerlink" title="排序、去重"></a>排序、去重</h4><pre class="line-numbers language-none"><code class="language-none">sort -n test.txt | uniq<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="grep多个关键字-or"><a href="#grep多个关键字-or" class="headerlink" title="grep多个关键字(or)"></a>grep多个关键字(or)</h4><pre class="line-numbers language-none"><code class="language-none">grep file.txt -E &quot;aaa|bbb|ccc&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="grep多个关键字-or"><a href="#grep多个关键字-or" class="headerlink" title="grep多个关键字(or)"></a>grep多个关键字(or)</h4><pre class="line-numbers language-none"><code class="language-none">grep file.txt -E "aaa|bbb|ccc"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="删除多行"><a href="#删除多行" class="headerlink" title="删除多行"></a>删除多行</h4><p>删除多行，闭区间[1,999]</p>
 <pre class="line-numbers language-none"><code class="language-none">vi file.txt

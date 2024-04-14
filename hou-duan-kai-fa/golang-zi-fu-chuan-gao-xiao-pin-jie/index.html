@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-05
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
                 
 
                 
@@ -436,110 +453,110 @@
 <p>一个例子<br>对于任何功能、性能、方法的研究，没有比例子更有说服力的啦。在这里，我们使用一个例子，来演示不同字符串的拼接方式，以及对应的性能分析。这个例子如下：</p>
 <p>昵称:飞雪无情<br>博客:<a target="_blank" rel="noopener" href="http://www.flysnow.org/">http://www.flysnow.org/</a><br>微信公众号:flysnow_org<br>在这个例子中，通过字符串拼接的方式，拼接出如上的内容，这里特别强调，在这个例子中，换行也是字符串拼接的一部分，因为我们要严格拼接出如上的内容。</p>
 <p>+号拼接<br>这种拼接最简单，也最容易被我们使用，因为它是不限编程语言的，比如Go语言有，Java也有，它们是+号运算符，在运行时计算的。现在演示下这种拼接的代码，虽然比较简单。</p>
-<pre class="line-numbers language-none"><code class="language-none">func StringPlus() string&#123;
+<pre class="line-numbers language-none"><code class="language-none">func StringPlus() string{
     var s string
-    s+&#x3D;&quot;昵称&quot;+&quot;:&quot;+&quot;飞雪无情&quot;+&quot;\n&quot;
-    s+&#x3D;&quot;博客&quot;+&quot;:&quot;+&quot;http:&#x2F;&#x2F;www.flysnow.org&#x2F;&quot;+&quot;\n&quot;
-    s+&#x3D;&quot;微信公众号&quot;+&quot;:&quot;+&quot;flysnow_org&quot;
+    s+="昵称"+":"+"飞雪无情"+"\n"
+    s+="博客"+":"+"http://www.flysnow.org/"+"\n"
+    s+="微信公众号"+":"+"flysnow_org"
     return s
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们可以自己写个用例测试下，可以打印出和我们例子中一样的内容。那么这种最常见的字符串拼接的方式性能怎么样的呢，我们测试下：</p>
-<pre class="line-numbers language-none"><code class="language-none">func BenchmarkStringPlus(b *testing.B) &#123;
-    for i:&#x3D;0;i&lt;b.N;i++&#123;
+<pre class="line-numbers language-none"><code class="language-none">func BenchmarkStringPlus(b *testing.B) {
+    for i:=0;i&lt;b.N;i++{
         StringPlus()
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>运行go test -bench&#x3D;. -benchmem 查看性能输出如下：</p>
-<p>BenchmarkStringPlus-8   20000000    108 ns&#x2F;op   144 B&#x2F;op    2 allocs&#x2F;op<br>每次操作需要108ns,进行2次内存分配，分配114字节的内存。</p>
+<p>运行go test -bench=. -benchmem 查看性能输出如下：</p>
+<p>BenchmarkStringPlus-8   20000000    108 ns/op   144 B/op    2 allocs/op<br>每次操作需要108ns,进行2次内存分配，分配114字节的内存。</p>
 <p>fmt 拼接<br>这种拼接，借助于fmt.Sprint系列函数进行拼接，然后返回拼接的字符串。</p>
-<pre class="line-numbers language-none"><code class="language-none">func StringFmt() string&#123;
-    return fmt.Sprint(&quot;昵称&quot;,&quot;:&quot;,&quot;飞雪无情&quot;,&quot;\n&quot;,&quot;博客&quot;,&quot;:&quot;,&quot;http:&#x2F;&#x2F;www.flysnow.org&#x2F;&quot;,&quot;\n&quot;,&quot;微信公众号&quot;,&quot;:&quot;,&quot;flysnow_org&quot;)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">func StringFmt() string{
+    return fmt.Sprint("昵称",":","飞雪无情","\n","博客",":","http://www.flysnow.org/","\n","微信公众号",":","flysnow_org")
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>为了演示，代码没有换行，可能在手机上影响阅读体验，见谅。它的性能我们也测试一下看看效果。</p>
-<pre class="line-numbers language-none"><code class="language-none">func BenchmarkStringFmt(b *testing.B) &#123;
-    for i:&#x3D;0;i&lt;b.N;i++&#123;
+<pre class="line-numbers language-none"><code class="language-none">func BenchmarkStringFmt(b *testing.B) {
+    for i:=0;i&lt;b.N;i++{
         StringFmt()
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行查看测试结果：</p>
-<p>BenchmarkStringFmt-8    5000000     385 ns&#x2F;op   80 B&#x2F;op     1 allocs&#x2F;op<br>虽然每次操作内存分配只有1次，分配80字节也不多，但是每次操作耗时太长，性能远没有+号操作快。</p>
+<p>BenchmarkStringFmt-8    5000000     385 ns/op   80 B/op     1 allocs/op<br>虽然每次操作内存分配只有1次，分配80字节也不多，但是每次操作耗时太长，性能远没有+号操作快。</p>
 <p>Join 拼接<br>这个是利用strings.Join函数进行拼接，接受一个字符串数组，转换为一个拼接好的字符串。</p>
-<pre class="line-numbers language-none"><code class="language-none">func StringJoin() string&#123;
-    s:&#x3D;[]string&#123;&quot;昵称&quot;,&quot;:&quot;,&quot;飞雪无情&quot;,&quot;\n&quot;,&quot;博客&quot;,&quot;:&quot;,&quot;http:&#x2F;&#x2F;www.flysnow.org&#x2F;&quot;,&quot;\n&quot;,&quot;微信公众号&quot;,&quot;:&quot;,&quot;flysnow_org&quot;&#125;
-    return strings.Join(s,&quot;&quot;)
-&#125;
+<pre class="line-numbers language-none"><code class="language-none">func StringJoin() string{
+    s:=[]string{"昵称",":","飞雪无情","\n","博客",":","http://www.flysnow.org/","\n","微信公众号",":","flysnow_org"}
+    return strings.Join(s,"")
+}
 
-func BenchmarkStringJoin(b *testing.B) &#123;
-    for i:&#x3D;0;i&lt;b.N;i++&#123;
+func BenchmarkStringJoin(b *testing.B) {
+    for i:=0;i&lt;b.N;i++{
         StringJoin()
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>为了方便，把性能测试的代码放一起了，现在看看性能测试的效果。</p>
-<p>BenchmarkStringJoin-8   10000000    177 ns&#x2F;op   160 B&#x2F;op    2 allocs&#x2F;op<br>整体和+操作相差不了太多，大概低0.5倍的样子。</p>
+<p>BenchmarkStringJoin-8   10000000    177 ns/op   160 B/op    2 allocs/op<br>整体和+操作相差不了太多，大概低0.5倍的样子。</p>
 <p><a target="_blank" rel="noopener" href="http://www.flysnow.org/2018/10/28/golang-concat-strings-performance-analysis.html">http://www.flysnow.org/2018/10/28/golang-concat-strings-performance-analysis.html</a></p>
 <p>Go语言字符串高效拼接（一） | 飞雪无情的博客</p>
 <p>buffer 拼接<br>这种被用的也很多，使用的是bytes.Buffer进行的字符串拼接，它是非常灵活的一个结构体，不止可以拼接字符串，还是可以byte,rune等，并且实现了io.Writer接口，写入也非常方便。</p>
-<pre class="line-numbers language-none"><code class="language-none">func StringBuffer() string &#123;
+<pre class="line-numbers language-none"><code class="language-none">func StringBuffer() string {
     var b bytes.Buffer
-    b.WriteString(&quot;昵称&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;飞雪无情&quot;)
-    b.WriteString(&quot;\n&quot;)
-    b.WriteString(&quot;博客&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;http:&#x2F;&#x2F;www.flysnow.org&#x2F;&quot;)
-    b.WriteString(&quot;\n&quot;)
-    b.WriteString(&quot;微信公众号&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;flysnow_org&quot;)
+    b.WriteString("昵称")
+    b.WriteString(":")
+    b.WriteString("飞雪无情")
+    b.WriteString("\n")
+    b.WriteString("博客")
+    b.WriteString(":")
+    b.WriteString("http://www.flysnow.org/")
+    b.WriteString("\n")
+    b.WriteString("微信公众号")
+    b.WriteString(":")
+    b.WriteString("flysnow_org")
     return b.String()
-&#125;
+}
 
-func BenchmarkStringBuffer(b *testing.B) &#123;
-    for i:&#x3D;0;i&lt;b.N;i++&#123;
+func BenchmarkStringBuffer(b *testing.B) {
+    for i:=0;i&lt;b.N;i++{
         StringBuffer()
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>看看他的性能，运行输出即可：</p>
-<p>BenchmarkStringBuffer-8     5000000     291 ns&#x2F;op   336 B&#x2F;op    3 allocs&#x2F;op<br>好像并不是太好,和最差的fmt拼接差不多，和+号，Join拼接差好远，内存分配也比较多。每次操作耗时也很长。</p>
+<p>BenchmarkStringBuffer-8     5000000     291 ns/op   336 B/op    3 allocs/op<br>好像并不是太好,和最差的fmt拼接差不多，和+号，Join拼接差好远，内存分配也比较多。每次操作耗时也很长。</p>
 <p>builder 拼接<br>为了改进buffer拼接的性能，从go 1.10 版本开始，增加了一个builder类型，用于提升字符串拼接的性能。它的使用和buffer几乎一样。</p>
-<pre class="line-numbers language-none"><code class="language-none">func StringBuilder() string &#123;
+<pre class="line-numbers language-none"><code class="language-none">func StringBuilder() string {
     var b strings.Builder
-    b.WriteString(&quot;昵称&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;飞雪无情&quot;)
-    b.WriteString(&quot;\n&quot;)
-    b.WriteString(&quot;博客&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;http:&#x2F;&#x2F;www.flysnow.org&#x2F;&quot;)
-    b.WriteString(&quot;\n&quot;)
-    b.WriteString(&quot;微信公众号&quot;)
-    b.WriteString(&quot;:&quot;)
-    b.WriteString(&quot;flysnow_org&quot;)
+    b.WriteString("昵称")
+    b.WriteString(":")
+    b.WriteString("飞雪无情")
+    b.WriteString("\n")
+    b.WriteString("博客")
+    b.WriteString(":")
+    b.WriteString("http://www.flysnow.org/")
+    b.WriteString("\n")
+    b.WriteString("微信公众号")
+    b.WriteString(":")
+    b.WriteString("flysnow_org")
     return b.String()
-&#125;
+}
 
-func BenchmarkStringBuilder(b *testing.B) &#123;
-    for i:&#x3D;0;i&lt;b.N;i++&#123;
+func BenchmarkStringBuilder(b *testing.B) {
+    for i:=0;i&lt;b.N;i++{
         StringBuilder()
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>官方都说比buffer性能好了，我们看看性能测试的结果。</p>
-<p>BenchmarkStringBuilder-8    10000000    170 ns&#x2F;op   232 B&#x2F;op    4 allocs&#x2F;op<br>的确提升了，提升了一倍，虽然每次分配的内存次数有点多，但是每次分配的内存大小比buffer要少。</p>
+<p>BenchmarkStringBuilder-8    10000000    170 ns/op   232 B/op    4 allocs/op<br>的确提升了，提升了一倍，虽然每次分配的内存次数有点多，但是每次分配的内存大小比buffer要少。</p>
 <p>性能对比<br>以上就是常用的字符串拼接的方式，现在我们把这些测试结果，汇总到一起，对比下看看,因为Benchmark的测试，对于性能只显示，我把测试的时间设置为3s（秒），把时间拉长便于对比测试，同时生成了cpu profile文件，用于性能分析。</p>
-<p>运行go test -bench&#x3D;. -benchmem -benchtime&#x3D;3s -cpuprofile&#x3D;profile.out得到如下测试结果：</p>
-<pre class="line-numbers language-none"><code class="language-none">StringPlus-8    50000000    112 ns&#x2F;op   144 B&#x2F;op    2 allocs&#x2F;op
-StringFmt-8     20000000    344 ns&#x2F;op   80 B&#x2F;op     1 allocs&#x2F;op
-StringJoin-8    30000000    171 ns&#x2F;op   160 B&#x2F;op    2 allocs&#x2F;op
-StringBuffer-8  20000000    302 ns&#x2F;op   336 B&#x2F;op    3 allocs&#x2F;op
-StringBuilder-8 30000000    171 ns&#x2F;op   232 B&#x2F;op    4 allocs&#x2F;op<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行go test -bench=. -benchmem -benchtime=3s -cpuprofile=profile.out得到如下测试结果：</p>
+<pre class="line-numbers language-none"><code class="language-none">StringPlus-8    50000000    112 ns/op   144 B/op    2 allocs/op
+StringFmt-8     20000000    344 ns/op   80 B/op     1 allocs/op
+StringJoin-8    30000000    171 ns/op   160 B/op    2 allocs/op
+StringBuffer-8  20000000    302 ns/op   336 B/op    3 allocs/op
+StringBuilder-8 30000000    171 ns/op   232 B/op    4 allocs/op<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们通过go tool pprof profile.out 看下我们输出的cpu profile信息。这里主要使用top命令。</p>
 <pre class="line-numbers language-none"><code class="language-none">Showing top 15 nodes out of 89
@@ -683,8 +700,7 @@ StringBuilder-8 30000000    171 ns&#x2F;op   232 B&#x2F;op    4 allocs&#x2F;op<s
                 <a href="/xiao-lu-gong-ju/golang-san-xing-dai-ma-fa-song-ding-ding-ji-qi-ren-xiao-xi/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Golang-三行代码发送钉钉机器人消息">
+                        <img src="/Image/image-20240322005830514.png" class="responsive-img" alt="Golang-三行代码发送钉钉机器人消息">
                         
                         <span class="card-title">Golang-三行代码发送钉钉机器人消息</span>
                     </div>

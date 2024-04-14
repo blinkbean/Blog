@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-16
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    884
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
                 
 
                 
@@ -434,18 +451,18 @@
                 <h1 id="Golang-Interface-应用"><a href="#Golang-Interface-应用" class="headerlink" title="Golang Interface 应用"></a>Golang Interface 应用</h1><h3 id="Interface是什么？"><a href="#Interface是什么？" class="headerlink" title="Interface是什么？"></a>Interface是什么？</h3><p>在Golang中，interface是一组method的集合，duck-type programing的一种体现。不关心属性（数据），只关心行为（方法）。可以认为interface是一种协议，一种为了双方交流而做出的约定。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// The error built-in interface type is the conventional interface for</span>
 <span class="token comment">// representing an error condition, with the nil value representing no error.</span>
-<span class="token keyword">type</span> <span class="token builtin">error</span> <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> <span class="token builtin">error</span> <span class="token keyword">interface</span> <span class="token punctuation">{</span>
 	<span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// ----------------</span>
 <span class="token comment">// 定义自己的err类型</span>
-<span class="token keyword">type</span> MyErr <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">type</span> MyErr <span class="token keyword">struct</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
 <span class="token comment">// 实现error接口</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>MyErr<span class="token punctuation">)</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>MyErr<span class="token punctuation">)</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
 	<span class="token keyword">return</span> <span class="token string">"my error"</span>	
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -457,7 +474,7 @@
 <h4 id="writing-generic-algorithm"><a href="#writing-generic-algorithm" class="headerlink" title="writing generic algorithm"></a>writing generic algorithm</h4><p>golang的泛型最早1.17才提供版本支持。用interface实现一下行不行呀？</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> sort
 
-<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Interface <span class="token keyword">interface</span> <span class="token punctuation">{</span>
     <span class="token comment">// Len is the number of elements in the collection.</span>
     <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>
     <span class="token comment">// Less reports whether the element with</span>
@@ -465,50 +482,50 @@
     <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span>
     <span class="token comment">// Swap swaps the elements with indexes i and j.</span>
     <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// ------------------</span>
 
-<span class="token keyword">type</span> BestLanguage <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> BestLanguage <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	Name  <span class="token builtin">string</span>
 	Score <span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>b BestLanguage<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b BestLanguage<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
 	<span class="token keyword">return</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%s:%d"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> b<span class="token punctuation">.</span>Score<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">type</span> Languages <span class="token punctuation">[</span><span class="token punctuation">]</span>BestLanguage
 
 <span class="token comment">// 实现了sort的Interface，不知道是怎么排序的，但拥有了排序的能力</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>Languages<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>Languages<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Score <span class="token operator">></span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Score
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Less</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>Score <span class="token operator">&gt;</span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Score
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>l Languages<span class="token punctuation">)</span> <span class="token function">Swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> l<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> l<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	languages <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>BestLanguage<span class="token punctuation">&#123;</span>
-		<span class="token punctuation">&#123;</span><span class="token string">"Chinese"</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-		<span class="token punctuation">&#123;</span><span class="token string">"English"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-		<span class="token punctuation">&#123;</span><span class="token string">"Japanese"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-	<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	languages <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>BestLanguage<span class="token punctuation">{</span>
+		<span class="token punctuation">{</span><span class="token string">"Chinese"</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token punctuation">{</span><span class="token string">"English"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token punctuation">{</span><span class="token string">"Japanese"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
 
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span>
 	sort<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token function">Languages</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span><span class="token punctuation">)</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>languages<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Return concrete types, receive interfaces as parameter.</span>
-<span class="token keyword">func</span> <span class="token function">ConvertInterfaceToString</span><span class="token punctuation">(</span>v <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">ConvertInterfaceToString</span><span class="token punctuation">(</span>v <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
 	<span class="token keyword">var</span> vstr <span class="token builtin">string</span>
-	<span class="token keyword">switch</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">switch</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	<span class="token keyword">case</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
 		vstr <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 	<span class="token keyword">case</span> <span class="token builtin">int32</span><span class="token punctuation">:</span>
@@ -520,78 +537,78 @@
 	<span class="token keyword">case</span> <span class="token builtin">string</span><span class="token punctuation">:</span>
 		vstr <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
 	<span class="token keyword">default</span><span class="token punctuation">:</span>
-	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
 	<span class="token keyword">return</span> vstr
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
 <h4 id="hiding-implement-detail"><a href="#hiding-implement-detail" class="headerlink" title="hiding implement detail"></a>hiding implement detail</h4><p>三个函数返回的具体 struct （都实现了 Context interface），但是对于使用者来说是完全无感知的。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Context <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Context <span class="token keyword">interface</span> <span class="token punctuation">{</span>
 	<span class="token function">Deadline</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">,</span> ok <span class="token builtin">bool</span><span class="token punctuation">)</span>
-	<span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
 	<span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
-	<span class="token function">Value</span><span class="token punctuation">(</span>key <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+	<span class="token function">Value</span><span class="token punctuation">(</span>key <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// ------------------</span>
 
-<span class="token keyword">type</span> cancelCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> cancelCtx <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	Context
 	mu       sync<span class="token punctuation">.</span>Mutex
-	done     <span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-	children <span class="token keyword">map</span><span class="token punctuation">[</span>canceler<span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	done     <span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+	children <span class="token keyword">map</span><span class="token punctuation">[</span>canceler<span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
 	err      <span class="token builtin">error</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">func</span> <span class="token function">WithCancel</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">)</span> <span class="token punctuation">(</span>ctx Context<span class="token punctuation">,</span> cancel CancelFunc<span class="token punctuation">)</span>    <span class="token comment">//返回 cancelCtx</span>
 
-<span class="token keyword">type</span> timerCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> timerCtx <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	cancelCtx
 	timer <span class="token operator">*</span>time<span class="token punctuation">.</span>Timer
 	deadline time<span class="token punctuation">.</span>Time
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">func</span> <span class="token function">WithDeadline</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">)</span> <span class="token punctuation">(</span>Context<span class="token punctuation">,</span> CancelFunc<span class="token punctuation">)</span> <span class="token comment">//返回 timerCtx</span>
 
-<span class="token keyword">type</span> valueCtx <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> valueCtx <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	Context
-	key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token function">WithValue</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> Context    <span class="token comment">//返回 valueCtx</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">WithValue</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> Context    <span class="token comment">//返回 valueCtx</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="providing-interception-points"><a href="#providing-interception-points" class="headerlink" title="providing interception points"></a>providing interception points</h4><p>实现RoundTripper接口，可以在http请求前后写入自己的逻辑，如apm，jaeger的打点。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> http
 
-<span class="token keyword">type</span> RoundTripper <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> RoundTripper <span class="token keyword">interface</span> <span class="token punctuation">{</span>
 	<span class="token function">RoundTrip</span><span class="token punctuation">(</span><span class="token operator">*</span>Request<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>Response<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">WrapClient</span><span class="token punctuation">(</span>c <span class="token operator">*</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">)</span> <span class="token operator">*</span>http<span class="token punctuation">.</span>Client <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> c <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">WrapClient</span><span class="token punctuation">(</span>c <span class="token operator">*</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">)</span> <span class="token operator">*</span>http<span class="token punctuation">.</span>Client <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> c <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 		c <span class="token operator">=</span> http<span class="token punctuation">.</span>DefaultClient
-	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
 	copied <span class="token operator">:=</span> <span class="token operator">*</span>c
 	copied<span class="token punctuation">.</span>Transport <span class="token operator">=</span> <span class="token function">wrapRoundTripper</span><span class="token punctuation">(</span>copied<span class="token punctuation">.</span>Transport<span class="token punctuation">)</span>
 	<span class="token keyword">return</span> <span class="token operator">&amp;</span>copied
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">wrapRoundTripper</span><span class="token punctuation">(</span>r http<span class="token punctuation">.</span>RoundTripper<span class="token punctuation">)</span> http<span class="token punctuation">.</span>RoundTripper <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> r <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">wrapRoundTripper</span><span class="token punctuation">(</span>r http<span class="token punctuation">.</span>RoundTripper<span class="token punctuation">)</span> http<span class="token punctuation">.</span>RoundTripper <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> r <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
 		r <span class="token operator">=</span> http<span class="token punctuation">.</span>DefaultTransport
-	<span class="token punctuation">&#125;</span>
-	rt <span class="token operator">:=</span> <span class="token operator">&amp;</span>roundTripper<span class="token punctuation">&#123;</span>r<span class="token punctuation">:</span> r<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">}</span>
+	rt <span class="token operator">:=</span> <span class="token operator">&amp;</span>roundTripper<span class="token punctuation">{</span>r<span class="token punctuation">:</span> r<span class="token punctuation">}</span>
 	<span class="token keyword">return</span> rt
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> roundTripper <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> roundTripper <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	r http<span class="token punctuation">.</span>RoundTripper
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>roundTripper<span class="token punctuation">)</span> <span class="token function">RoundTrip</span><span class="token punctuation">(</span>req <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>http<span class="token punctuation">.</span>Response<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>roundTripper<span class="token punctuation">)</span> <span class="token function">RoundTrip</span><span class="token punctuation">(</span>req <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>http<span class="token punctuation">.</span>Response<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// do something</span>
   resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> r<span class="token punctuation">.</span>r<span class="token punctuation">.</span><span class="token function">RoundTrip</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span> <span class="token comment">// real request</span>
   <span class="token comment">// do something</span>
   <span class="token keyword">return</span> resp<span class="token punctuation">,</span> err
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -602,68 +619,68 @@
 <li>❎表示编译不通过，因为对象没有声明接口的全部方法。</li>
 <li>指针类型没有声明全部，但是能编译通过，因为Go自己做了一些转换。</li>
 </ol>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Animal <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Animal <span class="token keyword">interface</span> <span class="token punctuation">{</span>
 	<span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span>
 	<span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 全部值</span>
-<span class="token keyword">type</span> Dog <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Dog <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	food <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"dog like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 全部指针</span>
-<span class="token keyword">type</span> Cat <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Cat <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	food <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Cat<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"cat like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 有值、有指针</span>
-<span class="token keyword">type</span> Fish <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">type</span> Fish <span class="token keyword">struct</span> <span class="token punctuation">{</span>
 	food <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Fish<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>Fish<span class="token punctuation">)</span> <span class="token function">Eat</span><span class="token punctuation">(</span>food <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	d<span class="token punctuation">.</span>food <span class="token operator">=</span> food
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d Fish<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Fish<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"fish like "</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span>food<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> Dog<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> <span class="token operator">&amp;</span>Dog<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> Dog<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> <span class="token operator">&amp;</span>Dog<span class="token punctuation">{</span><span class="token punctuation">}</span>
 	<span class="token keyword">var</span> dog Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span>
 	dog<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"bone"</span><span class="token punctuation">)</span>
 	dog<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token comment">// dog like    # 没吃上，赋值失败</span>
 
-	❎ <span class="token keyword">var</span> cat Animal <span class="token operator">=</span> Cat<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-	<span class="token comment">//var cat Animal = &amp;Cat&#123;&#125;</span>
+	❎ <span class="token keyword">var</span> cat Animal <span class="token operator">=</span> Cat<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token comment">//var cat Animal = &amp;Cat{}</span>
 	<span class="token keyword">var</span> cat Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Cat<span class="token punctuation">)</span>
 	cat<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"fish"</span><span class="token punctuation">)</span>
 	cat<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token comment">// cat like  fish</span>
 
-	❎ <span class="token keyword">var</span> fish Animal <span class="token operator">=</span> Fish<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	❎ <span class="token keyword">var</span> fish Animal <span class="token operator">=</span> Fish<span class="token punctuation">{</span><span class="token punctuation">}</span>
 	<span class="token keyword">var</span> fish Animal <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>Fish<span class="token punctuation">)</span>
 	fish<span class="token punctuation">.</span><span class="token function">Eat</span><span class="token punctuation">(</span><span class="token string">"small fish"</span><span class="token punctuation">)</span>
 	fish<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token comment">// fish like  small fish</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="http://legendtkl.com/2017/06/12/understanding-golang-interface/">http://legendtkl.com/2017/06/12/understanding-golang-interface/</a></p>
 

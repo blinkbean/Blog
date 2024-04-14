@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-11
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    175
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 
                 
@@ -431,56 +448,56 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。</p>
+                <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’&nbsp;的字符串 s ，判断字符串是否有效。</p>
 <p>有效字符串需满足：</p>
 <p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>滑动窗口</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">type stack struct &#123;
+<pre class="line-numbers language-none"><code class="language-none">type stack struct {
 	arr []int32
-&#125;
+}
 
-func (s *stack) push(c int32) &#123;
-	s.arr &#x3D; append(s.arr, c)
-&#125;
-func (s *stack) pop() int32 &#123;
+func (s *stack) push(c int32) {
+	s.arr = append(s.arr, c)
+}
+func (s *stack) pop() int32 {
 	var t int32
-	if !s.isEmpty() &#123;
-		t &#x3D; s.arr[len(s.arr)-1]
-		s.arr &#x3D; s.arr[:len(s.arr)-1]
-	&#125;
+	if !s.isEmpty() {
+		t = s.arr[len(s.arr)-1]
+		s.arr = s.arr[:len(s.arr)-1]
+	}
 	return t
-&#125;
-func (s *stack) isEmpty() bool &#123;
-	if len(s.arr) &#x3D;&#x3D; 0 &#123;
+}
+func (s *stack) isEmpty() bool {
+	if len(s.arr) == 0 {
 		return true
-	&#125;
+	}
 	return false
-&#125;
+}
 
-func isValid(s string) bool &#123;
-	m :&#x3D; map[int32]int32&#123;
-		&#39;)&#39;: &#39;(&#39;,
-		&#39;]&#39;: &#39;[&#39;,
-		&#39;&#125;&#39;: &#39;&#123;&#39;,
-	&#125;
-	sta :&#x3D; stack&#123;arr: make([]int32, 0, 0)&#125;
-	for _, v :&#x3D; range s &#123;
-		if mv, ok :&#x3D; m[v]; ok &#123;
-			if sta.pop() !&#x3D; mv &#123;
+func isValid(s string) bool {
+	m := map[int32]int32{
+		')': '(',
+		']': '[',
+		'}': '{',
+	}
+	sta := stack{arr: make([]int32, 0, 0)}
+	for _, v := range s {
+		if mv, ok := m[v]; ok {
+			if sta.pop() != mv {
 				return false
-			&#125;
-		&#125; else &#123;
+			}
+		} else {
 			sta.push(v)
-		&#125;
-	&#125;
-	if sta.isEmpty() &#123;
+		}
+	}
+	if sta.isEmpty() {
 		return true
-	&#125;
+	}
 	return false
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

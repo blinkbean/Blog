@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    3 分
+                </div>
                 
 
                 
@@ -444,7 +461,7 @@
 <blockquote>
 <ul>
 <li>没有线程对该结果集中的任何行数据使用排他锁或共享锁，否则申请会阻塞。</li>
-<li>for update仅适用于InnoDB，且必须在事务块(BEGIN&#x2F;COMMIT)中才能生效</li>
+<li>for update仅适用于InnoDB，且必须在事务块(BEGIN/COMMIT)中才能生效</li>
 <li>MySQL会对查询结果集中每行数据都添加排他锁，其他线程对该记录的更新与删除操作都会阻塞。</li>
 <li>排他锁包含行锁、表锁。</li>
 </ul>
@@ -455,13 +472,13 @@
 <blockquote>
 <ul>
 <li>共享锁<blockquote>
-<p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。<br>关键字：&#x3D;&#x3D;lock in share mode&#x3D;&#x3D;</p>
+<p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。<br>关键字：==lock in share mode==</p>
 <pre class="line-numbers language-none"><code class="language-none">begin;
- SELECT * from city where id &#x3D; &quot;1&quot;  lock in share mode;
+ SELECT * from city where id = "1"  lock in share mode;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></blockquote>
 </li>
 <li>排他锁<blockquote>
-<p>多个不同的事务，对同一个资源只能有一把锁。<br>关键字：&#x3D;&#x3D;for update&#x3D;&#x3D;</p>
+<p>多个不同的事务，对同一个资源只能有一把锁。<br>关键字：==for update==</p>
 <ul>
 <li>每次获取商品时，对该商品加排他锁。</li>
 <li>期间其他用户阻塞等待访问该记录。</li>
@@ -472,8 +489,8 @@
 </ul>
 </blockquote>
 <pre class="line-numbers language-none"><code class="language-none">begin;
-    select * from goods where id &#x3D; 1 for update;
-    update goods set stock &#x3D; stock - 1 where id &#x3D; 1;
+    select * from goods where id = 1 for update;
+    update goods set stock = stock - 1 where id = 1;
 commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>乐观锁</p>
 <blockquote>
@@ -485,12 +502,12 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 </ul>
 </blockquote>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">#不加锁获取 id&#x3D;1 的商品对象
-select * from goods where id &#x3D; 1
+<pre class="line-numbers language-none"><code class="language-none">#不加锁获取 id=1 的商品对象
+select * from goods where id = 1
 
 begin;
-    #更新 stock 值，这里需要注意 where 条件 “stock &#x3D; cur_stock”，只有程序中获取到的库存量与数据库中的库存量相等才执行更新
-    update goods set stock &#x3D; stock - 1 where id &#x3D; 1 and stock &#x3D; cur_stock;
+    #更新 stock 值，这里需要注意 where 条件 “stock = cur_stock”，只有程序中获取到的库存量与数据库中的库存量相等才执行更新
+    update goods set stock = stock - 1 where id = 1 and stock = cur_stock;
 commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><h4 id="行锁和表锁"><a href="#行锁和表锁" class="headerlink" title="行锁和表锁"></a>行锁和表锁</h4></li>
 </ul>
@@ -499,7 +516,7 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <li>只根据主键进行查询，并且查询到数据，主键字段产生行锁。</li>
 <li>除了使用非主键不含索引字段查询，其余所有的查询，没有查询到数据，就不产生锁。</li>
 <li>根据主键、非主键含索引（name）进行查询，并且查询到数据，主键字段产生行锁，name字段产生行锁。<pre class="line-numbers language-none"><code class="language-none">begin;
-select * from goods where id &#x3D; 1 and name&#x3D;&#39;prod11&#39; for update;
+select * from goods where id = 1 and name='prod11' for update;
 commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li>根据主键、非主键不含索引（name）进行查询，并且查询到数据，如果其他线程按主键字段进行再次查询，则主键字段产生行锁，如果其他线程按非主键不含索引字段进行查询，则非主键不含索引字段产生表锁，如果其他线程按非主键含索引字段进行查询，则非主键含索引字段产生行锁，如果索引值是枚举类型，mysql也会进行表锁。</li>
 <li>根据非主键含索引（name）进行查询，并且查询到数据，name字段产生行锁。</li>
@@ -513,10 +530,10 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 </ul>
 <blockquote>
 <ol>
-<li>InnoDB行锁是通过给索引上的索引项加锁来实现的，只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁。&#x3D;&#x3D;行锁一定有索引&#x3D;&#x3D;</li>
+<li>InnoDB行锁是通过给索引上的索引项加锁来实现的，只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁。==行锁一定有索引==</li>
 <li>当表有多个索引的时候，不同的事务可以使用不同的索引锁定不同的行，另外，不论是使用主键索引、唯一索引或普通索引，InnoDB都会使用行锁来对数据加锁。 </li>
 <li>如果MySQL认为全表扫描效率更高，比如对一些很小的表，它就不会使用索引，这种情况下InnoDB将使用表锁，而不是行锁。</li>
-<li>检索值的&#x3D;&#x3D;数据类型&#x3D;&#x3D;与索引字段不同，虽然MySQL能够进行数据类型转换，但却不会使用索引，从而导致InnoDB使用表锁。</li>
+<li>检索值的==数据类型==与索引字段不同，虽然MySQL能够进行数据类型转换，但却不会使用索引，从而导致InnoDB使用表锁。</li>
 </ol>
 </blockquote>
 

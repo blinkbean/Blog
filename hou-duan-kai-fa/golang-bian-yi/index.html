@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -266,7 +268,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20240322005956791.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-03-16
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    771
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    3 分
+                </div>
                 
 
                 
@@ -462,7 +479,7 @@
 </ul>
 <p>gcflag中的pattern</p>
 <ul>
-<li><p>gcflag传入的方式为： -gcflag&#x3D;”pattern&#x3D; args”,其中pattern代表取值分别为 main,all,std,…,用于指定编译参数作用的范围，args则为对应的编译参数</p>
+<li><p>gcflag传入的方式为： -gcflag=”pattern= args”,其中pattern代表取值分别为 main,all,std,…,用于指定编译参数作用的范围，args则为对应的编译参数</p>
 </li>
 <li><p><code>main</code>：表示main函数所在的顶级包路径</p>
 </li>
@@ -472,12 +489,12 @@
 </li>
 <li><p><code>...</code>：表示是一个通配符，可以匹配任意字符串（包括空字符串）</p>
 <ul>
-<li>net&#x2F;…表示net模块和它所有子模块</li>
-<li>.&#x2F;…表示当前主模块和所有子模块</li>
-<li>如果 pattern 中包含了 &#x2F; 和 …，那么就不会匹配 vendor 目录。例如: <code>./...</code> 不会匹配 <code>./vendor</code> 目录。可以使用 <code>./vendor/...</code> 匹配 vendor 目录和它的子模块</li>
+<li>net/…表示net模块和它所有子模块</li>
+<li>./…表示当前主模块和所有子模块</li>
+<li>如果 pattern 中包含了 / 和 …，那么就不会匹配 vendor 目录。例如: <code>./...</code> 不会匹配 <code>./vendor</code> 目录。可以使用 <code>./vendor/...</code> 匹配 vendor 目录和它的子模块</li>
 </ul>
 <p>举例：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">go build -gcflags&#x3D;&quot;main&#x3D;-N -l&quot; .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">go build -gcflags="main=-N -l" .<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 </li>
 <li><p>-ldflags ‘flag list’</p>
@@ -497,22 +514,22 @@
     buildTime <span class="token builtin">string</span>
     goVersion <span class="token builtin">string</span>
 <span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     args <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args
-    <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"--version"</span> <span class="token operator">||</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"-v"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"--version"</span> <span class="token operator">||</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"-v"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Git Commit Hash: %s \n"</span><span class="token punctuation">,</span> gitHash<span class="token punctuation">)</span>
         fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Build TimeStamp: %s \n"</span><span class="token punctuation">,</span> buildTime<span class="token punctuation">)</span>
         fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"GoLang Version: %s \n"</span><span class="token punctuation">,</span> goVersion<span class="token punctuation">)</span>
         <span class="token keyword">return</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">go build -ldflags &quot;-X &#39;main.goVersion&#x3D;$(go version)&#39; -X &#39;main.gitHash&#x3D;$(git show -s --format&#x3D;%H)&#39; -X &#39;main.buildTime&#x3D;$(git show -s --format&#x3D;%cd)&#39;&quot; -o main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">go build -ldflags "-X 'main.goVersion=$(go version)' -X 'main.gitHash=$(git show -s --format=%H)' -X 'main.buildTime=$(git show -s --format=%cd)'" -o main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">➜  cmd git:(master) ✗ .&#x2F;main -v                                                                                                                                                 
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">➜  cmd git:(master) ✗ ./main -v                                                                                                                                                 
 Git Commit Hash: 24ba11ec5e2af192dc619e2555c6604a254690d0 
 Build TimeStamp: Mon Mar 11 15:44:52 2024 +0800 
-GoLang Version: go version go1.20.6 darwin&#x2F;amd64 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+GoLang Version: go version go1.20.6 darwin/amd64 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>makefile</p>
 <pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">flags<span class="token operator">=</span>-X main.buildDate<span class="token operator">=</span>`date -u <span class="token string">'+%Y-%m-%d'</span>` -X main.gitHash<span class="token operator">=</span>`git rev-parse --short HEAD`
@@ -529,7 +546,7 @@ GoLang Version: go version go1.20.6 darwin&#x2F;amd64 <span aria-hidden="true" c
 </li>
 <li><p>-race</p>
 <ul>
-<li>同时检测数据竞争状态，只支持 linux&#x2F;amd64, freebsd&#x2F;amd64, darwin&#x2F;amd64 和 windows&#x2F;amd64</li>
+<li>同时检测数据竞争状态，只支持 linux/amd64, freebsd/amd64, darwin/amd64 和 windows/amd64</li>
 </ul>
 </li>
 </ul>
@@ -540,23 +557,23 @@ GoLang Version: go version go1.20.6 darwin&#x2F;amd64 <span aria-hidden="true" c
 <li>交叉编译不支持CGO所以要禁用它</li>
 </ul>
 <p>Windows环境编译</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">SET CGO_ENABLED&#x3D;0
-SET GOOS&#x3D;darwin
-SET GOARCH&#x3D;amd64
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">SET CGO_ENABLED=0
+SET GOOS=darwin
+SET GOARCH=amd64
 go build main.go
 
-SET CGO_ENABLED&#x3D;0
-SET GOOS&#x3D;linux
-SET GOARCH&#x3D;amd64
+SET CGO_ENABLED=0
+SET GOOS=linux
+SET GOARCH=amd64
 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Mac环境编译</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go
-CGO_ENABLED&#x3D;0 GOOS&#x3D;windows GOARCH&#x3D;amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
+CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>Linux环境编译</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go
-CGO_ENABLED&#x3D;0 GOOS&#x3D;windows GOARCH&#x3D;amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
+CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
                 
@@ -669,50 +686,47 @@ CGO_ENABLED&#x3D;0 GOOS&#x3D;windows GOARCH&#x3D;amd64 go build main.go<span ari
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/cheng-xu-ren-sheng/about-hong-lou-meng/">
+                <a href="/hou-duan-kai-fa/golang-bian-yi/">
                     <div class="card-image">
                         
+                        <img src="/Image/image-20240322005956791.png" class="responsive-img" alt="Golang-编译">
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="About-红楼梦">
-                        
-                        <span class="card-title">About-红楼梦</span>
+                        <span class="card-title">Golang-编译</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            请输入密码后查看
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>9999-12-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
-                                    程序人生
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/private100/">
-                        <span class="chip bg-color">private100</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%B9%A6/">
-                        <span class="chip bg-color">书</span>
+                    <a href="/tags/Golang/">
+                        <span class="chip bg-color">Golang</span>
                     </a>
                     
                 </div>

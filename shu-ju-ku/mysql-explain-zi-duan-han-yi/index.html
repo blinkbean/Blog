@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -410,11 +412,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-07
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    5 分
+                </div>
                 
 
                 
@@ -440,9 +457,9 @@
 <p>显示sql执行效率</p>
 </blockquote>
 <h3 id="explain列解释"><a href="#explain列解释" class="headerlink" title="explain列解释"></a>explain列解释</h3><ol>
-<li><p>&#x3D;&#x3D;table&#x3D;&#x3D; 输出的行所引用的表</p>
+<li><p>==table== 输出的行所引用的表</p>
 </li>
-<li><p>&#x3D;&#x3D;select_type&#x3D;&#x3D; select类型</p>
+<li><p>==select_type== select类型</p>
 <blockquote>
 <ul>
 <li><strong>SIMPLE</strong>:简单SELECT(不使用UNION或子查询)</li>
@@ -456,12 +473,12 @@
 </ul>
 </blockquote>
 </li>
-<li><p>&#x3D;&#x3D;type&#x3D;&#x3D; 这是重要的列，显示连接使用了何种类型。</p>
+<li><p>==type== 这是重要的列，显示连接使用了何种类型。</p>
 <blockquote>
 <p>结果值从好到坏依次是：</p>
 <p>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL</p>
 <ul>
-<li><strong>system</strong>:表仅有一行(&#x3D;系统表)。这是const联接类型的一个特例。</li>
+<li><strong>system</strong>:表仅有一行(=系统表)。这是const联接类型的一个特例。</li>
 <li><strong>const</strong>:表最多有一个匹配行,它将在查询开始时被读取。因为仅有一行,在这行的列值可被优化器剩余部分认为是常数。const表很快,因为它们只读取一次!</li>
 <li><strong>eq_ref</strong>:对于每个来自于前面的表的行组合,从该表中读取一行。这可能是最好的联接类型,除了const类型。</li>
 <li><strong>ref</strong>:对于每个来自于前面的表的行组合,所有有匹配索引值的行将从这张表中读取。</li>
@@ -475,20 +492,20 @@
 </ul>
 </blockquote>
 </li>
-<li><p>&#x3D;&#x3D;possible_keys&#x3D;&#x3D; 指出MySQL能使用哪个索引在该表中找到行。</p>
+<li><p>==possible_keys== 指出MySQL能使用哪个索引在该表中找到行。</p>
 </li>
-<li><p>&#x3D;&#x3D;key&#x3D;&#x3D; 实际使用的索引。如果为NULL，则没有使用索引。很少的情况下，MYSQL会选择优化不足的索引。</p>
+<li><p>==key== 实际使用的索引。如果为NULL，则没有使用索引。很少的情况下，MYSQL会选择优化不足的索引。</p>
 <blockquote>
 <p>可以在SELECT语句中使用USE INDEX（indexname）、force index(indexname) 来强制使用一个索引或者用IGNORE INDEX（indexname）来强制MYSQL忽略索引</p>
 </blockquote>
 </li>
-<li><p>&#x3D;&#x3D;key_len&#x3D;&#x3D; 使用的索引的长度。在不损失精确性的情况下，长度越短越好。如果键是NULL,则长度为NULL。</p>
+<li><p>==key_len== 使用的索引的长度。在不损失精确性的情况下，长度越短越好。如果键是NULL,则长度为NULL。</p>
 </li>
-<li><p>&#x3D;&#x3D;ref&#x3D;&#x3D; 显示使用哪个列或常数与key一起从表中选择行。</p>
+<li><p>==ref== 显示使用哪个列或常数与key一起从表中选择行。</p>
 </li>
-<li><p>&#x3D;&#x3D;rows&#x3D;&#x3D; MYSQL认为必须检查的用来返回请求数据的行数。</p>
+<li><p>==rows== MYSQL认为必须检查的用来返回请求数据的行数。</p>
 </li>
-<li><p>&#x3D;&#x3D;extra&#x3D;&#x3D; 关于MYSQL如何解析查询的额外信息。</p>
+<li><p>==extra== 关于MYSQL如何解析查询的额外信息。</p>
 <blockquote>
 <p>坏的例子是<strong>Using temporary</strong>和<strong>Using filesort</strong>，意思MYSQL根本不能使用索引，结果是检索会很慢。</p>
 <ul>
@@ -509,7 +526,7 @@
 </ul>
 </blockquote>
 </li>
-<li><p>&#x3D;&#x3D;filtered&#x3D;&#x3D; 显示了通过条件过滤出的行数的百分比估计值。</p>
+<li><p>==filtered== 显示了通过条件过滤出的行数的百分比估计值。</p>
 </li>
 </ol>
 

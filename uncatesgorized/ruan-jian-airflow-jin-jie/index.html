@@ -29,7 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 
@@ -401,11 +403,26 @@
 
             <div class="post-info">
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-08-10
+                </div>
                 
 
                 
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
                 
 
                 
@@ -452,57 +469,57 @@
 </ul>
 <h5 id="更多命令-官方Command-Line-Interface"><a href="#更多命令-官方Command-Line-Interface" class="headerlink" title="更多命令  官方Command Line Interface"></a>更多命令  <a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/cli.html">官方Command Line Interface</a></h5><hr>
 <h2 id="BaseOperator"><a href="#BaseOperator" class="headerlink" title="BaseOperator"></a>BaseOperator</h2><p>官网例子，里面的各个属性有代表什么意思？</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;&quot;&quot;
+<pre class="line-numbers language-none"><code class="language-none">"""
 Code that goes along with the Airflow tutorial located at:
-https:&#x2F;&#x2F;github.com&#x2F;apache&#x2F;incubator-airflow&#x2F;blob&#x2F;master&#x2F;airflow&#x2F;example_dags&#x2F;tutorial.py
-&quot;&quot;&quot;
+https://github.com/apache/incubator-airflow/blob/master/airflow/example_dags/tutorial.py
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
 
 
-default_args &#x3D; &#123;
-    &#39;owner&#39;: &#39;airflow&#39;,
-    &#39;depends_on_past&#39;: False,
-    &#39;start_date&#39;: datetime(2015, 6, 1),
-    &#39;email&#39;: [&#39;airflow@example.com&#39;],
-    &#39;email_on_failure&#39;: False,
-    &#39;email_on_retry&#39;: False,
-    &#39;retries&#39;: 1,
-    &#39;retry_delay&#39;: timedelta(minutes&#x3D;5),
-    # &#39;queue&#39;: &#39;bash_queue&#39;,
-    # &#39;pool&#39;: &#39;backfill&#39;,
-    # &#39;priority_weight&#39;: 10,
-    # &#39;end_date&#39;: datetime(2016, 1, 1),
-&#125;
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime(2015, 6, 1),
+    'email': ['airflow@example.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+    # 'queue': 'bash_queue',
+    # 'pool': 'backfill',
+    # 'priority_weight': 10,
+    # 'end_date': datetime(2016, 1, 1),
+}
 
-dag &#x3D; DAG(&#39;tutorial&#39;, default_args&#x3D;default_args)
+dag = DAG('tutorial', default_args=default_args)
 
 # t1, t2 and t3 are examples of tasks created by instantiating operators
-t1 &#x3D; BashOperator(
-    task_id&#x3D;&#39;print_date&#39;,
-    bash_command&#x3D;&#39;date&#39;,
-    dag&#x3D;dag)
+t1 = BashOperator(
+    task_id='print_date',
+    bash_command='date',
+    dag=dag)
 
-t2 &#x3D; BashOperator(
-    task_id&#x3D;&#39;sleep&#39;,
-    bash_command&#x3D;&#39;sleep 5&#39;,
-    retries&#x3D;3,
-    dag&#x3D;dag)
+t2 = BashOperator(
+    task_id='sleep',
+    bash_command='sleep 5',
+    retries=3,
+    dag=dag)
 
-templated_command &#x3D; &quot;&quot;&quot;
-    &#123;% for i in range(5) %&#125;
-        echo &quot;&#123;&#123; ds &#125;&#125;&quot;
-        echo &quot;&#123;&#123; macros.ds_add(ds, 7)&#125;&#125;&quot;
-        echo &quot;&#123;&#123; params.my_param &#125;&#125;&quot;
-    &#123;% endfor %&#125;
-&quot;&quot;&quot;
+templated_command = """
+    {% for i in range(5) %}
+        echo "{{ ds }}"
+        echo "{{ macros.ds_add(ds, 7)}}"
+        echo "{{ params.my_param }}"
+    {% endfor %}
+"""
 
-t3 &#x3D; BashOperator(
-    task_id&#x3D;&#39;templated&#39;,
-    bash_command&#x3D;templated_command,
-    params&#x3D;&#123;&#39;my_param&#39;: &#39;Parameter I passed in&#39;&#125;,
-    dag&#x3D;dag)
+t3 = BashOperator(
+    task_id='templated',
+    bash_command=templated_command,
+    params={'my_param': 'Parameter I passed in'},
+    dag=dag)
 
 t2.set_upstream(t1)
 t3.set_upstream(t1)
@@ -518,7 +535,7 @@ t3.set_upstream(t1)
 <li><strong>depends_on_past</strong> （bool）设置为true时，任务实例将依次运行，同时依赖上一个任务的计划成功。允许start_date的任务实例运行。</li>
 <li><strong>wait_for_downstream</strong> （bool）TODO</li>
 <li><strong>dag</strong> (DAG) 任务所附的dag的引用（如果有的话）</li>
-<li>parallelism：这个参数指定了整个Airflow系统，在任何一刻能同时运行的Task Instance的数量，这个数量跟DAG无关，只跟Executor和Task有关。举个例子：如果parallelism&#x3D;15, 这时你有两个DAG，A和B，如果A需要同时开跑10个Task，B也要同时开跑10个Task，两个DAG同时触发，那么这时候同时在跑的Task数量只能是15，其余的5个会等之前的Task运行完了触发，这时的状态不会显示在web上。而且在这种情况下，触发的顺序是不确定的。</li>
+<li>parallelism：这个参数指定了整个Airflow系统，在任何一刻能同时运行的Task Instance的数量，这个数量跟DAG无关，只跟Executor和Task有关。举个例子：如果parallelism=15, 这时你有两个DAG，A和B，如果A需要同时开跑10个Task，B也要同时开跑10个Task，两个DAG同时触发，那么这时候同时在跑的Task数量只能是15，其余的5个会等之前的Task运行完了触发，这时的状态不会显示在web上。而且在这种情况下，触发的顺序是不确定的。</li>
 </ol>
 </blockquote>
 <blockquote>

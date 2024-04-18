@@ -268,7 +268,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20240418003749111.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -427,14 +427,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    617
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -452,7 +452,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="sed是什么"><a href="#sed是什么" class="headerlink" title="sed是什么"></a>sed是什么</h2><p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，不断重复，直到文件末尾。文件内容不会改变，除非使用重定向输出。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sed [option] 'command' filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>常用option：</p>
+<blockquote>
+<p>-n 或–quiet或–silent 仅显示script处理后的结果.</p>
+<p>-e <script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。</p>
+<p>-f <script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。</p>
+<p>-r 让sed命令支持扩展的正则表达式(默认是基础正则表达式)。</p>
+</blockquote>
+<p>动作说明：</p>
+<blockquote>
+<p>a: 新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)。</p>
+<p>c: 取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行。</p>
+<p>d: 删除</p>
+<p>i: 插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)。</p>
+<p>p: 打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行</p>
+<p>s: 取代，可以直接进行取代的工作。通常这个 s 的动作可以搭配正则表达式</p>
+</blockquote>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li><p>插入</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 在第一行前添加字符串
+sed &#39;1i\添加的内容&#39; file
+# 在最后一行行前添加字符串
+sed &#39;$i\添加的内容&#39; file
+# 在最后一行行后添加字符串
+sed &#39;$a\添加的内容&#39; file
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>替换</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 注释掉含有“swap”的行
+sed -i &#39;s&#x2F;^[^#].*swap*&#x2F;#&amp;&#x2F;g&#39; fstab
+
+# 取消含有字符串swap的行最前面的注释符号#
+## &#x2F;&#x2F;两杠表示空格，以空格替换#，等价取消#。
+sed -i &#39;&#x2F;^#.*swap&#x2F;s&#x2F;^#&#x2F;&#x2F;g&#39; fstab
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>删除</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 删除第2行
+sed &#39;2d&#39; filename
+# 删除1-4行
+sed &#39;1,4d&#39; filename
+# 删除1行和后2行,共3行
+sed &#39;1,+2d&#39; filename
+# 删除匹配到Coder的行和其后面的2行
+sed &#39;&#x2F;Coder&#x2F;,+2d&#39; filename
+# 删除奇数行
+sed &#39;1~2d&#39; filename
+# 删除偶数行
+sed &#39;2~2d&#39; filename
+# 删除匹配Coder的行
+sed &#39;&#x2F;Coder&#x2F;d&#39; filename
+# 删除所有空行
+sed &#39;&#x2F;^$&#x2F;d&#39; filename<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</script></p></blockquote>
                 
             </div>
             <hr/>
@@ -627,8 +683,7 @@
                 <a href="/wang-luo/wang-luo-ya-ce-gong-ju-wrk/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="网络-压测工具wrk">
+                        <img src="/Image/image-20240418003623483.png" class="responsive-img" alt="网络-压测工具wrk">
                         
                         <span class="card-title">网络-压测工具wrk</span>
                     </div>

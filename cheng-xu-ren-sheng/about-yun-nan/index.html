@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Golanl-RWMutex, Blinkbean">
+    <meta name="keywords" content="云南, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Golanl-RWMutex | Blinkbean</title>
+    <title>云南 | Blinkbean</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -315,12 +315,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20240511233941597.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Golanl-RWMutex</h1>
+                    <h1 class="description center-align post-title">云南</h1>
                 </div>
             </div>
         </div>
@@ -436,8 +436,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Golang/">
-                                <span class="chip bg-color">Golang</span>
+                            <a href="/tags/private100/">
+                                <span class="chip bg-color">private100</span>
                             </a>
                         
                     </div>
@@ -448,8 +448,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                后端开发
+                            <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
+                                程序人生
                             </a>
                         
                     </div>
@@ -461,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-13
+                    1999-12-31
                 </div>
                 
 
@@ -470,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    9
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    1 分
                 </div>
                 
 
@@ -495,198 +495,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="sync-RWMutex"><a href="#sync-RWMutex" class="headerlink" title="sync.RWMutex"></a>sync.RWMutex</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
-<p>读写互斥锁，可以由多个读者或单个写者持有。RWMutex的零值是未锁定的互斥锁。</p>
-</blockquote>
-<ol>
-<li><p>结构体及其常量</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> RWMutex <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-	w           Mutex  <span class="token comment">// 互斥锁</span>
-	writerSem   <span class="token builtin">uint32</span> <span class="token comment">// 写操作等待读操作完成的信号量</span>
-	readerSem   <span class="token builtin">uint32</span> <span class="token comment">// 读操作等待写操作完成的信号量</span>
-	readerCount <span class="token builtin">int32</span>  <span class="token comment">// 读锁计数器</span>
-	readerWait  <span class="token builtin">int32</span>  <span class="token comment">// 获取写锁时当前需要等待的读锁释放数量</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">// 最大只支持 1 &lt;&lt; 30 个读锁</span>
-<span class="token keyword">const</span> rwmutexMaxReaders <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-</li>
-<li><p>四种方法</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> Lock         <span class="token comment">// 提供写锁加锁操作</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> RLock        <span class="token comment">// 提供读锁加锁操作</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> RUnlock      <span class="token comment">// 提供读锁解锁操作</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> Unlock       <span class="token comment">// 提供写锁解锁操作</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>读操作可并发重入，写操作是互斥的，读写锁通常用互斥锁、条件变量、信号量实现。</p>
-</li>
-</ol>
-<h3 id="场景-实现"><a href="#场景-实现" class="headerlink" title="场景&amp;实现"></a>场景&amp;实现</h3><ol>
-<li><p>写操作互斥写操作</p>
-<p>读写锁包含一个互斥锁，写锁定必须先获取该互斥锁，如果互斥锁已被协程A获取（或者协程A在阻塞等待读结束），意味着协程A获取了互斥锁，那么协程B只能阻塞等待该互斥锁。</p>
-</li>
-<li><p>写操作互斥读操作</p>
-<p>通过RWMutex.readerCount表示读者数量，不考虑写操作的情况下，每次读写锁将该值+1，每次解除读锁定将该值-1，所以readerCount取值为[0,N]，N为读者个数，实际上最大可支持2^30个并发读者。</p>
-<p>写操作将readerCount变成负数来阻止读操作，当写锁定时将readerCount减去2^30，从而readerCount变成负值，此时再有读锁定检测到readerCount为负值，则开始阻塞等待。真实的读操作个数并不会丢失，只需要将readerCount加上2^30即可。</p>
-</li>
-<li><p>读操作互斥写操作</p>
-<p>读锁定会先将readerCount加1，此时写操作来是发现读者数量不为0，会阻塞等待所有读操作结束。</p>
-</li>
-<li><p>写锁定不会被饿死</p>
-<p>写操作要等待读操作结束后才可以获得锁，写操作等待期间可能还有新的读操作持续到来，如果写操作等待所有读操作结束，很可能被饿死。</p>
-<p>通过RWMutex.readerWait解决，在写操作到来是，会把RWMutex.readerCount值拷贝到RWMutex.readerWait中，用于标记排在写操作前面的读者个数。前面的读操作结束后，除了会递减readerCount，还会递减readerWait值，当readerWait值变为0时唤醒写操作。写操作相当于把一段连续的读划分为两部分，前面的读操作结束后唤醒写操作，写操作结束后唤醒后面的读操作。</p>
-</li>
-</ol>
-<h3 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h3><ol>
-<li><p>写锁加锁 Lock()</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> <span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 竞态检测</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        <span class="token boolean">_</span> <span class="token operator">=</span> rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span>state
-        race<span class="token punctuation">.</span><span class="token function">Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 1.使用 Mutex 锁，解决与其他写者的竞争</span>
-    rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    
-    <span class="token comment">// 2.判断当前是否存在读锁：先通过原子操作改变readerCount（readerCount-rwmutexMaxReaders），</span>
-    <span class="token comment">// 使其变为负数，告诉 RUnLock 当前存在写锁等待；</span>
-    <span class="token comment">// 然后再加回 rwmutexMaxReaders 并赋给r，若r仍然不为0, 代表当前还有读锁</span>
-    r <span class="token operator">:=</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerCount<span class="token punctuation">,</span> <span class="token operator">-</span>rwmutexMaxReaders<span class="token punctuation">)</span> <span class="token operator">+</span> rwmutexMaxReaders
-    
-    <span class="token comment">// 3.如果仍然有其他 Goroutine 持有互斥锁的读锁（r != 0）</span>
-    <span class="token comment">// 会先将 readerCount 的值加到 readerWait中，防止源源不断的读者进来导致写锁饿死，</span>
-    <span class="token comment">// 然后该 Goroutine 会调用 sync.runtime_SemacquireMutex 进入休眠状态，</span>
-    <span class="token comment">// 并等待所有读锁所有者执行结束后释放 writerSem 信号量将当前协程唤醒。</span>
-    <span class="token keyword">if</span> r <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerWait<span class="token punctuation">,</span> r<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token comment">// 阻塞写锁</span>
-        <span class="token function">runtime_SemacquireMutex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>writerSem<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 竞态检测</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        race<span class="token punctuation">.</span><span class="token function">Acquire</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerSem<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        race<span class="token punctuation">.</span><span class="token function">Acquire</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>writerSem<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>使用 <code>sync.Mutex</code> 中的互斥锁 <code>sync.Mutex.Lock()</code> 先解决与其他写者的竞争问题；</li>
-<li>判断当前是否存在读锁：先通过原子操作改变<code>readerCount（readerCount-rwmutexMaxReaders）</code>，使其变为负数，告诉 RUnLock 当前存在写锁等待，然后再加回<code>rwmutexMaxReaders</code> 并赋给r，若r仍然不为0，代表当前还有读锁</li>
-<li>判断是否还有其他 <code>Goroutine</code> 持有<code>RWMutex</code>互斥锁的读锁（r != 0），如果有则会先将当前的 <code>readerCount</code> 的数量加到 <code>readerWait</code>中，从而防止后面源源不断的读者请求读锁，从而进来导致写锁饿死的情况发生，然后该 <code>Goroutine</code> 会调用 <code>sync.runtime_SemacquireMutex</code> 进入休眠状态，并等待当前持有读锁的 <code>Goroutine</code> 结束后释放 <code>writerSem</code> 信号量将当前 <code>Goroutine</code> 唤醒。</li>
-</ol>
-</li>
-<li><p>写锁释放 UnLock()</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> <span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 竞态检测</span>
-	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-		<span class="token boolean">_</span> <span class="token operator">=</span> rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span>state
-		race<span class="token punctuation">.</span><span class="token function">Release</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerSem<span class="token punctuation">)</span><span class="token punctuation">)</span>
-		race<span class="token punctuation">.</span><span class="token function">Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-	<span class="token comment">// 1.释放读锁：通过调用 atomic.AddInt32 函数将 readerCount 加上 rwmutexMaxReaders 从而变回正数；；</span>
-	r <span class="token operator">:=</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerCount<span class="token punctuation">,</span> rwmutexMaxReaders<span class="token punctuation">)</span>
-    <span class="token comment">// 若超过读锁的最大限制, 触发panic</span>
-	<span class="token keyword">if</span> r <span class="token operator">&gt;=</span> rwmutexMaxReaders <span class="token punctuation">{</span>
-		race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"sync: Unlock of unlocked RWMutex"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-	<span class="token comment">// 2.通过 for 循环触发所有由于获取读锁而陷入等待的 Goroutine，也即解除阻塞的读锁(若有)</span>
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">int</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-		<span class="token function">runtime_Semrelease</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerSem<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-	<span class="token comment">// 3.调用 sync.Mutex.Unlock 方法释放写互斥锁</span>
-	rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    
-    <span class="token comment">// 是否开启竞态检测</span>
-	<span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-		race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>释放读锁：通过调用 <code>atomic.AddInt32</code> 函数将 <code>readerCount</code> 加上 <code>rwmutexMaxReaders</code> 从而变回正数；</li>
-<li>通过 for 循环触发所有由于获取读锁而陷入等待的 Goroutine，也即解除阻塞的读锁(若有)；</li>
-<li>调用 <code>sync.Mutex.Unlock()</code> 方法释放写互斥锁。</li>
-</ol>
-</li>
-<li><p>读锁加锁 RLock()</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> <span class="token function">RLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 是否开启检测race</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        <span class="token boolean">_</span> <span class="token operator">=</span> rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span>state
-        race<span class="token punctuation">.</span><span class="token function">Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">//这里分两种情况:</span>
-	<span class="token comment">// 1.此时无写锁 (readerCount + 1) &gt; 0,那么可以上读锁, 并且readerCount原子加1(读锁可重入[只要匹配了释放次数就行])</span>
-	<span class="token comment">// 2.此时有写锁 (readerCount + 1) &lt; 0,所以通过readerSem读信号量, 使读操作睡眠等待</span>
-    <span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerCount<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token comment">// 当前有个写锁, 读操作需要阻塞等待写锁释放；</span>
-        <span class="token comment">// 其实做的事情是将 goroutine 排到G队列的后面,挂起 goroutine</span>
-        <span class="token function">runtime_SemacquireMutex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerSem<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 是否开启检测race</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        race<span class="token punctuation">.</span><span class="token function">Acquire</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerSem<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>此时无写锁 <code>(readerCount + 1) &gt; 0</code>（注意，在写锁是加锁那里，我们对readerCount 进行了<code>readerCount-rwmutexMaxReaders</code>处理），那么可以上读锁, 并且<code>readerCount</code>原子加1（读锁可重入[只要匹配了释放次数就行]）；</li>
-<li>此时有写锁 <code>(readerCount + 1) &lt; 0,</code>所以通过<code>readerSem</code>读信号量, 使读操作睡眠等待；</li>
-</ol>
-</li>
-<li><p>读锁释放 RUnlock()</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> <span class="token function">RUnlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 竞态检测</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        <span class="token boolean">_</span> <span class="token operator">=</span> rw<span class="token punctuation">.</span>w<span class="token punctuation">.</span>state
-        race<span class="token punctuation">.</span><span class="token function">ReleaseMerge</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>writerSem<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        race<span class="token punctuation">.</span><span class="token function">Disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 写锁等待状态，检查当前是否可以进行获取；</span>
-    <span class="token comment">// 首先将 readerCount 减1并赋予r，然后分两种情况判断</span>
-    <span class="token comment">//  1.若r大于等于0，读锁直接解锁成功，直接结束本次操作；</span>
-    <span class="token comment">//  2.若r小于0，有一个正在执行的写操作，在这时会调用sync.RWMutex.rUnlockSlow 方法；</span>
-    <span class="token keyword">if</span> r <span class="token operator">:=</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerCount<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> r <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token comment">// Outlined slow-path to allow the fast-path to be inlined</span>
-        rw<span class="token punctuation">.</span><span class="token function">rUnlockSlow</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span> race<span class="token punctuation">.</span>Enabled <span class="token punctuation">{</span>
-        race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>rw <span class="token operator">*</span>RWMutex<span class="token punctuation">)</span> <span class="token function">rUnlockSlow</span><span class="token punctuation">(</span>r <span class="token builtin">int32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// r + 1 == 0 表示本来就没读锁, 直接执行RUnlock()</span>
-    <span class="token comment">// r + 1 == -rwmutexMaxReaders 表示执行Lock()再执行RUnlock()</span>
-	<span class="token keyword">if</span> r<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> r<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">==</span> <span class="token operator">-</span>rwmutexMaxReaders <span class="token punctuation">{</span>
-		race<span class="token punctuation">.</span><span class="token function">Enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"sync: RUnlock of unlocked RWMutex"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-	<span class="token comment">// 如果当前有写锁等待，则减少一个readerWait的数目</span>
-    <span class="token keyword">if</span> atomic<span class="token punctuation">.</span><span class="token function">AddInt32</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>readerWait<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-		<span class="token comment">// 写锁前的最后一个读锁唤醒写锁执行</span>
-        <span class="token function">runtime_Semrelease</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rw<span class="token punctuation">.</span>writerSem<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li><p>首先readerCount 减1，然后进行两种情况的判断：</p>
-<ol>
-<li>若 r 大于等于0，读锁直接解锁成功，直接结束本次操作；</li>
-<li>若 r 小于0， 有一个正在执行的写操作，在这时会调用<code>sync.RWMutex.rUnlockSlow</code> 方法；</li>
-</ol>
-</li>
-<li><p>然后倘若上面判断 r 小于0，则进入 <code>rUnlockSlow()</code> 慢解锁，先进行一个判断，若有以下两种情况发生：<code>r + 1 == 0</code>表示直接执行<code>RUnlock()</code> ，<code>r + 1 == -rwmutexMaxReaders</code>表示执行 <code>Lock()</code> 再执行 <code>RUnlock()</code>，这两种情况都会进行报错。</p>
-</li>
-<li><p>如果没有上述两种情况发生，则<code>sync.RWMutex.rUnlockSlow</code> 会减少获取锁的写操作等待的读操作数 <code>readerWait</code> ，并在所有读操作都被释放之后触发写操作的信号量 <code>writerSem</code>，该信号量被触发时，调度器就会唤醒尝试获取写锁的 <code>Goroutine</code>。</p>
-</li>
-</ol>
-</li>
-</ol>
-
+                <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请找作者确认" data-whm="文章校验失败">
+  <script id="hbeData" type="hbeData" data-hmacdigest="a1dc58bc91bc8e9b90032ede67095af250c32d0edcf92c297e37e5ec698b92b7">23933bd71f3b356245e911eee53c218a6ef0248d8ef2642fc48f4387d76dae2f610a6a8cecccaed80cc82cff35805f3ce8b48e2b10889052203fa4b76c91c7b128b0c859f7291718f7ca06c529805bc85a491961c84cd9bce3634958abfc66d5499da27d45879d3ff8c59acf8285fe54d31fa92b5ba6ee4dbdf29177e74e7b06347486b189b159e09d598043dab169a3a2d981046782312a90e77a71639fca49957b743eae2f5e652211b50488abdd94f59e90d6167f6f5da15df15cc0f634bf76eb40d0ab9ed7c7ece8be8d4348825f8b7344796972162da6b7b972ec807610666d69945b02710f4af125837e622214b6ec71234a8c7f1de931e65460308d2ca793ce8c596943daaee9cf43d4d51277e659acde136701209e2722b10ab6dcf7d4e10fb15cd1db20289d76500e6457af8eadbeacfbebfde904097796f91ae3ebf5e250360295a764ef1233593baa2203c7442e0ad91c7c3cdb8fb02a49167c83d75a70414df09231690bf28b9f9665630ccea05f22fe6f6909523c5e223d1d68cfceba560f6f64c629c33d2a6c3cdc8e642730a77fb2407fb4e2e458b49309413a341ca50733e4236d3954fe70d543d7937a64ad9d179daa137bab5749664cc67882290e8749a5ccc3f6654ed2f6ed326a0e393ab536710f63372817d457dc27d84e26b3f3e3c1125a89051741650ec8602bb5b033fb38103b76ec0fa47f1dde5049e536dd39f079814d381f151acc4bc2207bcefb96f590acc8faf1c4cb5e19039108b4388cd7cd5c9c66325fae3d816a2ee2816e8eec66a4c009c492adc44b2e93483421788389149f83e229425eeed9af060f93e00215ef391d219bd408da4c7164ff6780ef4e3e1dd8741574b2f835e1b3c34a377b56d67d82d879466690816bf2cbf6911931c0c4b70dcfa151d94c7843cd115c345ad14e473a820320e288b173d2a638889ae68abd2a3710bb7e5231b698579d16b07763b74922f05bca57ebaac99d32e846c537385fec318080cef64eb4605b157eec2080836a2f313479b5c721da7654c04183b7294d4e73bed89174e9d9e412a40abd231dbc86513348970fdc3b3579c462fc0f714ba4d5b325eae9989a7b5610f0cbf946e764bddca98996b683b61ff2ec84a6eaef7b68799683ac181c621a6d4945e9ea33178abd522a7531d054098c1468db79643e458c5861c72f6351dc6b69b49d2f1b2a9cadc6d748f324db3a870476c005ff2e663fe387f24f76b50012af1f47bab3cdf4a14e9473290bdb0da05add692a6e348e5a0dcc9282d94633a4d0670c8d5946388cf0c4e7a3be25404b1cc469e7d2a29680d1c29107cdd020b7dc5a4a219d5b3000424fc68fcf909dff7311e725e974b32f4dd3e079b4e6144cad6528eb6ac87f870bdd96139559dfd23edcef283192cabe10d598d7cebc00ec98bd1c76a40e3c8f45f0256a33195d0cdb6e0cd5cb6854b94d264eaef1adccbfc3041727c195e68723eef8e7303db27c51f0601be1d9c85af91724f2ebeaecfe020f780d12451d2e74872c3ac535a8131c4f075ffecd7c0d1d71ab3ce1a59add8f803ca1719896de01202b6714f206d822b305e1af7c8f6650ce55cdf45d7f26eb6aabefaf1a5f64f56d4420f1da83a1cfddaa90e4a87839805e179ea98a3f798d274a1f3a753158ffad627d32330aeb2eccab9ccd9264308234d2e8356f004e7cfc48a70a3e6aa2f4611375c8dd9528cd088fe680025ea0a72c40bfbf78f50e64d59c4c309c29c8175319d78dc522f4ab753c31a110e70be80ae04e31e58e3321a5ac6b83e19806d13782557798023085688a706d03bf3111e3d5111998c07ef95b87b7e2c1efded2da7a7521265a4c430c7932a9606cda28eef4552afccc51911702d5bb8c5da983e8bfaa710278eaa9be925d2c8ab6aa7036067208b9196845e6cc57b35728f77e2d1a1c37a1c217fe41fce1034fc1d5727e5176a4b05ddb1544ef70bbce5b203b4bbbe9b6a351a07f81ef154973a73a6f76adc06bf3a3ce554010c250614f2cf241d1bbb5b7906310f38bd3077ef32fc26e5ce626dd09b5c290bf0e7d94ec9e29725132b3f713d8dc5cb9ca9be4a8adef1052f5bfc129e4f10f945ad9bb36131d54657b8437903519abe6dfc119c78aefe15bca658d90a70656f8cfb4275f9a5efc77155a3fc754535cacf0002151aeec0a728d8bd99f6331c7ef639ca52877695b3139395304bfbe495a114a639bf428a1c31c7bd3da32fc55a1fe590b2983ade8409204e598f4a8edc04d12c63e1e3f8aa32686dcf2515f548b1a5a675f3db87d0331bf4713845cd4b054ff09f72c6bfe7c6199fe39cb98e9b7089ed9cdff09f1ff36351b6c0438f66616627401c3305b7cb65d4d10ed3387f2412c0743e3e50d14e6324f4a34616df7d0b30828bff2ce2179e06b770a63422c12b6aef8302062b3fd7e291b869014fca57ecadccaa735d9f0745c28466068a3ac4e8ff784868784cf46dd46deecbb42495652718db86f4b28acbd4bcdbef00c158bcbc962958110ed1c00cca9ad35735182b0450f1e8aa29daf92b2a049fd99effba945db51e0f77f3b6fe533b50d2a88668b3cd94d571981746d8b04864b851301b1ec31615ace72406c6525c74c2fb9194b8425a49ee3760b68aeca83b53cdf7bf426ccc8f140fc8101aa6dd72ef3794ba33e4ab2ff624c46b2fbb85c6091e680d8d7086dbded655a28d8b01dc05a21b415fdc2fb4a6f2f88fd7abc59b7a6a367a285a390da2c7f32d73a84a65d5bdc589d50ae6988c5866765dd39f4fa0717bccbd45f41c2cb2de6a79b3b0d1c2cdc7630d0ee3dc119d5da8a3ce2ed43d10d68d367ead1019a16b48c90a3585aec1a671ba93ff5d7683d1b2d9cb8736491c01f91693a012f26981d3fda4179c20c714eca517460878f2b2437e56d163fe1956bd22103effc95e58eec23a14475e216544372966970f5ea6aae75fc8b2e0ab7a611399c479b5d8fe3d0b71cd87452a7bb10e1286cdfc86142bacd009f3d015e7c4958735422de3f7690842234cce7c1180bba78d93744824180210bc29fb297cadd0e52209934460d45a01feaea8633611657e6d1b8d2263c477f09230e20dd7aa3a6fae640c7d99324d17dfc7e526416cade75885249a98e6935f18086b9131bf15424b9442556965f9bcf47ba831563cfad3d4fa2aec163694e1f43a733b13bc59b0af45c3b4b1f9b6d4a3e10797e21d1b1f7f0fa4b3214a31b4dc0d3995fc035c8dcee0b3cc2d0b60b766949d44d9b7ea412e696fd8963bb1a56a1c7a5e8c6c1523eef107bec10d39b4def4993c2e072bef7ddf6db388577adbd25a14aa572da36c60632923fe9725201c1d9fe0a9b0c58199828a303507e4772413ebeff7ef6e4d167201e7b5a91ddd5fa4740aed7f98c440401215aef467ab124262d43ff53312b9537c9d382e44c389daab1e724d6bd40f414fafa848ef6719870e2f244defe577fe174de351e8fecbfb3c0e9b8b918b9da3b79161a0a81d0211ad5c2b5a9e178ce7b4b70e34f0f6442785d96c5796878f7465bdb7f7ed8f5f03096a0af787231614835b2299b9ce07df4a2812f64a63bb2b887900fcc0a3eb1bfe0af114fa2cdfb980e2d00b8a958fd54faae1483659f3c142d4dc19adcaab4fa217309402fcf9482a9a2c19c6067d8aaaf63deba7d35806b6b2a79dc872f137162dbd95f803a77b70e659341e1af39dffe082b7bbc1f2be80a6cb97e1ea5eed12c02506f5e5e2ca7659a69a60f3975ed33a43cbadb9dd563cf58c20f49edf3da68a6884082a5b09781ffdffcf93aa943ea10d7aa1c9ebbabaa4f1672e4a1783055eeea91951574667629dad24acaed09439db4291892d0184c312fda52e1220e582887080f92425ba8773b7d19ed7089fff674c233012793870d81b14bc9dd1f4ee76aefaadedb55c04b621c42266c68a8fe1742343a7831fd813004ed545ea9085c6917d5354a188b9fc5b399a930156b026f94137d41c8e3fb6f00a0ffa58003d5a6bd9ba3de36e975b2224e42bdd3e008547a6db9f2ee99a118a367e5fe2a1fce4316315b46142d20e8e782adde68dab652bcbedc8566bdd95080243b26925e532a13a7530cb262f0a50c91725af01ad73944994321bfa142b9aaf80a53ef97524c0a051b6b2383687a7f1a35299130480ab515533157177761443897c967b32f6c21928ad2897decfeb573ab3d9375590116c9ea82e3b69246a999e67eaf1197b8909e8ffbf6fb1447395e6884761d2c155fa3f43fb9545a9ad447b98bfd8f11174ec61c97e2bb0cb643d818005e71e584f9b0c505c086aaf25444117bd69cab615cbd8dda1a7cf9d0a61d047f421ac486a09060571e77754b879090ff5768394d1f04332571c560f7e99b4449486bed90b62fb18ee95f0ea89420eb7f9203add4ca860fc2907ef3356ee59a0d943baba19140794f713c77b3386ea50ab354983912859dc735393e14a48dea4a02c24ae14295642e03b6d8fee386b35e6f306401cab48ed9b487d03d19f110b559b80f9b08f8f980414afd90ecd754241680879f867dad8a785c4db7805a34e4b196f85c2d8311d099fe4744d2234cb67d1fa1390e67a53e05680a87f51bb3187c26a5466ae646a28e5d90663e842c0dec3a1cb3117d5d</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码后查看</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
                 
             </div>
             <hr/>
@@ -700,8 +520,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Golang/">
-                                    <span class="chip bg-color">Golang</span>
+                                <a href="/tags/private100/">
+                                    <span class="chip bg-color">private100</span>
                                 </a>
                             
                         </div>
@@ -801,12 +621,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/2023-12-22-wang-luo-duan-kou-sao-miao-gong-ju-nmap/">
+                <a href="/uncatesgorized/2021-03-07-ruan-jian-airflow-an-zhuang-yu-jian-dan-shi-yong/">
                     <div class="card-image">
                         
-                        <img src="/Image/image-20240418001148852.png" class="responsive-img" alt="网络-端口扫描工具nmap">
                         
-                        <span class="card-title">网络-端口扫描工具nmap</span>
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="软件-Airflow安装与简单使用">
+                        
+                        <span class="card-title">软件-Airflow安装与简单使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -817,16 +638,12 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-07
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            blinkbean
                             
                         </span>
                     </div>
@@ -834,8 +651,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/Airflow/">
+                        <span class="chip bg-color">Airflow</span>
                     </a>
                     
                 </div>
@@ -849,30 +666,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/2024-04-18-linux-sed-chang-yong-ming-ling/">
+                <a href="/cheng-xu-ren-sheng/about-shu-dian-ying/">
                     <div class="card-image">
                         
-                        <img src="/Image/image-20240418000707023.png" class="responsive-img" alt="Linux命令 - sed">
+                        <img src="/Image/image-20240414224926039.png" class="responsive-img" alt="书&amp;电影">
                         
-                        <span class="card-title">Linux命令 - sed</span>
+                        <span class="card-title">书&amp;电影</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            最初是为了消磨时间，后来发现电影跟书一样，一部就是一个世界，用两个小时高效率的讲故事，时间远远小于看一本书。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-11
+                                <i class="far fa-clock fa-fw icon-date"></i>1999-12-31
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
+                            <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
+                                    程序人生
                                 </a>
                             
                             
@@ -882,8 +699,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Golang/">
-                        <span class="chip bg-color">Golang</span>
+                    <a href="/tags/private100/">
+                        <span class="chip bg-color">private100</span>
                     </a>
                     
                 </div>

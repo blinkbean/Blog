@@ -545,12 +545,7 @@
                 <p class="post-description">
                     
                         dingtalk钉钉机器人消息封装——Golang
-目前自定义机器人支持
-
-文本（text）
-链接（link）
-markdown
-Actio
+github：https://github.com/blinkbean/dingtalk
                     
                 </p>
                 <a href="/xiao-lu-gong-ju/2021-03-07-golang-san-xing-dai-ma-fa-song-ding-ding-ji-qi-ren-xiao-xi/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
@@ -623,21 +618,13 @@ MySQL有哪些常见的引擎
                         <div class="summary block-with-text">
                             
                                 dingtalk钉钉机器人消息封装——Golang
+github：https://github.com/blinkbean/dingtalk
 目前自定义机器人支持
 
 文本（text）
 链接（link）
 markdown
 ActionCard
-整体跳转
-独立跳转
-
-
-FeedCard
-
-机器人官方文档
-
-添加钉钉群：3545101
                             
                         </div>
                         <div class="publish-info">
@@ -742,6 +729,9 @@ MyISAM：非事务处理存储引擎
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
+                                缓存击穿  高并发场景下，为降低数据库压力，通常通过localcache、redis等设置缓存。接到请求后先从缓存读，如果存在则直接返回，否则需要从数据库读取，然后写到缓存。
+  通常查询数据库在整个请求流程中的耗时是最长的，高并发情况下，
+                            
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
@@ -843,6 +833,13 @@ install 已废弃，安装指定的包来完成编译，编译需要的包会自
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
+                                NMapNetwork Mapper，是一款网络扫描和主机检测的非常有用的工具。
+其基本功能有三个：
+
+是扫描主机端口，嗅探所提供的网络服务
+是探测一组主机是否在线
+还可以推断主机所用的操作系统，到达主机经过的路由，系统已开放端口的软件版本
+                            
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
@@ -875,13 +872,13 @@ install 已废弃，安装指定的包来完成编译，编译需要的包会自
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/hou-duan-kai-fa/2024-04-19-golanl-rwmutex/">
+                    <a href="/hou-duan-kai-fa/2024-04-19-golang-rwmutex/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Golanl-RWMutex">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Golang-RWMutex">
                             
-                            <span class="card-title">Golanl-RWMutex</span>
+                            <span class="card-title">Golang-RWMutex</span>
                         </div>
                     </a>
 
@@ -1312,6 +1309,12 @@ type RWMutex struct {
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
+                            
+                                sync.Cond基本用法读写操作都由 sync.Mutex 进行并发安全的保护
+
+定义一个互斥锁，用于保护共享数据；
+创建一个sync.Cond对象，关联这个互斥锁；
+在需要等待条件变量的地方，获取这个互斥锁，并使用Wait方法等待条件变
                             
                         </div>
                         <div class="publish-info">

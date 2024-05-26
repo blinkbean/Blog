@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    419
                 </div>
                 
 
@@ -495,7 +495,62 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="NMap"><a href="#NMap" class="headerlink" title="NMap"></a>NMap</h2><p>Network Mapper，是一款网络扫描和主机检测的非常有用的工具。</p>
+<p>其基本功能有三个：</p>
+<ul>
+<li>是扫描主机端口，嗅探所提供的网络服务</li>
+<li>是探测一组主机是否在线</li>
+<li>还可以推断主机所用的操作系统，到达主机经过的路由，系统已开放端口的软件版本</li>
+</ul>
+<h4 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h4><blockquote>
+<p>// ping扫描</p>
+<p>nmap -sP 10.22.133.11</p>
+</blockquote>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><blockquote>
+<p>// 指定端口范围使用-p参数</p>
+<p>nmap 192.169.0.1 -p1-65535</p>
+<p>// 如果不指定要扫描的端口，Nmap默认扫描从1到1024再加上nmap-services列出的端口</p>
+<p>nmap 192.169.0.1</p>
+<p>// sys扫描（速度快，不会留下痕迹,没有完成三次捂手）</p>
+<p>nmap -sS 192.168.0.10</p>
+<p>// Connect扫描跟sys很像，完成了三次捂手</p>
+<p>nmap -sT 192.168.0.10</p>
+<p>// 扫描主机并跟踪路由</p>
+<p>nmap –traceroute <a target="_blank" rel="noopener" href="http://www.linux265.com/">www.linux265.com</a></p>
+</blockquote>
+<h4 id="一个IP的多个端口"><a href="#一个IP的多个端口" class="headerlink" title="一个IP的多个端口"></a>一个IP的多个端口</h4><blockquote>
+<p>nmap 10.0.1.161  -p20-200,7777,8888</p>
+</blockquote>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>-sU：表示udp scan ， udp端口扫描</p>
+<p>-Pn：不对目标进行ping探测（不判断主机是否在线）（直接扫描端口）</p>
+<p>对于udp端口扫描比较慢，扫描完6万多个端口需要20分钟左右</p>
+<blockquote>
+<p>nmap -sU 10.0.1.161 -Pn</p>
+</blockquote>
+<h4 id="多个IP"><a href="#多个IP" class="headerlink" title="多个IP"></a>多个IP</h4><blockquote>
+<p>nmap 10.0.1.161 10.0.1.162</p>
+<p>nmap 10.0.1.161,162</p>
+<p>nmap 10.0.1.161-162</p>
+<p>// 子网网段</p>
+<p>nmap 10.0.3.0/24</p>
+</blockquote>
+<h4 id="扫描文件里的IP"><a href="#扫描文件里的IP" class="headerlink" title="扫描文件里的IP"></a>扫描文件里的IP</h4><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">[root@B ~]# cat ip.txt
+10.0.1.161
+10.0.1.162<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>nmap -iL ip.txt</p>
+</blockquote>
+<h4 id="排除某IP"><a href="#排除某IP" class="headerlink" title="排除某IP"></a>排除某IP</h4><blockquote>
+<p>nmap 10.0.1.161-162 –exclude 10.0.1.162</p>
+<p>nmap 10.0.1.161-163 –exclude 10.0.1.162-163</p>
+<p>nmap 10.0.1.161-163 –exclude 10.0.1.161,10.0.1.163</p>
+<p>nmap 10.0.1.161-163 –excludefile ex.txt</p>
+</blockquote>
+<h4 id="操作系统检测"><a href="#操作系统检测" class="headerlink" title="操作系统检测"></a>操作系统检测</h4><blockquote>
+<p>nmap -O 192.168.1.100</p>
+</blockquote>
+
                 
             </div>
             <hr/>
@@ -658,13 +713,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/2024-04-19-golanl-rwmutex/">
+                <a href="/hou-duan-kai-fa/2024-04-19-golang-rwmutex/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Golanl-RWMutex">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Golang-RWMutex">
                         
-                        <span class="card-title">Golanl-RWMutex</span>
+                        <span class="card-title">Golang-RWMutex</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

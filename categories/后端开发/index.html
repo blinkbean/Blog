@@ -356,20 +356,20 @@
                 
                 
                 
-                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="后端开发: 31">
+                <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" title="效率工具: 3">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9EBEA;">后端开发
-                        <span class="tag-length">31</span>
+                             chip-default "
+                            style="background-color: #F9EBEA;">效率工具
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" title="效率工具: 3">
+                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="后端开发: 31">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">效率工具
-                        <span class="tag-length">3</span>
+                             chip-active "
+                            style="background-color: #F5EEF8;">后端开发
+                        <span class="tag-length">31</span>
                     </span>
                 </a>
                 
@@ -410,11 +410,11 @@
                 </a>
                 
                 
-                <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" title="程序人生: 11">
+                <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" title="程序人生: 12">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             style="background-color: #82E0AA;">程序人生
-                        <span class="tag-length">11</span>
+                        <span class="tag-length">12</span>
                     </span>
                 </a>
                 
@@ -443,7 +443,8 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
+                                缓存击穿  高并发场景下，为降低数据库压力，通常通过localcache、redis等设置缓存。接到请求后先从缓存读，如果存在则直接返回，否则需要从数据库读取，然后写到缓存。
+  通常查询数据库在整个请求流程中的耗时是最长的，高并发情况下，
                             
                         </div>
                         <div class="publish-info">
@@ -544,7 +545,12 @@ install 已废弃，安装指定的包来完成编译，编译需要的包会自
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
+                                NMapNetwork Mapper，是一款网络扫描和主机检测的非常有用的工具。
+其基本功能有三个：
+
+是扫描主机端口，嗅探所提供的网络服务
+是探测一组主机是否在线
+还可以推断主机所用的操作系统，到达主机经过的路由，系统已开放端口的软件版本
                             
                         </div>
                         <div class="publish-info">
@@ -578,13 +584,13 @@ install 已废弃，安装指定的包来完成编译，编译需要的包会自
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/hou-duan-kai-fa/2024-04-19-golanl-rwmutex/">
+                    <a href="/hou-duan-kai-fa/2024-04-19-golang-rwmutex/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Golanl-RWMutex">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Golang-RWMutex">
                             
-                            <span class="card-title">Golanl-RWMutex</span>
+                            <span class="card-title">Golang-RWMutex</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
@@ -831,7 +837,11 @@ type RWMutex struct {
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
+                                sync.Cond基本用法读写操作都由 sync.Mutex 进行并发安全的保护
+
+定义一个互斥锁，用于保护共享数据；
+创建一个sync.Cond对象，关联这个互斥锁；
+在需要等待条件变量的地方，获取这个互斥锁，并使用Wait方法等待条件变
                             
                         </div>
                         <div class="publish-info">

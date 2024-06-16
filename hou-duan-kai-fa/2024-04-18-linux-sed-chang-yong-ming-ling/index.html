@@ -17,19 +17,21 @@
 
 
     <title>Linux命令 - sed | Blinkbean</title>
-    <link rel="icon" type="image/png" href="/blinkbean/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
 
-    <script src="/blinkbean/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -41,9 +43,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="/blinkbean/" class="waves-effect waves-light">
+                <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/blinkbean/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Blinkbean</span>
                 </a>
@@ -55,7 +57,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/" class="waves-effect waves-light">
+    <a href="/" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -66,7 +68,18 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/tags" class="waves-effect waves-light">
+    <a href="/scode" class="waves-effect waves-light">
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>源码计划</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -77,7 +90,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/categories" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -88,7 +101,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/archives" class="waves-effect waves-light">
+    <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -110,7 +123,7 @@
     <ul class="sub-nav menus_item_child ">
       
       <li>
-        <a href="/blinkbean/about">
+        <a href="/about">
           
           <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -119,7 +132,7 @@
       </li>
       
       <li>
-        <a href="/blinkbean/aboutme">
+        <a href="/aboutme">
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -143,7 +156,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/blinkbean/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Blinkbean</div>
         <div class="logo-desc">
@@ -159,7 +172,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/" class="waves-effect waves-light">
+		<a href="/" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -170,7 +183,18 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/tags" class="waves-effect waves-light">
+		<a href="/scode" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-file-code"></i>
+			
+			源码计划
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -181,7 +205,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/categories" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -192,7 +216,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/archives" class="waves-effect waves-light">
+		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -214,7 +238,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/about " style="margin-left:75px">
+                  <a href="/about " style="margin-left:75px">
 				  
 				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
 			      
@@ -224,7 +248,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/aboutme " style="margin-left:75px">
+                  <a href="/aboutme " style="margin-left:75px">
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
@@ -239,7 +263,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://blinkbean.gitee.io" class="waves-effect waves-light" target="_blank">
+            <a href="https://blinkbean.xyz" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>To My Home
             </a>
         </li>
@@ -296,7 +320,7 @@
     }
 </style>
 
-<a href="https://blinkbean.gitee.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://blinkbean.xyz" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="To My Home" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -315,7 +339,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blinkbean/Image/image-20240418000707023.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20240418000707023.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -333,7 +357,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/blinkbean/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -436,7 +460,7 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blinkbean/tags/Golang/">
+                            <a href="/tags/Golang/">
                                 <span class="chip bg-color">Golang</span>
                             </a>
                         
@@ -448,7 +472,7 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
                                 后端开发
                             </a>
                         
@@ -470,7 +494,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    589
+                    587
                 </div>
                 
 
@@ -488,7 +512,7 @@
 
         
         <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/blinkbean/libs/prism/prism.css">
+        <link rel="stylesheet" href="/libs/prism/prism.css">
         
 
         
@@ -496,7 +520,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="sed是什么"><a href="#sed是什么" class="headerlink" title="sed是什么"></a>sed是什么</h2><p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，不断重复，直到文件末尾。文件内容不会改变，除非使用重定向输出。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sed [option] 'command' filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [option] <span class="string">'command'</span> filename</span><br></pre></td></tr></tbody></table></figure>
 
 <p>常用option：</p>
 <blockquote>
@@ -516,40 +540,13 @@
 </blockquote>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
 <li><p>插入</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 在第一行前添加字符串
-sed '1i\添加的内容' file
-# 在最后一行行前添加字符串
-sed '$i\添加的内容' file
-# 在最后一行行后添加字符串
-sed '$a\添加的内容' file
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在第一行前添加字符串</span></span><br><span class="line">sed <span class="string">'1i\添加的内容'</span> file</span><br><span class="line"><span class="comment"># 在最后一行行前添加字符串</span></span><br><span class="line">sed <span class="string">'$i\添加的内容'</span> file</span><br><span class="line"><span class="comment"># 在最后一行行后添加字符串</span></span><br><span class="line">sed <span class="string">'$a\添加的内容'</span> file</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>替换</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 注释掉含有“swap”的行
-sed -i 's/^[^#].*swap*/#&amp;/g' fstab
-
-# 取消含有字符串swap的行最前面的注释符号#
-## //两杠表示空格，以空格替换#，等价取消#。
-sed -i '/^#.*swap/s/^#//g' fstab
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注释掉含有“swap”的行</span></span><br><span class="line">sed -i <span class="string">'s/^[^#].*swap*/#&amp;/g'</span> fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消含有字符串swap的行最前面的注释符号#</span></span><br><span class="line"><span class="comment">## //两杠表示空格，以空格替换#，等价取消#。</span></span><br><span class="line">sed -i <span class="string">'/^#.*swap/s/^#//g'</span> fstab</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>删除</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 删除第2行
-sed '2d' filename
-# 删除1-4行
-sed '1,4d' filename
-# 删除1行和后2行,共3行
-sed '1,+2d' filename
-# 删除匹配到Coder的行和其后面的2行
-sed '/Coder/,+2d' filename
-# 删除奇数行
-sed '1~2d' filename
-# 删除偶数行
-sed '2~2d' filename
-# 删除匹配Coder的行
-sed '/Coder/d' filename
-# 删除所有空行
-sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除第2行</span></span><br><span class="line">sed <span class="string">'2d'</span> filename</span><br><span class="line"><span class="comment"># 删除1-4行</span></span><br><span class="line">sed <span class="string">'1,4d'</span> filename</span><br><span class="line"><span class="comment"># 删除1行和后2行,共3行</span></span><br><span class="line">sed <span class="string">'1,+2d'</span> filename</span><br><span class="line"><span class="comment"># 删除匹配到Coder的行和其后面的2行</span></span><br><span class="line">sed <span class="string">'/Coder/,+2d'</span> filename</span><br><span class="line"><span class="comment"># 删除奇数行</span></span><br><span class="line">sed <span class="string">'1~2d'</span> filename</span><br><span class="line"><span class="comment"># 删除偶数行</span></span><br><span class="line">sed <span class="string">'2~2d'</span> filename</span><br><span class="line"><span class="comment"># 删除匹配Coder的行</span></span><br><span class="line">sed <span class="string">'/Coder/d'</span> filename</span><br><span class="line"><span class="comment"># 删除所有空行</span></span><br><span class="line">sed <span class="string">'/^$/d'</span> filename</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 
                 
@@ -565,7 +562,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                     
                         <div class="article-tag">
                             
-                                <a href="/blinkbean/tags/Golang/">
+                                <a href="/tags/Golang/">
                                     <span class="chip bg-color">Golang</span>
                                 </a>
                             
@@ -573,7 +570,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
 
     
@@ -666,11 +663,11 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/blinkbean/hou-duan-kai-fa/2024-04-19-golang-rwmutex/">
+                <a href="/code/code-golang-rwmutex/">
                     <div class="card-image">
                         
                         
-                        <img src="/blinkbean/medias/featureimages/19.jpg" class="responsive-img" alt="Golang-RWMutex">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Golang-RWMutex">
                         
                         <span class="card-title">Golang-RWMutex</span>
                     </div>
@@ -689,8 +686,8 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
+                            <a href="/categories/Code/" class="post-category">
+                                    Code
                                 </a>
                             
                             
@@ -700,7 +697,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/Golang/">
+                    <a href="/tags/Golang/">
                         <span class="chip bg-color">Golang</span>
                     </a>
                     
@@ -715,10 +712,10 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blinkbean/hou-duan-kai-fa/2024-04-19-cheng-xu-she-ji-ling-pai-tong/">
+                <a href="/hou-duan-kai-fa/2024-04-19-cheng-xu-she-ji-ling-pai-tong/">
                     <div class="card-image">
                         
-                        <img src="/blinkbean/Image/image-20240419010318669.png" class="responsive-img" alt="令牌桶">
+                        <img src="/Image/image-20240419010318669.png" class="responsive-img" alt="令牌桶">
                         
                         <span class="card-title">令牌桶</span>
                     </div>
@@ -737,7 +734,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
                                     后端开发
                                 </a>
                             
@@ -748,7 +745,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+                    <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
                         <span class="chip bg-color">程序设计</span>
                     </a>
                     
@@ -765,21 +762,21 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
     </div>
@@ -800,7 +797,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
 </div>
 
 
-<script src="/blinkbean/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -892,7 +889,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
                 <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
-            <a href="/blinkbean/about" target="_blank">blinkbean</a>
+            <a href="/about" target="_blank">blinkbean</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -945,7 +942,7 @@ sed '/^$/d' filename<span aria-hidden="true" class="line-numbers-rows"><span></s
 
 
 
-    <a href="/blinkbean/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -1056,7 +1053,7 @@ $(function () {
         });
     };
 
-    searchFunc('/blinkbean/search.xml', 'searchInput', 'searchResult');
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1068,12 +1065,12 @@ $(function () {
 </div>
 
 
-    <script src="/blinkbean/libs/materialize/materialize.min.js"></script>
-    <script src="/blinkbean/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/blinkbean/libs/aos/aos.js"></script>
-    <script src="/blinkbean/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/blinkbean/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/blinkbean/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1094,10 +1091,10 @@ $(function () {
 </script>
 
     
-    <script src="/blinkbean/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/blinkbean/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1111,11 +1108,11 @@ $(function () {
     
 
     
-    <script type="text/javascript" src="/blinkbean/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="/blinkbean/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

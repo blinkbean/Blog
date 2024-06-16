@@ -17,19 +17,21 @@
 
 
     <title>Python-BloomFilter实现 | Blinkbean</title>
-    <link rel="icon" type="image/png" href="/blinkbean/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
 
-    <script src="/blinkbean/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -41,9 +43,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="/blinkbean/" class="waves-effect waves-light">
+                <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/blinkbean/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Blinkbean</span>
                 </a>
@@ -55,7 +57,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/" class="waves-effect waves-light">
+    <a href="/" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -66,7 +68,18 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/tags" class="waves-effect waves-light">
+    <a href="/scode" class="waves-effect waves-light">
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>源码计划</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -77,7 +90,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/categories" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -88,7 +101,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/archives" class="waves-effect waves-light">
+    <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -110,7 +123,7 @@
     <ul class="sub-nav menus_item_child ">
       
       <li>
-        <a href="/blinkbean/about">
+        <a href="/about">
           
           <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -119,7 +132,7 @@
       </li>
       
       <li>
-        <a href="/blinkbean/aboutme">
+        <a href="/aboutme">
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -143,7 +156,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/blinkbean/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Blinkbean</div>
         <div class="logo-desc">
@@ -159,7 +172,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/" class="waves-effect waves-light">
+		<a href="/" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -170,7 +183,18 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/tags" class="waves-effect waves-light">
+		<a href="/scode" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-file-code"></i>
+			
+			源码计划
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -181,7 +205,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/categories" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -192,7 +216,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/archives" class="waves-effect waves-light">
+		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -214,7 +238,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/about " style="margin-left:75px">
+                  <a href="/about " style="margin-left:75px">
 				  
 				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
 			      
@@ -224,7 +248,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/aboutme " style="margin-left:75px">
+                  <a href="/aboutme " style="margin-left:75px">
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
@@ -239,7 +263,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://blinkbean.gitee.io" class="waves-effect waves-light" target="_blank">
+            <a href="https://blinkbean.xyz" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>To My Home
             </a>
         </li>
@@ -296,7 +320,7 @@
     }
 </style>
 
-<a href="https://blinkbean.gitee.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://blinkbean.xyz" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="To My Home" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -315,7 +339,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blinkbean/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -333,7 +357,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/blinkbean/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -436,11 +460,11 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blinkbean/tags/Python/">
+                            <a href="/tags/Python/">
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
-                            <a href="/blinkbean/tags/Redis/">
+                            <a href="/tags/Redis/">
                                 <span class="chip bg-color">Redis</span>
                             </a>
                         
@@ -452,7 +476,7 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
                                 后端开发
                             </a>
                         
@@ -474,7 +498,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    650
                 </div>
                 
 
@@ -492,7 +516,7 @@
 
         
         <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/blinkbean/libs/prism/prism.css">
+        <link rel="stylesheet" href="/libs/prism/prism.css">
         
 
         
@@ -502,113 +526,14 @@
                 <ul>
 <li>学习笔记，如有不足之处，欢迎指正。</li>
 </ul>
-<h4 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> math
-<span class="token keyword">import</span> time
-<span class="token keyword">import</span> redis
-<span class="token keyword">from</span> hashlib <span class="token keyword">import</span> md5
-
-
-<span class="token keyword">class</span> <span class="token class-name">SimpleHash</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cap<span class="token punctuation">,</span> seed<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>cap <span class="token operator">=</span> cap
-        self<span class="token punctuation">.</span>seed <span class="token operator">=</span> seed
-
-    <span class="token keyword">def</span> <span class="token function">hash</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        ret <span class="token operator">=</span> <span class="token number">0</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            ret <span class="token operator">+=</span> self<span class="token punctuation">.</span>seed <span class="token operator">*</span> ret <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>value<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>cap <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> ret
-
-
-<span class="token keyword">class</span> <span class="token class-name">BloomFilter</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment"># 随机种子</span>
-    SEEDS <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">543</span><span class="token punctuation">,</span> <span class="token number">460</span><span class="token punctuation">,</span> <span class="token number">171</span><span class="token punctuation">,</span> <span class="token number">876</span><span class="token punctuation">,</span> <span class="token number">796</span><span class="token punctuation">,</span> <span class="token number">607</span><span class="token punctuation">,</span> <span class="token number">650</span><span class="token punctuation">,</span> <span class="token number">81</span><span class="token punctuation">,</span> <span class="token number">837</span><span class="token punctuation">,</span> <span class="token number">545</span><span class="token punctuation">,</span> <span class="token number">591</span><span class="token punctuation">,</span> <span class="token number">946</span><span class="token punctuation">,</span> <span class="token number">846</span><span class="token punctuation">,</span> <span class="token number">521</span><span class="token punctuation">,</span> <span class="token number">913</span><span class="token punctuation">,</span> <span class="token number">636</span><span class="token punctuation">,</span> <span class="token number">878</span><span class="token punctuation">,</span> <span class="token number">735</span><span class="token punctuation">,</span> <span class="token number">414</span><span class="token punctuation">,</span> <span class="token number">372</span><span class="token punctuation">,</span>
-             <span class="token number">344</span><span class="token punctuation">,</span> <span class="token number">324</span><span class="token punctuation">,</span> <span class="token number">223</span><span class="token punctuation">,</span> <span class="token number">180</span><span class="token punctuation">,</span> <span class="token number">327</span><span class="token punctuation">,</span> <span class="token number">891</span><span class="token punctuation">,</span> <span class="token number">798</span><span class="token punctuation">,</span> <span class="token number">933</span><span class="token punctuation">,</span> <span class="token number">493</span><span class="token punctuation">,</span> <span class="token number">293</span><span class="token punctuation">,</span> <span class="token number">836</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">544</span><span class="token punctuation">,</span> <span class="token number">924</span><span class="token punctuation">,</span> <span class="token number">849</span><span class="token punctuation">,</span> <span class="token number">438</span><span class="token punctuation">,</span> <span class="token number">41</span><span class="token punctuation">,</span> <span class="token number">862</span><span class="token punctuation">,</span> <span class="token number">648</span><span class="token punctuation">,</span> <span class="token number">338</span><span class="token punctuation">,</span>
-             <span class="token number">465</span><span class="token punctuation">,</span> <span class="token number">562</span><span class="token punctuation">,</span> <span class="token number">693</span><span class="token punctuation">,</span> <span class="token number">979</span><span class="token punctuation">,</span> <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">763</span><span class="token punctuation">,</span> <span class="token number">103</span><span class="token punctuation">,</span> <span class="token number">387</span><span class="token punctuation">,</span> <span class="token number">374</span><span class="token punctuation">,</span> <span class="token number">349</span><span class="token punctuation">,</span> <span class="token number">94</span><span class="token punctuation">,</span> <span class="token number">384</span><span class="token punctuation">,</span> <span class="token number">680</span><span class="token punctuation">,</span> <span class="token number">574</span><span class="token punctuation">,</span> <span class="token number">480</span><span class="token punctuation">,</span> <span class="token number">307</span><span class="token punctuation">,</span> <span class="token number">580</span><span class="token punctuation">,</span> <span class="token number">71</span><span class="token punctuation">,</span> <span class="token number">535</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">53</span><span class="token punctuation">,</span>
-             <span class="token number">481</span><span class="token punctuation">,</span> <span class="token number">519</span><span class="token punctuation">,</span> <span class="token number">644</span><span class="token punctuation">,</span> <span class="token number">219</span><span class="token punctuation">,</span> <span class="token number">686</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span> <span class="token number">424</span><span class="token punctuation">,</span> <span class="token number">326</span><span class="token punctuation">,</span> <span class="token number">244</span><span class="token punctuation">,</span> <span class="token number">212</span><span class="token punctuation">,</span> <span class="token number">909</span><span class="token punctuation">,</span> <span class="token number">202</span><span class="token punctuation">,</span> <span class="token number">951</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">812</span><span class="token punctuation">,</span> <span class="token number">901</span><span class="token punctuation">,</span> <span class="token number">926</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">507</span><span class="token punctuation">,</span> <span class="token number">739</span><span class="token punctuation">,</span> <span class="token number">371</span><span class="token punctuation">,</span>
-             <span class="token number">63</span><span class="token punctuation">,</span> <span class="token number">584</span><span class="token punctuation">,</span> <span class="token number">154</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">284</span><span class="token punctuation">,</span> <span class="token number">617</span><span class="token punctuation">,</span> <span class="token number">332</span><span class="token punctuation">,</span> <span class="token number">472</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">605</span><span class="token punctuation">,</span> <span class="token number">262</span><span class="token punctuation">,</span> <span class="token number">355</span><span class="token punctuation">,</span> <span class="token number">526</span><span class="token punctuation">,</span> <span class="token number">647</span><span class="token punctuation">,</span> <span class="token number">923</span><span class="token punctuation">,</span> <span class="token number">199</span><span class="token punctuation">,</span> <span class="token number">518</span><span class="token punctuation">]</span>
-
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> capacity<span class="token operator">=</span><span class="token number">100000000</span><span class="token punctuation">,</span> error_rate<span class="token operator">=</span><span class="token number">0.0000001</span><span class="token punctuation">,</span> redis_con<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> key<span class="token operator">=</span><span class="token string">"bloomfilter"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>bit_size <span class="token operator">=</span> math<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span>capacity <span class="token operator">*</span> math<span class="token punctuation">.</span>log2<span class="token punctuation">(</span>math<span class="token punctuation">.</span>e<span class="token punctuation">)</span> <span class="token operator">*</span> math<span class="token punctuation">.</span>log2<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> error_rate<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 所需位数</span>
-        self<span class="token punctuation">.</span>hash_time <span class="token operator">=</span> math<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span>math<span class="token punctuation">.</span>log1p<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>bit_size <span class="token operator">/</span> capacity<span class="token punctuation">)</span>  <span class="token comment"># 最少hash次数</span>
-        self<span class="token punctuation">.</span>memery <span class="token operator">=</span> math<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bit_size <span class="token operator">/</span> <span class="token number">8</span> <span class="token operator">/</span> <span class="token number">1024</span> <span class="token operator">/</span> <span class="token number">1024</span><span class="token punctuation">)</span>  <span class="token comment"># 占用多少M内存</span>
-        self<span class="token punctuation">.</span>block_num <span class="token operator">=</span> math<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span>self<span class="token punctuation">.</span>memery <span class="token operator">/</span> <span class="token number">512</span><span class="token punctuation">)</span>  <span class="token comment"># 需要多少个512M的内存块,value的第一个字符必须是ascii码，最多有256个内存块</span>
-        self<span class="token punctuation">.</span>seeds <span class="token operator">=</span> self<span class="token punctuation">.</span>SEEDS<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>hash_time<span class="token punctuation">]</span>
-        self<span class="token punctuation">.</span>key <span class="token operator">=</span> key
-        self<span class="token punctuation">.</span>N <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">31</span> <span class="token operator">-</span> <span class="token number">1</span>
-        self<span class="token punctuation">.</span>hash_func <span class="token operator">=</span> <span class="token punctuation">[</span>SimpleHash<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bit_size<span class="token punctuation">,</span> seed<span class="token punctuation">)</span> <span class="token keyword">for</span> seed <span class="token keyword">in</span> self<span class="token punctuation">.</span>seeds<span class="token punctuation">]</span>
-        self<span class="token punctuation">.</span>redis_con <span class="token operator">=</span> redis_con
-
-    <span class="token keyword">def</span> <span class="token function">get_key</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>key <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>block_num<span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">is_contains</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> str_input<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">try</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> <span class="token keyword">not</span> str_input<span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-            m5 <span class="token operator">=</span> md5<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            m5<span class="token punctuation">.</span>update<span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-            str_input <span class="token operator">=</span> m5<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            ret <span class="token operator">=</span> <span class="token boolean">True</span>
-            name <span class="token operator">=</span> self<span class="token punctuation">.</span>get_key<span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-            <span class="token keyword">for</span> f <span class="token keyword">in</span> self<span class="token punctuation">.</span>hash_func<span class="token punctuation">:</span>
-                loc <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token builtin">hash</span><span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-                ret <span class="token operator">=</span> ret <span class="token operator">&amp;</span> self<span class="token punctuation">.</span>redis_con<span class="token punctuation">.</span>getbit<span class="token punctuation">(</span>name<span class="token punctuation">,</span> loc<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> ret
-        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-            <span class="token keyword">raise</span>
-
-    <span class="token keyword">def</span> <span class="token function">insert</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> str_input<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">try</span><span class="token punctuation">:</span>
-            m5 <span class="token operator">=</span> md5<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            m5<span class="token punctuation">.</span>update<span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-            str_input <span class="token operator">=</span> m5<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            name <span class="token operator">=</span> self<span class="token punctuation">.</span>get_key<span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-            <span class="token keyword">for</span> f <span class="token keyword">in</span> self<span class="token punctuation">.</span>hash_func<span class="token punctuation">:</span>
-                loc <span class="token operator">=</span> f<span class="token punctuation">.</span><span class="token builtin">hash</span><span class="token punctuation">(</span>str_input<span class="token punctuation">)</span>
-                self<span class="token punctuation">.</span>redis_con<span class="token punctuation">.</span>setbit<span class="token punctuation">(</span>name<span class="token punctuation">,</span> loc<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-            <span class="token keyword">raise</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    bloom_filter_redis_conn_args <span class="token operator">=</span> <span class="token punctuation">{</span>
-        <span class="token string">"host"</span><span class="token punctuation">:</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span>
-        <span class="token string">"port"</span><span class="token punctuation">:</span> <span class="token string">"6379"</span><span class="token punctuation">,</span>
-        <span class="token string">"db"</span><span class="token punctuation">:</span> <span class="token number">0</span>
-    <span class="token punctuation">}</span>
-    redis_con <span class="token operator">=</span> redis<span class="token punctuation">.</span>StrictRedis<span class="token punctuation">(</span>connection_pool<span class="token operator">=</span>redis<span class="token punctuation">.</span>ConnectionPool<span class="token punctuation">(</span><span class="token operator">**</span>bloom_filter_redis_conn_args<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    bloom_filter <span class="token operator">=</span> BloomFilter<span class="token punctuation">(</span>redis_con<span class="token operator">=</span>redis_con<span class="token punctuation">)</span>
-    
-    start_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">6100000</span><span class="token punctuation">,</span> <span class="token number">6101000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        bloom_filter<span class="token punctuation">.</span>insert<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start_time<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>bloom_filter<span class="token punctuation">.</span>is_contains<span class="token punctuation">(</span><span class="token string">"6100101"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleHash</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, cap, seed</span>):</span><br><span class="line">        self.cap = cap</span><br><span class="line">        self.seed = seed</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hash</span>(<span class="params">self, value</span>):</span><br><span class="line">        ret = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(value)):</span><br><span class="line">            ret += self.seed * ret + <span class="built_in">ord</span>(value[i])</span><br><span class="line">        <span class="keyword">return</span> (self.cap - <span class="number">1</span>) &amp; ret</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BloomFilter</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="comment"># 随机种子</span></span><br><span class="line">    SEEDS = [<span class="number">543</span>, <span class="number">460</span>, <span class="number">171</span>, <span class="number">876</span>, <span class="number">796</span>, <span class="number">607</span>, <span class="number">650</span>, <span class="number">81</span>, <span class="number">837</span>, <span class="number">545</span>, <span class="number">591</span>, <span class="number">946</span>, <span class="number">846</span>, <span class="number">521</span>, <span class="number">913</span>, <span class="number">636</span>, <span class="number">878</span>, <span class="number">735</span>, <span class="number">414</span>, <span class="number">372</span>,</span><br><span class="line">             <span class="number">344</span>, <span class="number">324</span>, <span class="number">223</span>, <span class="number">180</span>, <span class="number">327</span>, <span class="number">891</span>, <span class="number">798</span>, <span class="number">933</span>, <span class="number">493</span>, <span class="number">293</span>, <span class="number">836</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">544</span>, <span class="number">924</span>, <span class="number">849</span>, <span class="number">438</span>, <span class="number">41</span>, <span class="number">862</span>, <span class="number">648</span>, <span class="number">338</span>,</span><br><span class="line">             <span class="number">465</span>, <span class="number">562</span>, <span class="number">693</span>, <span class="number">979</span>, <span class="number">52</span>, <span class="number">763</span>, <span class="number">103</span>, <span class="number">387</span>, <span class="number">374</span>, <span class="number">349</span>, <span class="number">94</span>, <span class="number">384</span>, <span class="number">680</span>, <span class="number">574</span>, <span class="number">480</span>, <span class="number">307</span>, <span class="number">580</span>, <span class="number">71</span>, <span class="number">535</span>, <span class="number">300</span>, <span class="number">53</span>,</span><br><span class="line">             <span class="number">481</span>, <span class="number">519</span>, <span class="number">644</span>, <span class="number">219</span>, <span class="number">686</span>, <span class="number">236</span>, <span class="number">424</span>, <span class="number">326</span>, <span class="number">244</span>, <span class="number">212</span>, <span class="number">909</span>, <span class="number">202</span>, <span class="number">951</span>, <span class="number">56</span>, <span class="number">812</span>, <span class="number">901</span>, <span class="number">926</span>, <span class="number">250</span>, <span class="number">507</span>, <span class="number">739</span>, <span class="number">371</span>,</span><br><span class="line">             <span class="number">63</span>, <span class="number">584</span>, <span class="number">154</span>, <span class="number">7</span>, <span class="number">284</span>, <span class="number">617</span>, <span class="number">332</span>, <span class="number">472</span>, <span class="number">140</span>, <span class="number">605</span>, <span class="number">262</span>, <span class="number">355</span>, <span class="number">526</span>, <span class="number">647</span>, <span class="number">923</span>, <span class="number">199</span>, <span class="number">518</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, capacity=<span class="number">100000000</span>, error_rate=<span class="number">0.0000001</span>, redis_con=<span class="literal">None</span>, key=<span class="string">"bloomfilter"</span></span>):</span><br><span class="line">        self.bit_size = math.ceil(capacity * math.log2(math.e) * math.log2(<span class="number">1</span> / error_rate))  <span class="comment"># 所需位数</span></span><br><span class="line">        self.hash_time = math.ceil(math.log1p(<span class="number">2</span>) * self.bit_size / capacity)  <span class="comment"># 最少hash次数</span></span><br><span class="line">        self.memery = math.ceil(self.bit_size / <span class="number">8</span> / <span class="number">1024</span> / <span class="number">1024</span>)  <span class="comment"># 占用多少M内存</span></span><br><span class="line">        self.block_num = math.ceil(self.memery / <span class="number">512</span>)  <span class="comment"># 需要多少个512M的内存块,value的第一个字符必须是ascii码，最多有256个内存块</span></span><br><span class="line">        self.seeds = self.SEEDS[<span class="number">0</span>:self.hash_time]</span><br><span class="line">        self.key = key</span><br><span class="line">        self.N = <span class="number">2</span> ** <span class="number">31</span> - <span class="number">1</span></span><br><span class="line">        self.hash_func = [SimpleHash(self.bit_size, seed) <span class="keyword">for</span> seed <span class="keyword">in</span> self.seeds]</span><br><span class="line">        self.redis_con = redis_con</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_key</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">return</span> self.key + <span class="built_in">str</span>(<span class="built_in">int</span>(value[<span class="number">0</span>:<span class="number">2</span>], <span class="number">16</span>) % self.block_num)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">is_contains</span>(<span class="params">self, str_input</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> str_input:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            m5 = md5()</span><br><span class="line">            m5.update(str_input)</span><br><span class="line">            str_input = m5.hexdigest()</span><br><span class="line">            ret = <span class="literal">True</span></span><br><span class="line">            name = self.get_key(str_input)</span><br><span class="line">            <span class="keyword">for</span> f <span class="keyword">in</span> self.hash_func:</span><br><span class="line">                loc = f.<span class="built_in">hash</span>(str_input)</span><br><span class="line">                ret = ret &amp; self.redis_con.getbit(name, loc)</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">self, str_input</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            m5 = md5()</span><br><span class="line">            m5.update(str_input)</span><br><span class="line">            str_input = m5.hexdigest()</span><br><span class="line">            name = self.get_key(str_input)</span><br><span class="line">            <span class="keyword">for</span> f <span class="keyword">in</span> self.hash_func:</span><br><span class="line">                loc = f.<span class="built_in">hash</span>(str_input)</span><br><span class="line">                self.redis_con.setbit(name, loc, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">raise</span> </span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bloom_filter_redis_conn_args = {</span><br><span class="line">        <span class="string">"host"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">        <span class="string">"port"</span>: <span class="string">"6379"</span>,</span><br><span class="line">        <span class="string">"db"</span>: <span class="number">0</span></span><br><span class="line">    }</span><br><span class="line">    redis_con = redis.StrictRedis(connection_pool=redis.ConnectionPool(**bloom_filter_redis_conn_args))</span><br><span class="line">    bloom_filter = BloomFilter(redis_con=redis_con)</span><br><span class="line">    </span><br><span class="line">    start_time = time.time()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6100000</span>, <span class="number">6101000</span>):</span><br><span class="line">        bloom_filter.insert(<span class="built_in">str</span>(i).encode(<span class="string">"utf-8"</span>))</span><br><span class="line">    <span class="built_in">print</span>(time.time() - start_time)</span><br><span class="line">    <span class="built_in">print</span>(bloom_filter.is_contains(<span class="string">"6100101"</span>.encode(<span class="string">"utf-8"</span>)))</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="初步结论（本地测试）"><a href="#初步结论（本地测试）" class="headerlink" title="初步结论（本地测试）"></a>初步结论（本地测试）</h4><ul>
 <li>插入1000条耗时在2-4s之间。</li>
 <li>插入和查询耗时基本相同。</li>
 </ul>
-<h4 id="Redis数据查询"><a href="#Redis数据查询" class="headerlink" title="Redis数据查询"></a>Redis数据查询</h4><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">➜  ~ redis-<span class="token function">cli</span> <span class="token operator">--</span>bigkeys <span class="token operator">-</span>i 0<span class="token punctuation">.</span>1 <span class="token operator">-</span>h 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1
-
-<span class="token comment"># Scanning the entire keyspace to find biggest keys as well as</span>
-<span class="token comment"># average sizes per key type.  You can use -i 0.1 to sleep 0.1 sec</span>
-<span class="token comment"># per 100 SCAN commands (not usually needed).</span>
-
-<span class="token punctuation">[</span>00<span class="token punctuation">.</span>00%<span class="token punctuation">]</span> Biggest string found so far <span class="token string">'bloomfilter0'</span> with 419346305 bytes
-
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span> summary <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
-
-Sampled 1 keys in the keyspace!
-Total key length in bytes is 12 <span class="token punctuation">(</span>avg len 12<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-
-Biggest string found <span class="token string">'bloomfilter0'</span> has 419346305 bytes
-
-1 strings with 419346305 bytes <span class="token punctuation">(</span>100<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 419346305<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 lists with 0 items <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 hashs with 0 fields <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 streams with 0 entries <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 sets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span>
-0 zsets with 0 members <span class="token punctuation">(</span>00<span class="token punctuation">.</span>00% of keys<span class="token punctuation">,</span> avg size 0<span class="token punctuation">.</span>00<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Redis数据查询"><a href="#Redis数据查询" class="headerlink" title="Redis数据查询"></a>Redis数据查询</h4><figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ redis<span class="literal">-cli</span> <span class="literal">--bigkeys</span> <span class="literal">-i</span> <span class="number">0.1</span> <span class="literal">-h</span> <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Scanning the entire keyspace to find biggest keys as well as</span></span><br><span class="line"><span class="comment"># average sizes per key type.  You can use -i 0.1 to sleep 0.1 sec</span></span><br><span class="line"><span class="comment"># per 100 SCAN commands (not usually needed).</span></span><br><span class="line"></span><br><span class="line">[<span class="number">00.00</span>%] Biggest string found so far <span class="string">'bloomfilter0'</span> with <span class="number">419346305</span> bytes</span><br><span class="line"></span><br><span class="line"><span class="literal">--------</span> summary <span class="literal">-------</span></span><br><span class="line"></span><br><span class="line">Sampled <span class="number">1</span> keys <span class="keyword">in</span> the keyspace!</span><br><span class="line">Total key length <span class="keyword">in</span> bytes is <span class="number">12</span> (avg len <span class="number">12.00</span>)</span><br><span class="line"></span><br><span class="line">Biggest string found <span class="string">'bloomfilter0'</span> has <span class="number">419346305</span> bytes</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> strings with <span class="number">419346305</span> bytes (<span class="number">100.00</span>% of keys, avg size <span class="number">419346305.00</span>)</span><br><span class="line"><span class="number">0</span> lists with <span class="number">0</span> items (<span class="number">00.00</span>% of keys, avg size <span class="number">0.00</span>)</span><br><span class="line"><span class="number">0</span> hashs with <span class="number">0</span> fields (<span class="number">00.00</span>% of keys, avg size <span class="number">0.00</span>)</span><br><span class="line"><span class="number">0</span> streams with <span class="number">0</span> entries (<span class="number">00.00</span>% of keys, avg size <span class="number">0.00</span>)</span><br><span class="line"><span class="number">0</span> sets with <span class="number">0</span> members (<span class="number">00.00</span>% of keys, avg size <span class="number">0.00</span>)</span><br><span class="line"><span class="number">0</span> zsets with <span class="number">0</span> members (<span class="number">00.00</span>% of keys, avg size <span class="number">0.00</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>可以看到 bloomfilter0 所占内存为400M左右</p>
 
                 
@@ -624,11 +549,11 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                     
                         <div class="article-tag">
                             
-                                <a href="/blinkbean/tags/Python/">
+                                <a href="/tags/Python/">
                                     <span class="chip bg-color">Python</span>
                                 </a>
                             
-                                <a href="/blinkbean/tags/Redis/">
+                                <a href="/tags/Redis/">
                                     <span class="chip bg-color">Redis</span>
                                 </a>
                             
@@ -636,7 +561,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
 
     
@@ -729,11 +654,11 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/blinkbean/uncatesgorized/2021-03-07-python-ji-chu-zhi-shi-zheng-li/">
+                <a href="/uncatesgorized/2021-03-07-python-ji-chu-zhi-shi-zheng-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/blinkbean/medias/featureimages/2.jpg" class="responsive-img" alt="Python-基础知识整理">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Python-基础知识整理">
                         
                         <span class="card-title">Python-基础知识整理</span>
                     </div>
@@ -759,7 +684,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/Python/">
+                    <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
                     </a>
                     
@@ -774,11 +699,11 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blinkbean/xiao-lu-gong-ju/2021-03-07-za-chang-yong-zai-xian-wang-zhan/">
+                <a href="/xiao-lu-gong-ju/2021-03-07-za-chang-yong-zai-xian-wang-zhan/">
                     <div class="card-image">
                         
                         
-                        <img src="/blinkbean/medias/featureimages/15.jpg" class="responsive-img" alt="常用在线网站">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="常用在线网站">
                         
                         <span class="card-title">常用在线网站</span>
                     </div>
@@ -797,7 +722,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" class="post-category">
+                            <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" class="post-category">
                                     效率工具
                                 </a>
                             
@@ -808,7 +733,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/%E5%B7%A5%E5%85%B7/">
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
                         <span class="chip bg-color">工具</span>
                     </a>
                     
@@ -825,21 +750,21 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
     </div>
@@ -860,7 +785,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
 </div>
 
 
-<script src="/blinkbean/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -952,7 +877,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
                 <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
-            <a href="/blinkbean/about" target="_blank">blinkbean</a>
+            <a href="/about" target="_blank">blinkbean</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -1005,7 +930,7 @@ Biggest string found <span class="token string">'bloomfilter0'</span> has 419346
 
 
 
-    <a href="/blinkbean/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -1116,7 +1041,7 @@ $(function () {
         });
     };
 
-    searchFunc('/blinkbean/search.xml', 'searchInput', 'searchResult');
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1128,12 +1053,12 @@ $(function () {
 </div>
 
 
-    <script src="/blinkbean/libs/materialize/materialize.min.js"></script>
-    <script src="/blinkbean/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/blinkbean/libs/aos/aos.js"></script>
-    <script src="/blinkbean/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/blinkbean/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/blinkbean/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1154,10 +1079,10 @@ $(function () {
 </script>
 
     
-    <script src="/blinkbean/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/blinkbean/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1171,11 +1096,11 @@ $(function () {
     
 
     
-    <script type="text/javascript" src="/blinkbean/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="/blinkbean/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Golang-信号量semaphore, Blinkbean">
+    <meta name="keywords" content="Golang-sync.Pool使用及原理, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,20 +16,22 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Golang-信号量semaphore | Blinkbean</title>
-    <link rel="icon" type="image/png" href="/blinkbean/favicon.png">
+    <title>Golang-sync.Pool使用及原理 | Blinkbean</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
 
-    <script src="/blinkbean/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -41,9 +43,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="/blinkbean/" class="waves-effect waves-light">
+                <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/blinkbean/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Blinkbean</span>
                 </a>
@@ -55,7 +57,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/" class="waves-effect waves-light">
+    <a href="/" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -66,7 +68,18 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/tags" class="waves-effect waves-light">
+    <a href="/scode" class="waves-effect waves-light">
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>源码计划</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -77,7 +90,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/categories" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -88,7 +101,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/archives" class="waves-effect waves-light">
+    <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -110,7 +123,7 @@
     <ul class="sub-nav menus_item_child ">
       
       <li>
-        <a href="/blinkbean/about">
+        <a href="/about">
           
           <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -119,7 +132,7 @@
       </li>
       
       <li>
-        <a href="/blinkbean/aboutme">
+        <a href="/aboutme">
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -143,7 +156,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/blinkbean/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Blinkbean</div>
         <div class="logo-desc">
@@ -159,7 +172,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/" class="waves-effect waves-light">
+		<a href="/" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -170,7 +183,18 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/tags" class="waves-effect waves-light">
+		<a href="/scode" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-file-code"></i>
+			
+			源码计划
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -181,7 +205,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/categories" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -192,7 +216,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/archives" class="waves-effect waves-light">
+		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -214,7 +238,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/about " style="margin-left:75px">
+                  <a href="/about " style="margin-left:75px">
 				  
 				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
 			      
@@ -224,7 +248,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/aboutme " style="margin-left:75px">
+                  <a href="/aboutme " style="margin-left:75px">
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
@@ -239,7 +263,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://blinkbean.gitee.io" class="waves-effect waves-light" target="_blank">
+            <a href="https://blinkbean.xyz" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>To My Home
             </a>
         </li>
@@ -296,7 +320,7 @@
     }
 </style>
 
-<a href="https://blinkbean.gitee.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://blinkbean.xyz" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="To My Home" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -315,12 +339,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blinkbean/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Golang-信号量semaphore</h1>
+                    <h1 class="description center-align post-title">Golang-sync.Pool使用及原理</h1>
                 </div>
             </div>
         </div>
@@ -333,7 +357,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/blinkbean/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -436,7 +460,7 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blinkbean/tags/Golang/">
+                            <a href="/tags/Golang/">
                                 <span class="chip bg-color">Golang</span>
                             </a>
                         
@@ -448,8 +472,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                后端开发
+                            <a href="/categories/Code/" class="post-category">
+                                Code
                             </a>
                         
                     </div>
@@ -461,7 +485,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-01
+                    2021-07-28
                 </div>
                 
 
@@ -470,7 +494,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    856
+                    650
                 </div>
                 
 
@@ -488,130 +512,32 @@
 
         
         <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/blinkbean/libs/prism/prism.css">
+        <link rel="stylesheet" href="/libs/prism/prism.css">
         
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="semaphore"><a href="#semaphore" class="headerlink" title="semaphore"></a>semaphore</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 一个 watier 就表示一个请求，其中n表示这次请求的资源数量</span>
-<span class="token keyword">type</span> waiter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-	n     <span class="token builtin">int64</span>
-	ready <span class="token keyword">chan</span><span class="token operator">&lt;-</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// Closed when semaphore acquired.</span>
-<span class="token punctuation">}</span>
+                <div class="note info no-icon">
+      <a class="no-line-link" href="../../scode">本文分类《源码计划》</a>
+</div>
 
-<span class="token keyword">type</span> Weighted <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-  <span class="token comment">// 最大资源数量，取走时会减少，释放时会增加</span>
-	size    <span class="token builtin">int64</span>
-  <span class="token comment">// 记录当前已使用资源数，值范围[0 - size]</span>
-	cur     <span class="token builtin">int64</span>
-	mu      sync<span class="token punctuation">.</span>Mutex
-  <span class="token comment">// 当前处于等待休眠的请求者goroutine，每个请求者请求的资源数量可能不一样，只有在请求时，可用资源数量不足时请求者才会进入请求链表，每个请求者表示一个goroutine</span>
-	waiters list<span class="token punctuation">.</span>List
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h2><p>​		你想看一本书，需要的时候开始印刷，看完了就卖废品，1000个人想看就得印刷1000本书，卖1000本废品。这明显太不绿色了，你想了想如果建一个图书馆，里面放几本书，大家想看的时候去借，看完了再还回去，这明显高效了不少。</p>
+<p>​		程序员发现了你用图书馆的方式合理的利用了资源，于是照猫画虎发明了连接池、线程池、协程池、内存池，各种各样的池都是想解决同类的问题：创建连接、线程等都相对比较消耗资源，通过池存一写已经新建的连接，线程…需要的时候拿去用，不用了就再还回来。借与还的模式，节省了不少资源，大家都说好。</p>
+<p>​		Golang的sync.Pool，对象池。采用对象池来创建对象，增加对象的重复利用率，使用的时候就不必在堆上重新创建对象可以节省开销。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>sync.Pool对外提供三个方法：New，Get，Put。</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pool *sync.Pool</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> {</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> {</span><br><span class="line">	pool = &amp;sync.Pool{</span><br><span class="line">		New: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{} {</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">new</span>(Book)</span><br><span class="line">		},</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	book := pool.Get().(*Book)</span><br><span class="line">	fmt.Println(book) <span class="comment">// &amp;{}</span></span><br><span class="line">	book.Name = <span class="string">"Go Programming"</span></span><br><span class="line">	pool.Put(book)</span><br><span class="line">	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{Go Programming}</span></span><br><span class="line">	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{}</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="方法列表"><a href="#方法列表" class="headerlink" title="方法列表"></a>方法列表</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 创建一类资源，参数 n 资源表示最大可用资源总个数</span>
-<span class="token keyword">func</span> <span class="token function">NewWeighted</span><span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token operator">*</span>Weighted
-<span class="token comment">// 获取指定个数的资源，如果当前没有空闲资源可用，当前请求者goroutine将陷入休眠状态</span>
-<span class="token comment">// 可以一次获取多个资源，如果没有足够多的资源，调用者就会被阻塞。它的第一个参数是 Context，这就意味着，你可以通过 Context 增加超时或者 cancel 的机制。如果是正常获取了资源，就返回 nil；否则，就返回 ctx.Err()，信号量不改变</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">Acquire</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">,</span> n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
-<span class="token comment">// 释放资源</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">Release</span><span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">)</span>
-<span class="token comment">// 同 Acquire 一样，但当无空闲资源将直接返回false，而不阻塞</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">TryAcquire</span><span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><ul>
+<li>结构体</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pool <span class="keyword">struct</span> {</span><br><span class="line">	noCopy noCopy <span class="comment">// 禁止拷贝</span></span><br><span class="line"></span><br><span class="line">	local     unsafe.Pointer <span class="comment">// [P]poolLocal poolLocal数组指针</span></span><br><span class="line">	localSize <span class="type">uintptr</span>        <span class="comment">// 数组大小</span></span><br><span class="line"></span><br><span class="line">	victim     unsafe.Pointer <span class="comment">// GC处理并不直接将allPools的object直接进行GC处理，而是保存到oldPools，等到下一个GC周期到了再处理。</span></span><br><span class="line">	victimSize <span class="type">uintptr</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当pool没有缓存对象的时候，会调用New方法生成一个新的对象</span></span><br><span class="line">	New <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> poolLocal <span class="keyword">struct</span> {</span><br><span class="line">    poolLocalInternal</span><br><span class="line">    pad [<span class="number">128</span> - unsafe.Sizeof(poolLocalInternal{})%<span class="number">128</span>]<span class="type">byte</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">type</span> poolLocalInternal <span class="keyword">struct</span> {</span><br><span class="line">    private <span class="keyword">interface</span>{}   <span class="comment">// Can be used only by the respective P.</span></span><br><span class="line">    shared  poolChain   <span class="comment">// Local P can pushHead/popHead; any P can popTail.</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> poolChain <span class="keyword">struct</span> {</span><br><span class="line">	<span class="comment">// head is the poolDequeue to push to. This is only accessed</span></span><br><span class="line">	<span class="comment">// by the producer, so doesn't need to be synchronized.</span></span><br><span class="line">	head *poolChainElt</span><br><span class="line"></span><br><span class="line">	<span class="comment">// tail is the poolDequeue to popTail from. This is accessed</span></span><br><span class="line">	<span class="comment">// by consumers, so reads and writes must be atomic.</span></span><br><span class="line">	tail *poolChainElt</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="Acquire-和-TryAcquire"><a href="#Acquire-和-TryAcquire" class="headerlink" title="Acquire 和 TryAcquire"></a>Acquire 和 TryAcquire</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">Acquire</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">,</span> n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
-    s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment">// 如果恰好有足够的资源，也没有排队等待获取资源的goroutine，</span>
-    <span class="token comment">// 将cur加上n后直接返回</span>
-    <span class="token keyword">if</span> s<span class="token punctuation">.</span>size<span class="token operator">-</span>s<span class="token punctuation">.</span>cur <span class="token operator">&gt;=</span> n <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-      s<span class="token punctuation">.</span>cur <span class="token operator">+=</span> n
-      s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">return</span> <span class="token boolean">nil</span>
-    <span class="token punctuation">}</span>
-  
-    <span class="token comment">// 请求的资源数大于能提供的最大的资源数</span>
-    <span class="token comment">// 这个任务处理不了，走错误处理逻辑</span>
-    <span class="token keyword">if</span> n <span class="token operator">&gt;</span> s<span class="token punctuation">.</span>size <span class="token punctuation">{</span>
-      s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token comment">// 依赖ctx的状态返回，否则一直等待</span>
-      <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">return</span> ctx<span class="token punctuation">.</span><span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 现存资源不够, 需要把调用者加入到等待队列中</span>
-    <span class="token comment">// 创建了一个ready chan,以便被通知唤醒</span>
-    ready <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-    w <span class="token operator">:=</span> waiter<span class="token punctuation">{</span>n<span class="token punctuation">:</span> n<span class="token punctuation">,</span> ready<span class="token punctuation">:</span> ready<span class="token punctuation">}</span>
-    elem <span class="token operator">:=</span> s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">PushBack</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span>
-    s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  
-
-    <span class="token comment">// 等待</span>
-    <span class="token keyword">select</span> <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment">// context的Done被关闭</span>
-      err <span class="token operator">:=</span> ctx<span class="token punctuation">.</span><span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">select</span> <span class="token punctuation">{</span>
-      <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ready<span class="token punctuation">:</span> <span class="token comment">// 如果被唤醒了，忽略ctx的状态</span>
-        err <span class="token operator">=</span> <span class="token boolean">nil</span>
-      <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token comment">// 通知waiter</span>
-        isFront <span class="token operator">:=</span> s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Front</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> elem
-        <span class="token comment">// 已经通过ctx退出了，删除</span>
-        s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span>
-        <span class="token comment">// 如果当前元素正好位于链表最前面，且还存在可用的资源，就通知其它waiters</span>
-        <span class="token keyword">if</span> isFront <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">.</span>size <span class="token operator">&gt;</span> s<span class="token punctuation">.</span>cur <span class="token punctuation">{</span>
-          s<span class="token punctuation">.</span><span class="token function">notifyWaiters</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-      s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">return</span> err
-    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ready<span class="token punctuation">:</span> <span class="token comment">// 等待者被唤醒了</span>
-      <span class="token keyword">return</span> <span class="token boolean">nil</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">TryAcquire</span><span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
-	s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	success <span class="token operator">:=</span> s<span class="token punctuation">.</span>size<span class="token operator">-</span>s<span class="token punctuation">.</span>cur <span class="token operator">&gt;=</span> n <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
-	<span class="token keyword">if</span> success <span class="token punctuation">{</span>
-		s<span class="token punctuation">.</span>cur <span class="token operator">+=</span> n
-	<span class="token punctuation">}</span>
-	s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token keyword">return</span> success
-<span class="token punctuation">}</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">notifyWaiters</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-      next <span class="token operator">:=</span> s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Front</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">if</span> next <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        <span class="token keyword">break</span> <span class="token comment">// 没有等待者了，直接返回</span>
-      <span class="token punctuation">}</span>
-  
-      w <span class="token operator">:=</span> next<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token punctuation">(</span>waiter<span class="token punctuation">)</span>
-      <span class="token keyword">if</span> s<span class="token punctuation">.</span>size<span class="token operator">-</span>s<span class="token punctuation">.</span>cur <span class="token operator">&lt;</span> w<span class="token punctuation">.</span>n <span class="token punctuation">{</span>
-        <span class="token comment">// 如果现有资源不够队列头调用者请求的资源数，就退出所有等待者会继续等待</span>
-        <span class="token comment">// 这里还是按照先入先出的方式处理是为了避免饥饿</span>
-        <span class="token keyword">break</span>
-      <span class="token punctuation">}</span>
-      s<span class="token punctuation">.</span>cur <span class="token operator">+=</span> w<span class="token punctuation">.</span>n
-      s<span class="token punctuation">.</span>waiters<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>next<span class="token punctuation">)</span>
-      <span class="token function">close</span><span class="token punctuation">(</span>w<span class="token punctuation">.</span>ready<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Weighted<span class="token punctuation">)</span> <span class="token function">Release</span><span class="token punctuation">(</span>n <span class="token builtin">int64</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment">// 将当前计数值减去释放的资源数n</span>
-    s<span class="token punctuation">.</span>cur <span class="token operator">-=</span> n
-    <span class="token keyword">if</span> s<span class="token punctuation">.</span>cur <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-      s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"semaphore: released more than held"</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment">// 尝试唤醒等待队列中的调用者，看是否有足够的资源被获取</span>
-    s<span class="token punctuation">.</span><span class="token function">notifyWaiters</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    s<span class="token punctuation">.</span>mu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>Get</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> Get() <span class="keyword">interface</span>{} {</span><br><span class="line">	<span class="keyword">if</span> race.Enabled { <span class="comment">// 不允许竞态检测</span></span><br><span class="line">		race.Disable()</span><br><span class="line">	}</span><br><span class="line">	l, pid := p.pin() <span class="comment">// 获取一个poolLocal</span></span><br><span class="line">	x := l.private</span><br><span class="line">	l.private = <span class="literal">nil</span></span><br><span class="line">	<span class="keyword">if</span> x == <span class="literal">nil</span> {</span><br><span class="line">		<span class="comment">// Try to pop the head of the local shard. We prefer</span></span><br><span class="line">		<span class="comment">// the head over the tail for temporal locality of</span></span><br><span class="line">		<span class="comment">// reuse.</span></span><br><span class="line">		x, _ = l.shared.popHead()</span><br><span class="line">		<span class="keyword">if</span> x == <span class="literal">nil</span> {</span><br><span class="line">			x = p.getSlow(pid)</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	runtime_procUnpin()</span><br><span class="line">	<span class="keyword">if</span> race.Enabled {</span><br><span class="line">		race.Enable()</span><br><span class="line">		<span class="keyword">if</span> x != <span class="literal">nil</span> {</span><br><span class="line">			race.Acquire(poolRaceAddr(x))</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> x == <span class="literal">nil</span> &amp;&amp; p.New != <span class="literal">nil</span> { <span class="comment">// 没拿到 new一个</span></span><br><span class="line">		x = p.New()</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> x</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> pin() *poolLocal {</span><br><span class="line">    pid := runtime_procPin()</span><br><span class="line">    s := atomic.LoadUintptr(&amp;p.localSize) <span class="comment">// load-acquire</span></span><br><span class="line">    l := p.local                          <span class="comment">// load-consume</span></span><br><span class="line">    <span class="keyword">if</span> <span class="type">uintptr</span>(pid) &lt; s {</span><br><span class="line">        <span class="keyword">return</span> indexLocal(l, pid)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> p.pinSlow()</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
                 
@@ -627,7 +553,7 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/blinkbean/tags/Golang/">
+                                <a href="/tags/Golang/">
                                     <span class="chip bg-color">Golang</span>
                                 </a>
                             
@@ -635,7 +561,7 @@
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
 
     
@@ -728,12 +654,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/blinkbean/wang-luo/2023-02-01-wang-luo-linux-xia-shi-yong-tc-mo-ni-wang-luo-yan-chi-he-diu-bao/">
+                <a href="/hou-duan-kai-fa/2024-04-19-linux-lvs/">
                     <div class="card-image">
                         
-                        <img src="/blinkbean/Image/image-20240419011205283.png" class="responsive-img" alt="Linux下使用tc模拟网络延迟和丢包">
+                        <img src="/Image/image-20240419010440053.png" class="responsive-img" alt="Linux virtual server (LVS)">
                         
-                        <span class="card-title">Linux下使用tc模拟网络延迟和丢包</span>
+                        <span class="card-title">Linux virtual server (LVS)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -744,14 +670,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-19
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
-                                    网络
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
                                 </a>
                             
                             
@@ -761,8 +687,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">网络工具</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -776,13 +702,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blinkbean/hou-duan-kai-fa/2023-02-01-golang-sync-cond/">
+                <a href="/hou-duan-kai-fa/2021-07-23-za-she-ji-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/blinkbean/medias/featureimages/22.jpg" class="responsive-img" alt="Golang-sync.Cond">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="设计模式">
                         
-                        <span class="card-title">Golang-sync.Cond</span>
+                        <span class="card-title">设计模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -793,13 +719,13 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
                                     后端开发
                                 </a>
                             
@@ -810,8 +736,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/Golang/">
-                        <span class="chip bg-color">Golang</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
@@ -827,21 +753,21 @@
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
     </div>
@@ -862,7 +788,7 @@
 </div>
 
 
-<script src="/blinkbean/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -954,7 +880,7 @@
                 <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
-            <a href="/blinkbean/about" target="_blank">blinkbean</a>
+            <a href="/about" target="_blank">blinkbean</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -1007,7 +933,7 @@
 
 
 
-    <a href="/blinkbean/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -1118,7 +1044,7 @@ $(function () {
         });
     };
 
-    searchFunc('/blinkbean/search.xml', 'searchInput', 'searchResult');
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1130,12 +1056,12 @@ $(function () {
 </div>
 
 
-    <script src="/blinkbean/libs/materialize/materialize.min.js"></script>
-    <script src="/blinkbean/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/blinkbean/libs/aos/aos.js"></script>
-    <script src="/blinkbean/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/blinkbean/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/blinkbean/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1156,10 +1082,10 @@ $(function () {
 </script>
 
     
-    <script src="/blinkbean/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/blinkbean/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1173,11 +1099,11 @@ $(function () {
     
 
     
-    <script type="text/javascript" src="/blinkbean/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="/blinkbean/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

@@ -17,19 +17,21 @@
 
 
     <title>软件-Airflow安装与简单使用 | Blinkbean</title>
-    <link rel="icon" type="image/png" href="/blinkbean/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/blinkbean/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
 
-    <script src="/blinkbean/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -41,9 +43,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="/blinkbean/" class="waves-effect waves-light">
+                <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/blinkbean/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Blinkbean</span>
                 </a>
@@ -55,7 +57,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/" class="waves-effect waves-light">
+    <a href="/" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -66,7 +68,18 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/tags" class="waves-effect waves-light">
+    <a href="/scode" class="waves-effect waves-light">
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>源码计划</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -77,7 +90,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/categories" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -88,7 +101,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/blinkbean/archives" class="waves-effect waves-light">
+    <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -110,7 +123,7 @@
     <ul class="sub-nav menus_item_child ">
       
       <li>
-        <a href="/blinkbean/about">
+        <a href="/about">
           
           <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -119,7 +132,7 @@
       </li>
       
       <li>
-        <a href="/blinkbean/aboutme">
+        <a href="/aboutme">
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
@@ -143,7 +156,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/blinkbean/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Blinkbean</div>
         <div class="logo-desc">
@@ -159,7 +172,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/" class="waves-effect waves-light">
+		<a href="/" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -170,7 +183,18 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/tags" class="waves-effect waves-light">
+		<a href="/scode" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-file-code"></i>
+			
+			源码计划
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -181,7 +205,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/categories" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -192,7 +216,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/blinkbean/archives" class="waves-effect waves-light">
+		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -214,7 +238,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/about " style="margin-left:75px">
+                  <a href="/about " style="margin-left:75px">
 				  
 				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
 			      
@@ -224,7 +248,7 @@
               
                 <li>
 
-                  <a href="/blinkbean/aboutme " style="margin-left:75px">
+                  <a href="/aboutme " style="margin-left:75px">
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
@@ -239,7 +263,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://blinkbean.gitee.io" class="waves-effect waves-light" target="_blank">
+            <a href="https://blinkbean.xyz" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>To My Home
             </a>
         </li>
@@ -296,7 +320,7 @@
     }
 </style>
 
-<a href="https://blinkbean.gitee.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://blinkbean.xyz" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="To My Home" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -315,7 +339,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blinkbean/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -333,7 +357,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/blinkbean/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -436,7 +460,7 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blinkbean/tags/Airflow/">
+                            <a href="/tags/Airflow/">
                                 <span class="chip bg-color">Airflow</span>
                             </a>
                         
@@ -461,7 +485,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    563
+                    556
                 </div>
                 
 
@@ -479,7 +503,7 @@
 
         
         <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/blinkbean/libs/prism/prism.css">
+        <link rel="stylesheet" href="/libs/prism/prism.css">
         
 
         
@@ -488,71 +512,45 @@
             <div id="articleContent">
                 <h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><ul>
 <li><p>1、新建一个虚拟环境</p>
-<pre class="line-numbers language-none"><code class="language-none">virtualenv airflowenv
-source airflowenv/bin/activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virtualenv airflowenv</span><br><span class="line">source airflowenv/bin/activate</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>2、安装airflow<br> 需要等一段时间</p>
-<pre class="line-numbers language-none"><code class="language-none">pip install airflow==1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install airflow==1.8.0</span><br></pre></td></tr></tbody></table></figure>
 
 </li>
 <li><p>3、查看安装结果</p>
-<pre class="line-numbers language-none"><code class="language-none">airflow version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airflow version</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>出现如下则说明安装成功</p>
-<pre class="line-numbers language-none"><code class="language-none">____________       _____________
-____    |__( )_________  __/__  /________      __
-____  /| |_  /__  ___/_  /_ __  /_  __ \_ | /| / /
-___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /
-_/_/  |_/_/  /_/    /_/    /_/  \____/____/|__/
-  v1.8.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">____________       _____________</span><br><span class="line">____    |__( )_________  __/__  /________      __</span><br><span class="line">____  /| |_  /__  ___/_  /_ __  /_  __ \_ | /| / /</span><br><span class="line">___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /</span><br><span class="line">_/_/  |_/_/  /_/    /_/    /_/  \____/____/|__/</span><br><span class="line">  v1.8.0</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
 </li>
 <li><p>4、cd 进入airflow文件夹</p>
-<pre class="line-numbers language-none"><code class="language-none">ls -al<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<pre class="line-numbers language-none"><code class="language-none">有以下两个文件
--rw-r--r--   1 ***  staff  11602  8 28 18:06 airflow.cfg
--rw-r--r--   1 ***  staff   1549  8 27 12:31 unittests.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有以下两个文件</span><br><span class="line">-rw-r--r--   1 ***  staff  11602  8 28 18:06 airflow.cfg</span><br><span class="line">-rw-r--r--   1 ***  staff   1549  8 27 12:31 unittests.cfg</span><br></pre></td></tr></tbody></table></figure>
 <p>airflow.cfg有许多<strong>配置项</strong>，后面会作简单解释</p>
 </blockquote>
 </li>
 <li><p>5、初始化airflow数据库</p>
-<pre class="line-numbers language-none"><code class="language-none">airflow initdb
-默认配置使用SQLLite，执行后在airflow文件夹生成一个airflow.db数据库文件（可以通过配置airflow.cfg的方式更改数据库类型如：mysql）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">airflow initdb</span><br><span class="line">默认配置使用SQLLite，执行后在airflow文件夹生成一个airflow.db数据库文件（可以通过配置airflow.cfg的方式更改数据库类型如：mysql）</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>6、启动服务</p>
-<pre class="line-numbers language-none"><code class="language-none">airflow webserver -p 8080
-执行之后在浏览器输入：localhost:8080/admin
-结果如下所示：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">airflow webserver -p 8080</span><br><span class="line">执行之后在浏览器输入：localhost:8080/admin</span><br><span class="line">结果如下所示：</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdn.net/20180828194455231?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="airflow"></p>
 </li>
 </ul>
 <h4 id="安装工作结束"><a href="#安装工作结束" class="headerlink" title="安装工作结束"></a>安装工作结束</h4><h2 id="二、更改数据库为Mysql"><a href="#二、更改数据库为Mysql" class="headerlink" title="二、更改数据库为Mysql"></a>二、更改数据库为Mysql</h2><ul>
 <li><p>1、安装MySQL，方法不限</p>
-<pre class="line-numbers language-none"><code class="language-none">pip install mysql-python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mysql-python</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>2、成功进入MySQL之后</p>
-<pre class="line-numbers language-none"><code class="language-none">新建用户
-CREATE USER airflow;
-新建数据库
-CREATE DATABASE airflow;
-CREATE DATABASE celery_result_airflow;
-给权限
-GRANT all privileges on airflow.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';
-GRANT all privileges on celery_result_airflow.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">新建用户</span><br><span class="line">CREATE USER airflow;</span><br><span class="line">新建数据库</span><br><span class="line">CREATE DATABASE airflow;</span><br><span class="line">CREATE DATABASE celery_result_airflow;</span><br><span class="line">给权限</span><br><span class="line">GRANT all privileges on airflow.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';</span><br><span class="line">GRANT all privileges on celery_result_airflow.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>3、打开上文提到的airflow.cfg<br>将 sql_alchemy_conn，改为如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">sql_alchemy_conn = mysql://airflow:airflow@localhost:3306/airflow<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">初始化元数据库
-airflow initdb
-重置元数据库
-airflow resetdb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql_alchemy_conn = mysql://airflow:airflow@localhost:3306/airflow</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">初始化元数据库</span><br><span class="line">airflow initdb</span><br><span class="line">重置元数据库</span><br><span class="line">airflow resetdb</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h2 id="三、启动airflow"><a href="#三、启动airflow" class="headerlink" title="三、启动airflow"></a>三、启动airflow</h2><ul>
 <li><p>运行命令（需要在不同窗口）</p>
-<pre class="line-numbers language-none"><code class="language-none">airflow webserver -p 8080
-airflow scheduler
-
-以非root用户运行
-airflow worker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">airflow webserver -p 8080</span><br><span class="line">airflow scheduler</span><br><span class="line"></span><br><span class="line">以非root用户运行</span><br><span class="line">airflow worker</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>浏览器输入 localhost:8080/admin</p>
 </li>
@@ -561,22 +559,14 @@ airflow worker<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 </ul>
 <h2 id="四、实际项目中可能遇到的问题"><a href="#四、实际项目中可能遇到的问题" class="headerlink" title="四、实际项目中可能遇到的问题"></a>四、实际项目中可能遇到的问题</h2><ul>
 <li><p>如何打开已有项目</p>
-<pre class="line-numbers language-none"><code class="language-none">在 airflow.cfg文件中将 dags_folder 指向已有项目
-原本为：dags_folder = /Users/liyuxing/airflow/dags
-改为：dags_folder = /Users/liyuxing/work/mive/dags<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在 airflow.cfg文件中将 dags_folder 指向已有项目</span><br><span class="line">原本为：dags_folder = /Users/liyuxing/airflow/dags</span><br><span class="line">改为：dags_folder = /Users/liyuxing/work/mive/dags</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>如果需要添加自己的dags，在airflow目录下新建dags文件夹，并将文件放入文件夹即可，airflow会自己找。</p>
 </li>
 <li><p>报错 No module named pyutil.program.conf</p>
-<pre class="line-numbers language-none"><code class="language-none">‘*’号为Python版本
-cd airflowenv/lib/python*.*/site-packages
-vim data.pth
-
-在文件中一行，添加pyutil的路径（其他类似问题也可这样解决），如
-/Users/liyuxing/work/util<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">‘*’号为Python版本</span><br><span class="line">cd airflowenv/lib/python*.*/site-packages</span><br><span class="line">vim data.pth</span><br><span class="line"></span><br><span class="line">在文件中一行，添加pyutil的路径（其他类似问题也可这样解决），如</span><br><span class="line">/Users/liyuxing/work/util</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>执行 airflow webserver之后提示缺少Redis或者其他包</p>
-<pre class="line-numbers language-none"><code class="language-none">通通
-pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通通</span><br><span class="line">pip install 缺啥装啥</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>schedule_interval 参数意义<br><a target="_blank" rel="noopener" href="http://airflow.incubator.apache.org/scheduler.html?highlight=schedule_interval#dag-runs">官方文档</a></p>
 </li>
@@ -595,7 +585,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                     
                         <div class="article-tag">
                             
-                                <a href="/blinkbean/tags/Airflow/">
+                                <a href="/tags/Airflow/">
                                     <span class="chip bg-color">Airflow</span>
                                 </a>
                             
@@ -603,7 +593,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/blinkbean/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
 
     
@@ -696,11 +686,11 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/blinkbean/uncatesgorized/2021-03-07-ruan-jian-airflow-jin-jie/">
+                <a href="/uncatesgorized/2021-03-07-ruan-jian-airflow-jin-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/blinkbean/medias/featureimages/3.jpg" class="responsive-img" alt="软件-Airflow进阶">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="软件-Airflow进阶">
                         
                         <span class="card-title">软件-Airflow进阶</span>
                     </div>
@@ -726,7 +716,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/Airflow/">
+                    <a href="/tags/Airflow/">
                         <span class="chip bg-color">Airflow</span>
                     </a>
                     
@@ -741,10 +731,10 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blinkbean/cheng-xu-ren-sheng/about-shu-dian-ying/">
+                <a href="/cheng-xu-ren-sheng/about-shu-dian-ying/">
                     <div class="card-image">
                         
-                        <img src="/blinkbean/Image/image-20240414224926039.png" class="responsive-img" alt="书&amp;电影">
+                        <img src="/Image/image-20240414224926039.png" class="responsive-img" alt="书&amp;电影">
                         
                         <span class="card-title">书&amp;电影</span>
                     </div>
@@ -763,7 +753,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/blinkbean/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
+                            <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
                                     程序人生
                                 </a>
                             
@@ -774,7 +764,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blinkbean/tags/private100/">
+                    <a href="/tags/private100/">
                         <span class="chip bg-color">private100</span>
                     </a>
                     
@@ -791,21 +781,21 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/blinkbean/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
     </div>
@@ -826,7 +816,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
 </div>
 
 
-<script src="/blinkbean/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -918,7 +908,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
                 <span id="year">2020-2024</span>
             
             <span id="year">2020</span>
-            <a href="/blinkbean/about" target="_blank">blinkbean</a>
+            <a href="/about" target="_blank">blinkbean</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -971,7 +961,7 @@ pip install 缺啥装啥<span aria-hidden="true" class="line-numbers-rows"><span
 
 
 
-    <a href="/blinkbean/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -1082,7 +1072,7 @@ $(function () {
         });
     };
 
-    searchFunc('/blinkbean/search.xml', 'searchInput', 'searchResult');
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1094,12 +1084,12 @@ $(function () {
 </div>
 
 
-    <script src="/blinkbean/libs/materialize/materialize.min.js"></script>
-    <script src="/blinkbean/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/blinkbean/libs/aos/aos.js"></script>
-    <script src="/blinkbean/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/blinkbean/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/blinkbean/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1120,10 +1110,10 @@ $(function () {
 </script>
 
     
-    <script src="/blinkbean/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/blinkbean/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1137,11 +1127,11 @@ $(function () {
     
 
     
-    <script type="text/javascript" src="/blinkbean/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="/blinkbean/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

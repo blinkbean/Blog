@@ -556,50 +556,7 @@
 <li>加密模式相同。</li>
 <li>Padding模式相同。</li>
 </ol>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">aesEncrypt</span><span class="params">(orig <span class="type">string</span>, key <span class="type">string</span>)</span></span> <span class="type">string</span> {
-	<span class="comment">// 转成字节数组</span>
-	origData := []<span class="type">byte</span>(orig)
-	k := []<span class="type">byte</span>(key)
-	<span class="comment">// 分组秘钥</span>
-	block, err := aes.NewCipher(k)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">"key 长度必须 16/24/32长度: %s"</span>, err.Error()))
-	}
-	<span class="comment">// 获取秘钥块的长度</span>
-	blockSize := block.BlockSize()
-	<span class="comment">// 补全码</span>
-	origData = PKCS7Padding(origData, blockSize)
-	<span class="comment">// 加密模式</span>
-	blockMode := cipher.NewCBCEncrypter(block, k[:blockSize])
-	<span class="comment">// 创建数组</span>
-	cryted := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(origData))
-	<span class="comment">// 加密</span>
-	blockMode.CryptBlocks(cryted, origData)
-	<span class="keyword">return</span> base64.RawURLEncoding.EncodeToString(cryted)
-
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">aesDecrypt</span><span class="params">(cryted <span class="type">string</span>, key <span class="type">string</span>)</span></span> <span class="type">string</span> {
-	crytedByte, _ := base64.RawURLEncoding.DecodeString(cryted)
-	k := []<span class="type">byte</span>(key)
-
-	<span class="comment">// 分组秘钥</span>
-	block, err := aes.NewCipher(k)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">"key 长度必须 16/24/32长度: %s"</span>, err.Error()))
-	}
-	<span class="comment">// 获取秘钥块的长度</span>
-	blockSize := block.BlockSize()
-	<span class="comment">// 加密模式</span>
-	blockMode := cipher.NewCBCDecrypter(block, k[:blockSize])
-	<span class="comment">// 创建数组</span>
-	orig := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(crytedByte))
-	<span class="comment">// 解密</span>
-	blockMode.CryptBlocks(orig, crytedByte)
-	<span class="comment">// 去补全码</span>
-	orig = PKCS7UnPadding(orig)
-	<span class="keyword">return</span> <span class="type">string</span>(orig)
-}</code></pre>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">aesEncrypt</span><span class="params">(orig <span class="type">string</span>, key <span class="type">string</span>)</span></span> <span class="type">string</span> {</span><br><span class="line">	<span class="comment">// 转成字节数组</span></span><br><span class="line">	origData := []<span class="type">byte</span>(orig)</span><br><span class="line">	k := []<span class="type">byte</span>(key)</span><br><span class="line">	<span class="comment">// 分组秘钥</span></span><br><span class="line">	block, err := aes.NewCipher(k)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">"key 长度必须 16/24/32长度: %s"</span>, err.Error()))</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 获取秘钥块的长度</span></span><br><span class="line">	blockSize := block.BlockSize()</span><br><span class="line">	<span class="comment">// 补全码</span></span><br><span class="line">	origData = PKCS7Padding(origData, blockSize)</span><br><span class="line">	<span class="comment">// 加密模式</span></span><br><span class="line">	blockMode := cipher.NewCBCEncrypter(block, k[:blockSize])</span><br><span class="line">	<span class="comment">// 创建数组</span></span><br><span class="line">	cryted := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(origData))</span><br><span class="line">	<span class="comment">// 加密</span></span><br><span class="line">	blockMode.CryptBlocks(cryted, origData)</span><br><span class="line">	<span class="keyword">return</span> base64.RawURLEncoding.EncodeToString(cryted)</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">aesDecrypt</span><span class="params">(cryted <span class="type">string</span>, key <span class="type">string</span>)</span></span> <span class="type">string</span> {</span><br><span class="line">	crytedByte, _ := base64.RawURLEncoding.DecodeString(cryted)</span><br><span class="line">	k := []<span class="type">byte</span>(key)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 分组秘钥</span></span><br><span class="line">	block, err := aes.NewCipher(k)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">"key 长度必须 16/24/32长度: %s"</span>, err.Error()))</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 获取秘钥块的长度</span></span><br><span class="line">	blockSize := block.BlockSize()</span><br><span class="line">	<span class="comment">// 加密模式</span></span><br><span class="line">	blockMode := cipher.NewCBCDecrypter(block, k[:blockSize])</span><br><span class="line">	<span class="comment">// 创建数组</span></span><br><span class="line">	orig := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(crytedByte))</span><br><span class="line">	<span class="comment">// 解密</span></span><br><span class="line">	blockMode.CryptBlocks(orig, crytedByte)</span><br><span class="line">	<span class="comment">// 去补全码</span></span><br><span class="line">	orig = PKCS7UnPadding(orig)</span><br><span class="line">	<span class="keyword">return</span> <span class="type">string</span>(orig)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="结束了吗？"><a href="#结束了吗？" class="headerlink" title="结束了吗？"></a>结束了吗？</h4><p>加密或解密结果通常是byte数组，需要进一步转换为字符串。这时候通常又有两种选择，<strong>hex</strong>和<strong>base64</strong>。如果使用了base64进行编码，那么还有一个需要双方约定的地方。</p>
 <h3 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h3><p>Base64编码好处：简短、不可读性，即所编码的数据不会被人用肉眼所直接看到。</p>
@@ -633,19 +590,9 @@
 <td></td>
 </tr>
 </tbody></table>
-<pre><code class="highlight go"><span class="keyword">const</span> encodeStd = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span>
-<span class="keyword">const</span> encodeURL = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> encodeStd = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line"><span class="keyword">const</span> encodeURL = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"</span></span><br></pre></td></tr></tbody></table></figure>
 
-<pre><code class="highlight go"><span class="comment">//编码</span>
-base64.StdEncoding.EncodeToString(data)
-base64.StdEncoding.DecodeString(data)
-base64.RawStdEncoding.EncodeToString(data)
-base64.RawStdEncoding.DecodeString(data)
-<span class="comment">//解码</span>
-base64.URLEncoding.EncodeToString(data)
-base64.URLEncoding.DecodeString(data)
-base64.RawURLEncoding.EncodeToString(data)
-base64.RawURLEncoding.DecodeString(data)</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编码</span></span><br><span class="line">base64.StdEncoding.EncodeToString(data)</span><br><span class="line">base64.StdEncoding.DecodeString(data)</span><br><span class="line">base64.RawStdEncoding.EncodeToString(data)</span><br><span class="line">base64.RawStdEncoding.DecodeString(data)</span><br><span class="line"><span class="comment">//解码</span></span><br><span class="line">base64.URLEncoding.EncodeToString(data)</span><br><span class="line">base64.URLEncoding.DecodeString(data)</span><br><span class="line">base64.RawURLEncoding.EncodeToString(data)</span><br><span class="line">base64.RawURLEncoding.DecodeString(data)</span><br></pre></td></tr></tbody></table></figure>
 
 
 

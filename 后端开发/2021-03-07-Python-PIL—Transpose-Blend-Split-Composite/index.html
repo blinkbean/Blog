@@ -497,7 +497,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    662
+                    655
                 </div>
                 
 
@@ -540,127 +540,7 @@
 <h4 id="Composite-两张图片合并，并加入mask图像作为透明度。"><a href="#Composite-两张图片合并，并加入mask图像作为透明度。" class="headerlink" title="Composite 两张图片合并，并加入mask图像作为透明度。"></a>Composite 两张图片合并，并加入mask图像作为透明度。</h4><ul>
 <li>前提：image1, image2, mask 图片的尺寸和模式一致。<br>相当于Photoshop里的通道蒙版，下图效果不是特别好，可以注意一下图1的嘴，颜色没有图2、3明显。拿自己的Object试试看，可能对比效果会好一点。<br><img src="https://img-blog.csdnimg.cn/20190727220505748.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 </ul>
-<h4 id="原代码"><a href="#原代码" class="headerlink" title="原代码"></a>原代码</h4><pre><code class="highlight python"><span class="comment">#!/usr/local/env python</span>
-<span class="comment"># -*- coding: utf-8 -*-</span>
-<span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageFont, ImageDraw
-
-font_posotion = <span class="number">20</span>,<span class="number">20</span>
-color =  <span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>
-font = ImageFont.truetype(<span class="string">'Arial.ttf'</span>, size=<span class="number">25</span>, encoding=<span class="string">"unic"</span>)
-thumbnail_size = <span class="number">400</span>,<span class="number">400</span>
-row_count = <span class="number">3</span>
-
-
-<span class="keyword">def</span> <span class="title function_">create_thumbnail</span>(<span class="params">src_file</span>):
-    size = thumbnail_size
-    im = Image.<span class="built_in">open</span>(src_file)
-
-    im.thumbnail(size, Image.ANTIALIAS)
-    <span class="keyword">return</span> im
-
-<span class="keyword">def</span> <span class="title function_">get_position</span>(<span class="params">count</span>):
-
-    width = thumbnail_size[<span class="number">0</span>]
-    pic_width = width*row_count
-    position = (count * width)%pic_width, (count * width)/pic_width*width
-    <span class="keyword">return</span> position
-
-<span class="keyword">def</span> <span class="title function_">get_pic_size</span>(<span class="params">thumbnail_size, pic_num, row_count</span>):
-    pic_width = thumbnail_size[<span class="number">0</span>] * row_count
-    extra_row = <span class="number">1</span> <span class="keyword">if</span> pic_num % row_count <span class="keyword">else</span> <span class="number">0</span>
-    pic_height = (pic_num / row_count + extra_row) * thumbnail_size[<span class="number">1</span>]
-
-    <span class="keyword">return</span> pic_width, pic_height
-
-
-<span class="keyword">class</span> <span class="title class_">MyTranspose</span>(<span class="title class_ inherited__">object</span>):
-    FLIP_LEFT_RIGHT = <span class="string">"FLIP_LEFT_RIGHT"</span>
-    FLIP_TOP_BOTTOM = <span class="string">"FLIP_TOP_BOTTOM"</span>
-    ROTATE_90 = <span class="string">"ROTATE_90"</span>
-    ROTATE_180 = <span class="string">"ROTATE_180"</span>
-    ROTATE_270 = <span class="string">"ROTATE_270"</span>
-    TRANSPOSE = <span class="string">"TRANSPOSE"</span>
-
-    TransposeList = [FLIP_LEFT_RIGHT,FLIP_TOP_BOTTOM,ROTATE_90,ROTATE_180,ROTATE_270,TRANSPOSE]
-    ImageTransposeList = [Image.FLIP_LEFT_RIGHT,Image.FLIP_TOP_BOTTOM,Image.ROTATE_90,
-                          Image.ROTATE_180,Image.ROTATE_270,Image.TRANSPOSE]
-
-<span class="keyword">class</span> <span class="title class_">MySplit</span>(<span class="title class_ inherited__">object</span>):
-    R = <span class="string">"R"</span>
-    G = <span class="string">"G"</span>
-    B = <span class="string">"B"</span>
-
-    SplitList = [R, G, B]
-
-<span class="keyword">def</span> <span class="title function_">create_transpose</span>(<span class="params">src_file</span>):
-    <span class="comment"># 方向变换</span>
-    count = <span class="number">0</span>
-    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyTranspose.TransposeList), row_count)
-    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)
-    thumbnail_im = create_thumbnail(src_file)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyTranspose.TransposeList)):
-        img = thumbnail_im.copy()
-        CONTOURimg = img.transpose(MyTranspose.ImageTransposeList[i])
-        CONTOURdraw = ImageDraw.Draw(CONTOURimg)
-        CONTOURdraw.text(font_posotion, MyTranspose.TransposeList[count], font=font, fill=color)
-        image.paste(CONTOURimg, get_position(count))
-        count+=<span class="number">1</span>
-    CONTOURimg = thumbnail_im.copy()
-    CONTOURdraw = ImageDraw.Draw(CONTOURimg)
-    CONTOURdraw.text(font_posotion, <span class="string">"ORIGINAL PIC"</span>, font=font, fill=color)
-    image.paste(CONTOURimg, get_position(count))
-    <span class="comment"># image.show()</span>
-    image.save(<span class="string">"transpose.jpg"</span>)
-
-<span class="keyword">def</span> <span class="title function_">create_blend</span>(<span class="params">src_file</span>):
-    <span class="comment"># 合并</span>
-    img = Image.<span class="built_in">open</span>(src_file)
-    copy_img = img.transpose(Image.FLIP_LEFT_RIGHT)
-    res_img = Image.blend(img, copy_img, <span class="number">0.5</span>)
-
-    res_img.show()
-
-<span class="keyword">def</span> <span class="title function_">create_composite</span>(<span class="params">src_file</span>):
-    <span class="comment"># 蒙版工具</span>
-    count = <span class="number">0</span>
-    mask_name = [<span class="string">"R"</span>,<span class="string">"G"</span>,<span class="string">"B"</span>]
-    image = Image.new(<span class="string">"RGBA"</span>, (<span class="number">1200</span>,<span class="number">400</span>), <span class="string">"white"</span>)
-    thumbnail_im = create_thumbnail(src_file)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">3</span>):
-        <span class="built_in">print</span> i
-        copy_img = thumbnail_im.transpose(Image.FLIP_LEFT_RIGHT)
-        res_img = Image.blend(thumbnail_im, copy_img, <span class="number">0.5</span>)
-        my_split = res_img.split()
-        im = Image.composite(thumbnail_im, res_img, my_split[i])
-        CONTOURdraw = ImageDraw.Draw(im)
-        CONTOURdraw.text(font_posotion, <span class="string">"mask: %s"</span> % mask_name[i], font=font, fill=color)
-        image.paste(im, get_position(count))
-        count += <span class="number">1</span>
-    image.save(<span class="string">"composite.jpg"</span>)
-    <span class="comment"># image.show()</span>
-
-<span class="keyword">def</span> <span class="title function_">create_split</span>(<span class="params">src_file</span>):
-    <span class="comment"># 图层</span>
-    count = <span class="number">0</span>
-    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MySplit.SplitList), row_count)
-    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)
-    thumbnail_im = create_thumbnail(src_file)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MySplit.SplitList)):
-        CONTOURimg = thumbnail_im.split()[i].copy()
-        CONTOURdraw = ImageDraw.Draw(CONTOURimg)
-        CONTOURdraw.text(font_posotion, MySplit.SplitList[count], font=font)
-        image.paste(CONTOURimg, get_position(count))
-        count += <span class="number">1</span>
-
-    <span class="comment"># image.show()</span>
-    image.save(<span class="string">"split.jpg"</span>)
-
-<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
-    <span class="comment"># create_transpose("res.jpg")</span>
-    <span class="comment"># create_split("res.jpg")</span>
-    <span class="comment"># create_blend("res.jpg")</span>
-    create_composite(<span class="string">"res.jpg"</span>)
-</code></pre>
+<h4 id="原代码"><a href="#原代码" class="headerlink" title="原代码"></a>原代码</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageFont, ImageDraw</span><br><span class="line"></span><br><span class="line">font_posotion = <span class="number">20</span>,<span class="number">20</span></span><br><span class="line">color =  <span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span></span><br><span class="line">font = ImageFont.truetype(<span class="string">'Arial.ttf'</span>, size=<span class="number">25</span>, encoding=<span class="string">"unic"</span>)</span><br><span class="line">thumbnail_size = <span class="number">400</span>,<span class="number">400</span></span><br><span class="line">row_count = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_thumbnail</span>(<span class="params">src_file</span>):</span><br><span class="line">    size = thumbnail_size</span><br><span class="line">    im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line"></span><br><span class="line">    im.thumbnail(size, Image.ANTIALIAS)</span><br><span class="line">    <span class="keyword">return</span> im</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_position</span>(<span class="params">count</span>):</span><br><span class="line"></span><br><span class="line">    width = thumbnail_size[<span class="number">0</span>]</span><br><span class="line">    pic_width = width*row_count</span><br><span class="line">    position = (count * width)%pic_width, (count * width)/pic_width*width</span><br><span class="line">    <span class="keyword">return</span> position</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_pic_size</span>(<span class="params">thumbnail_size, pic_num, row_count</span>):</span><br><span class="line">    pic_width = thumbnail_size[<span class="number">0</span>] * row_count</span><br><span class="line">    extra_row = <span class="number">1</span> <span class="keyword">if</span> pic_num % row_count <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    pic_height = (pic_num / row_count + extra_row) * thumbnail_size[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pic_width, pic_height</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyTranspose</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    FLIP_LEFT_RIGHT = <span class="string">"FLIP_LEFT_RIGHT"</span></span><br><span class="line">    FLIP_TOP_BOTTOM = <span class="string">"FLIP_TOP_BOTTOM"</span></span><br><span class="line">    ROTATE_90 = <span class="string">"ROTATE_90"</span></span><br><span class="line">    ROTATE_180 = <span class="string">"ROTATE_180"</span></span><br><span class="line">    ROTATE_270 = <span class="string">"ROTATE_270"</span></span><br><span class="line">    TRANSPOSE = <span class="string">"TRANSPOSE"</span></span><br><span class="line"></span><br><span class="line">    TransposeList = [FLIP_LEFT_RIGHT,FLIP_TOP_BOTTOM,ROTATE_90,ROTATE_180,ROTATE_270,TRANSPOSE]</span><br><span class="line">    ImageTransposeList = [Image.FLIP_LEFT_RIGHT,Image.FLIP_TOP_BOTTOM,Image.ROTATE_90,</span><br><span class="line">                          Image.ROTATE_180,Image.ROTATE_270,Image.TRANSPOSE]</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MySplit</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    R = <span class="string">"R"</span></span><br><span class="line">    G = <span class="string">"G"</span></span><br><span class="line">    B = <span class="string">"B"</span></span><br><span class="line"></span><br><span class="line">    SplitList = [R, G, B]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_transpose</span>(<span class="params">src_file</span>):</span><br><span class="line">    <span class="comment"># 方向变换</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyTranspose.TransposeList), row_count)</span><br><span class="line">    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)</span><br><span class="line">    thumbnail_im = create_thumbnail(src_file)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyTranspose.TransposeList)):</span><br><span class="line">        img = thumbnail_im.copy()</span><br><span class="line">        CONTOURimg = img.transpose(MyTranspose.ImageTransposeList[i])</span><br><span class="line">        CONTOURdraw = ImageDraw.Draw(CONTOURimg)</span><br><span class="line">        CONTOURdraw.text(font_posotion, MyTranspose.TransposeList[count], font=font, fill=color)</span><br><span class="line">        image.paste(CONTOURimg, get_position(count))</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">    CONTOURimg = thumbnail_im.copy()</span><br><span class="line">    CONTOURdraw = ImageDraw.Draw(CONTOURimg)</span><br><span class="line">    CONTOURdraw.text(font_posotion, <span class="string">"ORIGINAL PIC"</span>, font=font, fill=color)</span><br><span class="line">    image.paste(CONTOURimg, get_position(count))</span><br><span class="line">    <span class="comment"># image.show()</span></span><br><span class="line">    image.save(<span class="string">"transpose.jpg"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_blend</span>(<span class="params">src_file</span>):</span><br><span class="line">    <span class="comment"># 合并</span></span><br><span class="line">    img = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line">    copy_img = img.transpose(Image.FLIP_LEFT_RIGHT)</span><br><span class="line">    res_img = Image.blend(img, copy_img, <span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    res_img.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_composite</span>(<span class="params">src_file</span>):</span><br><span class="line">    <span class="comment"># 蒙版工具</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    mask_name = [<span class="string">"R"</span>,<span class="string">"G"</span>,<span class="string">"B"</span>]</span><br><span class="line">    image = Image.new(<span class="string">"RGBA"</span>, (<span class="number">1200</span>,<span class="number">400</span>), <span class="string">"white"</span>)</span><br><span class="line">    thumbnail_im = create_thumbnail(src_file)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span> i</span><br><span class="line">        copy_img = thumbnail_im.transpose(Image.FLIP_LEFT_RIGHT)</span><br><span class="line">        res_img = Image.blend(thumbnail_im, copy_img, <span class="number">0.5</span>)</span><br><span class="line">        my_split = res_img.split()</span><br><span class="line">        im = Image.composite(thumbnail_im, res_img, my_split[i])</span><br><span class="line">        CONTOURdraw = ImageDraw.Draw(im)</span><br><span class="line">        CONTOURdraw.text(font_posotion, <span class="string">"mask: %s"</span> % mask_name[i], font=font, fill=color)</span><br><span class="line">        image.paste(im, get_position(count))</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    image.save(<span class="string">"composite.jpg"</span>)</span><br><span class="line">    <span class="comment"># image.show()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_split</span>(<span class="params">src_file</span>):</span><br><span class="line">    <span class="comment"># 图层</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MySplit.SplitList), row_count)</span><br><span class="line">    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)</span><br><span class="line">    thumbnail_im = create_thumbnail(src_file)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MySplit.SplitList)):</span><br><span class="line">        CONTOURimg = thumbnail_im.split()[i].copy()</span><br><span class="line">        CONTOURdraw = ImageDraw.Draw(CONTOURimg)</span><br><span class="line">        CONTOURdraw.text(font_posotion, MySplit.SplitList[count], font=font)</span><br><span class="line">        image.paste(CONTOURimg, get_position(count))</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># image.show()</span></span><br><span class="line">    image.save(<span class="string">"split.jpg"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># create_transpose("res.jpg")</span></span><br><span class="line">    <span class="comment"># create_split("res.jpg")</span></span><br><span class="line">    <span class="comment"># create_blend("res.jpg")</span></span><br><span class="line">    create_composite(<span class="string">"res.jpg"</span>)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
                 
             </div>

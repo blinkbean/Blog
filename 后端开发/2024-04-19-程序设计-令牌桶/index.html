@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    643
+                    635
                 </div>
                 
 
@@ -526,79 +526,15 @@
 </ol>
 <h3 id="rate库"><a href="#rate库" class="headerlink" title="rate库"></a>rate库</h3><ol>
 <li><p>基本结构体</p>
-<pre><code class="highlight go"><span class="keyword">type</span> Limit <span class="type">float64</span>
-
-<span class="keyword">type</span> Limiter <span class="keyword">struct</span> {
-	limit     Limit      <span class="comment">// 每秒放入的令牌数量</span>
-	burst     <span class="type">int</span>        <span class="comment">// 桶大小</span>
-	mu        sync.Mutex <span class="comment">// 锁</span>
-	tokens    <span class="type">float64</span>    <span class="comment">// 剩余令牌数量</span>
-	last      time.Time  <span class="comment">// 上一次取走tokens的时间</span>
-	lastEvent time.Time  <span class="comment">// 最近限流事件的时间</span>
-}
-
-<span class="comment">// 令牌发放之后，会存储在 Reservation 预约对象中</span>
-<span class="keyword">type</span> Reservation <span class="keyword">struct</span> {
-	ok        <span class="type">bool</span>      <span class="comment">// 是否满足条件分配了token</span>
-	lim       *Limiter  <span class="comment">// 发送令牌的限流器</span>
-	tokens    <span class="type">int</span>       <span class="comment">// 发送 token 令牌的数量</span>
-	timeToAct time.Time <span class="comment">// 满足令牌发放的时间</span>
-	limit     Limit     <span class="comment">// 令牌发放速度</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Limit <span class="type">float64</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Limiter <span class="keyword">struct</span> {</span><br><span class="line">	limit     Limit      <span class="comment">// 每秒放入的令牌数量</span></span><br><span class="line">	burst     <span class="type">int</span>        <span class="comment">// 桶大小</span></span><br><span class="line">	mu        sync.Mutex <span class="comment">// 锁</span></span><br><span class="line">	tokens    <span class="type">float64</span>    <span class="comment">// 剩余令牌数量</span></span><br><span class="line">	last      time.Time  <span class="comment">// 上一次取走tokens的时间</span></span><br><span class="line">	lastEvent time.Time  <span class="comment">// 最近限流事件的时间</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 令牌发放之后，会存储在 Reservation 预约对象中</span></span><br><span class="line"><span class="keyword">type</span> Reservation <span class="keyword">struct</span> {</span><br><span class="line">	ok        <span class="type">bool</span>      <span class="comment">// 是否满足条件分配了token</span></span><br><span class="line">	lim       *Limiter  <span class="comment">// 发送令牌的限流器</span></span><br><span class="line">	tokens    <span class="type">int</span>       <span class="comment">// 发送 token 令牌的数量</span></span><br><span class="line">	timeToAct time.Time <span class="comment">// 满足令牌发放的时间</span></span><br><span class="line">	limit     Limit     <span class="comment">// 令牌发放速度</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>方法</p>
-<pre><code class="highlight go"><span class="comment">// 构建一个限流器，r 是每秒放入的令牌数量，b 是桶的大小</span>
-<span class="function"><span class="keyword">func</span> <span class="title">NewLimiter</span><span class="params">(r Limit, b <span class="type">int</span>)</span></span> *Limiter
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建一个限流器，r 是每秒放入的令牌数量，b 是桶的大小</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewLimiter</span><span class="params">(r Limit, b <span class="type">int</span>)</span></span> *Limiter</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别返回 b 和 r 的值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Burst() <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Limit() Limit</span><br><span class="line"></span><br><span class="line"><span class="comment">// token 3种消费方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Allow() <span class="type">bool</span> <span class="comment">// Allow(now, 1)</span></span><br><span class="line"><span class="comment">// 表示截止到now这个时间点，是否存在n个token</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> AllowN(now time.Time, n <span class="type">int</span>) <span class="type">bool</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Reserve() *Reservation <span class="comment">// ReserveN(now, 1)</span></span><br><span class="line"><span class="comment">// ReserveN和AllowN类似，表示截止到now这个时间点，是否存在n个token，无论Token是否充足，都会返回Reservation对象</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> ReserveN(now time.Time, n <span class="type">int</span>) *Reservation</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Wait(ctx context.Context) (err <span class="type">error</span>) <span class="comment">// WaitN(ctx, 1)</span></span><br><span class="line"><span class="comment">// 如果存在n个令牌就直接转发，不存在就阻塞，直至满足条件，传入的ctx的Deadline就是等待的Deadline</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> WaitN(ctx context.Context, n <span class="type">int</span>) (err <span class="type">error</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态流控</span></span><br><span class="line"><span class="comment">// 设置桶的大小</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetBurst(newBurst <span class="type">int</span>)</span><br><span class="line"><span class="comment">// 流控最后的更新时间</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetBurstAt(now time.Time, newBurst <span class="type">int</span>)</span><br><span class="line"><span class="comment">// token 生产速率</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetLimit(newLimit Limit)</span><br><span class="line"><span class="comment">// 流控最后的更新时间</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetLimitAt(now time.Time, newLimit Limit)</span><br></pre></td></tr></tbody></table></figure>
 
-<span class="comment">// 分别返回 b 和 r 的值</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Burst() <span class="type">int</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Limit() Limit
-
-<span class="comment">// token 3种消费方法</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Allow() <span class="type">bool</span> <span class="comment">// Allow(now, 1)</span>
-<span class="comment">// 表示截止到now这个时间点，是否存在n个token</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> AllowN(now time.Time, n <span class="type">int</span>) <span class="type">bool</span>
-
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Reserve() *Reservation <span class="comment">// ReserveN(now, 1)</span>
-<span class="comment">// ReserveN和AllowN类似，表示截止到now这个时间点，是否存在n个token，无论Token是否充足，都会返回Reservation对象</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> ReserveN(now time.Time, n <span class="type">int</span>) *Reservation
-
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> Wait(ctx context.Context) (err <span class="type">error</span>) <span class="comment">// WaitN(ctx, 1)</span>
-<span class="comment">// 如果存在n个令牌就直接转发，不存在就阻塞，直至满足条件，传入的ctx的Deadline就是等待的Deadline</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> WaitN(ctx context.Context, n <span class="type">int</span>) (err <span class="type">error</span>)
-
-<span class="comment">// 动态流控</span>
-<span class="comment">// 设置桶的大小</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetBurst(newBurst <span class="type">int</span>)
-<span class="comment">// 流控最后的更新时间</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetBurstAt(now time.Time, newBurst <span class="type">int</span>)
-<span class="comment">// token 生产速率</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetLimit(newLimit Limit)
-<span class="comment">// 流控最后的更新时间</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(lim *Limiter)</span></span> SetLimitAt(now time.Time, newLimit Limit)</code></pre>
-
-<pre><code class="highlight go"><span class="comment">// 如果不想等待，可以调用Cancel()方法，该方法会将Token归还。</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> Cancel()
-<span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> CancelAt(now time.Time)
-<span class="comment">// 返回需要等待的时间。如果等待时间为0，则说明不用等待</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> Delay() time.Duration
-<span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> DelayFrom(now time.Time) time.Duration
-<span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> OK() <span class="type">bool</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不想等待，可以调用Cancel()方法，该方法会将Token归还。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> Cancel()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> CancelAt(now time.Time)</span><br><span class="line"><span class="comment">// 返回需要等待的时间。如果等待时间为0，则说明不用等待</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> Delay() time.Duration</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> DelayFrom(now time.Time) time.Duration</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Reservation)</span></span> OK() <span class="type">bool</span></span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>使用</p>
-<pre><code class="highlight go"><span class="comment">// 对ip进行限流</span>
-<span class="keyword">var</span> limiters = &amp;sync.Map{}
-
-<span class="function"><span class="keyword">func</span> <span class="title">rateLimiter</span><span class="params">(r rate.Limit, b <span class="type">int</span>, ip <span class="type">string</span>, t time.Duration)</span></span> <span class="type">bool</span> {
-	l, _ := limiters.LoadOrStore(ip, rate.NewLimiter(r, b))
-	ctx, cancel := context.WithTimeout(context.Background(), t)
-	<span class="keyword">defer</span> cancel()
-
-	<span class="keyword">if</span> err := l.(*rate.Limiter).Wait(ctx); err != <span class="literal">nil</span> {
-		<span class="keyword">return</span> <span class="literal">false</span>
-	}
-	<span class="keyword">return</span> <span class="literal">true</span>
-}</code></pre></li>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对ip进行限流</span></span><br><span class="line"><span class="keyword">var</span> limiters = &amp;sync.Map{}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rateLimiter</span><span class="params">(r rate.Limit, b <span class="type">int</span>, ip <span class="type">string</span>, t time.Duration)</span></span> <span class="type">bool</span> {</span><br><span class="line">	l, _ := limiters.LoadOrStore(ip, rate.NewLimiter(r, b))</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), t)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := l.(*rate.Limiter).Wait(ctx); err != <span class="literal">nil</span> {</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 
                 

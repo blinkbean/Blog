@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    934
+                    929
                 </div>
                 
 
@@ -542,17 +542,7 @@
 </li>
 <li><p>事务提交是，必须将InnoDB存储引擎的日志缓冲写入磁盘。</p>
 <p>通过预写日志的方式保证事务的完整性，会造成吸盘上存储的数据页和内存缓冲池中的页是不同步的。可以通过<code>show engine innodb status；</code>查看当前磁盘和日志的差距。</p>
-<pre><code class="highlight mysql">show engine innodb status\G;
-
----
-LOG
----
-Log sequence number 77292702 # 当前LSN
-Log flushed up to   77292702 # 刷新到重做日志文件的LSN
-Pages flushed up to 77292702
-Last checkpoint at  77292702 # 刷新到磁盘的LSN
-0 pending log writes, 0 pending chkp writes
-8 log i/o's done, 0.00 log i/o's/second</code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">LOG</span><br><span class="line">---</span><br><span class="line">Log sequence number 77292702 # 当前LSN</span><br><span class="line">Log flushed up to   77292702 # 刷新到重做日志文件的LSN</span><br><span class="line">Pages flushed up to 77292702</span><br><span class="line">Last checkpoint at  77292702 # 刷新到磁盘的LSN</span><br><span class="line">0 pending log writes, 0 pending chkp writes</span><br><span class="line">8 log i/o's done, 0.00 log i/o's/second</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h3 id="undo"><a href="#undo" class="headerlink" title="undo"></a>undo</h3><p>事务需要回滚，需要undo。undo与redo正好相反，对于数据库进行修改是，数据库不但会产生redo，还会产生一定量的undo。</p>
 <p>redo存放在重做日志中，undo存放在数据库内部的一个特殊段（segment）中，称为undo段（undo segment），undue段位于共享表空间中。</p>
@@ -576,8 +566,7 @@ Last checkpoint at  77292702 # 刷新到磁盘的LSN
 <p>InnoDB会对每个select操作自动添加<code>lock in share mode</code>，即共享锁。因为InnoDB在rr的隔离级别就可以避免幻读，所以serializable隔离级别主要用于分布式事务。</p>
 </li>
 </ul>
-<h4 id="查看事务隔离级别"><a href="#查看事务隔离级别" class="headerlink" title="查看事务隔离级别"></a>查看事务隔离级别</h4><pre><code class="highlight mysql">select @@tx_isolation\G;
-select @@global.tx_isolation\G;</code></pre>
+<h4 id="查看事务隔离级别"><a href="#查看事务隔离级别" class="headerlink" title="查看事务隔离级别"></a>查看事务隔离级别</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @@tx_isolation\G;</span><br><span class="line">select @@global.tx_isolation\G;</span><br></pre></td></tr></tbody></table></figure>
 
 
 <h4 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h4><p>分布式事务由一个或多个资源管理器、一个事务管理器和一个应用程序组成。</p>

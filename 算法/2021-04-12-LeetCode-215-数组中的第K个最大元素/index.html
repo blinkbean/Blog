@@ -527,55 +527,7 @@
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>最小堆</li>
 </ul>
-<pre><code class="highlight plaintext">type MinHeap struct {
-	arr  []int
-	size int
-}
-
-func (m *MinHeap) Len() int {
-	return len(m.arr)
-}
-func (m *MinHeap) Less(i, j int) bool {
-	return m.arr[i] &lt; m.arr[j]
-}
-
-func (m *MinHeap) Swap(i, j int) {
-	m.arr[i], m.arr[j] = m.arr[j], m.arr[i]
-}
-
-func (m *MinHeap) Push(v interface{}) {
-	m.arr = append(m.arr, v.(int))
-}
-
-func (m *MinHeap) Pop() interface{} {
-	t := m.arr[m.Len()-1] // 最后一个
-	m.arr = m.arr[0 : m.Len()-1]
-	return t
-}
-
-func (m *MinHeap) Top() int {
-	return m.arr[0] // 第一个
-}
-
-func (m *MinHeap) RealPush(v int) {
-	if m.size == m.Len() {
-		if m.Top() &lt; v {
-			heap.Pop(m)
-			heap.Push(m, v)
-		}
-	} else {
-		heap.Push(m, v)
-	}
-}
-
-func InitHeap(size int) MinHeap {
-	m := MinHeap{
-		arr:  make([]int, 0),
-		size: size,
-	}
-	heap.Init(&amp;m)
-	return m
-}</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">type MinHeap struct {</span><br><span class="line">	arr  []int</span><br><span class="line">	size int</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Len() int {</span><br><span class="line">	return len(m.arr)</span><br><span class="line">}</span><br><span class="line">func (m *MinHeap) Less(i, j int) bool {</span><br><span class="line">	return m.arr[i] &lt; m.arr[j]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Swap(i, j int) {</span><br><span class="line">	m.arr[i], m.arr[j] = m.arr[j], m.arr[i]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Push(v interface{}) {</span><br><span class="line">	m.arr = append(m.arr, v.(int))</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Pop() interface{} {</span><br><span class="line">	t := m.arr[m.Len()-1] // 最后一个</span><br><span class="line">	m.arr = m.arr[0 : m.Len()-1]</span><br><span class="line">	return t</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Top() int {</span><br><span class="line">	return m.arr[0] // 第一个</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) RealPush(v int) {</span><br><span class="line">	if m.size == m.Len() {</span><br><span class="line">		if m.Top() &lt; v {</span><br><span class="line">			heap.Pop(m)</span><br><span class="line">			heap.Push(m, v)</span><br><span class="line">		}</span><br><span class="line">	} else {</span><br><span class="line">		heap.Push(m, v)</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func InitHeap(size int) MinHeap {</span><br><span class="line">	m := MinHeap{</span><br><span class="line">		arr:  make([]int, 0),</span><br><span class="line">		size: size,</span><br><span class="line">	}</span><br><span class="line">	heap.Init(&amp;m)</span><br><span class="line">	return m</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
                 
             </div>
             <hr/>

@@ -524,7 +524,7 @@
             <div id="articleContent">
                 <h5 id="面试官：“了解MySQL吗？”"><a href="#面试官：“了解MySQL吗？”" class="headerlink" title="面试官：“了解MySQL吗？”"></a>面试官：“了解MySQL吗？”</h5><p>要是说不了解，接下来该聊些啥呀？</p>
 <h5 id="面试官：“了解的话，那说说XXX吧。”"><a href="#面试官：“了解的话，那说说XXX吧。”" class="headerlink" title="面试官：“了解的话，那说说XXX吧。”"></a>面试官：“了解的话，那说说XXX吧。”</h5><p>巴拉巴拉…</p>
-<h3 id="MySQL有哪些常见的引擎，说说他们的区别？"><a href="#MySQL有哪些常见的引擎，说说他们的区别？" class="headerlink" title="MySQL有哪些常见的引擎，说说他们的区别？"></a>MySQL有哪些常见的引擎，说说他们的区别？</h3><pre><code class="highlight mysql">show engines; #查看支持的引擎</code></pre>
+<h3 id="MySQL有哪些常见的引擎，说说他们的区别？"><a href="#MySQL有哪些常见的引擎，说说他们的区别？" class="headerlink" title="MySQL有哪些常见的引擎，说说他们的区别？"></a>MySQL有哪些常见的引擎，说说他们的区别？</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show engines; #查看支持的引擎</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><p>MyISAM：非事务处理存储引擎</p>
@@ -689,18 +689,17 @@
 <li>主键索引就是聚簇索引，因此建表时最好用自增类型主键。</li>
 <li>如果没有设置主键会发生什么？建表时如果没有设置主键，MySQL会启用内部的隐藏主键==row_id==（6个字节），也就是说无论如何一张表都必须有主键。MySQL会依次查找<strong>主键-&gt;唯一键-&gt;隐藏主键</strong>建立索引。</li>
 </ol>
-<pre><code class="highlight mysql">alter table table_name add primary key (column name);</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add primary key (column name);</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>普通索引，联合索引</p>
-<pre><code class="highlight mysql">create index 索引名 on table_name(column1,column2);
-alter table table_name add index 索引名(column1,column2);</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create index 索引名 on table_name(column1,column2);</span><br><span class="line">alter table table_name add index 索引名(column1,column2);</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>唯一索引</p>
 <ol>
 <li>唯一索引可以有多个null（不提倡有null值）,但不能有重复的内容。</li>
 <li>相比主键索引，主键字段不能为null，也不能重复。</li>
 </ol>
-<pre><code class="highlight mysql">create unique index index_name on table_name (column_list);</code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create unique index index_name on table_name (column_list);</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h3 id="为什么要使用索引？"><a href="#为什么要使用索引？" class="headerlink" title="为什么要使用索引？"></a>为什么要使用索引？</h3><ol>
 <li>减少存储引擎需要扫描的数据量，加快查询速度。</li>
@@ -931,11 +930,11 @@ alter table table_name add index 索引名(column1,column2);</code></pre>
 <ol>
 <li><p>共享锁</p>
 <p>Share Locks，简称S锁。事务在读取一条记录时，需要先获取S锁。</p>
-<pre><code class="highlight mysql">select ... lock in share mode;</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ... lock in share mode;</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>独占锁</p>
 <p>也叫排它锁，Exclusive Locks，简称X锁。事务要改动一条记录时，需要先获取该记录的X锁。</p>
-<pre><code class="highlight mysql">select ... for update;</code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select ... for update;</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>行级锁兼容性</p>
 <table>
 <thead>
@@ -1069,7 +1068,7 @@ alter table table_name add index 索引名(column1,column2);</code></pre>
 <p>主库和从库执行相同的SQL，主库可以快速执行，为什么从库不行？</p>
 <p>master可以并发，但是slave的SQL线程只能顺序执行。当TPS较高时，产生的SQL超过slave一个SQL线程能承受的范围，延时就产生了。</p>
 </blockquote>
-<pre><code class="highlight mysql">show status # Seconds_Behind_Master查看从库落后多长时间</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show status # Seconds_Behind_Master查看从库落后多长时间</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><p>MySQL主从同步解决方案</p>

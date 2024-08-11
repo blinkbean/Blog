@@ -530,15 +530,7 @@
 </blockquote>
 </li>
 <li>主动删除：由于惰性删除策略无法保证冷数据被及时删掉，所以Redis会定期主动淘汰一批已过期的key</li>
-<li>当前已用内存超过maxmemory限定时，触发主动清理策略<pre><code class="highlight py"><span class="keyword">def</span> <span class="title function_">get_chatroom_user_tips</span>(<span class="params">self, uid</span>):
-    <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.chatroom_redis.exists(<span class="string">"flag_key"</span>):
-        value = <span class="variable language_">self</span>.redis.get(<span class="string">"key"</span>, <span class="number">0</span> , <span class="number">0</span>)
-        <span class="comment"># 间隔时间</span>
-        _interval = <span class="number">30</span>
-        <span class="keyword">if</span> group_ids:
-            <span class="variable language_">self</span>.redis.setex(<span class="string">"flag_key"</span>, value=<span class="number">1</span>, time=_interval)
-            <span class="variable language_">self</span>.redis.delete(<span class="string">"key"</span>)
-        <span class="keyword">return</span> group_ids</code></pre></li>
+<li>当前已用内存超过maxmemory限定时，触发主动清理策略<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_chatroom_user_tips</span>(<span class="params">self, uid</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self.chatroom_redis.exists(<span class="string">"flag_key"</span>):</span><br><span class="line">        value = self.redis.get(<span class="string">"key"</span>, <span class="number">0</span> , <span class="number">0</span>)</span><br><span class="line">        <span class="comment"># 间隔时间</span></span><br><span class="line">        _interval = <span class="number">30</span></span><br><span class="line">        <span class="keyword">if</span> group_ids:</span><br><span class="line">            self.redis.setex(<span class="string">"flag_key"</span>, value=<span class="number">1</span>, time=_interval)</span><br><span class="line">            self.redis.delete(<span class="string">"key"</span>)</span><br><span class="line">        <span class="keyword">return</span> group_ids</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 <h6 id="上面代码存在的问题及应对方式"><a href="#上面代码存在的问题及应对方式" class="headerlink" title="上面代码存在的问题及应对方式"></a>上面代码存在的问题及应对方式</h6><p>问题</p>
 <ul>
@@ -547,15 +539,7 @@
 </ul>
 <p>解决</p>
 <ul>
-<li>用ttl代替exists<pre><code class="highlight py"><span class="keyword">def</span> <span class="title function_">get_chatroom_user_tips</span>(<span class="params">self, uid</span>):
-    <span class="keyword">if</span> <span class="variable language_">self</span>.chatroom_redis.ttl(<span class="string">"flag_key"</span>) &lt;= <span class="number">0</span>:
-        value = <span class="variable language_">self</span>.redis.get(<span class="string">"key"</span>, <span class="number">0</span> , <span class="number">0</span>)
-        <span class="comment"># 间隔时间</span>
-        _interval = <span class="number">30</span>
-        <span class="keyword">if</span> group_ids:
-            <span class="variable language_">self</span>.redis.setex(<span class="string">"flag_key"</span>, value=<span class="number">1</span>, time=_interval)
-            <span class="variable language_">self</span>.redis.delete(<span class="string">"key"</span>)
-        <span class="keyword">return</span> group_ids</code></pre></li>
+<li>用ttl代替exists<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_chatroom_user_tips</span>(<span class="params">self, uid</span>):</span><br><span class="line">    <span class="keyword">if</span> self.chatroom_redis.ttl(<span class="string">"flag_key"</span>) &lt;= <span class="number">0</span>:</span><br><span class="line">        value = self.redis.get(<span class="string">"key"</span>, <span class="number">0</span> , <span class="number">0</span>)</span><br><span class="line">        <span class="comment"># 间隔时间</span></span><br><span class="line">        _interval = <span class="number">30</span></span><br><span class="line">        <span class="keyword">if</span> group_ids:</span><br><span class="line">            self.redis.setex(<span class="string">"flag_key"</span>, value=<span class="number">1</span>, time=_interval)</span><br><span class="line">            self.redis.delete(<span class="string">"key"</span>)</span><br><span class="line">        <span class="keyword">return</span> group_ids</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 
                 

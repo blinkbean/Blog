@@ -497,7 +497,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    624
+                    617
                 </div>
                 
 
@@ -633,119 +633,7 @@
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/2019072719355829.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="原代码"><a href="#原代码" class="headerlink" title="原代码"></a>原代码</h4><pre><code class="highlight python"><span class="comment">#!/usr/local/env python</span>
-<span class="comment"># -*- coding: utf-8 -*-</span>
-<span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont, ImageFilter
-
-font_posotion = <span class="number">20</span>,<span class="number">20</span>
-color =  <span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>
-font = ImageFont.truetype(<span class="string">'Arial.ttf'</span>, size=<span class="number">25</span>, encoding=<span class="string">"unic"</span>)
-thumbnail_size = <span class="number">400</span>,<span class="number">400</span>
-row_count = <span class="number">4</span>
-
-
-<span class="keyword">def</span> <span class="title function_">create_thumbnail</span>(<span class="params">src_file</span>):
-    size = thumbnail_size
-    im = Image.<span class="built_in">open</span>(src_file)
-
-    im.thumbnail(size, Image.ANTIALIAS)
-    <span class="keyword">return</span> im
-
-
-<span class="keyword">class</span> <span class="title class_">MyFilter</span>(<span class="title class_ inherited__">object</span>):
-    BLUR = <span class="string">"BLUR"</span>
-    CONTOUR = <span class="string">"CONTOUR"</span>
-    DETAIL = <span class="string">"DETAIL"</span>
-    EDGE_ENHANCE = <span class="string">"EDGE_ENHANCE"</span>
-    EDGE_ENHANCE_MORE = <span class="string">"EDGE_ENHANCE_MORE"</span>
-    EMBOSS = <span class="string">"EMBOSS"</span>
-    FIND_EDGES = <span class="string">"FIND_EDGES"</span>
-    SMOOTH = <span class="string">"SMOOTH"</span>
-    SMOOTH_MORE = <span class="string">"SMOOTH_MORE"</span>
-    SHARPEN = <span class="string">"SHARPEN"</span>
-
-    FilterList = [BLUR, CONTOUR, DETAIL,
-                  EDGE_ENHANCE, EDGE_ENHANCE_MORE, EMBOSS,
-                  FIND_EDGES, SMOOTH, SMOOTH_MORE,
-                  SHARPEN]
-
-    ImageFilterList = [ImageFilter.BLUR, ImageFilter.CONTOUR, ImageFilter.DETAIL,
-                       ImageFilter.EDGE_ENHANCE, ImageFilter.EDGE_ENHANCE_MORE, ImageFilter.EMBOSS,
-                       ImageFilter.FIND_EDGES, ImageFilter.SMOOTH, ImageFilter.SMOOTH_MORE,
-                       ImageFilter.SHARPEN]
-
-<span class="keyword">class</span> <span class="title class_">MyMode</span>(<span class="title class_ inherited__">object</span>):
-    MODE1 = <span class="string">"1"</span>
-    L = <span class="string">"L"</span>
-    I = <span class="string">"I"</span>
-    F = <span class="string">"F"</span>
-    P = <span class="string">"P"</span>
-    RGB = <span class="string">"RGB"</span>
-    RGBX = <span class="string">"RGBX"</span>
-    RGBA = <span class="string">"RGBA"</span>
-    CMYK = <span class="string">"CMYK"</span>
-    YCbCr = <span class="string">"YCbCr"</span>
-    <span class="comment"># LAB = "LAB"</span>
-    HSV = <span class="string">"HSV"</span>
-
-    ModeList = [MODE1, L, I, F, P, RGB, RGBX, RGBA, CMYK, YCbCr, HSV]
-
-<span class="keyword">def</span> <span class="title function_">get_position</span>(<span class="params">count</span>):
-
-    width = thumbnail_size[<span class="number">0</span>]
-    pic_width = width*row_count
-    position = (count * width)%pic_width, (count * width)/pic_width*width
-    <span class="keyword">return</span> position
-
-<span class="keyword">def</span> <span class="title function_">get_pic_size</span>(<span class="params">thumbnail_size, pic_num, row_count</span>):
-    pic_width = thumbnail_size[<span class="number">0</span>] * row_count
-    extra_row = <span class="number">1</span> <span class="keyword">if</span> pic_num % row_count <span class="keyword">else</span> <span class="number">0</span>
-    pic_height = (pic_num / row_count + extra_row) * thumbnail_size[<span class="number">1</span>]
-
-    <span class="keyword">return</span> pic_width, pic_height
-
-<span class="keyword">def</span> <span class="title function_">create_filter</span>(<span class="params">src_file</span>):
-    count = <span class="number">0</span>
-    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyFilter.FilterList), row_count)
-    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)
-    thumbnail_im = create_thumbnail(src_file)
-
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyFilter.FilterList)):
-        CONTOURimg = thumbnail_im.copy()
-        CONTOUR = CONTOURimg.<span class="built_in">filter</span>(MyFilter.ImageFilterList[count])
-        CONTOURdraw = ImageDraw.Draw(CONTOUR)
-        CONTOURdraw.text(font_posotion, MyFilter.FilterList[count], font=font, fill=color)
-        image.paste(CONTOUR, get_position(count))
-        count += <span class="number">1</span>
-
-    <span class="comment"># image.save("filter.jpg")</span>
-    image.show()
-
-<span class="keyword">def</span> <span class="title function_">create_mode</span>(<span class="params">src_file</span>):
-    count = <span class="number">0</span>
-    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyMode.ModeList), row_count)
-    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)
-    thumbnail_im = create_thumbnail(src_file)
-
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyMode.ModeList)):
-        img = thumbnail_im.copy()
-        CONTOURdraw = ImageDraw.Draw(img)
-        CONTOURdraw.text(font_posotion, MyMode.ModeList[count], font=font, fill=color)
-
-        CONTOUR = img.convert(MyMode.ModeList[i])
-
-        image.paste(CONTOUR, get_position(count))
-        count += <span class="number">1</span>
-
-    <span class="comment"># image.save("mode.jpg")</span>
-    image.show()
-
-
-<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
-    create_mode(<span class="string">"res.jpg"</span>)
-    create_filter(<span class="string">"res.jpg"</span>)
-    
-</code></pre>
+<h4 id="原代码"><a href="#原代码" class="headerlink" title="原代码"></a>原代码</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont, ImageFilter</span><br><span class="line"></span><br><span class="line">font_posotion = <span class="number">20</span>,<span class="number">20</span></span><br><span class="line">color =  <span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span></span><br><span class="line">font = ImageFont.truetype(<span class="string">'Arial.ttf'</span>, size=<span class="number">25</span>, encoding=<span class="string">"unic"</span>)</span><br><span class="line">thumbnail_size = <span class="number">400</span>,<span class="number">400</span></span><br><span class="line">row_count = <span class="number">4</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_thumbnail</span>(<span class="params">src_file</span>):</span><br><span class="line">    size = thumbnail_size</span><br><span class="line">    im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line"></span><br><span class="line">    im.thumbnail(size, Image.ANTIALIAS)</span><br><span class="line">    <span class="keyword">return</span> im</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyFilter</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    BLUR = <span class="string">"BLUR"</span></span><br><span class="line">    CONTOUR = <span class="string">"CONTOUR"</span></span><br><span class="line">    DETAIL = <span class="string">"DETAIL"</span></span><br><span class="line">    EDGE_ENHANCE = <span class="string">"EDGE_ENHANCE"</span></span><br><span class="line">    EDGE_ENHANCE_MORE = <span class="string">"EDGE_ENHANCE_MORE"</span></span><br><span class="line">    EMBOSS = <span class="string">"EMBOSS"</span></span><br><span class="line">    FIND_EDGES = <span class="string">"FIND_EDGES"</span></span><br><span class="line">    SMOOTH = <span class="string">"SMOOTH"</span></span><br><span class="line">    SMOOTH_MORE = <span class="string">"SMOOTH_MORE"</span></span><br><span class="line">    SHARPEN = <span class="string">"SHARPEN"</span></span><br><span class="line"></span><br><span class="line">    FilterList = [BLUR, CONTOUR, DETAIL,</span><br><span class="line">                  EDGE_ENHANCE, EDGE_ENHANCE_MORE, EMBOSS,</span><br><span class="line">                  FIND_EDGES, SMOOTH, SMOOTH_MORE,</span><br><span class="line">                  SHARPEN]</span><br><span class="line"></span><br><span class="line">    ImageFilterList = [ImageFilter.BLUR, ImageFilter.CONTOUR, ImageFilter.DETAIL,</span><br><span class="line">                       ImageFilter.EDGE_ENHANCE, ImageFilter.EDGE_ENHANCE_MORE, ImageFilter.EMBOSS,</span><br><span class="line">                       ImageFilter.FIND_EDGES, ImageFilter.SMOOTH, ImageFilter.SMOOTH_MORE,</span><br><span class="line">                       ImageFilter.SHARPEN]</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyMode</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    MODE1 = <span class="string">"1"</span></span><br><span class="line">    L = <span class="string">"L"</span></span><br><span class="line">    I = <span class="string">"I"</span></span><br><span class="line">    F = <span class="string">"F"</span></span><br><span class="line">    P = <span class="string">"P"</span></span><br><span class="line">    RGB = <span class="string">"RGB"</span></span><br><span class="line">    RGBX = <span class="string">"RGBX"</span></span><br><span class="line">    RGBA = <span class="string">"RGBA"</span></span><br><span class="line">    CMYK = <span class="string">"CMYK"</span></span><br><span class="line">    YCbCr = <span class="string">"YCbCr"</span></span><br><span class="line">    <span class="comment"># LAB = "LAB"</span></span><br><span class="line">    HSV = <span class="string">"HSV"</span></span><br><span class="line"></span><br><span class="line">    ModeList = [MODE1, L, I, F, P, RGB, RGBX, RGBA, CMYK, YCbCr, HSV]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_position</span>(<span class="params">count</span>):</span><br><span class="line"></span><br><span class="line">    width = thumbnail_size[<span class="number">0</span>]</span><br><span class="line">    pic_width = width*row_count</span><br><span class="line">    position = (count * width)%pic_width, (count * width)/pic_width*width</span><br><span class="line">    <span class="keyword">return</span> position</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_pic_size</span>(<span class="params">thumbnail_size, pic_num, row_count</span>):</span><br><span class="line">    pic_width = thumbnail_size[<span class="number">0</span>] * row_count</span><br><span class="line">    extra_row = <span class="number">1</span> <span class="keyword">if</span> pic_num % row_count <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    pic_height = (pic_num / row_count + extra_row) * thumbnail_size[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pic_width, pic_height</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_filter</span>(<span class="params">src_file</span>):</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyFilter.FilterList), row_count)</span><br><span class="line">    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)</span><br><span class="line">    thumbnail_im = create_thumbnail(src_file)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyFilter.FilterList)):</span><br><span class="line">        CONTOURimg = thumbnail_im.copy()</span><br><span class="line">        CONTOUR = CONTOURimg.<span class="built_in">filter</span>(MyFilter.ImageFilterList[count])</span><br><span class="line">        CONTOURdraw = ImageDraw.Draw(CONTOUR)</span><br><span class="line">        CONTOURdraw.text(font_posotion, MyFilter.FilterList[count], font=font, fill=color)</span><br><span class="line">        image.paste(CONTOUR, get_position(count))</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># image.save("filter.jpg")</span></span><br><span class="line">    image.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_mode</span>(<span class="params">src_file</span>):</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    pic_size = get_pic_size(thumbnail_size, <span class="built_in">len</span>(MyMode.ModeList), row_count)</span><br><span class="line">    image = Image.new(<span class="string">"RGBA"</span>, pic_size, <span class="string">"white"</span>)</span><br><span class="line">    thumbnail_im = create_thumbnail(src_file)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(MyMode.ModeList)):</span><br><span class="line">        img = thumbnail_im.copy()</span><br><span class="line">        CONTOURdraw = ImageDraw.Draw(img)</span><br><span class="line">        CONTOURdraw.text(font_posotion, MyMode.ModeList[count], font=font, fill=color)</span><br><span class="line"></span><br><span class="line">        CONTOUR = img.convert(MyMode.ModeList[i])</span><br><span class="line"></span><br><span class="line">        image.paste(CONTOUR, get_position(count))</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># image.save("mode.jpg")</span></span><br><span class="line">    image.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    create_mode(<span class="string">"res.jpg"</span>)</span><br><span class="line">    create_filter(<span class="string">"res.jpg"</span>)</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
                 
             </div>

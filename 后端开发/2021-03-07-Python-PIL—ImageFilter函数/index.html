@@ -533,8 +533,7 @@
 <li>如果设置scale，则卷积核作用于每个像素之后都要除以scale值，默认值为卷积核的权重之和。</li>
 <li>如果设置offset，则将offset值与卷积核相加，然后除以scale</li>
 </ul>
-<pre><code class="highlight python">im = Image.<span class="built_in">open</span>(src_file)
-Kernel_im = im.<span class="built_in">filter</span>(ImageFilter.Kernel((<span class="number">3</span>,<span class="number">3</span>),(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>)))</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line">Kernel_im = im.<span class="built_in">filter</span>(ImageFilter.Kernel((<span class="number">3</span>,<span class="number">3</span>),(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>)))</span><br></pre></td></tr></tbody></table></figure>
 
 <h5 id="RankFilter"><a href="#RankFilter" class="headerlink" title="RankFilter"></a>RankFilter</h5><blockquote>
 <p>RankFilter(size, rank)</p>
@@ -545,8 +544,7 @@ Kernel_im = im.<span class="built_in">filter</span>(ImageFilter.Kernel((<span cl
 <li>size，以像素点为中心size * size 的像素点中进行排序。</li>
 <li>rank，size * size 的像素中选择排序第rank位的像素作为新值。</li>
 </ul>
-<pre><code class="highlight python">im = Image.<span class="built_in">open</span>(src_file)
-im = im.<span class="built_in">filter</span>(ImageFilter.RankFilter(<span class="number">5</span>,<span class="number">24</span>))</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line">im = im.<span class="built_in">filter</span>(ImageFilter.RankFilter(<span class="number">5</span>,<span class="number">24</span>))</span><br></pre></td></tr></tbody></table></figure>
 
 <h5 id="MinFilter-MedianFilter-MaxFilter"><a href="#MinFilter-MedianFilter-MaxFilter" class="headerlink" title="MinFilter, MedianFilter,MaxFilter"></a>MinFilter, MedianFilter,MaxFilter</h5><blockquote>
 <p>MinFilter(size)<br>最小滤波器。<br>MedianFilter(size)<br>中值滤波器。<br>MaxFilter(size)<br>最大滤波器。</p>
@@ -554,10 +552,7 @@ im = im.<span class="built_in">filter</span>(ImageFilter.RankFilter(<span class=
 <ul>
 <li>size，以像素点为中心的(size * size) 区域中选择最小、中值、最大的像素作为新值。</li>
 </ul>
-<pre><code class="highlight python">im = Image.<span class="built_in">open</span>(src_file)
-im = im.<span class="built_in">filter</span>(ImageFilter.MinFilter(<span class="number">5</span>))
-im = im.<span class="built_in">filter</span>(ImageFilter.MedianFilterFilter(<span class="number">5</span>))
-im = im.<span class="built_in">filter</span>(ImageFilter.MaxFilter(<span class="number">5</span>))</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line">im = im.<span class="built_in">filter</span>(ImageFilter.MinFilter(<span class="number">5</span>))</span><br><span class="line">im = im.<span class="built_in">filter</span>(ImageFilter.MedianFilterFilter(<span class="number">5</span>))</span><br><span class="line">im = im.<span class="built_in">filter</span>(ImageFilter.MaxFilter(<span class="number">5</span>))</span><br></pre></td></tr></tbody></table></figure>
 
 <h5 id="ModeFilter"><a href="#ModeFilter" class="headerlink" title="ModeFilter"></a>ModeFilter</h5><blockquote>
 <p>ModeFilter(size)</p>
@@ -566,8 +561,7 @@ im = im.<span class="built_in">filter</span>(ImageFilter.MaxFilter(<span class="
 <li>模式滤波器</li>
 <li>size，以像素点为中心的(size * size)区域中选择出现次数最多的像素最为新值。</li>
 </ul>
-<pre><code class="highlight python">im = Image.<span class="built_in">open</span>(src_file)
-im = im.<span class="built_in">filter</span>(ImageFilter.ModeFilter(<span class="number">5</span>))</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">im = Image.<span class="built_in">open</span>(src_file)</span><br><span class="line">im = im.<span class="built_in">filter</span>(ImageFilter.ModeFilter(<span class="number">5</span>))</span><br></pre></td></tr></tbody></table></figure>
 
 
                 

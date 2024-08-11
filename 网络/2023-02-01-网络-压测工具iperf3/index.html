@@ -497,7 +497,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    601
+                    599
                 </div>
                 
 
@@ -523,7 +523,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="sed是什么"><a href="#sed是什么" class="headerlink" title="sed是什么"></a>sed是什么</h2><p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，不断重复，直到文件末尾。文件内容不会改变，除非使用重定向输出。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre><code class="highlight sh">sed [option] <span class="string">'command'</span> filename</code></pre>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [option] <span class="string">'command'</span> filename</span><br></pre></td></tr></tbody></table></figure>
 
 <p>常用option：</p>
 <blockquote>
@@ -543,40 +543,13 @@
 </blockquote>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
 <li><p>插入</p>
-<pre><code class="highlight sh"><span class="comment"># 在第一行前添加字符串</span>
-sed <span class="string">&#x27;1i\添加的内容&#x27;</span> file
-<span class="comment"># 在最后一行行前添加字符串</span>
-sed <span class="string">&#x27;$i\添加的内容&#x27;</span> file
-<span class="comment"># 在最后一行行后添加字符串</span>
-sed <span class="string">&#x27;$a\添加的内容&#x27;</span> file
-</code></pre>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在第一行前添加字符串</span></span><br><span class="line">sed <span class="string">&#x27;1i\添加的内容&#x27;</span> file</span><br><span class="line"><span class="comment"># 在最后一行行前添加字符串</span></span><br><span class="line">sed <span class="string">&#x27;$i\添加的内容&#x27;</span> file</span><br><span class="line"><span class="comment"># 在最后一行行后添加字符串</span></span><br><span class="line">sed <span class="string">&#x27;$a\添加的内容&#x27;</span> file</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>替换</p>
-<pre><code class="highlight sh"><span class="comment"># 注释掉含有“swap”的行</span>
-sed -i <span class="string">&#x27;s/^[^#].*swap*/#&amp;/g&#x27;</span> fstab
-
-<span class="comment"># 取消含有字符串swap的行最前面的注释符号#</span>
-<span class="comment">## //两杠表示空格，以空格替换#，等价取消#。</span>
-sed -i <span class="string">&#x27;/^#.*swap/s/^#//g&#x27;</span> fstab
-</code></pre>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注释掉含有“swap”的行</span></span><br><span class="line">sed -i <span class="string">&#x27;s/^[^#].*swap*/#&amp;/g&#x27;</span> fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消含有字符串swap的行最前面的注释符号#</span></span><br><span class="line"><span class="comment">## //两杠表示空格，以空格替换#，等价取消#。</span></span><br><span class="line">sed -i <span class="string">&#x27;/^#.*swap/s/^#//g&#x27;</span> fstab</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>删除</p>
-<pre><code class="highlight sh"><span class="comment"># 删除第2行</span>
-sed <span class="string">&#x27;2d&#x27;</span> filename
-<span class="comment"># 删除1-4行</span>
-sed <span class="string">&#x27;1,4d&#x27;</span> filename
-<span class="comment"># 删除1行和后2行,共3行</span>
-sed <span class="string">&#x27;1,+2d&#x27;</span> filename
-<span class="comment"># 删除匹配到Coder的行和其后面的2行</span>
-sed <span class="string">&#x27;/Coder/,+2d&#x27;</span> filename
-<span class="comment"># 删除奇数行</span>
-sed <span class="string">&#x27;1~2d&#x27;</span> filename
-<span class="comment"># 删除偶数行</span>
-sed <span class="string">&#x27;2~2d&#x27;</span> filename
-<span class="comment"># 删除匹配Coder的行</span>
-sed <span class="string">&#x27;/Coder/d&#x27;</span> filename
-<span class="comment"># 删除所有空行</span>
-sed <span class="string">&#x27;/^$/d&#x27;</span> filename</code></pre></li>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除第2行</span></span><br><span class="line">sed <span class="string">&#x27;2d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除1-4行</span></span><br><span class="line">sed <span class="string">&#x27;1,4d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除1行和后2行,共3行</span></span><br><span class="line">sed <span class="string">&#x27;1,+2d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除匹配到Coder的行和其后面的2行</span></span><br><span class="line">sed <span class="string">&#x27;/Coder/,+2d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除奇数行</span></span><br><span class="line">sed <span class="string">&#x27;1~2d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除偶数行</span></span><br><span class="line">sed <span class="string">&#x27;2~2d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除匹配Coder的行</span></span><br><span class="line">sed <span class="string">&#x27;/Coder/d&#x27;</span> filename</span><br><span class="line"><span class="comment"># 删除所有空行</span></span><br><span class="line">sed <span class="string">&#x27;/^$/d&#x27;</span> filename</span><br></pre></td></tr></table></figure></li>
 </ul>
 </script></p></blockquote>
                 

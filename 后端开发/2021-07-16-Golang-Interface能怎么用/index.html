@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    884
+                    880
                 </div>
                 
 
@@ -519,20 +519,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="Golang-Interface-应用"><a href="#Golang-Interface-应用" class="headerlink" title="Golang Interface 应用"></a>Golang Interface 应用</h2><h3 id="Interface是什么？"><a href="#Interface是什么？" class="headerlink" title="Interface是什么？"></a>Interface是什么？</h3><p>在Golang中，interface是一组method的集合，duck-type programing的一种体现。不关心属性（数据），只关心行为（方法）。可以认为interface是一种协议，一种为了双方交流而做出的约定。</p>
-<pre><code class="highlight go"><span class="comment">// The error built-in interface type is the conventional interface for</span>
-<span class="comment">// representing an error condition, with the nil value representing no error.</span>
-<span class="keyword">type</span> <span class="type">error</span> <span class="keyword">interface</span> {
-	Error() <span class="type">string</span>
-}
-
-<span class="comment">// ----------------</span>
-<span class="comment">// 定义自己的err类型</span>
-<span class="keyword">type</span> MyErr <span class="keyword">struct</span> {}
-
-<span class="comment">// 实现error接口</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(e *MyErr)</span></span>Error() <span class="type">string</span> {
-	<span class="keyword">return</span> <span class="string">"my error"</span>	
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The error built-in interface type is the conventional interface for</span></span><br><span class="line"><span class="comment">// representing an error condition, with the nil value representing no error.</span></span><br><span class="line"><span class="keyword">type</span> <span class="type">error</span> <span class="keyword">interface</span> {</span><br><span class="line">	Error() <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------</span></span><br><span class="line"><span class="comment">// 定义自己的err类型</span></span><br><span class="line"><span class="keyword">type</span> MyErr <span class="keyword">struct</span> {}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现error接口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *MyErr)</span></span>Error() <span class="type">string</span> {</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"my error"</span>	</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
@@ -542,143 +529,17 @@
 <li>providing interception points （提供拦截点）</li>
 </ul>
 <h4 id="writing-generic-algorithm"><a href="#writing-generic-algorithm" class="headerlink" title="writing generic algorithm"></a>writing generic algorithm</h4><p>golang的泛型最早1.17才提供版本支持。用interface实现一下行不行呀？</p>
-<pre><code class="highlight go"><span class="keyword">package</span> sort
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sort</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Interface <span class="keyword">interface</span> {</span><br><span class="line">    <span class="comment">// Len is the number of elements in the collection.</span></span><br><span class="line">    Len() <span class="type">int</span></span><br><span class="line">    <span class="comment">// Less reports whether the element with</span></span><br><span class="line">    <span class="comment">// index i should sort before the element with index j.</span></span><br><span class="line">    Less(i, j <span class="type">int</span>) <span class="type">bool</span></span><br><span class="line">    <span class="comment">// Swap swaps the elements with indexes i and j.</span></span><br><span class="line">    Swap(i, j <span class="type">int</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> BestLanguage <span class="keyword">struct</span> {</span><br><span class="line">	Name  <span class="type">string</span></span><br><span class="line">	Score <span class="type">int</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b BestLanguage)</span></span> String() <span class="type">string</span> {</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%s:%d"</span>, b.Name, b.Score)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Languages []BestLanguage</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现了sort的Interface，不知道是怎么排序的，但拥有了排序的能力</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Len() <span class="type">int</span> {</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(Languages{})</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> {</span><br><span class="line">	<span class="keyword">return</span> l[i].Score &gt; l[j].Score</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Swap(i, j <span class="type">int</span>) {</span><br><span class="line">	l[i], l[j] = l[j], l[i]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	languages := []BestLanguage{</span><br><span class="line">		{<span class="string">"Chinese"</span>, <span class="number">5</span>},</span><br><span class="line">		{<span class="string">"English"</span>, <span class="number">4</span>},</span><br><span class="line">		{<span class="string">"Japanese"</span>, <span class="number">3</span>},</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	fmt.Println(languages)</span><br><span class="line">	sort.Sort(Languages(languages))</span><br><span class="line">	fmt.Println(languages)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<span class="keyword">type</span> Interface <span class="keyword">interface</span> {
-    <span class="comment">// Len is the number of elements in the collection.</span>
-    Len() <span class="type">int</span>
-    <span class="comment">// Less reports whether the element with</span>
-    <span class="comment">// index i should sort before the element with index j.</span>
-    Less(i, j <span class="type">int</span>) <span class="type">bool</span>
-    <span class="comment">// Swap swaps the elements with indexes i and j.</span>
-    Swap(i, j <span class="type">int</span>)
-}
-
-<span class="comment">// ------------------</span>
-
-<span class="keyword">type</span> BestLanguage <span class="keyword">struct</span> {
-	Name  <span class="type">string</span>
-	Score <span class="type">int</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(b BestLanguage)</span></span> String() <span class="type">string</span> {
-	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%s:%d"</span>, b.Name, b.Score)
-}
-
-<span class="keyword">type</span> Languages []BestLanguage
-
-<span class="comment">// 实现了sort的Interface，不知道是怎么排序的，但拥有了排序的能力</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Len() <span class="type">int</span> {
-	<span class="keyword">return</span> <span class="built_in">len</span>(Languages{})
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Less(i, j <span class="type">int</span>) <span class="type">bool</span> {
-	<span class="keyword">return</span> l[i].Score &gt; l[j].Score
-}
-<span class="function"><span class="keyword">func</span> <span class="params">(l Languages)</span></span> Swap(i, j <span class="type">int</span>) {
-	l[i], l[j] = l[j], l[i]
-}
-
-
-<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-	languages := []BestLanguage{
-		{<span class="string">"Chinese"</span>, <span class="number">5</span>},
-		{<span class="string">"English"</span>, <span class="number">4</span>},
-		{<span class="string">"Japanese"</span>, <span class="number">3</span>},
-	}
-
-	fmt.Println(languages)
-	sort.Sort(Languages(languages))
-	fmt.Println(languages)
-}</code></pre>
-
-<pre><code class="highlight go"><span class="comment">// Return concrete types, receive interfaces as parameter.</span>
-<span class="function"><span class="keyword">func</span> <span class="title">ConvertInterfaceToString</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> <span class="type">string</span> {
-	<span class="keyword">var</span> vstr <span class="type">string</span>
-	<span class="keyword">switch</span> v.(<span class="keyword">type</span>) {
-	<span class="keyword">case</span> <span class="type">int</span>:
-		vstr = strconv.Itoa(v.(<span class="type">int</span>))
-	<span class="keyword">case</span> <span class="type">int32</span>:
-		vstr = strconv.Itoa(<span class="type">int</span>(v.(<span class="type">int32</span>)))
-	<span class="keyword">case</span> <span class="type">int64</span>:
-		vstr = strconv.FormatInt(v.(<span class="type">int64</span>), <span class="number">10</span>)
-	<span class="keyword">case</span> <span class="type">float64</span>:
-		vstr = strconv.Itoa(<span class="type">int</span>(v.(<span class="type">float64</span>)))
-	<span class="keyword">case</span> <span class="type">string</span>:
-		vstr = v.(<span class="type">string</span>)
-	<span class="keyword">default</span>:
-	}
-	<span class="keyword">return</span> vstr
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Return concrete types, receive interfaces as parameter.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ConvertInterfaceToString</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> <span class="type">string</span> {</span><br><span class="line">	<span class="keyword">var</span> vstr <span class="type">string</span></span><br><span class="line">	<span class="keyword">switch</span> v.(<span class="keyword">type</span>) {</span><br><span class="line">	<span class="keyword">case</span> <span class="type">int</span>:</span><br><span class="line">		vstr = strconv.Itoa(v.(<span class="type">int</span>))</span><br><span class="line">	<span class="keyword">case</span> <span class="type">int32</span>:</span><br><span class="line">		vstr = strconv.Itoa(<span class="type">int</span>(v.(<span class="type">int32</span>)))</span><br><span class="line">	<span class="keyword">case</span> <span class="type">int64</span>:</span><br><span class="line">		vstr = strconv.FormatInt(v.(<span class="type">int64</span>), <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="type">float64</span>:</span><br><span class="line">		vstr = strconv.Itoa(<span class="type">int</span>(v.(<span class="type">float64</span>)))</span><br><span class="line">	<span class="keyword">case</span> <span class="type">string</span>:</span><br><span class="line">		vstr = v.(<span class="type">string</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> vstr</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <h4 id="hiding-implement-detail"><a href="#hiding-implement-detail" class="headerlink" title="hiding implement detail"></a>hiding implement detail</h4><p>三个函数返回的具体 struct （都实现了 Context interface），但是对于使用者来说是完全无感知的。</p>
-<pre><code class="highlight go"><span class="keyword">type</span> Context <span class="keyword">interface</span> {
-	Deadline() (deadline time.Time, ok <span class="type">bool</span>)
-	Done() &lt;-<span class="keyword">chan</span> <span class="keyword">struct</span>{}
-	Err() <span class="type">error</span>
-	Value(key <span class="keyword">interface</span>{}) <span class="keyword">interface</span>{}
-}
-
-<span class="comment">// ------------------</span>
-
-<span class="keyword">type</span> cancelCtx <span class="keyword">struct</span> {
-	Context
-	mu       sync.Mutex
-	done     <span class="keyword">chan</span> <span class="keyword">struct</span>{}
-	children <span class="keyword">map</span>[canceler]<span class="keyword">struct</span>{}
-	err      <span class="type">error</span>
-}
-<span class="function"><span class="keyword">func</span> <span class="title">WithCancel</span><span class="params">(parent Context)</span></span> (ctx Context, cancel CancelFunc)    <span class="comment">//返回 cancelCtx</span>
-
-<span class="keyword">type</span> timerCtx <span class="keyword">struct</span> {
-	cancelCtx
-	timer *time.Timer
-	deadline time.Time
-}
-<span class="function"><span class="keyword">func</span> <span class="title">WithDeadline</span><span class="params">(parent Context, deadline time.Time)</span></span> (Context, CancelFunc) <span class="comment">//返回 timerCtx</span>
-
-<span class="keyword">type</span> valueCtx <span class="keyword">struct</span> {
-	Context
-	key, val <span class="keyword">interface</span>{}
-}
-<span class="function"><span class="keyword">func</span> <span class="title">WithValue</span><span class="params">(parent Context, key, val <span class="keyword">interface</span>{})</span></span> Context    <span class="comment">//返回 valueCtx</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Context <span class="keyword">interface</span> {</span><br><span class="line">	Deadline() (deadline time.Time, ok <span class="type">bool</span>)</span><br><span class="line">	Done() &lt;-<span class="keyword">chan</span> <span class="keyword">struct</span>{}</span><br><span class="line">	Err() <span class="type">error</span></span><br><span class="line">	Value(key <span class="keyword">interface</span>{}) <span class="keyword">interface</span>{}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> cancelCtx <span class="keyword">struct</span> {</span><br><span class="line">	Context</span><br><span class="line">	mu       sync.Mutex</span><br><span class="line">	done     <span class="keyword">chan</span> <span class="keyword">struct</span>{}</span><br><span class="line">	children <span class="keyword">map</span>[canceler]<span class="keyword">struct</span>{}</span><br><span class="line">	err      <span class="type">error</span></span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithCancel</span><span class="params">(parent Context)</span></span> (ctx Context, cancel CancelFunc)    <span class="comment">//返回 cancelCtx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> timerCtx <span class="keyword">struct</span> {</span><br><span class="line">	cancelCtx</span><br><span class="line">	timer *time.Timer</span><br><span class="line">	deadline time.Time</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithDeadline</span><span class="params">(parent Context, deadline time.Time)</span></span> (Context, CancelFunc) <span class="comment">//返回 timerCtx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> valueCtx <span class="keyword">struct</span> {</span><br><span class="line">	Context</span><br><span class="line">	key, val <span class="keyword">interface</span>{}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithValue</span><span class="params">(parent Context, key, val <span class="keyword">interface</span>{})</span></span> Context    <span class="comment">//返回 valueCtx</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="providing-interception-points"><a href="#providing-interception-points" class="headerlink" title="providing interception points"></a>providing interception points</h4><p>实现RoundTripper接口，可以在http请求前后写入自己的逻辑，如apm，jaeger的打点。</p>
-<pre><code class="highlight go"><span class="keyword">package</span> http
-
-<span class="keyword">type</span> RoundTripper <span class="keyword">interface</span> {
-	RoundTrip(*Request) (*Response, <span class="type">error</span>)
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">WrapClient</span><span class="params">(c *http.Client)</span></span> *http.Client {
-	<span class="keyword">if</span> c == <span class="literal">nil</span> {
-		c = http.DefaultClient
-	}
-	copied := *c
-	copied.Transport = wrapRoundTripper(copied.Transport)
-	<span class="keyword">return</span> &amp;copied
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">wrapRoundTripper</span><span class="params">(r http.RoundTripper)</span></span> http.RoundTripper {
-	<span class="keyword">if</span> r == <span class="literal">nil</span> {
-		r = http.DefaultTransport
-	}
-	rt := &amp;roundTripper{r: r}
-	<span class="keyword">return</span> rt
-}
-
-<span class="keyword">type</span> roundTripper <span class="keyword">struct</span> {
-	r http.RoundTripper
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(r *roundTripper)</span></span> RoundTrip(req *http.Request) (*http.Response, <span class="type">error</span>) {
-  <span class="comment">// do something</span>
-  resp, err := r.r.RoundTrip(req) <span class="comment">// real request</span>
-  <span class="comment">// do something</span>
-  <span class="keyword">return</span> resp, err
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> http</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> RoundTripper <span class="keyword">interface</span> {</span><br><span class="line">	RoundTrip(*Request) (*Response, <span class="type">error</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WrapClient</span><span class="params">(c *http.Client)</span></span> *http.Client {</span><br><span class="line">	<span class="keyword">if</span> c == <span class="literal">nil</span> {</span><br><span class="line">		c = http.DefaultClient</span><br><span class="line">	}</span><br><span class="line">	copied := *c</span><br><span class="line">	copied.Transport = wrapRoundTripper(copied.Transport)</span><br><span class="line">	<span class="keyword">return</span> &amp;copied</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wrapRoundTripper</span><span class="params">(r http.RoundTripper)</span></span> http.RoundTripper {</span><br><span class="line">	<span class="keyword">if</span> r == <span class="literal">nil</span> {</span><br><span class="line">		r = http.DefaultTransport</span><br><span class="line">	}</span><br><span class="line">	rt := &amp;roundTripper{r: r}</span><br><span class="line">	<span class="keyword">return</span> rt</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> roundTripper <span class="keyword">struct</span> {</span><br><span class="line">	r http.RoundTripper</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *roundTripper)</span></span> RoundTrip(req *http.Request) (*http.Response, <span class="type">error</span>) {</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">  resp, err := r.r.RoundTrip(req) <span class="comment">// real request</span></span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">  <span class="keyword">return</span> resp, err</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
@@ -689,68 +550,7 @@
 <li>❎表示编译不通过，因为对象没有声明接口的全部方法。</li>
 <li>指针类型没有声明全部，但是能编译通过，因为Go自己做了一些转换。</li>
 </ol>
-<pre><code class="highlight go"><span class="keyword">type</span> Animal <span class="keyword">interface</span> {
-	Eat(food <span class="type">string</span>)
-	Say()
-}
-
-<span class="comment">// 全部值</span>
-<span class="keyword">type</span> Dog <span class="keyword">struct</span> {
-	food <span class="type">string</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span></span> Eat(food <span class="type">string</span>) {
-	d.food = food
-}
-<span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span></span> Say() {
-	fmt.Println(<span class="string">"dog like "</span>, d.food)
-}
-
-<span class="comment">// 全部指针</span>
-<span class="keyword">type</span> Cat <span class="keyword">struct</span> {
-	food <span class="type">string</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(d *Cat)</span></span> Eat(food <span class="type">string</span>) {
-	d.food = food
-}
-<span class="function"><span class="keyword">func</span> <span class="params">(d *Cat)</span></span> Say() {
-	fmt.Println(<span class="string">"cat like "</span>, d.food)
-}
-
-<span class="comment">// 有值、有指针</span>
-<span class="keyword">type</span> Fish <span class="keyword">struct</span> {
-	food <span class="type">string</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(d *Fish)</span></span> Eat(food <span class="type">string</span>) {
-	d.food = food
-}
-<span class="function"><span class="keyword">func</span> <span class="params">(d Fish)</span></span> Say() {
-	fmt.Println(<span class="string">"fish like "</span>, d.food)
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-	<span class="keyword">var</span> dog Animal = Dog{}
-	<span class="keyword">var</span> dog Animal = &amp;Dog{}
-	<span class="keyword">var</span> dog Animal = <span class="built_in">new</span>(Dog)
-	dog.Eat(<span class="string">"bone"</span>)
-	dog.Say()
-	<span class="comment">// dog like    # 没吃上，赋值失败</span>
-
-	❎ <span class="keyword">var</span> cat Animal = Cat{}
-	<span class="comment">//var cat Animal = &amp;Cat{}</span>
-	<span class="keyword">var</span> cat Animal = <span class="built_in">new</span>(Cat)
-	cat.Eat(<span class="string">"fish"</span>)
-	cat.Say()
-	<span class="comment">// cat like  fish</span>
-
-	❎ <span class="keyword">var</span> fish Animal = Fish{}
-	<span class="keyword">var</span> fish Animal = <span class="built_in">new</span>(Fish)
-	fish.Eat(<span class="string">"small fish"</span>)
-	fish.Say()
-	<span class="comment">// fish like  small fish</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Animal <span class="keyword">interface</span> {</span><br><span class="line">	Eat(food <span class="type">string</span>)</span><br><span class="line">	Say()</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部值</span></span><br><span class="line"><span class="keyword">type</span> Dog <span class="keyword">struct</span> {</span><br><span class="line">	food <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span></span> Eat(food <span class="type">string</span>) {</span><br><span class="line">	d.food = food</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span></span> Say() {</span><br><span class="line">	fmt.Println(<span class="string">"dog like "</span>, d.food)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部指针</span></span><br><span class="line"><span class="keyword">type</span> Cat <span class="keyword">struct</span> {</span><br><span class="line">	food <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Cat)</span></span> Eat(food <span class="type">string</span>) {</span><br><span class="line">	d.food = food</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Cat)</span></span> Say() {</span><br><span class="line">	fmt.Println(<span class="string">"cat like "</span>, d.food)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有值、有指针</span></span><br><span class="line"><span class="keyword">type</span> Fish <span class="keyword">struct</span> {</span><br><span class="line">	food <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Fish)</span></span> Eat(food <span class="type">string</span>) {</span><br><span class="line">	d.food = food</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Fish)</span></span> Say() {</span><br><span class="line">	fmt.Println(<span class="string">"fish like "</span>, d.food)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	<span class="keyword">var</span> dog Animal = Dog{}</span><br><span class="line">	<span class="keyword">var</span> dog Animal = &amp;Dog{}</span><br><span class="line">	<span class="keyword">var</span> dog Animal = <span class="built_in">new</span>(Dog)</span><br><span class="line">	dog.Eat(<span class="string">"bone"</span>)</span><br><span class="line">	dog.Say()</span><br><span class="line">	<span class="comment">// dog like    # 没吃上，赋值失败</span></span><br><span class="line"></span><br><span class="line">	❎ <span class="keyword">var</span> cat Animal = Cat{}</span><br><span class="line">	<span class="comment">//var cat Animal = &amp;Cat{}</span></span><br><span class="line">	<span class="keyword">var</span> cat Animal = <span class="built_in">new</span>(Cat)</span><br><span class="line">	cat.Eat(<span class="string">"fish"</span>)</span><br><span class="line">	cat.Say()</span><br><span class="line">	<span class="comment">// cat like  fish</span></span><br><span class="line"></span><br><span class="line">	❎ <span class="keyword">var</span> fish Animal = Fish{}</span><br><span class="line">	<span class="keyword">var</span> fish Animal = <span class="built_in">new</span>(Fish)</span><br><span class="line">	fish.Eat(<span class="string">"small fish"</span>)</span><br><span class="line">	fish.Say()</span><br><span class="line">	<span class="comment">// fish like  small fish</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://legendtkl.com/2017/06/12/understanding-golang-interface/">http://legendtkl.com/2017/06/12/understanding-golang-interface/</a></p>
 

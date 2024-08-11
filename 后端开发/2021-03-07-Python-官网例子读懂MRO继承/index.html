@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    472
+                    473
                 </div>
                 
 
@@ -522,99 +522,20 @@
 <p><a href="http://python.jobbole.com/85685/">MRO历史</a></p>
 <h4 id="C3方法解析顺序-The-C3-Method-Resolution-Order"><a href="#C3方法解析顺序-The-C3-Method-Resolution-Order" class="headerlink" title="C3方法解析顺序(The C3 Method Resolution Order)"></a>C3方法解析顺序(The C3 Method Resolution Order)</h4><ul>
 <li><p>像深度又像广度排序</p>
-<h5 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h5><pre><code class="highlight plaintext">&gt;&gt;&gt; O = object
-&gt;&gt;&gt; class F(O): pass
-&gt;&gt;&gt; class E(O): pass
-&gt;&gt;&gt; class D(O): pass
-&gt;&gt;&gt; class C(D,F): pass
-&gt;&gt;&gt; class B(D,E): pass
-&gt;&gt;&gt; class A(B,C): pass</code></pre>
-<pre><code class="highlight plaintext">                          6
-                         ---
-Level 3                 | O |                  (more general)
-                      /  ---  \
-                     /    |    \                      |
-                    /     |     \                     |
-                   /      |      \                    |
-                  ---    ---    ---                   |
-Level 2        3 | D | 4| E |  | F | 5                |
-                  ---    ---    ---                   |
-                   \  \ _ /       |                   |
-                    \    / \ _    |                   |
-                     \  /      \  |                   |
-                      ---      ---                    |
-Level 1            1 | B |    | C | 2                 |
-                      ---      ---                    |
-                        \      /                      |
-                         \    /                      \ /
-                           ---
-Level 0                 0 | A |</code></pre>
-<pre><code class="highlight plaintext">L[A] = A + merge(BDEO,CDFO,BC)
-     = A + B + merge(DEO,CDFO,C)
-     = A + B + C + merge(DEO,DFO)
-     = A + B + C + D + merge(EO,FO)
-     = A + B + C + D + E + merge(O,FO)
-     = A + B + C + D + E + F + merge(O,O)
-     = A B C D E F O</code></pre>
+<h5 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; O = object</span><br><span class="line">&gt;&gt;&gt; class F(O): pass</span><br><span class="line">&gt;&gt;&gt; class E(O): pass</span><br><span class="line">&gt;&gt;&gt; class D(O): pass</span><br><span class="line">&gt;&gt;&gt; class C(D,F): pass</span><br><span class="line">&gt;&gt;&gt; class B(D,E): pass</span><br><span class="line">&gt;&gt;&gt; class A(B,C): pass</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">                          6</span><br><span class="line">                         ---</span><br><span class="line">Level 3                 | O |                  (more general)</span><br><span class="line">                      /  ---  \</span><br><span class="line">                     /    |    \                      |</span><br><span class="line">                    /     |     \                     |</span><br><span class="line">                   /      |      \                    |</span><br><span class="line">                  ---    ---    ---                   |</span><br><span class="line">Level 2        3 | D | 4| E |  | F | 5                |</span><br><span class="line">                  ---    ---    ---                   |</span><br><span class="line">                   \  \ _ /       |                   |</span><br><span class="line">                    \    / \ _    |                   |</span><br><span class="line">                     \  /      \  |                   |</span><br><span class="line">                      ---      ---                    |</span><br><span class="line">Level 1            1 | B |    | C | 2                 |</span><br><span class="line">                      ---      ---                    |</span><br><span class="line">                        \      /                      |</span><br><span class="line">                         \    /                      \ /</span><br><span class="line">                           ---</span><br><span class="line">Level 0                 0 | A |              </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">L[A] = A + merge(BDEO,CDFO,BC)</span><br><span class="line">     = A + B + merge(DEO,CDFO,C)</span><br><span class="line">     = A + B + C + merge(DEO,DFO)</span><br><span class="line">     = A + B + C + D + merge(EO,FO)</span><br><span class="line">     = A + B + C + D + E + merge(O,FO)</span><br><span class="line">     = A + B + C + D + E + F + merge(O,O)</span><br><span class="line">     = A B C D E F O</span><br></pre></td></tr></tbody></table></figure>
 
-<h5 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h5><pre><code class="highlight plaintext">&gt;&gt;&gt; O = object
-&gt;&gt;&gt; class F(O): pass
-&gt;&gt;&gt; class E(O): pass
-&gt;&gt;&gt; class D(O): pass
-&gt;&gt;&gt; class C(D,F): pass
-&gt;&gt;&gt; class B(E,D): pass
-&gt;&gt;&gt; class A(B,C): pass</code></pre>
-<pre><code class="highlight plaintext">                           6
-                          ---
-Level 3                  | O |
-                       /  ---  \
-                      /    |    \
-                     /     |     \
-                    /      |      \
-                  ---     ---    ---
-Level 2        2 | E | 4 | D |  | F | 5
-                  ---     ---    ---
-                   \      / \     /
-                    \    /   \   /
-                     \  /     \ /
-                      ---     ---
-Level 1            1 | B |   | C | 3
-                      ---     ---
-                       \       /
-                        \     /
-                          ---
-Level 0                0 | A |
-                          ---</code></pre>
-<pre><code class="highlight plaintext">&gt;&gt;&gt; A.mro()
-(&lt;class '__main__.A'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.E'&gt;,
-&lt;class '__main__.C'&gt;, &lt;class '__main__.D'&gt;, &lt;class '__main__.F'&gt;,
-&lt;type 'object'&gt;)</code></pre></li>
+<h5 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; O = object</span><br><span class="line">&gt;&gt;&gt; class F(O): pass</span><br><span class="line">&gt;&gt;&gt; class E(O): pass</span><br><span class="line">&gt;&gt;&gt; class D(O): pass</span><br><span class="line">&gt;&gt;&gt; class C(D,F): pass</span><br><span class="line">&gt;&gt;&gt; class B(E,D): pass</span><br><span class="line">&gt;&gt;&gt; class A(B,C): pass</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">                           6</span><br><span class="line">                          ---</span><br><span class="line">Level 3                  | O |</span><br><span class="line">                       /  ---  \</span><br><span class="line">                      /    |    \</span><br><span class="line">                     /     |     \</span><br><span class="line">                    /      |      \</span><br><span class="line">                  ---     ---    ---</span><br><span class="line">Level 2        2 | E | 4 | D |  | F | 5</span><br><span class="line">                  ---     ---    ---</span><br><span class="line">                   \      / \     /</span><br><span class="line">                    \    /   \   /</span><br><span class="line">                     \  /     \ /</span><br><span class="line">                      ---     ---</span><br><span class="line">Level 1            1 | B |   | C | 3</span><br><span class="line">                      ---     ---</span><br><span class="line">                       \       /</span><br><span class="line">                        \     /</span><br><span class="line">                          ---</span><br><span class="line">Level 0                0 | A |</span><br><span class="line">                          ---</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; A.mro()</span><br><span class="line">(&lt;class '__main__.A'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.E'&gt;,</span><br><span class="line">&lt;class '__main__.C'&gt;, &lt;class '__main__.D'&gt;, &lt;class '__main__.F'&gt;,</span><br><span class="line">&lt;type 'object'&gt;)</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h4 id="什么时候对MRO来说是非法的？"><a href="#什么时候对MRO来说是非法的？" class="headerlink" title="什么时候对MRO来说是非法的？"></a>什么时候对MRO来说是非法的？</h4><p>- </p>
-<h5 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h5>  <pre><code class="highlight plaintext">&gt;&gt;&gt; O = object
-&gt;&gt;&gt; class X(O): pass
-&gt;&gt;&gt; class Y(O): pass
-&gt;&gt;&gt; class A(X,Y): pass
-&gt;&gt;&gt; class B(Y,X): pass</code></pre>
-  <pre><code class="highlight plaintext"> -----------
-|           |
-|    O      |
-|  /   \    |
- - X    Y  /
-   |  / | /
-   | /  |/
-   A    B
-   \   /
-     ?</code></pre>
-  <pre><code class="highlight plaintext">L[O] = 0
-L[X] = X O
-L[Y] = Y O
-L[A] = A X Y O
-L[B] = B Y X O</code></pre>
+<h5 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h5>  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; O = object</span><br><span class="line">&gt;&gt;&gt; class X(O): pass</span><br><span class="line">&gt;&gt;&gt; class Y(O): pass</span><br><span class="line">&gt;&gt;&gt; class A(X,Y): pass</span><br><span class="line">&gt;&gt;&gt; class B(Y,X): pass</span><br></pre></td></tr></tbody></table></figure>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> -----------</span><br><span class="line">|           |</span><br><span class="line">|    O      |</span><br><span class="line">|  /   \    |</span><br><span class="line"> - X    Y  /</span><br><span class="line">   |  / | /</span><br><span class="line">   | /  |/</span><br><span class="line">   A    B</span><br><span class="line">   \   /</span><br><span class="line">     ?</span><br></pre></td></tr></tbody></table></figure>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L[O] = 0</span><br><span class="line">L[X] = X O</span><br><span class="line">L[Y] = Y O</span><br><span class="line">L[A] = A X Y O</span><br><span class="line">L[B] = B Y X O</span><br></pre></td></tr></tbody></table></figure>
 
-  <pre><code class="highlight plaintext">L[C] = C + merge(AXYO, BYXO, AB)
-     = C + A + merge(XYO, BYXO, B)
-     = C + A + B + merge(XYO, YXO)</code></pre>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L[C] = C + merge(AXYO, BYXO, AB)</span><br><span class="line">     = C + A + merge(XYO, BYXO, B)</span><br><span class="line">     = C + A + B + merge(XYO, YXO)</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>这时，我们不能合并列表XYO和列表YXO，：因此，没有了符合规则的head，C3算法停止。在这种情形下，Python 2.3会抛出一个异常(TypeError: MRO conflict among bases Y, X)，因为X在YXO的tail中,而Y在XYO的tail中,阻止创建模棱两可的继承层次。Python 2.2不会抛出异常，而是选择了一种特定的方法解析顺序(CABXYO).</li>
 </ul>

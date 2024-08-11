@@ -484,7 +484,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    488
+                    475
                 </div>
                 
 
@@ -513,61 +513,30 @@
 <p>字节类型 a=bytes(‘123’)/a = b’123’<br>字节数组 bytearray(‘123’)</p>
 <p>可变序列：list,set,dict<br>不可变序列：str,tuple</p>
 <h4 id="数据类型方法"><a href="#数据类型方法" class="headerlink" title="数据类型方法"></a>数据类型方法</h4><h5 id="字符串方法"><a href="#字符串方法" class="headerlink" title="字符串方法"></a>字符串方法</h5><ol>
-<li>增<pre><code class="highlight python">strs = str1 + str2 + str3
-strs = <span class="string">""</span>.join([str1, str2, str3])
-strs = <span class="string">"%s%s%s"</span> % (str1, str2, str3)
-strs = <span class="string">"{}{}{}"</span>.<span class="built_in">format</span>(str1, str2, str3)</code></pre></li>
-<li>删<pre><code class="highlight python"><span class="comment"># m准备替换的内容，n替换的内容，x替换的个数</span>
-strs = x.replace(m, n, x)</code></pre></li>
-<li>改<pre><code class="highlight python">x.upper() <span class="comment"># x转化为大写</span>
-x.lower() <span class="comment"># x转化为小写</span>
-x.strip() <span class="comment"># 去x左右空白</span>
-x.lstrip() <span class="comment"># 去左空白</span>
-x.rstrip() <span class="comment"># 去右空白</span>
-x.title() <span class="comment"># x标题化</span>
-x.capitalize() <span class="comment"># 第一个字母大写</span>
-x.split(m, x) <span class="comment"># 以m为界分割，分割x次</span></code></pre></li>
-<li>查<pre><code class="highlight python">x.index(m) <span class="comment"># m的索引 找不到抛异常</span>
-x.find(m) <span class="comment"># m的索引 找不到返-1</span>
-x.count(m) <span class="comment"># 计数</span>
-x.isdigit(m) <span class="comment"># 是否是数字</span>
-x.isalpha() <span class="comment"># 是否是字母</span>
-x.isupper() <span class="comment"># 是否是大写</span>
-x.islower() <span class="comment"># 是否是小写</span>
-x.startswith(m) <span class="comment"># 是否以m开头</span>
-x.endswith(m) <span class="comment"># 是否以m结尾</span></code></pre></li>
+<li>增<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strs = str1 + str2 + str3</span><br><span class="line">strs = <span class="string">""</span>.join([str1, str2, str3])</span><br><span class="line">strs = <span class="string">"%s%s%s"</span> % (str1, str2, str3)</span><br><span class="line">strs = <span class="string">"{}{}{}"</span>.<span class="built_in">format</span>(str1, str2, str3)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>删<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># m准备替换的内容，n替换的内容，x替换的个数</span></span><br><span class="line">strs = x.replace(m, n, x)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>改<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x.upper() <span class="comment"># x转化为大写</span></span><br><span class="line">x.lower() <span class="comment"># x转化为小写</span></span><br><span class="line">x.strip() <span class="comment"># 去x左右空白</span></span><br><span class="line">x.lstrip() <span class="comment"># 去左空白</span></span><br><span class="line">x.rstrip() <span class="comment"># 去右空白</span></span><br><span class="line">x.title() <span class="comment"># x标题化</span></span><br><span class="line">x.capitalize() <span class="comment"># 第一个字母大写</span></span><br><span class="line">x.split(m, x) <span class="comment"># 以m为界分割，分割x次</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>查<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x.index(m) <span class="comment"># m的索引 找不到抛异常</span></span><br><span class="line">x.find(m) <span class="comment"># m的索引 找不到返-1</span></span><br><span class="line">x.count(m) <span class="comment"># 计数</span></span><br><span class="line">x.isdigit(m) <span class="comment"># 是否是数字</span></span><br><span class="line">x.isalpha() <span class="comment"># 是否是字母</span></span><br><span class="line">x.isupper() <span class="comment"># 是否是大写</span></span><br><span class="line">x.islower() <span class="comment"># 是否是小写</span></span><br><span class="line">x.startswith(m) <span class="comment"># 是否以m开头</span></span><br><span class="line">x.endswith(m) <span class="comment"># 是否以m结尾</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 <h5 id="列表方法"><a href="#列表方法" class="headerlink" title="列表方法"></a>列表方法</h5><ol>
-<li>增<pre><code class="highlight python">li.append(m)
-li.insert(x, m) <span class="comment"># 在x下标处插入m</span>
-li.extend(<span class="built_in">list</span>)</code></pre></li>
-<li>删<pre><code class="highlight python">li.pop(x) <span class="comment"># 删除并返回该元素的值，若无参数则从最后开始删</span>
-li.remove(m) <span class="comment"># 删掉第一个m</span>
-li.clear() <span class="comment"># 清空 py2无此方法</span></code></pre></li>
-<li>改<pre><code class="highlight python">li[n] = x</code></pre></li>
-<li>查 <pre><code class="highlight python">li.index(m) <span class="comment"># m索引的内容</span>
-li.count(m) <span class="comment"># m的数量</span></code></pre></li>
-<li>浅复制<pre><code class="highlight python">copy()</code></pre></li>
-<li>深复制<pre><code class="highlight python"><span class="keyword">import</span> copy
-li2 = copy.deepcopy(li1)</code></pre></li>
-<li>永久排序<pre><code class="highlight python">li.sort(reverse=<span class="literal">True</span>/<span class="literal">False</span>)
-li.reverse() <span class="comment"># 倒排序</span></code></pre></li>
-<li>临时排序<pre><code class="highlight python">li2 = <span class="built_in">sorted</span>(li, reverse=<span class="literal">True</span>/<span class="literal">False</span>) <span class="comment"># li2是list</span>
-li2 = <span class="built_in">reversed</span>(li) <span class="comment"># li2是listreverseiterator 对象</span></code></pre></li>
+<li>增<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">li.append(m)</span><br><span class="line">li.insert(x, m) <span class="comment"># 在x下标处插入m</span></span><br><span class="line">li.extend(<span class="built_in">list</span>)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>删<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">li.pop(x) <span class="comment"># 删除并返回该元素的值，若无参数则从最后开始删</span></span><br><span class="line">li.remove(m) <span class="comment"># 删掉第一个m</span></span><br><span class="line">li.clear() <span class="comment"># 清空 py2无此方法</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>改<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">li[n] = x</span><br></pre></td></tr></tbody></table></figure></li>
+<li>查 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">li.index(m) <span class="comment"># m索引的内容</span></span><br><span class="line">li.count(m) <span class="comment"># m的数量</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>浅复制<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy()</span><br></pre></td></tr></tbody></table></figure></li>
+<li>深复制<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">li2 = copy.deepcopy(li1)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>永久排序<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">li.sort(reverse=<span class="literal">True</span>/<span class="literal">False</span>)</span><br><span class="line">li.reverse() <span class="comment"># 倒排序</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>临时排序<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">li2 = <span class="built_in">sorted</span>(li, reverse=<span class="literal">True</span>/<span class="literal">False</span>) <span class="comment"># li2是list</span></span><br><span class="line">li2 = <span class="built_in">reversed</span>(li) <span class="comment"># li2是listreverseiterator 对象</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 <h5 id="元组方法"><a href="#元组方法" class="headerlink" title="元组方法"></a>元组方法</h5><ol>
-<li>查<pre><code class="highlight python">t.index(m)
-t.count(m)</code></pre></li>
+<li>查<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t.index(m)</span><br><span class="line">t.count(m)</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 <h5 id="集合方法"><a href="#集合方法" class="headerlink" title="集合方法"></a>集合方法</h5><p><strong>交集&amp;</strong><br><strong>并集|</strong><br><strong>差集-</strong></p>
 <ol>
-<li>增<pre><code class="highlight python">a.add(m)</code></pre></li>
-<li>删<pre><code class="highlight python">a.pop() <span class="comment"># 随机删除</span>
-a.remove(m)</code></pre></li>
-<li>改<pre><code class="highlight python">a.update(m) <span class="comment"># 向集合添加m，m可以为str list tuple set dict</span></code></pre></li>
-<li>查<pre><code class="highlight python">a.isdisjoint(b) <span class="comment"># 是否存在交集 </span>
-a.issubset(b) <span class="comment"># a是否是b的子集</span>
-a.issuperset(b) <span class="comment"># a是否是b的父集</span></code></pre></li>
+<li>增<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.add(m)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>删<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.pop() <span class="comment"># 随机删除</span></span><br><span class="line">a.remove(m)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>改<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.update(m) <span class="comment"># 向集合添加m，m可以为str list tuple set dict</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>查<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.isdisjoint(b) <span class="comment"># 是否存在交集 </span></span><br><span class="line">a.issubset(b) <span class="comment"># a是否是b的子集</span></span><br><span class="line">a.issuperset(b) <span class="comment"># a是否是b的父集</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 
                 

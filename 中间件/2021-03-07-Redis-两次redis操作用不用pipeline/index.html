@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    417
+                    414
                 </div>
                 
 
@@ -523,30 +523,7 @@
 <li>pipeline 允许客户端可以一次发送多条命令，而不等待上一条命令执行的结果。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2ltZy9iVlY5MTY?x-oss-process=image/format,png" alt="在这里插入图片描述"></li>
 </ul>
 <h4 id="两次redis操作，用pipeline会不会好一点"><a href="#两次redis操作，用pipeline会不会好一点" class="headerlink" title="两次redis操作，用pipeline会不会好一点"></a>两次redis操作，用pipeline会不会好一点</h4><ul>
-<li>执行10万次set<pre><code class="highlight python"><span class="keyword">import</span> redis
-<span class="keyword">import</span> time
-
-<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
-    my_redis = redis.StrictRedis(connection_pool=redis.ConnectionPool.from_url(<span class="string">"redis://:@127.0.0.1/0"</span>), socket_timeout=<span class="number">2</span>)
-	<span class="comment"># 不用pipeline</span>
-    start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100000</span>):
-        key1 = <span class="string">"test1_%s"</span> % i
-        my_redis.<span class="built_in">set</span>(key1, i)
-        my_redis.expire(key1, <span class="number">3600</span>)
-    end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-    <span class="built_in">print</span> end_time - start_time
-
-	<span class="comment"># 使用pipeline</span>
-    start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-    pipe = my_redis.pipeline()
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100000</span>):
-        key1 = <span class="string">"test2_%s"</span> % i
-        pipe.<span class="built_in">set</span>(key1, i)
-        pipe.expire(key1, <span class="number">3600</span>)
-    pipe.execute()
-    end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-    <span class="built_in">print</span> end_time - start_time</code></pre></li>
+<li>执行10万次set<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    my_redis = redis.StrictRedis(connection_pool=redis.ConnectionPool.from_url(<span class="string">"redis://:@127.0.0.1/0"</span>), socket_timeout=<span class="number">2</span>)</span><br><span class="line">	<span class="comment"># 不用pipeline</span></span><br><span class="line">    start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100000</span>):</span><br><span class="line">        key1 = <span class="string">"test1_%s"</span> % i</span><br><span class="line">        my_redis.<span class="built_in">set</span>(key1, i)</span><br><span class="line">        my_redis.expire(key1, <span class="number">3600</span>)</span><br><span class="line">    end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line">    <span class="built_in">print</span> end_time - start_time</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 使用pipeline</span></span><br><span class="line">    start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line">    pipe = my_redis.pipeline()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100000</span>):</span><br><span class="line">        key1 = <span class="string">"test2_%s"</span> % i</span><br><span class="line">        pipe.<span class="built_in">set</span>(key1, i)</span><br><span class="line">        pipe.expire(key1, <span class="number">3600</span>)</span><br><span class="line">    pipe.execute()</span><br><span class="line">    end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line">    <span class="built_in">print</span> end_time - start_time</span><br></pre></td></tr></tbody></table></figure></li>
 <li>执行结果<blockquote>
 <p>16651、14477、15041 # 不用pipeline<br>4517、4158、4325  # 使用pipeline</p>
 </blockquote>
@@ -558,25 +535,7 @@
 </ul>
 <h4 id="两次已经表现优异了，次数多点怎么样？"><a href="#两次已经表现优异了，次数多点怎么样？" class="headerlink" title="两次已经表现优异了，次数多点怎么样？"></a>两次已经表现优异了，次数多点怎么样？</h4><ul>
 <li><p>执行100万次sadd 操作</p>
-<pre><code class="highlight python">start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">100000</span>):
-    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>):
-        key1 = <span class="string">"test1_%s_%s"</span> % (i,j)
-        my_redis.sadd(key1, i)
-    my_redis.expire(key1, <span class="number">3600</span>)
-end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-<span class="built_in">print</span> end_time - start_time
-
-start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-pipe = my_redis.pipeline()
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">100000</span>):
-    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>):
-        key1 = <span class="string">"test2_%s_%s"</span> % (i,j)
-        pipe.sadd(key1, i)
-    pipe.expire(key1, <span class="number">3600</span>)
-pipe.execute()
-end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)
-<span class="built_in">print</span> end_time - start_time</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        key1 = <span class="string">"test1_%s_%s"</span> % (i,j)</span><br><span class="line">        my_redis.sadd(key1, i)</span><br><span class="line">    my_redis.expire(key1, <span class="number">3600</span>)</span><br><span class="line">end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">print</span> end_time - start_time</span><br><span class="line"></span><br><span class="line">start_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line">pipe = my_redis.pipeline()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        key1 = <span class="string">"test2_%s_%s"</span> % (i,j)</span><br><span class="line">        pipe.sadd(key1, i)</span><br><span class="line">    pipe.expire(key1, <span class="number">3600</span>)</span><br><span class="line">pipe.execute()</span><br><span class="line">end_time = <span class="built_in">int</span>(time.time() * <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">print</span> end_time - start_time</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>执行结果</p>
 <blockquote>

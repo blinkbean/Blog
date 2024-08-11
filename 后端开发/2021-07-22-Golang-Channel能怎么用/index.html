@@ -523,45 +523,19 @@
 </blockquote>
 <p>CSP模型用于描述两个独立的并发实体通过共享的通信管道（channel）进行通信的并发模型。Golang借用process和channel两个概念作为并发的理论支持。process在golang表现就是goroutine是实际并发执行的实体，每个实体之间通过channel通信实现数据共享。</p>
 <h3 id="channel初始化"><a href="#channel初始化" class="headerlink" title="channel初始化"></a>channel初始化</h3><p>使用channel必须make初始化。</p>
-<pre><code class="highlight go">unBufferChan := <span class="built_in">make</span>(<span class="keyword">chan</span> Type, <span class="number">0</span>) <span class="comment">// Type: int、string...</span>
-bufferChan := <span class="built_in">make</span>(<span class="keyword">chan</span> Type, N) <span class="comment">// 有缓存的通道</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unBufferChan := <span class="built_in">make</span>(<span class="keyword">chan</span> Type, <span class="number">0</span>) <span class="comment">// Type: int、string...</span></span><br><span class="line">bufferChan := <span class="built_in">make</span>(<span class="keyword">chan</span> Type, N) <span class="comment">// 有缓存的通道</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果使用未初始化的channel会有dead lock错误：</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-    <span class="keyword">var</span> x <span class="keyword">chan</span> <span class="type">int</span>
-    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {
-        x &lt;- <span class="number">1</span>
-    }()
-    &lt;-x
-}
-
---------
-
-fatal <span class="type">error</span>: all goroutines are asleep - deadlock!
-
-goroutine <span class="number">1</span> [<span class="keyword">chan</span> receive (<span class="literal">nil</span> <span class="keyword">chan</span>)]:
-main.main()</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    <span class="keyword">var</span> x <span class="keyword">chan</span> <span class="type">int</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {</span><br><span class="line">        x &lt;- <span class="number">1</span></span><br><span class="line">    }()</span><br><span class="line">    &lt;-x</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">--------</span><br><span class="line"></span><br><span class="line">fatal <span class="type">error</span>: all goroutines are asleep - deadlock!</span><br><span class="line"></span><br><span class="line">goroutine <span class="number">1</span> [<span class="keyword">chan</span> receive (<span class="literal">nil</span> <span class="keyword">chan</span>)]:</span><br><span class="line">main.main()</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <h3 id="单向channel"><a href="#单向channel" class="headerlink" title="单向channel"></a>单向channel</h3><p>单向channel主要用在函数声明中。是约定，但是强制必须这样。</p>
-<pre><code class="highlight go"><span class="comment">// 输入一个只能写的channel，返回一个只能读的channel</span>
-<span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &lt;-<span class="keyword">chan</span> <span class="type">int</span> {...}
-
-<span class="comment">// context包的Done()方法。</span>
-<span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Done() &lt;-<span class="keyword">chan</span> <span class="keyword">struct</span>{} {
-	<span class="keyword">return</span> <span class="literal">nil</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入一个只能写的channel，返回一个只能读的channel</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &lt;-<span class="keyword">chan</span> <span class="type">int</span> {...}</span><br><span class="line"></span><br><span class="line"><span class="comment">// context包的Done()方法。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Done() &lt;-<span class="keyword">chan</span> <span class="keyword">struct</span>{} {</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h3 id="channel读写"><a href="#channel读写" class="headerlink" title="channel读写"></a>channel读写</h3><pre><code class="highlight go">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">10</span>)
-
-<span class="comment">// 读操作</span>
-x &lt;- ch
-
-<span class="comment">// 写操作</span>
-ch &lt;- x</code></pre>
+<h3 id="channel读写"><a href="#channel读写" class="headerlink" title="channel读写"></a>channel读写</h3><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读操作</span></span><br><span class="line">x &lt;- ch</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写操作</span></span><br><span class="line">ch &lt;- x</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>读<ol>
@@ -577,42 +551,16 @@ ch &lt;- x</code></pre>
 </li>
 </ul>
 <h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select内channel有点特殊，不会block，与golang编译有关。</p>
-<pre><code class="highlight go"><span class="keyword">select</span> {
-    <span class="keyword">case</span> e, ok := &lt;-ch1:
-        ...
-    <span class="keyword">case</span> e, ok := &lt;-ch2:
-        ...
-    <span class="keyword">default</span>:  
-}
-
-<span class="keyword">for</span> {
-    <span class="keyword">select</span> {
-        ...
-    }
-}
-
-<span class="comment">// 超时控制</span>
-<span class="keyword">select</span> {
-  <span class="keyword">case</span> &lt;- ch:
-    <span class="comment">// get data from ch</span>
-  <span class="keyword">case</span> &lt;- time.After(<span class="number">2</span> * time.Second)
-    <span class="comment">// read data from ch timeout</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> {</span><br><span class="line">    <span class="keyword">case</span> e, ok := &lt;-ch1:</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">case</span> e, ok := &lt;-ch2:</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">default</span>:  </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> {</span><br><span class="line">    <span class="keyword">select</span> {</span><br><span class="line">        ...</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 超时控制</span></span><br><span class="line"><span class="keyword">select</span> {</span><br><span class="line">  <span class="keyword">case</span> &lt;- ch:</span><br><span class="line">    <span class="comment">// get data from ch</span></span><br><span class="line">  <span class="keyword">case</span> &lt;- time.After(<span class="number">2</span> * time.Second)</span><br><span class="line">    <span class="comment">// read data from ch timeout</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>一旦 channel 关闭，channel 内部数据读完之后循环自动结束。</p>
-<pre><code class="highlight go"><span class="keyword">for</span> x := <span class="keyword">range</span> ch {
-    fmt.Println(x)
-    ...
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x := <span class="keyword">range</span> ch {</span><br><span class="line">    fmt.Println(x)</span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h3 id="channel关闭"><a href="#channel关闭" class="headerlink" title="channel关闭"></a>channel关闭</h3><pre><code class="highlight go">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)
-
-<span class="comment">// 关闭</span>
-<span class="built_in">close</span>(ch)</code></pre>
+<h3 id="channel关闭"><a href="#channel关闭" class="headerlink" title="channel关闭"></a>channel关闭</h3><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭</span></span><br><span class="line"><span class="built_in">close</span>(ch)</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>关<ol>

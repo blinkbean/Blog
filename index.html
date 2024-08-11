@@ -699,10 +699,10 @@ ActionCard
                             
                                 面试官：“了解MySQL吗？”要是说不了解，接下来该聊些啥呀？
 面试官：“了解的话，那说说XXX吧。”巴拉巴拉…
-MySQL有哪些常见的引擎，说说他们的区别？show engines; #查看支持的引擎
+MySQL有哪些常见的引擎，说说他们的区别？1show engines; #查看支持的引擎
 
 
-MyISAM：非事务处理存储引擎
+MyISAM：非事务处理存储引
                             
                         </div>
                         <div class="publish-info">
@@ -791,41 +791,6 @@ MyISAM：非事务处理存储引擎
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/uncatesgorized/About-%E7%A8%8B%E5%BA%8F%E5%91%98-35%E5%B2%81%E5%8D%B1%E6%9C%BA/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                            
-                            <span class="card-title"></span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                title: 程序员-35岁危机comments: truedate: 1999-12-31 23:59:59img: /Image/image-20240323230451938.pnghide: truesummary: 一名资深程序员
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                blinkbean
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2024-03-18-Golang-%E7%BC%96%E8%AF%91/">
                         <div class="card-image">
                             
@@ -849,7 +814,7 @@ install 已废弃，安装指定的包来完成编译，编译需要的包会自
 
 其他参数都归类为build flags
 
-使用go build [-o 输出名] [
+使用1go build [-o 输出名] 
                             
                         </div>
                         <div class="publish-info">
@@ -956,8 +921,7 @@ sync.RWMutex介绍
 
 
 结构体及其常量
-type RWMutex struct {
-	w          
+12345678910type RWMutex struct {	w
                             
                         </div>
                         <div class="publish-info">
@@ -1150,7 +1114,7 @@ type RWMutex struct {
                         <div class="summary block-with-text">
                             
                                 ssss命令 用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。
-语法ss 
+语法12s
                             
                         </div>
                         <div class="publish-info">
@@ -1340,7 +1304,62 @@ type RWMutex struct {
 
 
 semaphore带权重的信号量在Golang中提供了一种灵活的机制，用于管理对共享资源的并发访问。通过合理使用带权重的信号量，可以更好地平衡并发访问和资源使用，从而提高程序的性能和稳定性
-数据结构/
+数据结构1
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Code/" class="post-category">
+                                    Code
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Golang/">
+                            <span class="chip bg-color">Golang</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/Code/Code-Golang-Cond/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Golang-sync.Cond">
+                            
+                            <span class="card-title">Golang-sync.Cond</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                
+      本文分类《源码计划》
+
+
+Cond基本用法读写操作都由 sync.Mutex 进行并发安全的保护
+
+定义一个互斥锁，用于保护共享数据；
+创建一个sync.Cond对象，关联这个互斥锁；
+在需要等待条件变量的地方，获取这个互斥锁
                             
                         </div>
                         <div class="publish-info">

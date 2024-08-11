@@ -528,84 +528,12 @@
 </ul>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ol>
 <li><p>网络图片下载到本地</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">multiGetImages</span><span class="params">(urls []<span class="type">string</span>, dir <span class="type">string</span>, prefix <span class="type">string</span>)</span></span>(localPath []<span class="type">string</span>){
-	<span class="keyword">var</span> w = sync.WaitGroup{}
-	w.Add(<span class="built_in">len</span>(urls))
-	timestamp := time.Now().UnixNano()
-	<span class="keyword">for</span> i, url :=<span class="keyword">range</span> urls {
-		name := fmt.Sprintf(<span class="string">"%s/%s_%d_%d.png"</span>, dir, prefix, timestamp, i)
-		localPath = <span class="built_in">append</span>(localPath, name)
-		<span class="keyword">go</span> downloadImage(url, name, &amp;w)
-	}
-	w.Wait()
-	<span class="keyword">return</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">downloadImage</span><span class="params">(url <span class="type">string</span>, imgName <span class="type">string</span>, wg *sync.WaitGroup)</span></span>{
-	<span class="keyword">defer</span> wg.Done()
-	out, err := os.Create(imgName)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		fmt.Println(err)
-		<span class="keyword">return</span>
-	}
-	<span class="keyword">defer</span> out.Close()
-	client := http.Client{Timeout: <span class="number">2</span> * time.Second}
-	resp, err := client.Get(url)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		fmt.Println(err)
-		<span class="keyword">return</span>
-	}
-	<span class="keyword">defer</span> resp.Body.Close()
-	pix, err := ioutil.ReadAll(resp.Body)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		fmt.Println(err)
-		<span class="keyword">return</span>
-	}
-	_, err = io.Copy(out, bytes.NewReader(pix))
-	<span class="keyword">return</span>
-}</code></pre></li>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">multiGetImages</span><span class="params">(urls []<span class="type">string</span>, dir <span class="type">string</span>, prefix <span class="type">string</span>)</span></span>(localPath []<span class="type">string</span>){</span><br><span class="line">	<span class="keyword">var</span> w = sync.WaitGroup{}</span><br><span class="line">	w.Add(<span class="built_in">len</span>(urls))</span><br><span class="line">	timestamp := time.Now().UnixNano()</span><br><span class="line">	<span class="keyword">for</span> i, url :=<span class="keyword">range</span> urls {</span><br><span class="line">		name := fmt.Sprintf(<span class="string">"%s/%s_%d_%d.png"</span>, dir, prefix, timestamp, i)</span><br><span class="line">		localPath = <span class="built_in">append</span>(localPath, name)</span><br><span class="line">		<span class="keyword">go</span> downloadImage(url, name, &amp;w)</span><br><span class="line">	}</span><br><span class="line">	w.Wait()</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">downloadImage</span><span class="params">(url <span class="type">string</span>, imgName <span class="type">string</span>, wg *sync.WaitGroup)</span></span>{</span><br><span class="line">	<span class="keyword">defer</span> wg.Done()</span><br><span class="line">	out, err := os.Create(imgName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">defer</span> out.Close()</span><br><span class="line">	client := http.Client{Timeout: <span class="number">2</span> * time.Second}</span><br><span class="line">	resp, err := client.Get(url)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line">	pix, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	_, err = io.Copy(out, bytes.NewReader(pix))</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>图片拼接</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">imageCompose</span><span class="params">(imagePath <span class="type">string</span>, localPaths []<span class="type">string</span>, gap <span class="type">int</span>)</span></span> {
-	imageSize := <span class="number">80</span>
-	imageRow := <span class="type">int</span>(math.Sqrt(<span class="type">float64</span>(<span class="built_in">len</span>(localPaths)))) <span class="comment">// 根据传入图片数量判断行列数量</span>
-	imageCol := imageRow
-	rowOffset := gap
-	colOffset := gap
-	backImg := imaging.New(imageSize*imageRow+gap*(imageCol+<span class="number">1</span>), imageSize*imageCol+gap*(imageRow+<span class="number">1</span>), color.NRGBA{<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>})
-	tempRow, tempCol := <span class="number">1</span>, <span class="number">1</span>
-	<span class="keyword">for</span> tempRow &lt; imageRow+<span class="number">1</span> {
-		<span class="keyword">for</span> tempCol &lt; imageCol+<span class="number">1</span> {
-			imgIndex := imageCol*(tempRow<span class="number">-1</span>) + tempCol - <span class="number">1</span>
-			resizeImg, err := imaging.Open(localPaths[imgIndex])
-			<span class="keyword">if</span> err != <span class="literal">nil</span> {
-				fmt.Println(err)
-			}
-			resizeImg = imaging.Blur(imaging.Resize(resizeImg, imageSize, imageSize, imaging.Lanczos), <span class="number">2</span>) <span class="comment">// 加了模糊操作</span>
-			backImg = imaging.Paste(backImg, resizeImg, image.Pt((tempCol<span class="number">-1</span>)*imageSize+colOffset, (tempRow<span class="number">-1</span>)*imageSize+rowOffset))
-			tempCol += <span class="number">1</span>
-			colOffset += gap
-		}
-		tempRow += <span class="number">1</span>
-		rowOffset += gap
-		tempCol = <span class="number">1</span>
-		colOffset = gap
-	}
-	err := imaging.Save(backImg, imagePath)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> {
-		fmt.Println(err)
-	}
-	<span class="keyword">return</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">imageCompose</span><span class="params">(imagePath <span class="type">string</span>, localPaths []<span class="type">string</span>, gap <span class="type">int</span>)</span></span> {</span><br><span class="line">	imageSize := <span class="number">80</span></span><br><span class="line">	imageRow := <span class="type">int</span>(math.Sqrt(<span class="type">float64</span>(<span class="built_in">len</span>(localPaths)))) <span class="comment">// 根据传入图片数量判断行列数量</span></span><br><span class="line">	imageCol := imageRow</span><br><span class="line">	rowOffset := gap</span><br><span class="line">	colOffset := gap</span><br><span class="line">	backImg := imaging.New(imageSize*imageRow+gap*(imageCol+<span class="number">1</span>), imageSize*imageCol+gap*(imageRow+<span class="number">1</span>), color.NRGBA{<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>})</span><br><span class="line">	tempRow, tempCol := <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> tempRow &lt; imageRow+<span class="number">1</span> {</span><br><span class="line">		<span class="keyword">for</span> tempCol &lt; imageCol+<span class="number">1</span> {</span><br><span class="line">			imgIndex := imageCol*(tempRow<span class="number">-1</span>) + tempCol - <span class="number">1</span></span><br><span class="line">			resizeImg, err := imaging.Open(localPaths[imgIndex])</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">				fmt.Println(err)</span><br><span class="line">			}</span><br><span class="line">			resizeImg = imaging.Blur(imaging.Resize(resizeImg, imageSize, imageSize, imaging.Lanczos), <span class="number">2</span>) <span class="comment">// 加了模糊操作</span></span><br><span class="line">			backImg = imaging.Paste(backImg, resizeImg, image.Pt((tempCol<span class="number">-1</span>)*imageSize+colOffset, (tempRow<span class="number">-1</span>)*imageSize+rowOffset))</span><br><span class="line">			tempCol += <span class="number">1</span></span><br><span class="line">			colOffset += gap</span><br><span class="line">		}</span><br><span class="line">		tempRow += <span class="number">1</span></span><br><span class="line">		rowOffset += gap</span><br><span class="line">		tempCol = <span class="number">1</span></span><br><span class="line">		colOffset = gap</span><br><span class="line">	}</span><br><span class="line">	err := imaging.Save(backImg, imagePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>删除临时图片</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">removeFile</span><span class="params">(filePaths []<span class="type">string</span>)</span></span>{
-	<span class="keyword">for</span> _,url := <span class="keyword">range</span> filePaths{
-		err := os.RemoveAll(url)
-		<span class="keyword">if</span> err != <span class="literal">nil</span> {
-			fmt.Println(err)
-		}
-	}
-}</code></pre></li>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeFile</span><span class="params">(filePaths []<span class="type">string</span>)</span></span>{</span><br><span class="line">	<span class="keyword">for</span> _,url := <span class="keyword">range</span> filePaths{</span><br><span class="line">		err := os.RemoveAll(url)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">			fmt.Println(err)</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 
                 

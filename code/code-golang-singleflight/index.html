@@ -525,268 +525,32 @@
 <h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p>  高并发场景下，为降低数据库压力，通常通过localcache、redis等设置缓存。接到请求后先从缓存读，如果存在则直接返回，否则需要从数据库读取，然后写到缓存。</p>
 <p>  通常查询数据库在整个请求流程中的耗时是最长的，高并发情况下，可能存在某个请求触发了读数据库的操作但没有返回和写入缓存，在这个期间后续的请求也触发相同的读请求，导致数据库瞬间请求量暴增或者直接被打死。</p>
 <p>  分布式锁可以解决这个问题，即第一个触发的请求加锁，等到写入缓存后释放锁。其他的请求只需要在发现有锁后等待并读取缓存数据即可。golang提供了更轻量的解决方法——singleFlight</p>
-<h2 id="SingleFlight"><a href="#SingleFlight" class="headerlink" title="SingleFlight"></a>SingleFlight</h2><pre><code class="highlight go"><span class="keyword">package</span> main
-
-<span class="keyword">import</span> (
-	<span class="string">"errors"</span>
-	<span class="string">"fmt"</span>
-	<span class="string">"log"</span>
-	<span class="string">"strconv"</span>
-	<span class="string">"sync"</span>
-	<span class="string">"time"</span>
-
-	<span class="string">"golang.org/x/sync/singleflight"</span>
-)
-
-<span class="keyword">var</span> (
-	g            singleflight.Group
-	ErrCacheMiss = errors.New(<span class="string">"cache miss"</span>)
-)
-
-<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-	<span class="keyword">var</span> wg sync.WaitGroup
-	wg.Add(<span class="number">10</span>)
-
-	<span class="comment">// 模拟10个并发</span>
-	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ {
-		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {
-			<span class="keyword">defer</span> wg.Done()
-			data, err := load(<span class="string">"key"</span>)
-			<span class="keyword">if</span> err != <span class="literal">nil</span> {
-				log.Print(err)
-				<span class="keyword">return</span>
-			}
-			log.Println(data)
-		}()
-	}
-	wg.Wait()
-}
-
-<span class="comment">// 获取数据</span>
-<span class="function"><span class="keyword">func</span> <span class="title">load</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {
-	data, err := loadFromCache(key)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err == ErrCacheMiss {
-		<span class="comment">// 利用 singleflight 来归并请求</span>
-		v, err, _ := g.Do(key, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>) {
-			data, err := loadFromDB(key)
-			<span class="keyword">if</span> err != <span class="literal">nil</span> {
-				<span class="keyword">return</span> <span class="literal">nil</span>, err
-			}
-			setCache(key, data)
-			<span class="keyword">return</span> data, <span class="literal">nil</span>
-		})
-		<span class="keyword">if</span> err != <span class="literal">nil</span> {
-			log.Println(err)
-			<span class="keyword">return</span> <span class="string">""</span>, err
-		}
-		data = v.(<span class="type">string</span>)
-	}
-	<span class="keyword">return</span> data, <span class="literal">nil</span>
-}
-
-<span class="comment">// getDataFromCache 模拟从cache中获取值 cache miss</span>
-<span class="function"><span class="keyword">func</span> <span class="title">loadFromCache</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {
-	<span class="keyword">return</span> <span class="string">""</span>, ErrCacheMiss
-}
-
-<span class="comment">// setCache 写入缓存</span>
-<span class="function"><span class="keyword">func</span> <span class="title">setCache</span><span class="params">(key, data <span class="type">string</span>)</span></span> {}
-
-<span class="comment">// getDataFromDB 模拟从数据库中获取值</span>
-<span class="function"><span class="keyword">func</span> <span class="title">loadFromDB</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {
-	fmt.Println(<span class="string">"query db"</span>)
-	unix := strconv.Itoa(<span class="type">int</span>(time.Now().UnixNano()))
-	<span class="keyword">return</span> unix, <span class="literal">nil</span>
-}</code></pre>
+<h2 id="SingleFlight"><a href="#SingleFlight" class="headerlink" title="SingleFlight"></a>SingleFlight</h2><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"errors"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"golang.org/x/sync/singleflight"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	g            singleflight.Group</span><br><span class="line">	ErrCacheMiss = errors.New(<span class="string">"cache miss"</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 模拟10个并发</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ {</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {</span><br><span class="line">			<span class="keyword">defer</span> wg.Done()</span><br><span class="line">			data, err := load(<span class="string">"key"</span>)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">				log.Print(err)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			}</span><br><span class="line">			log.Println(data)</span><br><span class="line">		}()</span><br><span class="line">	}</span><br><span class="line">	wg.Wait()</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">load</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {</span><br><span class="line">	data, err := loadFromCache(key)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err == ErrCacheMiss {</span><br><span class="line">		<span class="comment">// 利用 singleflight 来归并请求</span></span><br><span class="line">		v, err, _ := g.Do(key, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>) {</span><br><span class="line">			data, err := loadFromDB(key)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">			}</span><br><span class="line">			setCache(key, data)</span><br><span class="line">			<span class="keyword">return</span> data, <span class="literal">nil</span></span><br><span class="line">		})</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">			log.Println(err)</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>, err</span><br><span class="line">		}</span><br><span class="line">		data = v.(<span class="type">string</span>)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> data, <span class="literal">nil</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// getDataFromCache 模拟从cache中获取值 cache miss</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadFromCache</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {</span><br><span class="line">	<span class="keyword">return</span> <span class="string">""</span>, ErrCacheMiss</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// setCache 写入缓存</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setCache</span><span class="params">(key, data <span class="type">string</span>)</span></span> {}</span><br><span class="line"></span><br><span class="line"><span class="comment">// getDataFromDB 模拟从数据库中获取值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadFromDB</span><span class="params">(key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {</span><br><span class="line">	fmt.Println(<span class="string">"query db"</span>)</span><br><span class="line">	unix := strconv.Itoa(<span class="type">int</span>(time.Now().UnixNano()))</span><br><span class="line">	<span class="keyword">return</span> unix, <span class="literal">nil</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>结果：</p>
-<pre><code class="highlight go">query db
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span>
-<span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">query db</span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br><span class="line"><span class="number">2021</span>/<span class="number">07</span>/<span class="number">17</span> <span class="number">11</span>:<span class="number">04</span>:<span class="number">13</span> <span class="number">1626491053454483100</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h4 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h4><pre><code class="highlight go"><span class="keyword">type</span> Group <span class="keyword">struct</span> {
-	mu sync.Mutex       <span class="comment">// protects m</span>
-	m  <span class="keyword">map</span>[<span class="type">string</span>]*call <span class="comment">// lazily initialized，map的key就是唯一标识</span>
-}
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h4 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Group <span class="keyword">struct</span> {</span><br><span class="line">	mu sync.Mutex       <span class="comment">// protects m</span></span><br><span class="line">	m  <span class="keyword">map</span>[<span class="type">string</span>]*call <span class="comment">// lazily initialized，map的key就是唯一标识</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> call <span class="keyword">struct</span> {</span><br><span class="line">	wg sync.WaitGroup</span><br><span class="line">	<span class="comment">// 函数返回值和err信息</span></span><br><span class="line">	val <span class="keyword">interface</span>{}</span><br><span class="line">	err <span class="type">error</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 是否调用了 forget 方法</span></span><br><span class="line">	forgotten <span class="type">bool</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 记录这个 key 被分享了多少次</span></span><br><span class="line">	dups  <span class="type">int</span></span><br><span class="line">	chans []<span class="keyword">chan</span>&lt;- Result</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<span class="keyword">type</span> call <span class="keyword">struct</span> {
-	wg sync.WaitGroup
-	<span class="comment">// 函数返回值和err信息</span>
-	val <span class="keyword">interface</span>{}
-	err <span class="type">error</span>
-
-	<span class="comment">// 是否调用了 forget 方法</span>
-	forgotten <span class="type">bool</span>
-
-    <span class="comment">// 记录这个 key 被分享了多少次</span>
-	dups  <span class="type">int</span>
-	chans []<span class="keyword">chan</span>&lt;- Result
-}</code></pre>
-
-<h4 id="Do"><a href="#Do" class="headerlink" title="Do"></a>Do</h4><pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> Do(key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) (v <span class="keyword">interface</span>{}, err <span class="type">error</span>, shared <span class="type">bool</span>) {
-	g.mu.Lock()
-	<span class="keyword">if</span> g.m == <span class="literal">nil</span> { <span class="comment">// 懒加载</span>
-		g.m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]*call)
-	}
-    <span class="comment">// 先判断 key 是否已经存在</span>
-	<span class="keyword">if</span> c, ok := g.m[key]; ok { <span class="comment">// 存在则说明有其他请求在同步执行，本次请求只需要等待即可</span>
-		c.dups++
-		g.mu.Unlock()
-		c.wg.Wait() <span class="comment">// / 等待最先进来的那个请求执行完成，因为需要完成后才能获取到结果，这里用 wg 来阻塞，避免了手动写一个循环等待的逻辑</span>
-        <span class="comment">// 这里区分 panic 错误和 runtime 的错误，避免出现死锁，后面可以看到为什么这么做</span>
-		<span class="keyword">if</span> e, ok := c.err.(*panicError); ok {
-			<span class="built_in">panic</span>(e)
-		} <span class="keyword">else</span> <span class="keyword">if</span> c.err == errGoexit {
-			runtime.Goexit()
-		}
-        <span class="comment">// 最后直接从 call 对象中取出数据并返回</span>
-		<span class="keyword">return</span> c.val, c.err, <span class="literal">true</span>
-	}
-    <span class="comment">// 如果 key 不存在则会走到这里 new 一个 call 并执行</span>
-	c := <span class="built_in">new</span>(call)
-	c.wg.Add(<span class="number">1</span>)
-	g.m[key] = c <span class="comment">// 注意 这里在 Unlock 之前就把 call 写到 m 中了，所以 这部分逻辑只有第一次请求会执行</span>
-	g.mu.Unlock()
-    
- 	<span class="comment">// 然后我们调用 doCall 去执行</span>
-	g.doCall(c, key, fn)
-	<span class="keyword">return</span> c.val, c.err, c.dups &gt; <span class="number">0</span>
-}</code></pre>
+<h4 id="Do"><a href="#Do" class="headerlink" title="Do"></a>Do</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> Do(key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) (v <span class="keyword">interface</span>{}, err <span class="type">error</span>, shared <span class="type">bool</span>) {</span><br><span class="line">	g.mu.Lock()</span><br><span class="line">	<span class="keyword">if</span> g.m == <span class="literal">nil</span> { <span class="comment">// 懒加载</span></span><br><span class="line">		g.m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]*call)</span><br><span class="line">	}</span><br><span class="line">    <span class="comment">// 先判断 key 是否已经存在</span></span><br><span class="line">	<span class="keyword">if</span> c, ok := g.m[key]; ok { <span class="comment">// 存在则说明有其他请求在同步执行，本次请求只需要等待即可</span></span><br><span class="line">		c.dups++</span><br><span class="line">		g.mu.Unlock()</span><br><span class="line">		c.wg.Wait() <span class="comment">// / 等待最先进来的那个请求执行完成，因为需要完成后才能获取到结果，这里用 wg 来阻塞，避免了手动写一个循环等待的逻辑</span></span><br><span class="line">        <span class="comment">// 这里区分 panic 错误和 runtime 的错误，避免出现死锁，后面可以看到为什么这么做</span></span><br><span class="line">		<span class="keyword">if</span> e, ok := c.err.(*panicError); ok {</span><br><span class="line">			<span class="built_in">panic</span>(e)</span><br><span class="line">		} <span class="keyword">else</span> <span class="keyword">if</span> c.err == errGoexit {</span><br><span class="line">			runtime.Goexit()</span><br><span class="line">		}</span><br><span class="line">        <span class="comment">// 最后直接从 call 对象中取出数据并返回</span></span><br><span class="line">		<span class="keyword">return</span> c.val, c.err, <span class="literal">true</span></span><br><span class="line">	}</span><br><span class="line">    <span class="comment">// 如果 key 不存在则会走到这里 new 一个 call 并执行</span></span><br><span class="line">	c := <span class="built_in">new</span>(call)</span><br><span class="line">	c.wg.Add(<span class="number">1</span>)</span><br><span class="line">	g.m[key] = c <span class="comment">// 注意 这里在 Unlock 之前就把 call 写到 m 中了，所以 这部分逻辑只有第一次请求会执行</span></span><br><span class="line">	g.mu.Unlock()</span><br><span class="line">    </span><br><span class="line"> 	<span class="comment">// 然后我们调用 doCall 去执行</span></span><br><span class="line">	g.doCall(c, key, fn)</span><br><span class="line">	<span class="keyword">return</span> c.val, c.err, c.dups &gt; <span class="number">0</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="doCall"><a href="#doCall" class="headerlink" title="doCall"></a>doCall</h4><p>defer的使用值得学习</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> doCall(c *call, key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) {
-    <span class="comment">// 首先这两个 bool 用于标记是否正常返回或者触发了 recover</span>
-	normalReturn := <span class="literal">false</span>
-	recovered := <span class="literal">false</span>
-
-	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {
-		<span class="comment">// 如果既没有正常执行完毕，又没有 recover 那就说明需要直接退出了</span>
-		<span class="keyword">if</span> !normalReturn &amp;&amp; !recovered {
-			c.err = errGoexit
-		}
-
-		c.wg.Done() <span class="comment">// 这里 done 之后前面的所有 wait 都会返回了</span>
-		g.mu.Lock()
-		<span class="keyword">defer</span> g.mu.Unlock()
-        <span class="comment">// forgotten 默认值就是 false，所以默认就会调用 delete 移除掉 m 中的 key</span>
-		<span class="keyword">if</span> !c.forgotten { <span class="comment">// 然后这里也很巧妙，前面先调用了 done，于是所有等待的请求都返回了，那么这个c也没有用了，所以直接 delete 把这个 key 删掉，让后续的请求能再次触发 doCall，而不是直接从 m 中获取结果返回。</span>
-			<span class="built_in">delete</span>(g.m, key)
-		}
-
-		<span class="keyword">if</span> e, ok := c.err.(*panicError); ok {
-			<span class="comment">// 如果返回的是 panic 错误，为了避免 channel 死锁，我们需要确保这个 panic 无法被恢复</span>
-			<span class="keyword">if</span> <span class="built_in">len</span>(c.chans) &gt; <span class="number">0</span> {
-				<span class="keyword">go</span> <span class="built_in">panic</span>(e)
-				<span class="keyword">select</span> {} <span class="comment">// Keep this goroutine around so that it will appear in the crash dump.</span>
-			} <span class="keyword">else</span> {
-				<span class="built_in">panic</span>(e)
-			}
-		} <span class="keyword">else</span> <span class="keyword">if</span> c.err == errGoexit {
-			<span class="comment">// 如果是exitError就直接退出</span>
-		} <span class="keyword">else</span> {
-			<span class="comment">// 这里就是正常逻辑了,往 channel 里写入数据</span>
-			<span class="keyword">for</span> _, ch := <span class="keyword">range</span> c.chans {
-				ch &lt;- Result{c.val, c.err, c.dups &gt; <span class="number">0</span>}
-			}
-		}
-	}()
-
-	<span class="function"><span class="keyword">func</span><span class="params">()</span></span> { <span class="comment">// 使用匿名函数，保证下面的 defer 能在上一个defer之前执行</span>
-		<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {
-            <span class="comment">// 如果不是正常退出那肯定是 panic 了</span>
-			<span class="keyword">if</span> !normalReturn {
-                 <span class="comment">// 如果 panic 了我们就 recover 掉，然后 new 一个 panic 的错误后面在上层重新 panic</span>
-				<span class="keyword">if</span> r := <span class="built_in">recover</span>(); r != <span class="literal">nil</span> {
-					c.err = newPanicError(r)
-				}
-			}
-		}()
-
-		c.val, c.err = fn()
-        <span class="comment">// 如果我们传入的 fn 正常执行了 normalReturn 肯定会被修改为 true</span>
-        <span class="comment">// 所以 defer 里可以通过这个标记来判定是否 panic 了</span>
-		normalReturn = <span class="literal">true</span>
-	}()
-    
-    <span class="comment">// 如果 normalReturn 为 false 就表示，我们的 fn panic 了</span>
-    <span class="comment">// 如果执行到了这一步，也说明我们的 fn  也被 recover 住了，不是直接 runtime exit</span>
-	<span class="keyword">if</span> !normalReturn {
-		recovered = <span class="literal">true</span>
-	}
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> doCall(c *call, key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) {</span><br><span class="line">    <span class="comment">// 首先这两个 bool 用于标记是否正常返回或者触发了 recover</span></span><br><span class="line">	normalReturn := <span class="literal">false</span></span><br><span class="line">	recovered := <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {</span><br><span class="line">		<span class="comment">// 如果既没有正常执行完毕，又没有 recover 那就说明需要直接退出了</span></span><br><span class="line">		<span class="keyword">if</span> !normalReturn &amp;&amp; !recovered {</span><br><span class="line">			c.err = errGoexit</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		c.wg.Done() <span class="comment">// 这里 done 之后前面的所有 wait 都会返回了</span></span><br><span class="line">		g.mu.Lock()</span><br><span class="line">		<span class="keyword">defer</span> g.mu.Unlock()</span><br><span class="line">        <span class="comment">// forgotten 默认值就是 false，所以默认就会调用 delete 移除掉 m 中的 key</span></span><br><span class="line">		<span class="keyword">if</span> !c.forgotten { <span class="comment">// 然后这里也很巧妙，前面先调用了 done，于是所有等待的请求都返回了，那么这个c也没有用了，所以直接 delete 把这个 key 删掉，让后续的请求能再次触发 doCall，而不是直接从 m 中获取结果返回。</span></span><br><span class="line">			<span class="built_in">delete</span>(g.m, key)</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> e, ok := c.err.(*panicError); ok {</span><br><span class="line">			<span class="comment">// 如果返回的是 panic 错误，为了避免 channel 死锁，我们需要确保这个 panic 无法被恢复</span></span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(c.chans) &gt; <span class="number">0</span> {</span><br><span class="line">				<span class="keyword">go</span> <span class="built_in">panic</span>(e)</span><br><span class="line">				<span class="keyword">select</span> {} <span class="comment">// Keep this goroutine around so that it will appear in the crash dump.</span></span><br><span class="line">			} <span class="keyword">else</span> {</span><br><span class="line">				<span class="built_in">panic</span>(e)</span><br><span class="line">			}</span><br><span class="line">		} <span class="keyword">else</span> <span class="keyword">if</span> c.err == errGoexit {</span><br><span class="line">			<span class="comment">// 如果是exitError就直接退出</span></span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			<span class="comment">// 这里就是正常逻辑了,往 channel 里写入数据</span></span><br><span class="line">			<span class="keyword">for</span> _, ch := <span class="keyword">range</span> c.chans {</span><br><span class="line">				ch &lt;- Result{c.val, c.err, c.dups &gt; <span class="number">0</span>}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}()</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">func</span><span class="params">()</span></span> { <span class="comment">// 使用匿名函数，保证下面的 defer 能在上一个defer之前执行</span></span><br><span class="line">		<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {</span><br><span class="line">            <span class="comment">// 如果不是正常退出那肯定是 panic 了</span></span><br><span class="line">			<span class="keyword">if</span> !normalReturn {</span><br><span class="line">                 <span class="comment">// 如果 panic 了我们就 recover 掉，然后 new 一个 panic 的错误后面在上层重新 panic</span></span><br><span class="line">				<span class="keyword">if</span> r := <span class="built_in">recover</span>(); r != <span class="literal">nil</span> {</span><br><span class="line">					c.err = newPanicError(r)</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}()</span><br><span class="line"></span><br><span class="line">		c.val, c.err = fn()</span><br><span class="line">        <span class="comment">// 如果我们传入的 fn 正常执行了 normalReturn 肯定会被修改为 true</span></span><br><span class="line">        <span class="comment">// 所以 defer 里可以通过这个标记来判定是否 panic 了</span></span><br><span class="line">		normalReturn = <span class="literal">true</span></span><br><span class="line">	}()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果 normalReturn 为 false 就表示，我们的 fn panic 了</span></span><br><span class="line">    <span class="comment">// 如果执行到了这一步，也说明我们的 fn  也被 recover 住了，不是直接 runtime exit</span></span><br><span class="line">	<span class="keyword">if</span> !normalReturn {</span><br><span class="line">		recovered = <span class="literal">true</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="DoChan"><a href="#DoChan" class="headerlink" title="DoChan"></a>DoChan</h4><p>和 do 唯一的区别是 <code>go g.doCall(c, key, fn)</code>,但对起了一个 goroutine 来执行，并通过 channel 来返回数据，这样外部可以自定义超时逻辑，防止因为 fn 的阻塞，导致大量请求都被阻塞。</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> DoChan(key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) &lt;-<span class="keyword">chan</span> Result {
-	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> Result, <span class="number">1</span>)
-	g.mu.Lock()
-	<span class="keyword">if</span> g.m == <span class="literal">nil</span> {
-		g.m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]*call)
-	}
-	<span class="keyword">if</span> c, ok := g.m[key]; ok {
-		c.dups++
-		c.chans = <span class="built_in">append</span>(c.chans, ch)
-		g.mu.Unlock()
-		<span class="keyword">return</span> ch
-	}
-	c := &amp;call{chans: []<span class="keyword">chan</span>&lt;- Result{ch}}
-	c.wg.Add(<span class="number">1</span>)
-	g.m[key] = c
-	g.mu.Unlock()
-
-	<span class="keyword">go</span> g.doCall(c, key, fn)
-
-	<span class="keyword">return</span> ch
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> DoChan(key <span class="type">string</span>, fn <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>)) &lt;-<span class="keyword">chan</span> Result {</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> Result, <span class="number">1</span>)</span><br><span class="line">	g.mu.Lock()</span><br><span class="line">	<span class="keyword">if</span> g.m == <span class="literal">nil</span> {</span><br><span class="line">		g.m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]*call)</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> c, ok := g.m[key]; ok {</span><br><span class="line">		c.dups++</span><br><span class="line">		c.chans = <span class="built_in">append</span>(c.chans, ch)</span><br><span class="line">		g.mu.Unlock()</span><br><span class="line">		<span class="keyword">return</span> ch</span><br><span class="line">	}</span><br><span class="line">	c := &amp;call{chans: []<span class="keyword">chan</span>&lt;- Result{ch}}</span><br><span class="line">	c.wg.Add(<span class="number">1</span>)</span><br><span class="line">	g.m[key] = c</span><br><span class="line">	g.mu.Unlock()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> g.doCall(c, key, fn)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ch</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="Forget"><a href="#Forget" class="headerlink" title="Forget"></a>Forget</h4><p>手动移除某个 key，让后续请求能走 doCall 的逻辑，而不是直接阻塞。</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> Forget(key <span class="type">string</span>) {
-	g.mu.Lock()
-	<span class="keyword">if</span> c, ok := g.m[key]; ok {
-		c.forgotten = <span class="literal">true</span>
-	}
-	<span class="built_in">delete</span>(g.m, key)
-	g.mu.Unlock()
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Group)</span></span> Forget(key <span class="type">string</span>) {</span><br><span class="line">	g.mu.Lock()</span><br><span class="line">	<span class="keyword">if</span> c, ok := g.m[key]; ok {</span><br><span class="line">		c.forgotten = <span class="literal">true</span></span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">delete</span>(g.m, key)</span><br><span class="line">	g.mu.Unlock()</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><h4 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h4><p>singleflight 内部使用 waitGroup 来让同一个 key 的除了第一个请求的后续所有请求都阻塞。直到第一个请求执行 fn 返回后，其他请求才会返回。</p>
 <p>这意味着，如果 fn 执行需要很长时间，那么后面的所有请求都会被一直阻塞。</p>
 <p>这时候我们可以<strong>使用 DoChan 结合 ctx + select 做超时控制</strong></p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">loadChan</span><span class="params">(ctx context.Context,key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {
-	data, err := loadFromCache(key)
-	<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err == ErrCacheMiss {
-		<span class="comment">// 使用 DoChan 结合 select 做超时控制</span>
-		result := g.DoChan(key, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>) {
-			data, err := loadFromDB(key)
-			<span class="keyword">if</span> err != <span class="literal">nil</span> {
-				<span class="keyword">return</span> <span class="literal">nil</span>, err
-			}
-			setCache(key, data)
-			<span class="keyword">return</span> data, <span class="literal">nil</span>
-		})
-		<span class="keyword">select</span> {
-		<span class="keyword">case</span> r := &lt;-result:
-			<span class="keyword">return</span> r.Val.(<span class="type">string</span>), r.Err
-		<span class="keyword">case</span> &lt;-ctx.Done():
-			<span class="keyword">return</span> <span class="string">""</span>, ctx.Err()
-		}
-	}
-	<span class="keyword">return</span> data, <span class="literal">nil</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadChan</span><span class="params">(ctx context.Context,key <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) {</span><br><span class="line">	data, err := loadFromCache(key)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err == ErrCacheMiss {</span><br><span class="line">		<span class="comment">// 使用 DoChan 结合 select 做超时控制</span></span><br><span class="line">		result := g.DoChan(key, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> (<span class="keyword">interface</span>{}, <span class="type">error</span>) {</span><br><span class="line">			data, err := loadFromDB(key)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> {</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">			}</span><br><span class="line">			setCache(key, data)</span><br><span class="line">			<span class="keyword">return</span> data, <span class="literal">nil</span></span><br><span class="line">		})</span><br><span class="line">		<span class="keyword">select</span> {</span><br><span class="line">		<span class="keyword">case</span> r := &lt;-result:</span><br><span class="line">			<span class="keyword">return</span> r.Val.(<span class="type">string</span>), r.Err</span><br><span class="line">		<span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>, ctx.Err()</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> data, <span class="literal">nil</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="手动forget"><a href="#手动forget" class="headerlink" title="手动forget"></a>手动forget</h4><p>比如1秒内有100个请求过来，正常是第一个请求能执行queryDB，后续99个都会阻塞。</p>
 <p>增加这个 Forget 之后，每 100ms 就能有一个请求执行 queryDB，相当于是多了几次尝试的机会，相对的也给DB造成了更大的压力，需要根据具体场景进去<code>取舍</code>。</p>
-<pre><code class="highlight go"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {
-       time.Sleep(<span class="number">100</span> * time.Millisecond)
-       g.Forget(key)
-   }()</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> {</span><br><span class="line">       time.Sleep(<span class="number">100</span> * time.Millisecond)</span><br><span class="line">       g.Forget(key)</span><br><span class="line">   }()</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p><a href="https://www.lixueduan.com/posts/go/singleflight/">https://www.lixueduan.com/posts/go/singleflight/</a></p>
 
@@ -954,13 +718,12 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/uncatesgorized/About-%E7%A8%8B%E5%BA%8F%E5%91%98-35%E5%B2%81%E5%8D%B1%E6%9C%BA/">
+                <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2024-03-18-Golang-%E7%BC%96%E8%AF%91/">
                     <div class="card-image">
                         
+                        <img src="/Image/image-20240322005956791.png" class="responsive-img" alt="Golang-编译">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
+                        <span class="card-title">Golang-编译</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -971,15 +734,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-16
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Golang/">
+                        <span class="chip bg-color">Golang</span>
+                    </a>
+                    
                 </div>
                 
             </div>

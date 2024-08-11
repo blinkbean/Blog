@@ -532,12 +532,9 @@
 <h6 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h6><ul>
 <li>expire代替exists，重置key的过期时间。相当于利用expire给key续命，可以合理的“长生不死”。</li>
 </ul>
-<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre><code class="highlight python">EXPIRE &lt;KEY&gt; &lt;TTL&gt; : 将键的生存时间设为 ttl 秒
-PEXPIRE &lt;KEY&gt; &lt;TTL&gt; :将键的生存时间设为 ttl 毫秒
-EXPIREAT &lt;KEY&gt; &lt;timestamp&gt; :将键的过期时间设为 timestamp 所指定的秒数时间戳
-PEXPIREAT &lt;KEY&gt; &lt;timestamp&gt;: 将键的过期时间设为 timestamp 所指定的毫秒数时间戳.</code></pre>
+<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXPIRE &lt;KEY&gt; &lt;TTL&gt; : 将键的生存时间设为 ttl 秒</span><br><span class="line">PEXPIRE &lt;KEY&gt; &lt;TTL&gt; :将键的生存时间设为 ttl 毫秒</span><br><span class="line">EXPIREAT &lt;KEY&gt; &lt;timestamp&gt; :将键的过期时间设为 timestamp 所指定的秒数时间戳</span><br><span class="line">PEXPIREAT &lt;KEY&gt; &lt;timestamp&gt;: 将键的过期时间设为 timestamp 所指定的毫秒数时间戳.</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h4><pre><code class="highlight python">persist key</code></pre>
+<h4 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">persist key</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="redis值和过期时间的存储"><a href="#redis值和过期时间的存储" class="headerlink" title="redis值和过期时间的存储"></a>redis值和过期时间的存储</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy83MzYxMzgzLTcwMDYyYTM2ZDQxOWZjMTcucG5n?x-oss-process=image/format,png" alt="在这里插入图片描述"></p>
 <h4 id="删除book键的过期时间后的存储结构"><a href="#删除book键的过期时间后的存储结构" class="headerlink" title="删除book键的过期时间后的存储结构"></a>删除book键的过期时间后的存储结构</h4><ul>

@@ -528,22 +528,7 @@
 <li>node.Next.Next = node</li>
 <li>node.Next = nil</li>
 </ul>
-<pre><code class="highlight plaintext">func reverseList(head *ListNode) *ListNode {
-	if head==nil{
-		return nil
-	}
-	return revert(head)
-}
-
-func revert(head *ListNode) *ListNode {
-	if head.Next==nil{
-		return head
-	}
-	h := revert(head.Next)
-	head.Next.Next = head
-	head.Next=nil
-	return h
-}</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func reverseList(head *ListNode) *ListNode {</span><br><span class="line">	if head==nil{</span><br><span class="line">		return nil</span><br><span class="line">	}</span><br><span class="line">	return revert(head)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func revert(head *ListNode) *ListNode {</span><br><span class="line">	if head.Next==nil{</span><br><span class="line">		return head</span><br><span class="line">	}</span><br><span class="line">	h := revert(head.Next)</span><br><span class="line">	head.Next.Next = head</span><br><span class="line">	head.Next=nil</span><br><span class="line">	return h</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
                 
             </div>
             <hr/>

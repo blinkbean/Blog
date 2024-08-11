@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    651
+                    650
                 </div>
                 
 
@@ -526,107 +526,17 @@
 <p>​		程序员发现了你用图书馆的方式合理的利用了资源，于是照猫画虎发明了连接池、线程池、协程池、内存池，各种各样的池都是想解决同类的问题：创建连接、线程等都相对比较消耗资源，通过池存一写已经新建的连接，线程…需要的时候拿去用，不用了就再还回来。借与还的模式，节省了不少资源，大家都说好。</p>
 <p>​		Golang的sync.Pool，对象池。采用对象池来创建对象，增加对象的重复利用率，使用的时候就不必在堆上重新创建对象可以节省开销。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>sync.Pool对外提供三个方法：New，Get，Put。</p>
-<pre><code class="highlight go"><span class="keyword">var</span> pool *sync.Pool
-
-<span class="keyword">type</span> Book <span class="keyword">struct</span> {
-	Name <span class="type">string</span>
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> {
-	pool = &amp;sync.Pool{
-		New: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{} {
-			<span class="keyword">return</span> <span class="built_in">new</span>(Book)
-		},
-	}
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-	book := pool.Get().(*Book)
-	fmt.Println(book) <span class="comment">// &amp;{}</span>
-	book.Name = <span class="string">"Go Programming"</span>
-	pool.Put(book)
-	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{Go Programming}</span>
-	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{}</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pool *sync.Pool</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> {</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> {</span><br><span class="line">	pool = &amp;sync.Pool{</span><br><span class="line">		New: <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{} {</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">new</span>(Book)</span><br><span class="line">		},</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	book := pool.Get().(*Book)</span><br><span class="line">	fmt.Println(book) <span class="comment">// &amp;{}</span></span><br><span class="line">	book.Name = <span class="string">"Go Programming"</span></span><br><span class="line">	pool.Put(book)</span><br><span class="line">	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{Go Programming}</span></span><br><span class="line">	fmt.Println(pool.Get().(*Book)) <span class="comment">// &amp;{}</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><ul>
 <li>结构体</li>
 </ul>
-<pre><code class="highlight go"><span class="keyword">type</span> Pool <span class="keyword">struct</span> {
-	noCopy noCopy <span class="comment">// 禁止拷贝</span>
-
-	local     unsafe.Pointer <span class="comment">// [P]poolLocal poolLocal数组指针</span>
-	localSize <span class="type">uintptr</span>        <span class="comment">// 数组大小</span>
-
-	victim     unsafe.Pointer <span class="comment">// GC处理并不直接将allPools的object直接进行GC处理，而是保存到oldPools，等到下一个GC周期到了再处理。</span>
-	victimSize <span class="type">uintptr</span>
-
-	<span class="comment">// 当pool没有缓存对象的时候，会调用New方法生成一个新的对象</span>
-	New <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{}
-}
-
-<span class="keyword">type</span> poolLocal <span class="keyword">struct</span> {
-    poolLocalInternal
-    pad [<span class="number">128</span> - unsafe.Sizeof(poolLocalInternal{})%<span class="number">128</span>]<span class="type">byte</span>
-}
-<span class="keyword">type</span> poolLocalInternal <span class="keyword">struct</span> {
-    private <span class="keyword">interface</span>{}   <span class="comment">// Can be used only by the respective P.</span>
-    shared  poolChain   <span class="comment">// Local P can pushHead/popHead; any P can popTail.</span>
-}
-
-<span class="keyword">type</span> poolChain <span class="keyword">struct</span> {
-	<span class="comment">// head is the poolDequeue to push to. This is only accessed</span>
-	<span class="comment">// by the producer, so doesn't need to be synchronized.</span>
-	head *poolChainElt
-
-	<span class="comment">// tail is the poolDequeue to popTail from. This is accessed</span>
-	<span class="comment">// by consumers, so reads and writes must be atomic.</span>
-	tail *poolChainElt
-}
-
-</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pool <span class="keyword">struct</span> {</span><br><span class="line">	noCopy noCopy <span class="comment">// 禁止拷贝</span></span><br><span class="line"></span><br><span class="line">	local     unsafe.Pointer <span class="comment">// [P]poolLocal poolLocal数组指针</span></span><br><span class="line">	localSize <span class="type">uintptr</span>        <span class="comment">// 数组大小</span></span><br><span class="line"></span><br><span class="line">	victim     unsafe.Pointer <span class="comment">// GC处理并不直接将allPools的object直接进行GC处理，而是保存到oldPools，等到下一个GC周期到了再处理。</span></span><br><span class="line">	victimSize <span class="type">uintptr</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当pool没有缓存对象的时候，会调用New方法生成一个新的对象</span></span><br><span class="line">	New <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>{}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> poolLocal <span class="keyword">struct</span> {</span><br><span class="line">    poolLocalInternal</span><br><span class="line">    pad [<span class="number">128</span> - unsafe.Sizeof(poolLocalInternal{})%<span class="number">128</span>]<span class="type">byte</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">type</span> poolLocalInternal <span class="keyword">struct</span> {</span><br><span class="line">    private <span class="keyword">interface</span>{}   <span class="comment">// Can be used only by the respective P.</span></span><br><span class="line">    shared  poolChain   <span class="comment">// Local P can pushHead/popHead; any P can popTail.</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> poolChain <span class="keyword">struct</span> {</span><br><span class="line">	<span class="comment">// head is the poolDequeue to push to. This is only accessed</span></span><br><span class="line">	<span class="comment">// by the producer, so doesn't need to be synchronized.</span></span><br><span class="line">	head *poolChainElt</span><br><span class="line"></span><br><span class="line">	<span class="comment">// tail is the poolDequeue to popTail from. This is accessed</span></span><br><span class="line">	<span class="comment">// by consumers, so reads and writes must be atomic.</span></span><br><span class="line">	tail *poolChainElt</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>Get</li>
 </ul>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> Get() <span class="keyword">interface</span>{} {
-	<span class="keyword">if</span> race.Enabled { <span class="comment">// 不允许竞态检测</span>
-		race.Disable()
-	}
-	l, pid := p.pin() <span class="comment">// 获取一个poolLocal</span>
-	x := l.private
-	l.private = <span class="literal">nil</span>
-	<span class="keyword">if</span> x == <span class="literal">nil</span> {
-		<span class="comment">// Try to pop the head of the local shard. We prefer</span>
-		<span class="comment">// the head over the tail for temporal locality of</span>
-		<span class="comment">// reuse.</span>
-		x, _ = l.shared.popHead()
-		<span class="keyword">if</span> x == <span class="literal">nil</span> {
-			x = p.getSlow(pid)
-		}
-	}
-	runtime_procUnpin()
-	<span class="keyword">if</span> race.Enabled {
-		race.Enable()
-		<span class="keyword">if</span> x != <span class="literal">nil</span> {
-			race.Acquire(poolRaceAddr(x))
-		}
-	}
-	<span class="keyword">if</span> x == <span class="literal">nil</span> &amp;&amp; p.New != <span class="literal">nil</span> { <span class="comment">// 没拿到 new一个</span>
-		x = p.New()
-	}
-	<span class="keyword">return</span> x
-}
-
-<span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> pin() *poolLocal {
-    pid := runtime_procPin()
-    s := atomic.LoadUintptr(&amp;p.localSize) <span class="comment">// load-acquire</span>
-    l := p.local                          <span class="comment">// load-consume</span>
-    <span class="keyword">if</span> <span class="type">uintptr</span>(pid) &lt; s {
-        <span class="keyword">return</span> indexLocal(l, pid)
-    }
-    <span class="keyword">return</span> p.pinSlow()
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> Get() <span class="keyword">interface</span>{} {</span><br><span class="line">	<span class="keyword">if</span> race.Enabled { <span class="comment">// 不允许竞态检测</span></span><br><span class="line">		race.Disable()</span><br><span class="line">	}</span><br><span class="line">	l, pid := p.pin() <span class="comment">// 获取一个poolLocal</span></span><br><span class="line">	x := l.private</span><br><span class="line">	l.private = <span class="literal">nil</span></span><br><span class="line">	<span class="keyword">if</span> x == <span class="literal">nil</span> {</span><br><span class="line">		<span class="comment">// Try to pop the head of the local shard. We prefer</span></span><br><span class="line">		<span class="comment">// the head over the tail for temporal locality of</span></span><br><span class="line">		<span class="comment">// reuse.</span></span><br><span class="line">		x, _ = l.shared.popHead()</span><br><span class="line">		<span class="keyword">if</span> x == <span class="literal">nil</span> {</span><br><span class="line">			x = p.getSlow(pid)</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	runtime_procUnpin()</span><br><span class="line">	<span class="keyword">if</span> race.Enabled {</span><br><span class="line">		race.Enable()</span><br><span class="line">		<span class="keyword">if</span> x != <span class="literal">nil</span> {</span><br><span class="line">			race.Acquire(poolRaceAddr(x))</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> x == <span class="literal">nil</span> &amp;&amp; p.New != <span class="literal">nil</span> { <span class="comment">// 没拿到 new一个</span></span><br><span class="line">		x = p.New()</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> x</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> pin() *poolLocal {</span><br><span class="line">    pid := runtime_procPin()</span><br><span class="line">    s := atomic.LoadUintptr(&amp;p.localSize) <span class="comment">// load-acquire</span></span><br><span class="line">    l := p.local                          <span class="comment">// load-consume</span></span><br><span class="line">    <span class="keyword">if</span> <span class="type">uintptr</span>(pid) &lt; s {</span><br><span class="line">        <span class="keyword">return</span> indexLocal(l, pid)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> p.pinSlow()</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
                 

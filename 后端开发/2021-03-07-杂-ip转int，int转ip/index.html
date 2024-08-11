@@ -526,27 +526,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="IP和int之间相互转换"><a href="#IP和int之间相互转换" class="headerlink" title="IP和int之间相互转换"></a>IP和int之间相互转换</h4><pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">toInt</span><span class="params">(ip <span class="type">string</span>)</span></span> <span class="type">int64</span> {
-	i := <span class="number">3</span>
-	sum := <span class="type">int64</span>(<span class="number">0</span>)
-	<span class="keyword">for</span> j, v := <span class="keyword">range</span> strings.Split(ip, <span class="string">"."</span>) {
-		intV, _ := strconv.ParseInt(v, <span class="number">10</span>, <span class="number">64</span>)
-		sum = sum + intV*<span class="type">int64</span>(math.Pow(<span class="type">float64</span>(<span class="number">256</span>), <span class="type">float64</span>(i-j)))
-	}
-	fmt.Println(sum)
-	<span class="keyword">return</span> sum
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">toIp</span><span class="params">(num <span class="type">int64</span>)</span></span> <span class="type">string</span> {
-	s := <span class="built_in">make</span>([]<span class="type">string</span>, <span class="number">4</span>)
-	i := <span class="number">3</span>
-	<span class="keyword">for</span> i &gt;= <span class="number">0</span> {
-		s[i] = strconv.FormatInt(num % <span class="number">256</span>,<span class="number">10</span>)
-		num /= <span class="number">256</span>
-		i--
-	}
-	<span class="keyword">return</span> strings.Join(s, <span class="string">"."</span>)
-}</code></pre>
+                <h4 id="IP和int之间相互转换"><a href="#IP和int之间相互转换" class="headerlink" title="IP和int之间相互转换"></a>IP和int之间相互转换</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">toInt</span><span class="params">(ip <span class="type">string</span>)</span></span> <span class="type">int64</span> {</span><br><span class="line">	i := <span class="number">3</span></span><br><span class="line">	sum := <span class="type">int64</span>(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> j, v := <span class="keyword">range</span> strings.Split(ip, <span class="string">"."</span>) {</span><br><span class="line">		intV, _ := strconv.ParseInt(v, <span class="number">10</span>, <span class="number">64</span>)</span><br><span class="line">		sum = sum + intV*<span class="type">int64</span>(math.Pow(<span class="type">float64</span>(<span class="number">256</span>), <span class="type">float64</span>(i-j)))</span><br><span class="line">	}</span><br><span class="line">	fmt.Println(sum)</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">toIp</span><span class="params">(num <span class="type">int64</span>)</span></span> <span class="type">string</span> {</span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="type">string</span>, <span class="number">4</span>)</span><br><span class="line">	i := <span class="number">3</span></span><br><span class="line">	<span class="keyword">for</span> i &gt;= <span class="number">0</span> {</span><br><span class="line">		s[i] = strconv.FormatInt(num % <span class="number">256</span>,<span class="number">10</span>)</span><br><span class="line">		num /= <span class="number">256</span></span><br><span class="line">		i--</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> strings.Join(s, <span class="string">"."</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
                 
             </div>

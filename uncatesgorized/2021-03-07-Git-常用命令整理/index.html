@@ -484,7 +484,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    366
+                    358
                 </div>
                 
 
@@ -510,47 +510,25 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h4 id="远程分支强制覆盖本地分支-超级常用"><a href="#远程分支强制覆盖本地分支-超级常用" class="headerlink" title="远程分支强制覆盖本地分支(超级常用)"></a>远程分支强制覆盖本地分支(超级常用)</h4><p>置顶是因为我自己用了无数遍呀！！</p>
-<pre><code class="highlight plaintext">git fetch --all
-git reset --hard origin/your branch name
-git pull</code></pre>
-<h4 id="快捷提交"><a href="#快捷提交" class="headerlink" title="快捷提交"></a>快捷提交</h4><pre><code class="highlight plaintext">git commit -a -m 'this is my commit'</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/your branch name</span><br><span class="line">git pull</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="快捷提交"><a href="#快捷提交" class="headerlink" title="快捷提交"></a>快捷提交</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -a -m 'this is my commit'</span><br></pre></td></tr></tbody></table></figure>
 <p>等价于</p>
-<pre><code class="highlight plaintext">git add .
-git commit -m 'your commit'</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m 'your commit'</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="命令简写-mac环境，windows没试"><a href="#命令简写-mac环境，windows没试" class="headerlink" title="命令简写(mac环境，windows没试)"></a>命令简写(mac环境，windows没试)</h4><p>命令行输入：</p>
-<pre><code class="highlight plaintext">alias</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias</span><br></pre></td></tr></tbody></table></figure>
 <p>会列出所有git相关的缩写，当然也可以自己配。<br><img src="https://img-blog.csdnimg.cn/20190526223820765.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXV4aW5nNjYzOTgwMQ==,size_16,color_FFFFFF,t_70" alt="alias"><br>常用的也就几个：</p>
-<pre><code class="highlight plaintext">切换指定分支：
-gco branch_name
-切换到master分支：
-gcm
-查看分支：
-gb
-查看修改：
-gd
-拉代码：
-gl</code></pre>
-<h4 id="新建没有parent的新分支"><a href="#新建没有parent的新分支" class="headerlink" title="新建没有parent的新分支"></a>新建没有parent的新分支</h4><pre><code class="highlight plaintext">git checkout --orphan branch-name</code></pre>
-<h4 id="Git-代码量"><a href="#Git-代码量" class="headerlink" title="Git 代码量"></a>Git 代码量</h4><pre><code class="highlight plaintext">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done</code></pre>
-<h4 id="Git-命令提示：perl-warning-Setting-locale-failed"><a href="#Git-命令提示：perl-warning-Setting-locale-failed" class="headerlink" title="Git 命令提示：perl: warning: Setting locale failed."></a>Git 命令提示：perl: warning: Setting locale failed.</h4><pre><code class="highlight plaintext">vim  ~/.zshrc
-
-# Setting for the new UTF-8 terminal support in Lion
-LC_CTYPE=en_US.UTF-8
-LC_ALL=en_US.UTF-8
-
-source ~/.zshrc
-
-重启iTerm</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">切换指定分支：</span><br><span class="line">gco branch_name</span><br><span class="line">切换到master分支：</span><br><span class="line">gcm</span><br><span class="line">查看分支：</span><br><span class="line">gb</span><br><span class="line">查看修改：</span><br><span class="line">gd</span><br><span class="line">拉代码：</span><br><span class="line">gl</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="新建没有parent的新分支"><a href="#新建没有parent的新分支" class="headerlink" title="新建没有parent的新分支"></a>新建没有parent的新分支</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --orphan branch-name</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Git-代码量"><a href="#Git-代码量" class="headerlink" title="Git 代码量"></a>Git 代码量</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Git-命令提示：perl-warning-Setting-locale-failed"><a href="#Git-命令提示：perl-warning-Setting-locale-failed" class="headerlink" title="Git 命令提示：perl: warning: Setting locale failed."></a>Git 命令提示：perl: warning: Setting locale failed.</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim  ~/.zshrc</span><br><span class="line"></span><br><span class="line"># Setting for the new UTF-8 terminal support in Lion</span><br><span class="line">LC_CTYPE=en_US.UTF-8</span><br><span class="line">LC_ALL=en_US.UTF-8</span><br><span class="line"></span><br><span class="line">source ~/.zshrc</span><br><span class="line"></span><br><span class="line">重启iTerm</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="merge某个或几个commit"><a href="#merge某个或几个commit" class="headerlink" title="merge某个或几个commit"></a>merge某个或几个commit</h4><p>有些特殊情况不能直接merge(一个分支上同时有你和别人的commit)，但是你的commit需要上线了。</p>
 <ul>
-<li>查找要merge的commitId<pre><code class="highlight plaintext">gco old_branch
-git log</code></pre>
+<li>查找要merge的commitId<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gco old_branch</span><br><span class="line">git log</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>commit 1534c530522982a6ff050ac420b300ae4364474e<br>Author: lidoudou &lt;<a href="mailto:lidoudou@csdn.com">lidoudou@csdn.com</a>&gt;<br>Date:   Sat Apr 27 17:15:14 2019 +0800<br> update kafka setting</p>
 </blockquote>
 </li>
-<li>切换到目标分支，pick目标commit<pre><code class="highlight plaintext">gco new_branch
-git cherr-pick 1534c530522  // commitId</code></pre></li>
+<li>切换到目标分支，pick目标commit<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gco new_branch</span><br><span class="line">git cherr-pick 1534c530522  // commitId</span><br></pre></td></tr></tbody></table></figure></li>
 <li>正常的话现在可以看到new_branch上有了commitId不同，但是标识名相同的记录。</li>
 <li>当然也会出现意外——代码冲突了，按一般的冲突一样fix就OK了。</li>
 </ul>

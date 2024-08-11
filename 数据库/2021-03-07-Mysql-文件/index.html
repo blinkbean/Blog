@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    553
+                    554
                 </div>
                 
 
@@ -518,13 +518,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="参数文件"><a href="#参数文件" class="headerlink" title="参数文件"></a>参数文件</h4><pre><code class="highlight mysql">mysql --help | grep my.cnf</code></pre>
+                <h4 id="参数文件"><a href="#参数文件" class="headerlink" title="参数文件"></a>参数文件</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --help | grep my.cnf</span><br></pre></td></tr></tbody></table></figure>
 
 <p>没有参数文件，取源代码中的默认值。</p>
 <h4 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h4><ul>
 <li><p>错误日志</p>
-<pre><code class="highlight mysql"># 查看文件位置
-show variables like 'log_error';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看文件位置</span><br><span class="line">show variables like 'log_error';</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>二进制日志</p>
 <p>事务提交前进行记录。</p>
@@ -557,10 +556,10 @@ show variables like 'log_error';</code></pre>
 </li>
 </ul>
 <h4 id="socket文件"><a href="#socket文件" class="headerlink" title="socket文件"></a>socket文件</h4><p>​	用Unix域套接字方式进行连接时需要的文件</p>
-<pre><code class="highlight mysql">show variables like 'socket';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like 'socket';</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="pid文件"><a href="#pid文件" class="headerlink" title="pid文件"></a>pid文件</h4><p>​	MySQL实例的进程ID文件</p>
-<pre><code class="highlight mysql">show variables like 'pid_file';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like 'pid_file';</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="表结构文件"><a href="#表结构文件" class="headerlink" title="表结构文件"></a>表结构文件</h4><p>​	MySQL的数据存储都是按照表的，每个表都会有与之对应的文件。不论使用何种引擎，MySQL都有一个以frm为后缀的文件，记录表的结构定义。</p>
 <h4 id="存储引擎文件"><a href="#存储引擎文件" class="headerlink" title="存储引擎文件"></a>存储引擎文件</h4><ul>

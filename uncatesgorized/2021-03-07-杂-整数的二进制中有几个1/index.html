@@ -484,7 +484,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    182
+                    175
                 </div>
                 
 
@@ -509,35 +509,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="x-x-1-消除x最后一位的1"><a href="#x-x-1-消除x最后一位的1" class="headerlink" title="x &amp; (x - 1) 消除x最后一位的1"></a>x &amp; (x - 1) 消除x最后一位的1</h3><pre><code class="highlight plaintext">x = 15
-	15 = 0b1111
-	14 = 0b1110
-y = x &amp; (x-1)
-y = 0b1110  # 消去了x最后一位的1
-
-y = 14
-	14 = 0b1110
-	13 = 0b1101
-z = y &amp; (y-1)
-z = 0b1100  # 消去了y最后一位的1
-……</code></pre>
+                <h3 id="x-x-1-消除x最后一位的1"><a href="#x-x-1-消除x最后一位的1" class="headerlink" title="x &amp; (x - 1) 消除x最后一位的1"></a>x &amp; (x - 1) 消除x最后一位的1</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x = 15</span><br><span class="line">	15 = 0b1111</span><br><span class="line">	14 = 0b1110</span><br><span class="line">y = x &amp; (x-1)</span><br><span class="line">y = 0b1110  # 消去了x最后一位的1</span><br><span class="line"></span><br><span class="line">y = 14</span><br><span class="line">	14 = 0b1110</span><br><span class="line">	13 = 0b1101</span><br><span class="line">z = y &amp; (y-1)</span><br><span class="line">z = 0b1100  # 消去了y最后一位的1</span><br><span class="line">……</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>O(1) 时间检测X是否是2的n次方<blockquote>
 <p>一个数如果是2的n次方，则这个数的二进制中只有一个1<br>如果消去最后一位的1，则这个数为0</p>
 </blockquote>
-<pre><code class="highlight plaintext">x = 16
-	16 = 0b10000
-	15 = 0b01111
-x &amp; (x - 1) = 0</code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = 16</span><br><span class="line">	16 = 0b10000</span><br><span class="line">	15 = 0b01111</span><br><span class="line">x &amp; (x - 1) = 0</span><br></pre></td></tr></tbody></table></figure></li>
 <li>一个整数的二进制中有多少个1<blockquote>
 <p>x &amp; (x - 1) 可以消除最后一位的1<br>while循环消除最后一位的1，直到结果为0</p>
 </blockquote>
-<pre><code class="highlight plaintext">a = 15
-b = 0
-while a &gt; 0:
-	a = a &amp; (a - 1)
-	b += 1
-print b # 1的个数</code></pre></li>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = 15</span><br><span class="line">b = 0</span><br><span class="line">while a &gt; 0:</span><br><span class="line">	a = a &amp; (a - 1)</span><br><span class="line">	b += 1</span><br><span class="line">print b # 1的个数</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 
                 

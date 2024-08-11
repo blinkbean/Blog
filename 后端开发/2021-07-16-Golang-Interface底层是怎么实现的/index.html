@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    759
+                    760
                 </div>
                 
 
@@ -521,129 +521,27 @@
                 <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><ul>
 <li>从runtime包分析学习interface底层结构和interface断言的实现、</li>
 </ul>
-<h3 id="是nil，但不完全是nil"><a href="#是nil，但不完全是nil" class="headerlink" title="是nil，但不完全是nil"></a>是nil，但不完全是nil</h3><pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">InterfaceTest</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {
-	fmt.Println(v)
-	<span class="keyword">if</span> v == <span class="literal">nil</span> {
-		fmt.Println(<span class="string">"v is nil"</span>)
-		<span class="keyword">return</span>
-	}
-	fmt.Println(<span class="string">"v is not nil"</span>)
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">InterfaceTest2</span><span class="params">(v *<span class="type">int</span>)</span></span> {
-	fmt.Println(v)
-	<span class="keyword">if</span> v == <span class="literal">nil</span> {
-		fmt.Println(<span class="string">"v is nil"</span>)
-		<span class="keyword">return</span>
-	}
-	fmt.Println(<span class="string">"v is not nil"</span>)
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {
-	<span class="keyword">var</span> v *<span class="type">int</span> = <span class="literal">nil</span>
-	InterfaceTest(v)
-	fmt.Println(<span class="string">""</span>)
-	InterfaceTest2(v)
-}</code></pre>
+<h3 id="是nil，但不完全是nil"><a href="#是nil，但不完全是nil" class="headerlink" title="是nil，但不完全是nil"></a>是nil，但不完全是nil</h3><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InterfaceTest</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {</span><br><span class="line">	fmt.Println(v)</span><br><span class="line">	<span class="keyword">if</span> v == <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(<span class="string">"v is nil"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	fmt.Println(<span class="string">"v is not nil"</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InterfaceTest2</span><span class="params">(v *<span class="type">int</span>)</span></span> {</span><br><span class="line">	fmt.Println(v)</span><br><span class="line">	<span class="keyword">if</span> v == <span class="literal">nil</span> {</span><br><span class="line">		fmt.Println(<span class="string">"v is nil"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	fmt.Println(<span class="string">"v is not nil"</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	<span class="keyword">var</span> v *<span class="type">int</span> = <span class="literal">nil</span></span><br><span class="line">	InterfaceTest(v)</span><br><span class="line">	fmt.Println(<span class="string">""</span>)</span><br><span class="line">	InterfaceTest2(v)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>运行main方法，查看输出结果发现：InterfaceTest2是符合预期的。从InterfaceTest的输出来看，v是nil，但不完全为nil，经过interface转换之后发生了什么？</p>
-<pre><code class="highlight go">&lt;<span class="literal">nil</span>&gt;
-v is not <span class="literal">nil</span>
-
-&lt;<span class="literal">nil</span>&gt;
-v is <span class="literal">nil</span></code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="literal">nil</span>&gt;</span><br><span class="line">v is not <span class="literal">nil</span></span><br><span class="line"></span><br><span class="line">&lt;<span class="literal">nil</span>&gt;</span><br><span class="line">v is <span class="literal">nil</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="interface底层结构"><a href="#interface底层结构" class="headerlink" title="interface底层结构"></a>interface底层结构</h3><p>interface判断与预期不一样的根本原因，interface根本不是那么简简单单，而是两个struct。什么？interface不是单纯的值？是struct，还是两个？</p>
 <p><img src="https://i.loli.net/2021/07/16/zLr4R9OBxoVdsGw.jpg" alt="e18d20c94006dfe0-9eef65073f0f6be0-d9c854df534cf3bd0dca74a7e620249c.jpeg"></p>
 <p>根据interface是否包含method，底层实现上有两种struct：eface，iface</p>
 <ul>
 <li><p>eface表示不包含任何方法的空接口，也称为 empty interface。</p>
-<pre><code class="highlight go"><span class="keyword">type</span> eface <span class="keyword">struct</span> {
-    _type *_type <span class="comment">// 指向类型信息</span>
-    data  unsafe.Pointer <span class="comment">// 指向值信息</span>
-}
-
-<span class="keyword">type</span> _type <span class="keyword">struct</span> {
-    size       <span class="type">uintptr</span> <span class="comment">// 类型的大小</span>
-    ptrdata    <span class="type">uintptr</span> <span class="comment">// 所有指针的内存前缀大小</span>
-    hash       <span class="type">uint32</span>  <span class="comment">// 类型的hash值。此处提前计算好，可以避免在哈希表中计算</span>
-    tflag      tflag   <span class="comment">// 额外的类型信息标志。此处为类型的 flag 标志，主要用于反射</span>
-    align      <span class="type">uint8</span>   <span class="comment">// 对应变量与该类型的内存对齐大小。</span>
-    fieldalign <span class="type">uint8</span>   <span class="comment">// 对应类型的结构体的内存对齐大小。</span>
-    kind       <span class="type">uint8</span>   <span class="comment">// 类型的枚举值。包含 Go 语言中的所有类型，例如：kindBool、kindInt、kindInt8、kindInt16 等。</span>
-    alg        *typeAlg  <span class="comment">// algorithm table</span>
-    gcdata    *<span class="type">byte</span>    <span class="comment">// 存储垃圾收集器的 GC 类型数据</span>
-    str       nameOff  <span class="comment">// string form</span>
-    ptrToThis typeOff  <span class="comment">// type for pointer to this type, may be zero</span>
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> eface <span class="keyword">struct</span> {</span><br><span class="line">    _type *_type <span class="comment">// 指向类型信息</span></span><br><span class="line">    data  unsafe.Pointer <span class="comment">// 指向值信息</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> _type <span class="keyword">struct</span> {</span><br><span class="line">    size       <span class="type">uintptr</span> <span class="comment">// 类型的大小</span></span><br><span class="line">    ptrdata    <span class="type">uintptr</span> <span class="comment">// 所有指针的内存前缀大小</span></span><br><span class="line">    hash       <span class="type">uint32</span>  <span class="comment">// 类型的hash值。此处提前计算好，可以避免在哈希表中计算</span></span><br><span class="line">    tflag      tflag   <span class="comment">// 额外的类型信息标志。此处为类型的 flag 标志，主要用于反射</span></span><br><span class="line">    align      <span class="type">uint8</span>   <span class="comment">// 对应变量与该类型的内存对齐大小。</span></span><br><span class="line">    fieldalign <span class="type">uint8</span>   <span class="comment">// 对应类型的结构体的内存对齐大小。</span></span><br><span class="line">    kind       <span class="type">uint8</span>   <span class="comment">// 类型的枚举值。包含 Go 语言中的所有类型，例如：kindBool、kindInt、kindInt8、kindInt16 等。</span></span><br><span class="line">    alg        *typeAlg  <span class="comment">// algorithm table</span></span><br><span class="line">    gcdata    *<span class="type">byte</span>    <span class="comment">// 存储垃圾收集器的 GC 类型数据</span></span><br><span class="line">    str       nameOff  <span class="comment">// string form</span></span><br><span class="line">    ptrToThis typeOff  <span class="comment">// type for pointer to this type, may be zero</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>iface包含一些method的具体实现，存在itab.fun变量里</p>
-<pre><code class="highlight go"><span class="keyword">type</span> iface <span class="keyword">struct</span> {
-    tab  *itab
-    data unsafe.Pointer
-}
-
-<span class="keyword">type</span> itab <span class="keyword">struct</span> {
-    inter  *interfacetype <span class="comment">// 接口的类型信息</span>
-    _type  *_type <span class="comment">// 具体类型信息，这个type和eface里的type是一个东西</span>
-    link   *itab
-    bad    <span class="type">int32</span>
-    inhash <span class="type">int32</span>      <span class="comment">// has this itab been added to hash?</span>
-    fun    [<span class="number">1</span>]<span class="type">uintptr</span> <span class="comment">// 底层数组，存储接口的方法集的具体实现的地址，其包含一组函数指针，实现了接口方法的动态分派，且每次在接口发生变更时都会更新</span>
-}
-
-<span class="keyword">type</span> interfacetype <span class="keyword">struct</span> {
- typ     _type
- pkgpath name
- mhdr    []imethod
-}
-
-<span class="keyword">type</span> imethod <span class="keyword">struct</span> {
- name nameOff
- ityp typeOff
-}</code></pre></li>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> iface <span class="keyword">struct</span> {</span><br><span class="line">    tab  *itab</span><br><span class="line">    data unsafe.Pointer</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> itab <span class="keyword">struct</span> {</span><br><span class="line">    inter  *interfacetype <span class="comment">// 接口的类型信息</span></span><br><span class="line">    _type  *_type <span class="comment">// 具体类型信息，这个type和eface里的type是一个东西</span></span><br><span class="line">    link   *itab</span><br><span class="line">    bad    <span class="type">int32</span></span><br><span class="line">    inhash <span class="type">int32</span>      <span class="comment">// has this itab been added to hash?</span></span><br><span class="line">    fun    [<span class="number">1</span>]<span class="type">uintptr</span> <span class="comment">// 底层数组，存储接口的方法集的具体实现的地址，其包含一组函数指针，实现了接口方法的动态分派，且每次在接口发生变更时都会更新</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> interfacetype <span class="keyword">struct</span> {</span><br><span class="line"> typ     _type</span><br><span class="line"> pkgpath name</span><br><span class="line"> mhdr    []imethod</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> imethod <span class="keyword">struct</span> {</span><br><span class="line"> name nameOff</span><br><span class="line"> ityp typeOff</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h3 id="类型断言是怎么实现的？"><a href="#类型断言是怎么实现的？" class="headerlink" title="类型断言是怎么实现的？"></a>类型断言是怎么实现的？</h3><ul>
 <li><p>断言分为安全和非安全两种</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">myAssert</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {
-  <span class="comment">// 进行变量断言，若不判断容易出现 panic</span>
-	s := v.(<span class="type">string</span>)
-	<span class="comment">// 进行安全断言</span>
-  s, ok := v.(<span class="type">string</span>)
-}
-
-<span class="function"><span class="keyword">func</span> <span class="title">myAssert</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {
-  <span class="comment">// 进行 switch 断言</span>
-  <span class="keyword">switch</span> v.(<span class="keyword">type</span>) {
-  <span class="keyword">case</span> <span class="type">string</span>:
-      <span class="comment">// do something</span>
-  <span class="keyword">case</span> <span class="type">int</span>:
-      <span class="comment">// do something</span>
-  <span class="keyword">case</span> <span class="type">float64</span>:
-      <span class="comment">// do something</span>
-  }
-}</code></pre>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myAssert</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {</span><br><span class="line">  <span class="comment">// 进行变量断言，若不判断容易出现 panic</span></span><br><span class="line">	s := v.(<span class="type">string</span>)</span><br><span class="line">	<span class="comment">// 进行安全断言</span></span><br><span class="line">  s, ok := v.(<span class="type">string</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myAssert</span><span class="params">(v <span class="keyword">interface</span>{})</span></span> {</span><br><span class="line">  <span class="comment">// 进行 switch 断言</span></span><br><span class="line">  <span class="keyword">switch</span> v.(<span class="keyword">type</span>) {</span><br><span class="line">  <span class="keyword">case</span> <span class="type">string</span>:</span><br><span class="line">      <span class="comment">// do something</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">int</span>:</span><br><span class="line">      <span class="comment">// do something</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">float64</span>:</span><br><span class="line">      <span class="comment">// do something</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>iface和eface对应不同的方法，安全和不安全也对应两种方法。(runtime包iface.go)</p>
-<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="title">assertI2I</span><span class="params">(inter *interfacetype, i iface)</span></span> (r iface) {
-	tab := i.tab
-	<span class="keyword">if</span> tab == <span class="literal">nil</span> {
-		<span class="comment">// explicit conversions require non-nil interface value.</span>
-		<span class="built_in">panic</span>(&amp;TypeAssertionError{<span class="literal">nil</span>, <span class="literal">nil</span>, &amp;inter.typ, <span class="string">""</span>})
-	}
-	<span class="keyword">if</span> tab.inter == inter {
-		r.tab = tab
-		r.data = i.data
-		<span class="keyword">return</span>
-	}
-	r.tab = getitab(inter, tab._type, <span class="literal">false</span>)
-	r.data = i.data
-	<span class="keyword">return</span>
-}
-<span class="function"><span class="keyword">func</span> <span class="title">assertI2I</span><span class="params">(inter *interfacetype, i iface)</span></span> (r iface)
-
-<span class="function"><span class="keyword">func</span> <span class="title">assertE2I2</span><span class="params">(inter *interfacetype, e eface)</span></span> (r iface, b <span class="type">bool</span>)
-<span class="function"><span class="keyword">func</span> <span class="title">assertE2I</span><span class="params">(inter *interfacetype, e eface)</span></span> (r iface)</code></pre></li>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">assertI2I</span><span class="params">(inter *interfacetype, i iface)</span></span> (r iface) {</span><br><span class="line">	tab := i.tab</span><br><span class="line">	<span class="keyword">if</span> tab == <span class="literal">nil</span> {</span><br><span class="line">		<span class="comment">// explicit conversions require non-nil interface value.</span></span><br><span class="line">		<span class="built_in">panic</span>(&amp;TypeAssertionError{<span class="literal">nil</span>, <span class="literal">nil</span>, &amp;inter.typ, <span class="string">""</span>})</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span> tab.inter == inter {</span><br><span class="line">		r.tab = tab</span><br><span class="line">		r.data = i.data</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	}</span><br><span class="line">	r.tab = getitab(inter, tab._type, <span class="literal">false</span>)</span><br><span class="line">	r.data = i.data</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">assertI2I</span><span class="params">(inter *interfacetype, i iface)</span></span> (r iface)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">assertE2I2</span><span class="params">(inter *interfacetype, e eface)</span></span> (r iface, b <span class="type">bool</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">assertE2I</span><span class="params">(inter *interfacetype, e eface)</span></span> (r iface)</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://legendtkl.com/2017/07/01/golang-interface-implement/">http://legendtkl.com/2017/07/01/golang-interface-implement/</a></p>
 <p><a href="https://mp.weixin.qq.com/s/vNACbdSDxC9S0LOAr7ngLQ">https://mp.weixin.qq.com/s/vNACbdSDxC9S0LOAr7ngLQ</a></p>

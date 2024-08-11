@@ -520,8 +520,7 @@
             <div id="articleContent">
                 <h3 id="InnoDB引擎的4大特性"><a href="#InnoDB引擎的4大特性" class="headerlink" title="InnoDB引擎的4大特性"></a>InnoDB引擎的4大特性</h3><ol>
 <li><p>插入缓存（物理页的一个组成部分）</p>
-<pre><code class="highlight mysql">show engine innodb status\G;
-INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G;</span><br><span class="line">INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息</span><br></pre></td></tr></tbody></table></figure>
 
 <p>对于非聚集索引的插入或更新操作，不是每次直接插入索引页。而是先判断插入的非聚集索引页是否在缓冲池中。如果在，则直接插入，如果不在，先放入插入缓冲区，然后再以一定的频率执行插入缓冲和非聚集索引页子节点的合并操作。</p>
 <blockquote>
@@ -583,25 +582,13 @@ INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息</code></pre>
 <p>Log thread</p>
 <p>Read thread</p>
 <p>Write  thread</p>
-<pre><code class="highlight mysql">show engine innodb status\G; # 过去某个时间段的数据库状态
-
-Per second averages calculated from the last 46 seconds # 过去46s内的状态
-
-FILE I/O
-xxx</code></pre></blockquote>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G; # 过去某个时间段的数据库状态</span><br><span class="line"></span><br><span class="line">Per second averages calculated from the last 46 seconds # 过去46s内的状态</span><br><span class="line"></span><br><span class="line">FILE I/O</span><br><span class="line">xxx</span><br></pre></td></tr></tbody></table></figure></blockquote>
 </li>
 </ol>
 <h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><ol>
 <li><p>缓冲池 buffer poll</p>
 <p>占最大块内存，InnoDB将数据库文件按页（16k）读到缓冲池，然后按LRU保留缓存数据。数据库文件需要修改，首先修改缓冲池中的页（发生修改后，该页为脏页），按照一定的频率将缓冲池中的脏页刷新到文件。</p>
-<pre><code class="highlight mysql">show engine innodb status\G;
-
-BUFFER POOL AND MEMORY
-Buffer pool size   8191 # 一共多少个缓冲帧
-Free buffers       7529 # 空闲缓冲帧
-Database pages     658 # 已经使用缓冲帧
-Old database pages 262
-Modified db pages  0 # 脏页数量</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G;</span><br><span class="line"></span><br><span class="line">BUFFER POOL AND MEMORY</span><br><span class="line">Buffer pool size   8191 # 一共多少个缓冲帧</span><br><span class="line">Free buffers       7529 # 空闲缓冲帧</span><br><span class="line">Database pages     658 # 已经使用缓冲帧</span><br><span class="line">Old database pages 262</span><br><span class="line">Modified db pages  0 # 脏页数量</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>缓冲池中的数据页类型<ol>

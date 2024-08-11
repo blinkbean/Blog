@@ -3,7 +3,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Golang-RWMutex, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,18 +28,17 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     
 
-
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.2.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
@@ -528,12 +527,24 @@
 </blockquote>
 <ol>
 <li><p>结构体及其常量</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RWMutex <span class="keyword">struct</span> {</span><br><span class="line">	w           Mutex  <span class="comment">// 互斥锁</span></span><br><span class="line">	writerSem   <span class="type">uint32</span> <span class="comment">// 写操作等待读操作完成的信号量</span></span><br><span class="line">	readerSem   <span class="type">uint32</span> <span class="comment">// 读操作等待写操作完成的信号量</span></span><br><span class="line">	readerCount <span class="type">int32</span>  <span class="comment">// 读锁计数器</span></span><br><span class="line">	readerWait  <span class="type">int32</span>  <span class="comment">// 获取写锁时当前需要等待的读锁释放数量</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最大只支持 1 &lt;&lt; 30 个读锁</span></span><br><span class="line"><span class="keyword">const</span> rwmutexMaxReaders = <span class="number">1</span> &lt;&lt; <span class="number">30</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="keyword">type</span> RWMutex <span class="keyword">struct</span> {
+	w           Mutex  <span class="comment">// 互斥锁</span>
+	writerSem   <span class="type">uint32</span> <span class="comment">// 写操作等待读操作完成的信号量</span>
+	readerSem   <span class="type">uint32</span> <span class="comment">// 读操作等待写操作完成的信号量</span>
+	readerCount <span class="type">int32</span>  <span class="comment">// 读锁计数器</span>
+	readerWait  <span class="type">int32</span>  <span class="comment">// 获取写锁时当前需要等待的读锁释放数量</span>
+}
+
+<span class="comment">// 最大只支持 1 &lt;&lt; 30 个读锁</span>
+<span class="keyword">const</span> rwmutexMaxReaders = <span class="number">1</span> &lt;&lt; <span class="number">30</span></code></pre>
 
 
 </li>
 <li><p>四种方法</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Lock         <span class="comment">// 提供写锁加锁操作</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RLock        <span class="comment">// 提供读锁加锁操作</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RUnlock      <span class="comment">// 提供读锁解锁操作</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Unlock       <span class="comment">// 提供写锁解锁操作</span></span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Lock         <span class="comment">// 提供写锁加锁操作</span>
+<span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RLock        <span class="comment">// 提供读锁加锁操作</span>
+<span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RUnlock      <span class="comment">// 提供读锁解锁操作</span>
+<span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Unlock       <span class="comment">// 提供写锁解锁操作</span></code></pre>
 
 <p>读操作可并发重入，写操作是互斥的，读写锁通常用互斥锁、条件变量、信号量实现。</p>
 </li>
@@ -556,7 +567,35 @@
 </ol>
 <h3 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h3><ol>
 <li><p>写锁加锁 Lock()</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Lock() {</span><br><span class="line">    <span class="comment">// 竞态检测</span></span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        _ = rw.w.state</span><br><span class="line">        race.Disable()</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 1.使用 Mutex 锁，解决与其他写者的竞争</span></span><br><span class="line">    rw.w.Lock()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.判断当前是否存在读锁：先通过原子操作改变readerCount（readerCount-rwmutexMaxReaders），</span></span><br><span class="line">    <span class="comment">// 使其变为负数，告诉 RUnLock 当前存在写锁等待；</span></span><br><span class="line">    <span class="comment">// 然后再加回 rwmutexMaxReaders 并赋给r，若r仍然不为0, 代表当前还有读锁</span></span><br><span class="line">    r := atomic.AddInt32(&amp;rw.readerCount, -rwmutexMaxReaders) + rwmutexMaxReaders</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3.如果仍然有其他 Goroutine 持有互斥锁的读锁（r != 0）</span></span><br><span class="line">    <span class="comment">// 会先将 readerCount 的值加到 readerWait中，防止源源不断的读者进来导致写锁饿死，</span></span><br><span class="line">    <span class="comment">// 然后该 Goroutine 会调用 sync.runtime_SemacquireMutex 进入休眠状态，</span></span><br><span class="line">    <span class="comment">// 并等待所有读锁所有者执行结束后释放 writerSem 信号量将当前协程唤醒。</span></span><br><span class="line">    <span class="keyword">if</span> r != <span class="number">0</span> &amp;&amp; atomic.AddInt32(&amp;rw.readerWait, r) != <span class="number">0</span> {</span><br><span class="line">        <span class="comment">// 阻塞写锁</span></span><br><span class="line">        runtime_SemacquireMutex(&amp;rw.writerSem, <span class="literal">false</span>, <span class="number">0</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 竞态检测</span></span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        race.Enable()</span><br><span class="line">        race.Acquire(unsafe.Pointer(&amp;rw.readerSem))</span><br><span class="line">        race.Acquire(unsafe.Pointer(&amp;rw.writerSem))</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Lock() {
+    <span class="comment">// 竞态检测</span>
+    <span class="keyword">if</span> race.Enabled {
+        _ = rw.w.state
+        race.Disable()
+    }
+    <span class="comment">// 1.使用 Mutex 锁，解决与其他写者的竞争</span>
+    rw.w.Lock()
+    
+    <span class="comment">// 2.判断当前是否存在读锁：先通过原子操作改变readerCount（readerCount-rwmutexMaxReaders），</span>
+    <span class="comment">// 使其变为负数，告诉 RUnLock 当前存在写锁等待；</span>
+    <span class="comment">// 然后再加回 rwmutexMaxReaders 并赋给r，若r仍然不为0, 代表当前还有读锁</span>
+    r := atomic.AddInt32(&amp;rw.readerCount, -rwmutexMaxReaders) + rwmutexMaxReaders
+    
+    <span class="comment">// 3.如果仍然有其他 Goroutine 持有互斥锁的读锁（r != 0）</span>
+    <span class="comment">// 会先将 readerCount 的值加到 readerWait中，防止源源不断的读者进来导致写锁饿死，</span>
+    <span class="comment">// 然后该 Goroutine 会调用 sync.runtime_SemacquireMutex 进入休眠状态，</span>
+    <span class="comment">// 并等待所有读锁所有者执行结束后释放 writerSem 信号量将当前协程唤醒。</span>
+    <span class="keyword">if</span> r != <span class="number">0</span> &amp;&amp; atomic.AddInt32(&amp;rw.readerWait, r) != <span class="number">0</span> {
+        <span class="comment">// 阻塞写锁</span>
+        runtime_SemacquireMutex(&amp;rw.writerSem, <span class="literal">false</span>, <span class="number">0</span>)
+    }
+    <span class="comment">// 竞态检测</span>
+    <span class="keyword">if</span> race.Enabled {
+        race.Enable()
+        race.Acquire(unsafe.Pointer(&amp;rw.readerSem))
+        race.Acquire(unsafe.Pointer(&amp;rw.writerSem))
+    }
+}</code></pre>
 
 <ol>
 <li>使用 <code>sync.Mutex</code> 中的互斥锁 <code>sync.Mutex.Lock()</code> 先解决与其他写者的竞争问题；</li>
@@ -565,7 +604,32 @@
 </ol>
 </li>
 <li><p>写锁释放 UnLock()</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Unlock() {</span><br><span class="line">    <span class="comment">// 竞态检测</span></span><br><span class="line">	<span class="keyword">if</span> race.Enabled {</span><br><span class="line">		_ = rw.w.state</span><br><span class="line">		race.Release(unsafe.Pointer(&amp;rw.readerSem))</span><br><span class="line">		race.Disable()</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 1.释放读锁：通过调用 atomic.AddInt32 函数将 readerCount 加上 rwmutexMaxReaders 从而变回正数；；</span></span><br><span class="line">	r := atomic.AddInt32(&amp;rw.readerCount, rwmutexMaxReaders)</span><br><span class="line">    <span class="comment">// 若超过读锁的最大限制, 触发panic</span></span><br><span class="line">	<span class="keyword">if</span> r &gt;= rwmutexMaxReaders {</span><br><span class="line">		race.Enable()</span><br><span class="line">		throw(<span class="string">"sync: Unlock of unlocked RWMutex"</span>)</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 2.通过 for 循环触发所有由于获取读锁而陷入等待的 Goroutine，也即解除阻塞的读锁(若有)</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="type">int</span>(r); i++ {</span><br><span class="line">		runtime_Semrelease(&amp;rw.readerSem, <span class="literal">false</span>, <span class="number">0</span>)</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 3.调用 sync.Mutex.Unlock 方法释放写互斥锁</span></span><br><span class="line">	rw.w.Unlock()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 是否开启竞态检测</span></span><br><span class="line">	<span class="keyword">if</span> race.Enabled {</span><br><span class="line">		race.Enable()</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Unlock() {
+    <span class="comment">// 竞态检测</span>
+	<span class="keyword">if</span> race.Enabled {
+		_ = rw.w.state
+		race.Release(unsafe.Pointer(&amp;rw.readerSem))
+		race.Disable()
+	}
+	<span class="comment">// 1.释放读锁：通过调用 atomic.AddInt32 函数将 readerCount 加上 rwmutexMaxReaders 从而变回正数；；</span>
+	r := atomic.AddInt32(&amp;rw.readerCount, rwmutexMaxReaders)
+    <span class="comment">// 若超过读锁的最大限制, 触发panic</span>
+	<span class="keyword">if</span> r &gt;= rwmutexMaxReaders {
+		race.Enable()
+		throw(<span class="string">"sync: Unlock of unlocked RWMutex"</span>)
+	}
+	<span class="comment">// 2.通过 for 循环触发所有由于获取读锁而陷入等待的 Goroutine，也即解除阻塞的读锁(若有)</span>
+	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="type">int</span>(r); i++ {
+		runtime_Semrelease(&amp;rw.readerSem, <span class="literal">false</span>, <span class="number">0</span>)
+	}
+	<span class="comment">// 3.调用 sync.Mutex.Unlock 方法释放写互斥锁</span>
+	rw.w.Unlock()
+    
+    <span class="comment">// 是否开启竞态检测</span>
+	<span class="keyword">if</span> race.Enabled {
+		race.Enable()
+	}
+}</code></pre>
 
 <ol>
 <li>释放读锁：通过调用 <code>atomic.AddInt32</code> 函数将 <code>readerCount</code> 加上 <code>rwmutexMaxReaders</code> 从而变回正数；</li>
@@ -574,7 +638,26 @@
 </ol>
 </li>
 <li><p>读锁加锁 RLock()</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RLock() {</span><br><span class="line">    <span class="comment">// 是否开启检测race</span></span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        _ = rw.w.state</span><br><span class="line">        race.Disable()</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//这里分两种情况:</span></span><br><span class="line">	<span class="comment">// 1.此时无写锁 (readerCount + 1) &gt; 0,那么可以上读锁, 并且readerCount原子加1(读锁可重入[只要匹配了释放次数就行])</span></span><br><span class="line">	<span class="comment">// 2.此时有写锁 (readerCount + 1) &lt; 0,所以通过readerSem读信号量, 使读操作睡眠等待</span></span><br><span class="line">    <span class="keyword">if</span> atomic.AddInt32(&amp;rw.readerCount, <span class="number">1</span>) &lt; <span class="number">0</span> {</span><br><span class="line">        <span class="comment">// 当前有个写锁, 读操作需要阻塞等待写锁释放；</span></span><br><span class="line">        <span class="comment">// 其实做的事情是将 goroutine 排到G队列的后面,挂起 goroutine</span></span><br><span class="line">        runtime_SemacquireMutex(&amp;rw.readerSem, <span class="literal">false</span>, <span class="number">0</span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 是否开启检测race</span></span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        race.Enable()</span><br><span class="line">        race.Acquire(unsafe.Pointer(&amp;rw.readerSem))</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RLock() {
+    <span class="comment">// 是否开启检测race</span>
+    <span class="keyword">if</span> race.Enabled {
+        _ = rw.w.state
+        race.Disable()
+    }
+    <span class="comment">//这里分两种情况:</span>
+	<span class="comment">// 1.此时无写锁 (readerCount + 1) &gt; 0,那么可以上读锁, 并且readerCount原子加1(读锁可重入[只要匹配了释放次数就行])</span>
+	<span class="comment">// 2.此时有写锁 (readerCount + 1) &lt; 0,所以通过readerSem读信号量, 使读操作睡眠等待</span>
+    <span class="keyword">if</span> atomic.AddInt32(&amp;rw.readerCount, <span class="number">1</span>) &lt; <span class="number">0</span> {
+        <span class="comment">// 当前有个写锁, 读操作需要阻塞等待写锁释放；</span>
+        <span class="comment">// 其实做的事情是将 goroutine 排到G队列的后面,挂起 goroutine</span>
+        runtime_SemacquireMutex(&amp;rw.readerSem, <span class="literal">false</span>, <span class="number">0</span>)
+    }
+    <span class="comment">// 是否开启检测race</span>
+    <span class="keyword">if</span> race.Enabled {
+        race.Enable()
+        race.Acquire(unsafe.Pointer(&amp;rw.readerSem))
+    }
+}</code></pre>
 
 <ol>
 <li>此时无写锁 <code>(readerCount + 1) &gt; 0</code>（注意，在写锁是加锁那里，我们对readerCount 进行了<code>readerCount-rwmutexMaxReaders</code>处理），那么可以上读锁, 并且<code>readerCount</code>原子加1（读锁可重入[只要匹配了释放次数就行]）；</li>
@@ -582,7 +665,39 @@
 </ol>
 </li>
 <li><p>读锁释放 RUnlock()</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RUnlock() {</span><br><span class="line">    <span class="comment">// 竞态检测</span></span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        _ = rw.w.state</span><br><span class="line">        race.ReleaseMerge(unsafe.Pointer(&amp;rw.writerSem))</span><br><span class="line">        race.Disable()</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 写锁等待状态，检查当前是否可以进行获取；</span></span><br><span class="line">    <span class="comment">// 首先将 readerCount 减1并赋予r，然后分两种情况判断</span></span><br><span class="line">    <span class="comment">//  1.若r大于等于0，读锁直接解锁成功，直接结束本次操作；</span></span><br><span class="line">    <span class="comment">//  2.若r小于0，有一个正在执行的写操作，在这时会调用sync.RWMutex.rUnlockSlow 方法；</span></span><br><span class="line">    <span class="keyword">if</span> r := atomic.AddInt32(&amp;rw.readerCount, <span class="number">-1</span>); r &lt; <span class="number">0</span> {</span><br><span class="line">        <span class="comment">// Outlined slow-path to allow the fast-path to be inlined</span></span><br><span class="line">        rw.rUnlockSlow(r)</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> race.Enabled {</span><br><span class="line">        race.Enable()</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> rUnlockSlow(r <span class="type">int32</span>) {</span><br><span class="line">    <span class="comment">// r + 1 == 0 表示本来就没读锁, 直接执行RUnlock()</span></span><br><span class="line">    <span class="comment">// r + 1 == -rwmutexMaxReaders 表示执行Lock()再执行RUnlock()</span></span><br><span class="line">	<span class="keyword">if</span> r+<span class="number">1</span> == <span class="number">0</span> || r+<span class="number">1</span> == -rwmutexMaxReaders {</span><br><span class="line">		race.Enable()</span><br><span class="line">		throw(<span class="string">"sync: RUnlock of unlocked RWMutex"</span>)</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// 如果当前有写锁等待，则减少一个readerWait的数目</span></span><br><span class="line">    <span class="keyword">if</span> atomic.AddInt32(&amp;rw.readerWait, <span class="number">-1</span>) == <span class="number">0</span> {</span><br><span class="line">		<span class="comment">// 写锁前的最后一个读锁唤醒写锁执行</span></span><br><span class="line">        runtime_Semrelease(&amp;rw.writerSem, <span class="literal">false</span>, <span class="number">1</span>)</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre><code class="highlight go"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RUnlock() {
+    <span class="comment">// 竞态检测</span>
+    <span class="keyword">if</span> race.Enabled {
+        _ = rw.w.state
+        race.ReleaseMerge(unsafe.Pointer(&amp;rw.writerSem))
+        race.Disable()
+    }
+    <span class="comment">// 写锁等待状态，检查当前是否可以进行获取；</span>
+    <span class="comment">// 首先将 readerCount 减1并赋予r，然后分两种情况判断</span>
+    <span class="comment">//  1.若r大于等于0，读锁直接解锁成功，直接结束本次操作；</span>
+    <span class="comment">//  2.若r小于0，有一个正在执行的写操作，在这时会调用sync.RWMutex.rUnlockSlow 方法；</span>
+    <span class="keyword">if</span> r := atomic.AddInt32(&amp;rw.readerCount, <span class="number">-1</span>); r &lt; <span class="number">0</span> {
+        <span class="comment">// Outlined slow-path to allow the fast-path to be inlined</span>
+        rw.rUnlockSlow(r)
+    }
+    <span class="keyword">if</span> race.Enabled {
+        race.Enable()
+    }
+}
+
+<span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> rUnlockSlow(r <span class="type">int32</span>) {
+    <span class="comment">// r + 1 == 0 表示本来就没读锁, 直接执行RUnlock()</span>
+    <span class="comment">// r + 1 == -rwmutexMaxReaders 表示执行Lock()再执行RUnlock()</span>
+	<span class="keyword">if</span> r+<span class="number">1</span> == <span class="number">0</span> || r+<span class="number">1</span> == -rwmutexMaxReaders {
+		race.Enable()
+		throw(<span class="string">"sync: RUnlock of unlocked RWMutex"</span>)
+	}
+	<span class="comment">// 如果当前有写锁等待，则减少一个readerWait的数目</span>
+    <span class="keyword">if</span> atomic.AddInt32(&amp;rw.readerWait, <span class="number">-1</span>) == <span class="number">0</span> {
+		<span class="comment">// 写锁前的最后一个读锁唤醒写锁执行</span>
+        runtime_Semrelease(&amp;rw.writerSem, <span class="literal">false</span>, <span class="number">1</span>)
+	}
+}</code></pre>
 
 <ol>
 <li><p>首先readerCount 减1，然后进行两种情况的判断：</p>
@@ -713,7 +828,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/2023-12-22-wang-luo-duan-kou-sao-miao-gong-ju-nmap/">
+                <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2023-12-22-%E7%BD%91%E7%BB%9C-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7nmap/">
                     <div class="card-image">
                         
                         <img src="/Image/image-20240418001148852.png" class="responsive-img" alt="网络-端口扫描工具nmap">
@@ -761,7 +876,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/hou-duan-kai-fa/2024-04-18-linux-sed-chang-yong-ming-ling/">
+                <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2024-04-18-Linux-sed%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
                     <div class="card-image">
                         
                         <img src="/Image/image-20240418000707023.png" class="responsive-img" alt="Linux命令 - sed">
@@ -1161,7 +1276,7 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

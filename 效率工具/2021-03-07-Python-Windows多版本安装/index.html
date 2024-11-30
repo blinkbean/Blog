@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    562
+                    597
                 </div>
                 
 
@@ -519,7 +517,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h4 id="可能的解决方案"><a href="#可能的解决方案" class="headerlink" title="可能的解决方案"></a>可能的解决方案</h4><ul>
-<li>安装多个python版本，使用不同的命令进s行版本的区分<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\hero\python2</span><br><span class="line">Python 2.7.X</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line">C:\Users\hero\python3</span><br><span class="line">Python 3.X.X</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line">两个python版本都装了pip以后怎么办?</span><br><span class="line">python安装路径找到Scripts文件夹，进入里面找到pip*-script.py，打开修改第一句为要指定的python解释器。</span><br></pre></td></tr></tbody></table></figure></li>
+<li>安装多个python版本，使用不同的命令进s行版本的区分<pre class="line-numbers language-none"><code class="language-none">C:\Users\hero\python2
+Python 2.7.X
+&gt;&gt;&gt;</li>
+</ul>
+<p>C:\Users\hero\python3<br>Python 3.X.X<br>&gt;&gt;&gt;</p>
+<p>两个python版本都装了pip以后怎么办?<br>python安装路径找到Scripts文件夹，进入里面找到pip*-script.py，打开修改第一句为要指定的python解释器。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>:hexoPostRenderEscape–&gt;</p>
+<ul>
 <li>virtualenv</li>
 <li>anaconda(推荐)</li>
 <li>…(如果有更好的方案再补充)</li>
@@ -530,7 +534,7 @@
 <h4 id="为什么用anaconda？"><a href="#为什么用anaconda？" class="headerlink" title="为什么用anaconda？"></a>为什么用anaconda？</h4><ul>
 <li>希望自己的机器上同时拥有不同版本的python，以满足不同代码的需求。</li>
 <li>Windows环境下使用virtualenv对Python进行多版本隔离，但是前提是能安装上多个版本。[笑哭.jpg]</li>
-<li>Win8.1安装Python==3.5==以上提示缺失==api-ms-win-crt-runtime-l1-1-0.dll==问题</li>
+<li>Win8.1安装Python&#x3D;&#x3D;3.5&#x3D;&#x3D;以上提示缺失&#x3D;&#x3D;api-ms-win-crt-runtime-l1-1-0.dll&#x3D;&#x3D;问题</li>
 </ul>
 <h4 id="怎么安装anaconda？"><a href="#怎么安装anaconda？" class="headerlink" title="怎么安装anaconda？"></a>怎么安装anaconda？</h4><ul>
 <li>国内镜像地址 : <blockquote>
@@ -545,9 +549,25 @@
 <li>添加清华镜像(不然安装会超时)</li>
 </ul>
 </blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></tbody></table></figure></li>
+<pre class="line-numbers language-none"><code class="language-none">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;
+conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F;
+conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;msys2&#x2F;
+conda config --set show_channel_urls yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h4 id="Conda命令"><a href="#Conda命令" class="headerlink" title="Conda命令"></a>Conda命令</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">conda create --name python27 python=2.7 环境2.7名称python27</span><br><span class="line">conda create –name cpu 创建一个名为cpu的环境 </span><br><span class="line">source activate cpu 激活cpu环境 </span><br><span class="line">source deactivate 禁用当前环境 </span><br><span class="line">conda remove –name 环境名 –all </span><br><span class="line">conda search 软件名 //可以查看到对应的不同版本 </span><br><span class="line">conda install 软件名 安装软件 </span><br><span class="line">conda list 查看已安装的package </span><br><span class="line">conda list -n 环境名 查看指定环境已安装的package </span><br><span class="line">conda install -n 环境名 软件名 指定环境名 安装软件 </span><br><span class="line">如果不用-n指定环境名称，则被安装在当前活跃环境 </span><br><span class="line">conda update -n 环境名 软件名 指定环境名更新软件 </span><br><span class="line">conda remove -n 环境名 软件名 删除指定环境的指定软件包 </span><br><span class="line">conda env list //查看现有的环境</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Conda命令"><a href="#Conda命令" class="headerlink" title="Conda命令"></a>Conda命令</h4><pre class="line-numbers language-none"><code class="language-none">conda create --name python27 python&#x3D;2.7 环境2.7名称python27
+conda create –name cpu 创建一个名为cpu的环境 
+source activate cpu 激活cpu环境 
+source deactivate 禁用当前环境 
+conda remove –name 环境名 –all 
+conda search 软件名 &#x2F;&#x2F;可以查看到对应的不同版本 
+conda install 软件名 安装软件 
+conda list 查看已安装的package 
+conda list -n 环境名 查看指定环境已安装的package 
+conda install -n 环境名 软件名 指定环境名 安装软件 
+如果不用-n指定环境名称，则被安装在当前活跃环境 
+conda update -n 环境名 软件名 指定环境名更新软件 
+conda remove -n 环境名 软件名 删除指定环境的指定软件包 
+conda env list &#x2F;&#x2F;查看现有的环境<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 

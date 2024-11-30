@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    275
+                    317
                 </div>
                 
 
@@ -520,14 +518,62 @@
             <div id="articleContent">
                 <p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
 <p>示例 1:</p>
-<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5<br>示例&nbsp;2:</p>
-<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br>说明:</p>
+<p>输入: [3,2,1,5,6,4] 和 k &#x3D; 2<br>输出: 5<br>示例 2:</p>
+<p>输入: [3,2,3,1,2,4,5,5,6] 和 k &#x3D; 4<br>输出: 4<br>说明:</p>
 <p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</p>
 <p><a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array">https://leetcode-cn.com/problems/kth-largest-element-in-an-array</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>最小堆</li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">type MinHeap struct {</span><br><span class="line">	arr  []int</span><br><span class="line">	size int</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Len() int {</span><br><span class="line">	return len(m.arr)</span><br><span class="line">}</span><br><span class="line">func (m *MinHeap) Less(i, j int) bool {</span><br><span class="line">	return m.arr[i] &lt; m.arr[j]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Swap(i, j int) {</span><br><span class="line">	m.arr[i], m.arr[j] = m.arr[j], m.arr[i]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Push(v interface{}) {</span><br><span class="line">	m.arr = append(m.arr, v.(int))</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Pop() interface{} {</span><br><span class="line">	t := m.arr[m.Len()-1] // 最后一个</span><br><span class="line">	m.arr = m.arr[0 : m.Len()-1]</span><br><span class="line">	return t</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) Top() int {</span><br><span class="line">	return m.arr[0] // 第一个</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (m *MinHeap) RealPush(v int) {</span><br><span class="line">	if m.size == m.Len() {</span><br><span class="line">		if m.Top() &lt; v {</span><br><span class="line">			heap.Pop(m)</span><br><span class="line">			heap.Push(m, v)</span><br><span class="line">		}</span><br><span class="line">	} else {</span><br><span class="line">		heap.Push(m, v)</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func InitHeap(size int) MinHeap {</span><br><span class="line">	m := MinHeap{</span><br><span class="line">		arr:  make([]int, 0),</span><br><span class="line">		size: size,</span><br><span class="line">	}</span><br><span class="line">	heap.Init(&amp;m)</span><br><span class="line">	return m</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">type MinHeap struct &#123;
+    arr  []int
+    size int
+&#125;
+
+func (m *MinHeap) Len() int &#123;
+    return len(m.arr)
+&#125;
+func (m *MinHeap) Less(i, j int) bool &#123;
+    return m.arr[i] &lt; m.arr[j]
+&#125;
+
+func (m *MinHeap) Swap(i, j int) &#123;
+    m.arr[i], m.arr[j] &#x3D; m.arr[j], m.arr[i]
+&#125;
+
+func (m *MinHeap) Push(v interface&#123;&#125;) &#123;
+    m.arr &#x3D; append(m.arr, v.(int))
+&#125;
+
+func (m *MinHeap) Pop() interface&#123;&#125; &#123;
+    t :&#x3D; m.arr[m.Len()-1] &#x2F;&#x2F; 最后一个
+    m.arr &#x3D; m.arr[0 : m.Len()-1]
+    return t
+&#125;
+
+func (m *MinHeap) Top() int &#123;
+    return m.arr[0] &#x2F;&#x2F; 第一个
+&#125;
+
+func (m *MinHeap) RealPush(v int) &#123;
+    if m.size &#x3D;&#x3D; m.Len() &#123;
+        if m.Top() &lt; v &#123;
+            heap.Pop(m)
+            heap.Push(m, v)
+        &#125;
+    &#125; else &#123;
+        heap.Push(m, v)
+    &#125;
+&#125;
+
+func InitHeap(size int) MinHeap &#123;
+    m :&#x3D; MinHeap&#123;
+        arr:  make([]int, 0),
+        size: size,
+    &#125;
+    heap.Init(&amp;m)
+    return m
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

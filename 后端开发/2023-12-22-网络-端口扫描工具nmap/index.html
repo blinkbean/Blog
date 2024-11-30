@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    417
+                    434
                 </div>
                 
 
@@ -526,19 +524,19 @@
 <li>还可以推断主机所用的操作系统，到达主机经过的路由，系统已开放端口的软件版本</li>
 </ul>
 <h4 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h4><blockquote>
-<p>// ping扫描</p>
+<p>&#x2F;&#x2F; ping扫描</p>
 <p>nmap -sP 10.22.133.11</p>
 </blockquote>
 <h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><blockquote>
-<p>// 指定端口范围使用-p参数</p>
+<p>&#x2F;&#x2F; 指定端口范围使用-p参数</p>
 <p>nmap 192.169.0.1 -p1-65535</p>
-<p>// 如果不指定要扫描的端口，Nmap默认扫描从1到1024再加上nmap-services列出的端口</p>
+<p>&#x2F;&#x2F; 如果不指定要扫描的端口，Nmap默认扫描从1到1024再加上nmap-services列出的端口</p>
 <p>nmap 192.169.0.1</p>
-<p>// sys扫描（速度快，不会留下痕迹,没有完成三次捂手）</p>
+<p>&#x2F;&#x2F; sys扫描（速度快，不会留下痕迹,没有完成三次捂手）</p>
 <p>nmap -sS 192.168.0.10</p>
-<p>// Connect扫描跟sys很像，完成了三次捂手</p>
+<p>&#x2F;&#x2F; Connect扫描跟sys很像，完成了三次捂手</p>
 <p>nmap -sT 192.168.0.10</p>
-<p>// 扫描主机并跟踪路由</p>
+<p>&#x2F;&#x2F; 扫描主机并跟踪路由</p>
 <p>nmap –traceroute <a href="http://www.linux265.com/">www.linux265.com</a></p>
 </blockquote>
 <h4 id="一个IP的多个端口"><a href="#一个IP的多个端口" class="headerlink" title="一个IP的多个端口"></a>一个IP的多个端口</h4><blockquote>
@@ -554,10 +552,12 @@
 <p>nmap 10.0.1.161 10.0.1.162</p>
 <p>nmap 10.0.1.161,162</p>
 <p>nmap 10.0.1.161-162</p>
-<p>// 子网网段</p>
-<p>nmap 10.0.3.0/24</p>
+<p>&#x2F;&#x2F; 子网网段</p>
+<p>nmap 10.0.3.0&#x2F;24</p>
 </blockquote>
-<h4 id="扫描文件里的IP"><a href="#扫描文件里的IP" class="headerlink" title="扫描文件里的IP"></a>扫描文件里的IP</h4><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@B ~]<span class="comment"># cat ip.txt</span></span><br><span class="line">10.0.1.161</span><br><span class="line">10.0.1.162</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="扫描文件里的IP"><a href="#扫描文件里的IP" class="headerlink" title="扫描文件里的IP"></a>扫描文件里的IP</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@B ~<span class="token punctuation">]</span><span class="token comment"># cat ip.txt</span>
+<span class="token number">10.0</span>.1.161
+<span class="token number">10.0</span>.1.162<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>nmap -iL ip.txt</p>

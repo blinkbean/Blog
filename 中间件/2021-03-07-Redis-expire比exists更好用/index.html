@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    330
+                    322
                 </div>
                 
 
@@ -532,9 +530,12 @@
 <h6 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h6><ul>
 <li>expire代替exists，重置key的过期时间。相当于利用expire给key续命，可以合理的“长生不死”。</li>
 </ul>
-<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXPIRE &lt;KEY&gt; &lt;TTL&gt; : 将键的生存时间设为 ttl 秒</span><br><span class="line">PEXPIRE &lt;KEY&gt; &lt;TTL&gt; :将键的生存时间设为 ttl 毫秒</span><br><span class="line">EXPIREAT &lt;KEY&gt; &lt;timestamp&gt; :将键的过期时间设为 timestamp 所指定的秒数时间戳</span><br><span class="line">PEXPIREAT &lt;KEY&gt; &lt;timestamp&gt;: 将键的过期时间设为 timestamp 所指定的毫秒数时间戳.</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="过期相关补充"><a href="#过期相关补充" class="headerlink" title="过期相关补充"></a>过期相关补充</h1><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">EXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>TTL<span class="token operator">></span> <span class="token punctuation">:</span> 将键的生存时间设为 ttl 秒
+PEXPIRE <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>TTL<span class="token operator">></span> <span class="token punctuation">:</span>将键的生存时间设为 ttl 毫秒
+EXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>timestamp<span class="token operator">></span> <span class="token punctuation">:</span>将键的过期时间设为 timestamp 所指定的秒数时间戳
+PEXPIREAT <span class="token operator">&lt;</span>KEY<span class="token operator">></span> <span class="token operator">&lt;</span>timestamp<span class="token operator">></span><span class="token punctuation">:</span> 将键的过期时间设为 timestamp 所指定的毫秒数时间戳<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">persist key</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">persist key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="redis值和过期时间的存储"><a href="#redis值和过期时间的存储" class="headerlink" title="redis值和过期时间的存储"></a>redis值和过期时间的存储</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy83MzYxMzgzLTcwMDYyYTM2ZDQxOWZjMTcucG5n?x-oss-process=image/format,png" alt="在这里插入图片描述"></p>
 <h4 id="删除book键的过期时间后的存储结构"><a href="#删除book键的过期时间后的存储结构" class="headerlink" title="删除book键的过期时间后的存储结构"></a>删除book键的过期时间后的存储结构</h4><ul>

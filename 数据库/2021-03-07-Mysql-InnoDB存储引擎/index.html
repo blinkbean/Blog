@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -520,14 +518,15 @@
             <div id="articleContent">
                 <h3 id="InnoDB引擎的4大特性"><a href="#InnoDB引擎的4大特性" class="headerlink" title="InnoDB引擎的4大特性"></a>InnoDB引擎的4大特性</h3><ol>
 <li><p>插入缓存（物理页的一个组成部分）</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G;</span><br><span class="line">INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show engine innodb status\G;
+INSERT BUFFER AND ADAPTIVE HASH INDEX # 插入缓冲信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>对于非聚集索引的插入或更新操作，不是每次直接插入索引页。而是先判断插入的非聚集索引页是否在缓冲池中。如果在，则直接插入，如果不在，先放入插入缓冲区，然后再以一定的频率执行插入缓冲和非聚集索引页子节点的合并操作。</p>
 <blockquote>
 <p>那什么时候进行合并呢？</p>
 <ul>
 <li>非聚集索引页被读取到缓冲池中。select先检查insert buffer是否有非聚集索引页的存在，如果有则合并。</li>
-<li>非聚集索引页没有可用空间。空间小于1/32页的大小，则进行合并。</li>
+<li>非聚集索引页没有可用空间。空间小于1&#x2F;32页的大小，则进行合并。</li>
 <li>master thread每秒和每10秒的合并操作。</li>
 </ul>
 </blockquote>
@@ -553,13 +552,13 @@
 </li>
 <li><p>自适应哈希索引</p>
 <p>InnoDB会监控对表上索引的查找，如果建立哈希索引可以带来速度的提升，则建立哈希索引。自适应哈希索引通过缓冲池的B+树构造，因此建立速度很快。</p>
-<p>哈希索引会根据访问的频率和模式为==某些页建==立哈希索引，而不是整个表。</p>
+<p>哈希索引会根据访问的频率和模式为&#x3D;&#x3D;某些页建&#x3D;&#x3D;立哈希索引，而不是整个表。</p>
 <p>自适应哈希索引占用InnoDB buffer poll的空间。</p>
 </li>
 <li><p>预读</p>
 <ul>
 <li><p>随机预读（已废弃）</p>
-<p>当一个区中==13==个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
+<p>当一个区中&#x3D;&#x3D;13&#x3D;&#x3D;个页在缓冲区中，并在LRU列表的前端，则InnoDB存储引擎会将这个区中剩余的所有页都预读到缓冲区。InnoDB Plugin 1.0.4开始，随机预读被取消。</p>
 </li>
 <li><p>线性预读</p>
 <p>基于缓冲池中页的访问模式，而不是数量。如果一个区中的N个页都被顺序的访问了，则InnoDB会读取下一个区的所有页。N的值由<code>innodb_read_ahead_threshold</code>控制，默认值56。</p>
@@ -576,19 +575,27 @@
 </li>
 <li><p>1个错误监控线程</p>
 </li>
-<li><p>4个I/O thread（不同版本read write线程数可能不同）</p>
+<li><p>4个I&#x2F;O thread（不同版本read write线程数可能不同）</p>
 <blockquote>
 <p>Insert  buffer thread</p>
 <p>Log thread</p>
 <p>Read thread</p>
 <p>Write  thread</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G; # 过去某个时间段的数据库状态</span><br><span class="line"></span><br><span class="line">Per second averages calculated from the last 46 seconds # 过去46s内的状态</span><br><span class="line"></span><br><span class="line">FILE I/O</span><br><span class="line">xxx</span><br></pre></td></tr></tbody></table></figure></blockquote>
-</li>
+</blockquote>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show engine innodb status\G; # 过去某个时间段的数据库状态
+Per second averages calculated from the last 46 seconds # 过去46s内的状态
+FILE I&#x2F;O
+xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 <h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><ol>
-<li><p>缓冲池 buffer poll</p>
-<p>占最大块内存，InnoDB将数据库文件按页（16k）读到缓冲池，然后按LRU保留缓存数据。数据库文件需要修改，首先修改缓冲池中的页（发生修改后，该页为脏页），按照一定的频率将缓冲池中的脏页刷新到文件。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">show engine innodb status\G;</span><br><span class="line"></span><br><span class="line">BUFFER POOL AND MEMORY</span><br><span class="line">Buffer pool size   8191 # 一共多少个缓冲帧</span><br><span class="line">Free buffers       7529 # 空闲缓冲帧</span><br><span class="line">Database pages     658 # 已经使用缓冲帧</span><br><span class="line">Old database pages 262</span><br><span class="line">Modified db pages  0 # 脏页数量</span><br></pre></td></tr></tbody></table></figure>
+<li><p>缓冲池 buffer poll<br>占最大块内存，InnoDB将数据库文件按页（16k）读到缓冲池，然后按LRU保留缓存数据。数据库文件需要修改，首先修改缓冲池中的页（发生修改后，该页为脏页），按照一定的频率将缓冲池中的脏页刷新到文件。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show engine innodb status;
+BUFFER POOL AND MEMORY
+Buffer pool size   8191 # 一共多少个缓冲帧
+Free buffers       7529 # 空闲缓冲帧
+Database pages     658 # 已经使用缓冲帧
+Old database pages 262
+Modified db pages  0 # 脏页数量<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>缓冲池中的数据页类型<ol>

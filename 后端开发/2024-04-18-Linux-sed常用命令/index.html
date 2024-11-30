@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    587
+                    591
                 </div>
                 
 
@@ -519,13 +517,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="sed是什么"><a href="#sed是什么" class="headerlink" title="sed是什么"></a>sed是什么</h2><p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，不断重复，直到文件末尾。文件内容不会改变，除非使用重定向输出。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [option] <span class="string">'command'</span> filename</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sed</span> <span class="token punctuation">[</span>option<span class="token punctuation">]</span> <span class="token string">'command'</span> filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>常用option：</p>
 <blockquote>
 <p>-n 或–quiet或–silent 仅显示script处理后的结果.</p>
-<p>-e ‘脚本’或–expression=脚本 以选项中指定的script来处理输入的文本文件。</p>
-<p>-f &lt;script文件&gt;或–file=&lt;script文件&gt; 以选项中指定的script文件来处理输入的文本文件。</p>
+<p>-e ‘脚本’或–expression&#x3D;脚本 以选项中指定的script来处理输入的文本文件。</p>
+<p>-f &lt;script文件&gt;或–file&#x3D;&lt;script文件&gt; 以选项中指定的script文件来处理输入的文本文件。</p>
 <p>-r 让sed命令支持扩展的正则表达式(默认是基础正则表达式)。</p>
 </blockquote>
 <p>动作说明：</p>
@@ -539,13 +537,37 @@
 </blockquote>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
 <li><p>插入</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在第一行前添加字符串</span></span><br><span class="line">sed <span class="string">'1i\添加的内容'</span> file</span><br><span class="line"><span class="comment"># 在最后一行行前添加字符串</span></span><br><span class="line">sed <span class="string">'$i\添加的内容'</span> file</span><br><span class="line"><span class="comment"># 在最后一行行后添加字符串</span></span><br><span class="line">sed <span class="string">'$a\添加的内容'</span> file</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 在第一行前添加字符串</span>
+<span class="token function">sed</span> <span class="token string">'1i\添加的内容'</span> <span class="token function">file</span>
+<span class="token comment"># 在最后一行行前添加字符串</span>
+<span class="token function">sed</span> <span class="token string">'$i\添加的内容'</span> <span class="token function">file</span>
+<span class="token comment"># 在最后一行行后添加字符串</span>
+<span class="token function">sed</span> <span class="token string">'$a\添加的内容'</span> <span class="token function">file</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>替换</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注释掉含有“swap”的行</span></span><br><span class="line">sed -i <span class="string">'s/^[^#].*swap*/#&amp;/g'</span> fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消含有字符串swap的行最前面的注释符号#</span></span><br><span class="line"><span class="comment">## //两杠表示空格，以空格替换#，等价取消#。</span></span><br><span class="line">sed -i <span class="string">'/^#.*swap/s/^#//g'</span> fstab</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注释掉含有“swap”的行</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/^[^#].*swap*/#&amp;/g'</span> fstab
+<span class="token comment"># 取消含有字符串swap的行最前面的注释符号#</span>
+<span class="token comment">## //两杠表示空格，以空格替换#，等价取消#。</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'/^#.*swap/s/^#//g'</span> fstab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>删除</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除第2行</span></span><br><span class="line">sed <span class="string">'2d'</span> filename</span><br><span class="line"><span class="comment"># 删除1-4行</span></span><br><span class="line">sed <span class="string">'1,4d'</span> filename</span><br><span class="line"><span class="comment"># 删除1行和后2行,共3行</span></span><br><span class="line">sed <span class="string">'1,+2d'</span> filename</span><br><span class="line"><span class="comment"># 删除匹配到Coder的行和其后面的2行</span></span><br><span class="line">sed <span class="string">'/Coder/,+2d'</span> filename</span><br><span class="line"><span class="comment"># 删除奇数行</span></span><br><span class="line">sed <span class="string">'1~2d'</span> filename</span><br><span class="line"><span class="comment"># 删除偶数行</span></span><br><span class="line">sed <span class="string">'2~2d'</span> filename</span><br><span class="line"><span class="comment"># 删除匹配Coder的行</span></span><br><span class="line">sed <span class="string">'/Coder/d'</span> filename</span><br><span class="line"><span class="comment"># 删除所有空行</span></span><br><span class="line">sed <span class="string">'/^$/d'</span> filename</span><br></pre></td></tr></tbody></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 删除第2行</span>
+<span class="token function">sed</span> <span class="token string">'2d'</span> filename
+<span class="token comment"># 删除1-4行</span>
+<span class="token function">sed</span> <span class="token string">'1,4d'</span> filename
+<span class="token comment"># 删除1行和后2行,共3行</span>
+<span class="token function">sed</span> <span class="token string">'1,+2d'</span> filename
+<span class="token comment"># 删除匹配到Coder的行和其后面的2行</span>
+<span class="token function">sed</span> <span class="token string">'/Coder/,+2d'</span> filename
+<span class="token comment"># 删除奇数行</span>
+<span class="token function">sed</span> <span class="token string">'1~2d'</span> filename
+<span class="token comment"># 删除偶数行</span>
+<span class="token function">sed</span> <span class="token string">'2~2d'</span> filename
+<span class="token comment"># 删除匹配Coder的行</span>
+<span class="token function">sed</span> <span class="token string">'/Coder/d'</span> filename
+<span class="token comment"># 删除所有空行</span>
+<span class="token function">sed</span> <span class="token string">'/^$/d'</span> filename<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 
                 

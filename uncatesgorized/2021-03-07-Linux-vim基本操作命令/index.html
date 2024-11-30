@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -488,7 +486,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    913
+                    930
                 </div>
                 
 
@@ -526,7 +524,7 @@
 </li>
 <li><p><code>a</code></p>
 <blockquote>
-<p>append 和 ==i== 相似，不同在于在当前光标所在字母前，还是后插入（一试便知）</p>
+<p>append 和 &#x3D;&#x3D;i&#x3D;&#x3D; 相似，不同在于在当前光标所在字母前，还是后插入（一试便知）</p>
 </blockquote>
 </li>
 <li><p><code>A</code></p>
@@ -608,16 +606,16 @@
 </ul>
 <h6 id="单词间移动"><a href="#单词间移动" class="headerlink" title="单词间移动"></a>单词间移动</h6><p>word：以非空白符分割的单词(真单词)<br>WORD：以空白符分割的单词(不一定是单词)</p>
 <ul>
-<li><code>w/W</code> 移动到下一个单词word/WORD的开头</li>
-<li><code>e/E</code> 移动到下一个单词word/WORD的结尾</li>
-<li><code>b/B</code> 移动带上一个单词word/WORD的开头</li>
+<li><code>w/W</code> 移动到下一个单词word&#x2F;WORD的开头</li>
+<li><code>e/E</code> 移动到下一个单词word&#x2F;WORD的结尾</li>
+<li><code>b/B</code> 移动带上一个单词word&#x2F;WORD的开头</li>
 </ul>
 <h6 id="行间搜索移动"><a href="#行间搜索移动" class="headerlink" title="行间搜索移动"></a>行间搜索移动</h6><ul>
-<li><code>f{char}</code>  同一行搜索并移动到该字符</li>
-<li><code>t{char}</code>  同行搜索并移动到该字符的前一个字符</li>
+<li><code>f&#123;char&#125;</code>  同一行搜索并移动到该字符</li>
+<li><code>t&#123;char&#125;</code>  同行搜索并移动到该字符的前一个字符</li>
 <li><code>; </code>分号下一个</li>
 <li><code>, </code>逗号上一个</li>
-<li><code>F{char}</code> 反过来搜索前面的字符</li>
+<li><code>F&#123;char&#125;</code> 反过来搜索前面的字符</li>
 <li><code>0</code> 移动到行首第一个字符</li>
 <li><code>^</code> 移动到第一个非空字符</li>
 <li><code>$</code> 移动到行尾</li>
@@ -682,9 +680,9 @@
 <li><code>x</code> 快速删除一个字符</li>
 <li><code>d</code> 配合文本对象快速删除一个单词</li>
 <li><code>d</code>和<code>x</code>都可以搭配数字来执行多次</li>
-<li><code>dw</code>==<code>daw</code> 删除单词个空格</li>
+<li><code>dw</code>&#x3D;&#x3D;<code>daw</code> 删除单词个空格</li>
 <li><code>diw</code> 删除单词，不删空格</li>
-<li><code>dt{char}</code> 删除光标到目标字符之间的所有字符</li>
+<li><code>dt&#123;char&#125;</code> 删除光标到目标字符之间的所有字符</li>
 <li><code>d0</code> 删除到行首之间的字符</li>
 <li><code>d$</code> 删除到行尾之间的字符</li>
 <li><code>4x</code> 删除4个字符</li>

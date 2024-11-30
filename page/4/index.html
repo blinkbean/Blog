@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -379,6 +377,177 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2021-03-07-Python-PIL%E2%80%94Transpose-Blend-Split-Composite/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Python-PIL—Transpose,Blend,Split,Composite">
+                            
+                            <span class="card-title">Python-PIL—Transpose,Blend,Split,Composite</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Transpose 方向变换
+横看成岭侧成峰，好不容易有了Object，还不从各个方向都欣赏一下。
+
+Blend 调节透明度并合并
+前提：两张图片的尺寸和模式一致。
+一张图想同时放两个Object，也不是不可以，但是图这两个Object怎么
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip bg-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/PIL/">
+                            <span class="chip bg-color">PIL</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2021-03-07-Python-PIL%E2%80%94Color/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Python-PIL—Color">
+                            
+                            <span class="card-title">Python-PIL—Color</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                ImageColor十六进制
+共六位前两位表示R，中间两位表示G，后两位表示B 如：#ff0000
+
+RGB
+如：rgb(255, 0, 0)、rgb(100%, 0%, 0%)
+
+HSL(Hue-Saturation-Ligntness)
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip bg-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/PIL/">
+                            <span class="chip bg-color">PIL</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2021-03-07-Python-PIL%E2%80%94ImageFilter%E5%87%BD%E6%95%B0/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Python-PIL—ImageFilter函数">
+                            
+                            <span class="card-title">Python-PIL—ImageFilter函数</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                参考地址
+滤镜函数先看效果
+Kernel
+Kernel(size, kernel, scale&#x3D;None, offset&#x3D;0)
+
+
+生成给定尺寸的卷积核，变量的size必须为(3, 3) 或(5, 5)。
+kernel与
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    后端开发
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip bg-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/PIL/">
+                            <span class="chip bg-color">PIL</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/%E4%B8%AD%E9%97%B4%E4%BB%B6/2021-03-07-Redis-expire%E6%AF%94exists%E6%9B%B4%E5%A5%BD%E7%94%A8/">
                         <div class="card-image">
                             
@@ -445,7 +614,7 @@ redis key过期时间必须设置（特殊需求除外），但是如果DB的值
                         <div class="summary block-with-text">
                             
                                 数据类型基本数据类型：int,float,str,list,dict,tuple,set,bool数值类型：int,float,bool序列类型：str,list,tuple散列类型：set,dict
-字节类型 a=bytes(‘123’)
+字节类型 a&#x3D;bytes(‘
                             
                         </div>
                         <div class="publish-info">
@@ -491,7 +660,14 @@ redis key过期时间必须设置（特殊需求除外），但是如果DB的值
                                 
 学习笔记，如有不足之处，欢迎指正。
 
-类定义1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253
+类定义import math
+import time
+import redis
+from hashlib import md5
+
+
+class SimpleHash(object):
+    def 
                             
                         </div>
                         <div class="publish-info">
@@ -645,7 +821,7 @@ JSON-to-Gohttps://mholt.github.
 
 代码
 网络图片下载到本地
-123456789101112131415161718192021222324252627282930313233343536func multiGetImages(ur
+func multiGetImages(urls []string, dir string, prefix string)(localPath []string)&#12
                             
                         </div>
                         <div class="publish-info">
@@ -905,7 +1081,10 @@ Mutex由操作系统实现，而atomic包中的原子操作则由底层硬件直
                         <div class="summary block-with-text">
                             
                                 用两个队列实现栈，并分析相关栈操作的运行时间。思路同：两个栈实现队列
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647
+type DequeStack struct &#123;
+    pushDeque *Deque
+    popDeque *Deque
+    flag bool 
                             
                         </div>
                         <div class="publish-info">
@@ -960,7 +1139,7 @@ Mutex由操作系统实现，而atomic包中的原子操作则由底层硬件直
 要求push和pop操作的运行时间为O(1)。
 
 实现：
-两个栈分别从数组的两端开始，向中间push元素，直到两个指针相遇。12345678
+两个栈分别从数组的两端开始，向中间push元素，直到两个指针相遇。package 
                             
                         </div>
                         <div class="publish-info">
@@ -996,151 +1175,6 @@ Mutex由操作系统实现，而atomic包中的原子操作则由底层硬件直
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/2021-03-07-Redis-exists%E6%9C%89%E5%8F%AF%E8%83%BD%E8%B6%85%E5%87%BA%E4%BD%A0%E7%9A%84%E9%A2%84%E6%9C%9F/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Redis-exists有可能超出你的预期">
-                            
-                            <span class="card-title">Redis-exists有可能超出你的预期</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Redis的Exists有可能超出你的预期
-理论上每个key都应该有过期时间（当然也可以是一万年），通常情况下用exists来判断一个key是否存在都没什么问题（一般过期时间都比较长）。但如果过期时间需要精确到秒或十秒及，那么exists就
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    后端开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Redis/">
-                            <span class="chip bg-color">Redis</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/2021-03-07-Mysql-%E8%87%AA%E5%A2%9E%E5%88%97AUTO-INCREMENT/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Mysql-自增列AUTO_INCREMENT">
-                            
-                            <span class="card-title">Mysql-自增列AUTO_INCREMENT</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                AUTO_INCREMENT两种情况1、在载入语句执行前，已经不确定要插入多少条记录。
-
-在执行插入语句时在==表级别==加一个==auto-inc锁==，然后为每条待插入记录的auto-increment修饰的列分配递增的值，语句执行结束
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Mysql/">
-                            <span class="chip bg-color">Mysql</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/%E4%B8%AD%E9%97%B4%E4%BB%B6/2021-03-07-Redis-%E4%B8%A4%E6%AC%A1redis%E6%93%8D%E4%BD%9C%E7%94%A8%E4%B8%8D%E7%94%A8pipeline/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis-两次redis操作用不用pipeline">
-                            
-                            <span class="card-title">Redis-两次redis操作用不用pipeline</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                为什么需要 pipeline ？
-正常情况下，客户端发送一个命令，等待 Redis 应答；Redis 接收到命令，处理后应答。请求发出到响应的时间叫做往返时间，即 RTT（Round Time Trip）。在这种情况下，如果需要执行大量的命
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
-                                    中间件
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Redis/">
-                            <span class="chip bg-color">Redis</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1158,7 +1192,7 @@ Mutex由操作系统实现，而atomic包中的原子操作则由底层硬件直
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">4 / 6</div>
+            <div class="center-align b-text-gray">4 / 7</div>
         </div>
         <div class="col s6 m4 l4">
             

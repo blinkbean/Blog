@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    175
+                    226
                 </div>
                 
 
@@ -518,14 +516,56 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’&nbsp;的字符串 s ，判断字符串是否有效。</p>
+                <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。</p>
 <p>有效字符串需满足：</p>
 <p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p>
 <p><a href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>滑动窗口</li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">type stack struct {</span><br><span class="line">	arr []int32</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func (s *stack) push(c int32) {</span><br><span class="line">	s.arr = append(s.arr, c)</span><br><span class="line">}</span><br><span class="line">func (s *stack) pop() int32 {</span><br><span class="line">	var t int32</span><br><span class="line">	if !s.isEmpty() {</span><br><span class="line">		t = s.arr[len(s.arr)-1]</span><br><span class="line">		s.arr = s.arr[:len(s.arr)-1]</span><br><span class="line">	}</span><br><span class="line">	return t</span><br><span class="line">}</span><br><span class="line">func (s *stack) isEmpty() bool {</span><br><span class="line">	if len(s.arr) == 0 {</span><br><span class="line">		return true</span><br><span class="line">	}</span><br><span class="line">	return false</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func isValid(s string) bool {</span><br><span class="line">	m := map[int32]int32{</span><br><span class="line">		')': '(',</span><br><span class="line">		']': '[',</span><br><span class="line">		'}': '{',</span><br><span class="line">	}</span><br><span class="line">	sta := stack{arr: make([]int32, 0, 0)}</span><br><span class="line">	for _, v := range s {</span><br><span class="line">		if mv, ok := m[v]; ok {</span><br><span class="line">			if sta.pop() != mv {</span><br><span class="line">				return false</span><br><span class="line">			}</span><br><span class="line">		} else {</span><br><span class="line">			sta.push(v)</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	if sta.isEmpty() {</span><br><span class="line">		return true</span><br><span class="line">	}</span><br><span class="line">	return false</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">type stack struct &#123;
+    arr []int32
+&#125;
+
+func (s *stack) push(c int32) &#123;
+    s.arr &#x3D; append(s.arr, c)
+&#125;
+func (s *stack) pop() int32 &#123;
+    var t int32
+    if !s.isEmpty() &#123;
+        t &#x3D; s.arr[len(s.arr)-1]
+        s.arr &#x3D; s.arr[:len(s.arr)-1]
+    &#125;
+    return t
+&#125;
+func (s *stack) isEmpty() bool &#123;
+    if len(s.arr) &#x3D;&#x3D; 0 &#123;
+        return true
+    &#125;
+    return false
+&#125;
+
+func isValid(s string) bool &#123;
+    m :&#x3D; map[int32]int32&#123;
+        &#39;)&#39;: &#39;(&#39;,
+        &#39;]&#39;: &#39;[&#39;,
+        &#39;&#125;&#39;: &#39;&#123;&#39;,
+    &#125;
+    sta :&#x3D; stack&#123;arr: make([]int32, 0, 0)&#125;
+    for _, v :&#x3D; range s &#123;
+        if mv, ok :&#x3D; m[v]; ok &#123;
+            if sta.pop() !&#x3D; mv &#123;
+                return false
+            &#125;
+        &#125; else &#123;
+            sta.push(v)
+        &#125;
+    &#125;
+    if sta.isEmpty() &#123;
+        return true
+    &#125;
+    return false
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

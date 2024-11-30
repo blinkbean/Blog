@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -538,7 +536,7 @@
 <li>负载均衡器将客户端请求报文的源 MAC 地址改为自己的 MAC 地址，目标 MAC 改为了 RS 的 MAC 地址，并将此包发送给 RS</li>
 <li>处理完请求报文后，由于 RS 与 负载均衡器有具有同一 VIP, 会将响应报文直接发送给客户端</li>
 </ol>
-<p>![image-20230306142102784](/Users/suhang/Library/Application Support/typora-user-images/image-20230306142102784.png)</p>
+<p>![image-20230306142102784](&#x2F;Users&#x2F;suhang&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20230306142102784.png)</p>
 <ul>
 <li>优点：与隧道模式一样，负载均衡器也只是分发请求，应答包通过单独的路由方法返回给客户端。同时，不需要隧道结构，可以使用大多数服务器作为 RS</li>
 <li>缺点：要求 VIP 必须与物理网卡在一个物理段上，否则 ARP 不能寻到不同网段的 MAC 地址。也就是说所有 RS 节点和调度器 LB 只能在一个局域网里面</li>
@@ -550,7 +548,7 @@
 <li>RS 处理完成后响应对负载均衡器返回响应数据</li>
 <li>负载均衡器通过地址转换，将 RS 的响应数据响应给客户端</li>
 </ol>
-<p>![image-20230306141507935](/Users/suhang/Library/Application Support/typora-user-images/image-20230306141507935.png)</p>
+<p>![image-20230306141507935](&#x2F;Users&#x2F;suhang&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20230306141507935.png)</p>
 <blockquote>
 <p>注意: RIP 与 DIP 需要在同一网络，且 RIP 网关必须指向 DIP</p>
 </blockquote>
@@ -564,7 +562,7 @@
 <li>负载均衡器将在客户端请求报文的首部再封装一层 IP 报文，将源地址改为 DIP, 目标地址改为 RIP, 并通过 IP 隧道技术将报文发给 RS</li>
 <li>RS 收到后，先把数据包头解开，还原数据包，处理后，直接返回给客户端，不需要再经过负载均衡器</li>
 </ol>
-<p>![image-20230306141734441](/Users/suhang/Library/Application Support/typora-user-images/image-20230306141734441.png)</p>
+<p>![image-20230306141734441](&#x2F;Users&#x2F;suhang&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20230306141734441.png)</p>
 <ul>
 <li>优点：减少负载均衡器压力，负载均衡器不再是系统的瓶颈，能够处理更多的请求流量</li>
 <li>缺点: RS 节点需要合法 IP, 且需要所有服务器支持 <code>IP Tunneling</code>(IP Encapsulation) 协议，因此服务器可能只局限于部分 Linux 系统上</li>

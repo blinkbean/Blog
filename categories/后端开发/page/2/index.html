@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -451,6 +449,33 @@
                 </a>
                 
                 
+                <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #A3E4D7;">机器学习
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/PS/" title="PS: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #85C1E9;">PS
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E8%BD%AF%E8%80%83/" title="软考: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F8C471;">软考
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
             </div>
         </div>
     </div>
@@ -481,9 +506,7 @@
 
 Blend 调节透明度并合并
 前提：两张图片的尺寸和模式一致。
-
-
-一张图想同时放两个Object，也不是不可以，但是图这两个Object
+一张图想同时放两个Object，也不是不可以，但是图这两个Object怎么
                             
                         </div>
                         <div class="publish-info">
@@ -592,11 +615,11 @@ HSL(Hue-Saturation-Ligntness)
                                 参考地址
 滤镜函数先看效果
 Kernel
-Kernel(size, kernel, scale=None, offset=0)
+Kernel(size, kernel, scale&#x3D;None, offset&#x3D;0)
 
 
 生成给定尺寸的卷积核，变量的size必须为(3, 3) 或(5, 5)。
-kernel与size对应，必须为
+kernel与
                             
                         </div>
                         <div class="publish-info">
@@ -649,7 +672,14 @@ kernel与size对应，必须为
                                 
 学习笔记，如有不足之处，欢迎指正。
 
-类定义1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253
+类定义import math
+import time
+import redis
+from hashlib import md5
+
+
+class SimpleHash(object):
+    def 
                             
                         </div>
                         <div class="publish-info">
@@ -751,7 +781,7 @@ kernel与size对应，必须为
 
 代码
 网络图片下载到本地
-123456789101112131415161718192021222324252627282930313233343536func multiGetImages(ur
+func multiGetImages(urls []string, dir string, prefix string)(localPath []string)&#12
                             
                         </div>
                         <div class="publish-info">
@@ -950,7 +980,10 @@ Mutex由操作系统实现，而atomic包中的原子操作则由底层硬件直
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                IP和int之间相互转换123456789101112131415161718192021func toInt(ip string) int64 {	i := 3	sum := int64(0)	for j, v := range stri
+                                IP和int之间相互转换func toInt(ip string) int64 &#123;
+    i := 3
+    sum := int64(0)
+    for j, v := range strings.Split(ip, ".
                             
                         </div>
                         <div class="publish-info">

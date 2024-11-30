@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    762
+                    785
                 </div>
                 
 
@@ -529,7 +527,7 @@
 </li>
 <li>其他参数都归类为build flags</li>
 </ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build [-o 输出名] [-i] [编译标记] [包名]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go build <span class="token punctuation">[</span>-o 输出名<span class="token punctuation">]</span> <span class="token punctuation">[</span>-i<span class="token punctuation">]</span> <span class="token punctuation">[</span>编译标记<span class="token punctuation">]</span> <span class="token punctuation">[</span>包名<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="build-flags"><a href="#build-flags" class="headerlink" title="build flags"></a>build flags</h3><p>build flags在build,clean,get,install,list,run,test等命令下都是通用的</p>
 <ul>
@@ -549,7 +547,7 @@
 </ul>
 <p>gcflag中的pattern</p>
 <ul>
-<li><p>gcflag传入的方式为： -gcflag=”pattern= args”,其中pattern代表取值分别为 main,all,std,…,用于指定编译参数作用的范围，args则为对应的编译参数</p>
+<li><p>gcflag传入的方式为： -gcflag&#x3D;”pattern&#x3D; args”,其中pattern代表取值分别为 main,all,std,…,用于指定编译参数作用的范围，args则为对应的编译参数</p>
 </li>
 <li><p><code>main</code>：表示main函数所在的顶级包路径</p>
 </li>
@@ -559,31 +557,53 @@
 </li>
 <li><p><code>...</code>：表示是一个通配符，可以匹配任意字符串（包括空字符串）</p>
 <ul>
-<li>net/…表示net模块和它所有子模块</li>
-<li>./…表示当前主模块和所有子模块</li>
-<li>如果 pattern 中包含了 / 和 …，那么就不会匹配 vendor 目录。例如: <code>./...</code> 不会匹配 <code>./vendor</code> 目录。可以使用 <code>./vendor/...</code> 匹配 vendor 目录和它的子模块</li>
+<li>net&#x2F;…表示net模块和它所有子模块</li>
+<li>.&#x2F;…表示当前主模块和所有子模块</li>
+<li>如果 pattern 中包含了 &#x2F; 和 …，那么就不会匹配 vendor 目录。例如: <code>./...</code> 不会匹配 <code>./vendor</code> 目录。可以使用 <code>./vendor/...</code> 匹配 vendor 目录和它的子模块</li>
 </ul>
 <p>举例：</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -gcflags=<span class="string">"main=-N -l"</span> .</span><br></pre></td></tr></tbody></table></figure></li>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> build <span class="token operator">-</span>gcflags<span class="token operator">=</span><span class="token char">'main=-N -l'</span> <span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 </li>
-<li><p>-ldflags ‘flag list’</p>
+<li><p>ldflags ‘flag list’</p>
 <ul>
 <li>链接参数go tool link –help查看可用可用的参数</li>
-<li>-X：注入变量，通常用于版本信息的注入</li>
+<li>-X：注入变量，通常用于版本信息的注入<br>举例：<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+<span class="token string">"fmt"</span>
+<span class="token string">"os"</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">var</span> <span class="token punctuation">(</span>
+gitHash   <span class="token builtin">string</span>
+buildTime <span class="token builtin">string</span>
+goVersion <span class="token builtin">string</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+args <span class="token operator">:=</span> os<span class="token punctuation">.</span>Args
+<span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"--version"</span> <span class="token operator">||</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"-v"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Git Commit Hash: %s \n"</span><span class="token punctuation">,</span> gitHash<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"Build TimeStamp: %s \n"</span><span class="token punctuation">,</span> buildTime<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"GoLang Version: %s \n"</span><span class="token punctuation">,</span> goVersion<span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go build <span class="token parameter variable">-ldflags</span> <span class="token string">"-X 'main.goVersion=<span class="token variable"><span class="token variable">$(</span>go version<span class="token variable">)</span></span>' -X 'main.gitHash=<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> show <span class="token parameter variable">-s</span> <span class="token parameter variable">--format</span><span class="token operator">=</span>%H<span class="token variable">)</span></span>' -X 'main.buildTime=<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> show <span class="token parameter variable">-s</span> <span class="token parameter variable">--format</span><span class="token operator">=</span>%cd<span class="token variable">)</span></span>'"</span> <span class="token parameter variable">-o</span> main
+➜  cmd git:<span class="token punctuation">(</span>master<span class="token punctuation">)</span> ✗ ./main <span class="token parameter variable">-vs</span>
+Git Commit Hash: 24ba11ec5e2af192dc619e2555c6604a254690d0 
+Build TimeStamp: Mon Mar <span class="token number">11</span> <span class="token number">15</span>:44:52 <span class="token number">2024</span> +0800 s
+GoLang Version: go version go1.20.6 darwin/amd64 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<p>举例：</p>
-<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    gitHash   <span class="type">string</span></span><br><span class="line">    buildTime <span class="type">string</span></span><br><span class="line">    goVersion <span class="type">string</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    args := os.Args</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args) == <span class="number">2</span> &amp;&amp; (args[<span class="number">1</span>] == <span class="string">"--version"</span> || args[<span class="number">1</span>] == <span class="string">"-v"</span>) {</span><br><span class="line">        fmt.Printf(<span class="string">"Git Commit Hash: %s \n"</span>, gitHash)</span><br><span class="line">        fmt.Printf(<span class="string">"Build TimeStamp: %s \n"</span>, buildTime)</span><br><span class="line">        fmt.Printf(<span class="string">"GoLang Version: %s \n"</span>, goVersion)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -ldflags <span class="string">"-X 'main.goVersion=<span class="subst">$(go version)</span>' -X 'main.gitHash=<span class="subst">$(git show -s --format=%H)</span>' -X 'main.buildTime=<span class="subst">$(git show -s --format=%cd)</span>'"</span> -o main</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  cmd git:(master) ✗ ./main -v                                                                                                                                                 </span><br><span class="line">Git Commit Hash: 24ba11ec5e2af192dc619e2555c6604a254690d0 </span><br><span class="line">Build TimeStamp: Mon Mar 11 15:44:52 2024 +0800 </span><br><span class="line">GoLang Version: go version go1.20.6 darwin/amd64 </span><br></pre></td></tr></tbody></table></figure>
-
-<p>makefile</p>
-<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flags=-X main.buildDate=`date -u '+%Y-%m-%d'` -X main.gitHash=`git rev-parse --short HEAD`</span><br><span class="line"></span><br><span class="line"><span class="section">build:</span></span><br><span class="line">    go build -ldflags <span class="string">"<span class="variable">$(flags)</span>"</span> -o main main.go</span><br></pre></td></tr></tbody></table></figure>
-
-
 </li>
+</ul>
+<p>makefile</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">flags<span class="token operator">=</span>-X main.buildDate<span class="token operator">=</span>`date -u <span class="token string">'+%Y-%m-%d'</span>` -X main.gitHash<span class="token operator">=</span>`git rev-parse --short HEAD`
+
+<span class="token target symbol">build</span><span class="token punctuation">:</span>
+    go build -ldflags <span class="token string">"$(flags)"</span> -o main main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<ul>
 <li><p>-mod</p>
 <ul>
 <li>readonly,vendor,mod 1.14版本以后，如果在mod文件里面有指定vendor，则默认使用vendor，否则设置为readonly</li>
@@ -591,7 +611,7 @@
 </li>
 <li><p>-race</p>
 <ul>
-<li>同时检测数据竞争状态，只支持 linux/amd64, freebsd/amd64, darwin/amd64 和 windows/amd64</li>
+<li>同时检测数据竞争状态，只支持 linux&#x2F;amd64, freebsd&#x2F;amd64, darwin&#x2F;amd64 和 windows&#x2F;amd64</li>
 </ul>
 </li>
 </ul>
@@ -602,13 +622,23 @@
 <li>交叉编译不支持CGO所以要禁用它</li>
 </ul>
 <p>Windows环境编译</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SET CGO_ENABLED=0</span><br><span class="line">SET GOOS=darwin</span><br><span class="line">SET GOARCH=amd64</span><br><span class="line">go build main.go</span><br><span class="line"></span><br><span class="line">SET CGO_ENABLED=0</span><br><span class="line">SET GOOS=linux</span><br><span class="line">SET GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">SET <span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span>
+SET <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>darwin
+SET <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64
+go build main.go
+
+SET <span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span>
+SET <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>linux
+SET <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64
+go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Mac环境编译</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>linux <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64 go build main.go
+<span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>windows <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>Linux环境编译</p>
-<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>linux <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64 go build main.go
+<span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>windows <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64 go build main.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
                 

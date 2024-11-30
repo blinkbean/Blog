@@ -30,9 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
+<meta name="generator" content="Hexo 5.0.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -493,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    138
+                    155
                 </div>
                 
 
@@ -525,10 +523,25 @@
 <p><a href="https://leetcode-cn.com/problems/reverse-linked-list/">https://leetcode-cn.com/problems/reverse-linked-list/</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
 <li>每个节点都只关心自己和下一个节点的指向关系</li>
-<li>node.Next.Next = node</li>
-<li>node.Next = nil</li>
+<li>node.Next.Next &#x3D; node</li>
+<li>node.Next &#x3D; nil</li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func reverseList(head *ListNode) *ListNode {</span><br><span class="line">	if head==nil{</span><br><span class="line">		return nil</span><br><span class="line">	}</span><br><span class="line">	return revert(head)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">func revert(head *ListNode) *ListNode {</span><br><span class="line">	if head.Next==nil{</span><br><span class="line">		return head</span><br><span class="line">	}</span><br><span class="line">	h := revert(head.Next)</span><br><span class="line">	head.Next.Next = head</span><br><span class="line">	head.Next=nil</span><br><span class="line">	return h</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">func reverseList(head *ListNode) *ListNode &#123;
+    if head&#x3D;&#x3D;nil&#123;
+        return nil
+    &#125;
+    return revert(head)
+&#125;
+
+func revert(head *ListNode) *ListNode &#123;
+    if head.Next&#x3D;&#x3D;nil&#123;
+        return head
+    &#125;
+    h :&#x3D; revert(head.Next)
+    head.Next.Next &#x3D; head
+    head.Next&#x3D;nil
+    return h
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

@@ -76,6 +76,40 @@
   
   <li class="hide-on-med-and-down nav-item">
     
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>软考</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/middel">
+          
+          <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>中级</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/high">
+          
+          <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>高级</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
     <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
@@ -133,7 +167,7 @@
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
-          <span>关 于 我</span>
+          <span>关于我</span>
         </a>
       </li>
       
@@ -186,6 +220,41 @@
 			
 			源码计划
 		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file-code"></i>
+			
+			软考
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/middel " style="margin-left:75px">
+				  
+				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
+			      
+		          <span>中级</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/high " style="margin-left:75px">
+				  
+				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
+			      
+		          <span>高级</span>
+                  </a>
+                </li>
+              
+            </ul>
           
         </li>
         
@@ -249,7 +318,7 @@
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
-		          <span>关 于 我</span>
+		          <span>关于我</span>
                   </a>
                 </li>
               
@@ -565,31 +634,6 @@
     </div>
 
     
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'Ov23liQ41ULn812oY9Oi',
-        clientSecret: '206b4ba9e8529f1bdd637d11a7bbb8a4e55324a7',
-        repo: 'blinkbean.github.io/Blog',
-        owner: 'blinkbean',
-        admin: "blinkbean",
-        id: '1999-12-31T23-59-59',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
 
     
 
@@ -602,6 +646,57 @@
     
 
     
+        
+    <div id="SOHUCS"></div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var loadChangYan = function () {
+                var appid = 'cyvlt8R0W';
+                var conf = 'prod_e2dee049e699932e72131199e0ee8824';
+                var width = window.innerWidth || document.documentElement.clientWidth;
+                if (width < 960) {
+                    var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.charset = 'utf-8';
+                    script.id = 'changyan_mobile_js';
+                    script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid +
+                        '&conf=' + conf;
+                    head.appendChild(script);
+                } else {
+                    var loadJs = function (d, a) {
+                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                        var b = document.createElement("script");
+                        b.setAttribute("type", "text/javascript");
+                        b.setAttribute("charset", "UTF-8");
+                        b.setAttribute("src", d);
+                        if (typeof a === "function") {
+                            if (window.attachEvent) {
+                                b.onreadystatechange = function () {
+                                    var e = b.readyState;
+                                    if (e === "loaded" || e === "complete") {
+                                        b.onreadystatechange = null;
+                                        a()
+                                    }
+                                }
+                            } else {
+                                b.onload = a
+                            }
+                        }
+                        c.appendChild(b)
+                    };
+                    loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js", function () {
+                        window.changyan.api.config({
+                            appid: appid,
+                            conf: conf
+                        })
+                    });
+                }
+            }
+
+            loadChangYan();
+        }
+    </script>
 
     
 
@@ -616,18 +711,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E5%AE%AB%E5%B4%8E%E9%AA%8F/">
+                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E7%A8%8B%E5%BA%8F%E5%91%98-35%E5%B2%81%E5%8D%B1%E6%9C%BA/">
                     <div class="card-image">
                         
-                        <img src="/Image/boniu.png" class="responsive-img" alt="宫崎骏">
+                        <img src="/Image/image-20240323230451938.png" class="responsive-img" alt="程序员-35岁危机">
                         
-                        <span class="card-title">宫崎骏</span>
+                        <span class="card-title">程序员-35岁危机</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            信仰到底是什么呢，就是纵身一跃，就是我们跟神之间一个永远的约定，是舍弃旧的去开始新的生活;信仰就是从今以后，再也不要放开你的手。
+                            一名资深程序员下班回家，在路上感觉有东西滴在头上，他跟周围的人说要下雨了，周围的人不信，结果过了一会儿，雨真的下起来了。
                         
                     </div>
                     <div class="publish-info">
@@ -653,10 +748,6 @@
                         <span class="chip bg-color">private100</span>
                     </a>
                     
-                    <a href="/tags/%E7%94%B5%E5%BD%B1/">
-                        <span class="chip bg-color">电影</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -668,18 +759,18 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E7%A8%8B%E5%BA%8F%E5%91%98-35%E5%B2%81%E5%8D%B1%E6%9C%BA/">
+                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E7%A8%8B%E5%BA%8F%E5%91%98-%E5%8D%B0%E8%B1%A1/">
                     <div class="card-image">
                         
-                        <img src="/Image/image-20240323230451938.png" class="responsive-img" alt="程序员-35岁危机">
+                        <img src="/Image/image-20240417003048696.png" class="responsive-img" alt="程序员-印象">
                         
-                        <span class="card-title">程序员-35岁危机</span>
+                        <span class="card-title">程序员-印象</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一名资深程序员下班回家，在路上感觉有东西滴在头上，他跟周围的人说要下雨了，周围的人不信，结果过了一会儿，雨真的下起来了。
+                            while you.say('see u tomorrow') do </br> &nbsp;&nbsp;&nbsp;&nbsp;I.sleep = 0 </br> end
                         
                     </div>
                     <div class="publish-info">
@@ -842,7 +933,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2024</span>
+                <span id="year">2020-2025</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

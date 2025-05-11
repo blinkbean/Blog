@@ -76,6 +76,40 @@
   
   <li class="hide-on-med-and-down nav-item">
     
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file-code" style="zoom: 0.6;"></i>
+      
+      <span>软考</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/middel">
+          
+          <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>中级</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/high">
+          
+          <i class="fa fa-desktop" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>高级</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
     <a href="/tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
@@ -133,7 +167,7 @@
           
           <i class="fas fa-user-circle" style="margin-top: -20px; zoom: 0.6;"></i>
           
-          <span>关 于 我</span>
+          <span>关于我</span>
         </a>
       </li>
       
@@ -186,6 +220,41 @@
 			
 			源码计划
 		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file-code"></i>
+			
+			软考
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/middel " style="margin-left:75px">
+				  
+				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
+			      
+		          <span>中级</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/high " style="margin-left:75px">
+				  
+				   <i class="fa fa fa-desktop" style="position: absolute;left:50px" ></i>
+			      
+		          <span>高级</span>
+                  </a>
+                </li>
+              
+            </ul>
           
         </li>
         
@@ -249,7 +318,7 @@
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
-		          <span>关 于 我</span>
+		          <span>关于我</span>
                   </a>
                 </li>
               
@@ -554,31 +623,6 @@
     </div>
 
     
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'Ov23liQ41ULn812oY9Oi',
-        clientSecret: '206b4ba9e8529f1bdd637d11a7bbb8a4e55324a7',
-        repo: 'blinkbean.github.io/Blog',
-        owner: 'blinkbean',
-        admin: "blinkbean",
-        id: '2021-05-06T10-06-13',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
 
     
 
@@ -591,6 +635,57 @@
     
 
     
+        
+    <div id="SOHUCS"></div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var loadChangYan = function () {
+                var appid = 'cyvlt8R0W';
+                var conf = 'prod_e2dee049e699932e72131199e0ee8824';
+                var width = window.innerWidth || document.documentElement.clientWidth;
+                if (width < 960) {
+                    var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.charset = 'utf-8';
+                    script.id = 'changyan_mobile_js';
+                    script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid +
+                        '&conf=' + conf;
+                    head.appendChild(script);
+                } else {
+                    var loadJs = function (d, a) {
+                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                        var b = document.createElement("script");
+                        b.setAttribute("type", "text/javascript");
+                        b.setAttribute("charset", "UTF-8");
+                        b.setAttribute("src", d);
+                        if (typeof a === "function") {
+                            if (window.attachEvent) {
+                                b.onreadystatechange = function () {
+                                    var e = b.readyState;
+                                    if (e === "loaded" || e === "complete") {
+                                        b.onreadystatechange = null;
+                                        a()
+                                    }
+                                }
+                            } else {
+                                b.onload = a
+                            }
+                        }
+                        c.appendChild(b)
+                    };
+                    loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js", function () {
+                        window.changyan.api.config({
+                            appid: appid,
+                            conf: conf
+                        })
+                    });
+                }
+            }
+
+            loadChangYan();
+        }
+    </script>
 
     
 
@@ -816,7 +911,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2024</span>
+                <span id="year">2020-2025</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>

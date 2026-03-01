@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="在透明牢笼里奔跑, Blinkbean">
+    <meta name="keywords" content="基础-http与rpc的不同, Blinkbean">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>在透明牢笼里奔跑 | Blinkbean</title>
+    <title>基础-http与rpc的不同 | Blinkbean</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -405,12 +405,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/Image/image-20250511222312788.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">在透明牢笼里奔跑</h1>
+                    <h1 class="description center-align post-title">基础-http与rpc的不同</h1>
                 </div>
             </div>
         </div>
@@ -524,13 +524,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/private10/">
-                                <span class="chip bg-color">private10</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -538,8 +534,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" class="post-category">
-                                程序人生
+                            <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
+                                基础
                             </a>
                         
                     </div>
@@ -551,7 +547,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-02-11
+                    2025-05-14
                 </div>
                 
 
@@ -560,7 +556,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9
+                    533
                 </div>
                 
 
@@ -585,18 +581,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请找作者确认" data-whm="文章校验失败">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cadbcb29ee0b81faba26399d33893e6f4f6794a57e43c1508387bb937250efd0">8603c39cbbfb87213986a5e6689c52a8260048127344efa674e750a80f9be6242a4ca38d0ad046b93ddc1b6e872c6d920e0cc42b571ae4b563a351695591cc604c0f3a07d038c0f082063da020a517f124f635deae2bf0e7dfdb7d70f09ed624cce2827e8119a0f688557cdad1afe67212ea4098bda07599720270de9d1a47b0223276478778da1b80c7223f4fede40d4664f6fb482276ded63fdffa99d3b5761ae006dd2188f76866d697227ce1d38a</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-blink">
-      <input class="hbe hbe-input-field hbe-input-field-blink" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-blink" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-blink" data-content="请输入密码后查看">请输入密码后查看</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+                <p>HTTP 协议（<strong>H</strong>yper <strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol），又叫做超文本传输协议。</p>
+<p>RPC（Remote Procedure Call），远过程调用。它本身不是一个具体的协议，而是一种调用方式。虽然大部分RPC协议底层使用TCP，但实际上它们不一定非得使用TCP，改用UDP或HTTP，其实也可以做到类似的功能。</p>
+<p>HTTP主要用户B&#x2F;S架构，而RPC更多用于C&#x2F;S架构。</p>
+<h3 id="主要区别"><a href="#主要区别" class="headerlink" title="主要区别"></a>主要区别</h3><h4 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h4><p>HTTP中，知道服务域名，就可以通过DNS服务去解析得到它背后的IP地址，默认80端口。</p>
+<p>RPC一般会有专门的中间服务去保存服务名和IP信息，比如Consul或Etcd甚至是Redis。想访问服务，就去这些中间服务获取IP和端口信息。由于DNS也是服务发现的一种，所以也有基于DNS去做服务发现的组件，比如CoreDNS。</p>
+<h4 id="底层连接形式"><a href="#底层连接形式" class="headerlink" title="底层连接形式"></a>底层连接形式</h4><p>以HTTP1.1协议为例，其默认在建立底层TCP连接之后会一直保持这个连接（Keep Alive），之后的请求和响应都会复用这条连接。</p>
+<p>RPC协议跟HTTP类似，也是通过建立TCP长链接进行数据互动，但不同的地方在于，RPC协议一般会建立连接池，在请求量大的时候，建立多条连接放在池内，要发送数据的时候就从池里取一条连接出来，用完放回去，下次再复用。</p>
+<h4 id="传输的内容"><a href="#传输的内容" class="headerlink" title="传输的内容"></a>传输的内容</h4><p>基于TCP传输的消息，都是消息头和消息体组成的。Header用于标记一些特殊信息，其中最重要的是消息体长度。Body则是放我们真正需要传输的内容，而这些内容只能是二进制01串。对于HTTP1.1，传输内容以字符串为主。Body使用Json来序列化结构体数据，内容冗余、重复。</p>
+<p>RPC定制化程度更高，可以用体积更小的Protobuf或其他序列化协议去保存结构体数据，同时不需要考虑浏览器的各种行为，比如302。因此性能更好。</p>
+
                 
             </div>
             <hr/>
@@ -609,11 +603,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/private10/">
-                                    <span class="chip bg-color">private10</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -707,17 +697,57 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E5%9C%A8%E9%80%8F%E6%98%8E%E7%89%A2%E7%AC%BC%E9%87%8C%E5%A5%94%E8%B7%91/">
+                <a href="/%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80-http%E4%B8%8Ewebsocket%E7%9A%84%E4%B8%8D%E5%90%8C/">
                     <div class="card-image">
                         
-                        <img src="/Image/image-20250511222312788.png" class="responsive-img" alt="在透明牢笼里奔跑">
                         
-                        <span class="card-title">在透明牢笼里奔跑</span>
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="基础-http与websocket的不同">
+                        
+                        <span class="card-title">基础-http与websocket的不同</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/About-%E4%B8%89%E8%A7%82%E4%B8%8D%E5%90%88/">
+                    <div class="card-image">
+                        
+                        <img src="/Image/image-20250511222312788.png" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -742,51 +772,13 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/private10/">
-                        <span class="chip bg-color">private10</span>
+                    <a href="/tags/private5/">
+                        <span class="chip bg-color">private5</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/uncatesgorized/SDE-order/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="SDE-order">
-                        
-                        <span class="card-title">SDE-order</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            blinkbean
-                            
-                        </span>
-                    </div>
                 </div>
                 
             </div>
@@ -924,7 +916,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2025</span>
+                <span id="year">2020-2026</span>
             
             <span id="year">2020</span>
             <a href="/about" target="_blank">blinkbean</a>
